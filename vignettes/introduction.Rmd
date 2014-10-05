@@ -1,0 +1,21 @@
+---
+title: "Introduction to cowplot"
+author: "Claus O. Wilke"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+The **cowplot** package is a simple add-on to **ggplot2**. It's primary purpose is to change the default ggplot2 theme into something I (Claus O. Wilke) find more pleasing and am willing to use in publications.
+
+```{r message=FALSE}
+require(ggplot2)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point()
+
+# doesn't work yet, need to build and install package first
+#require(cowplot)
+#ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point()
+```
