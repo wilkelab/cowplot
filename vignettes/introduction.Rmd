@@ -2,20 +2,87 @@
 title: "Introduction to cowplot"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output:
+  rmarkdown::html_vignette:
+    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+The **cowplot** package is a simple add-on to **ggplot2**. It's primary purpose is to change the default **ggplot2** theme into something I (Claus O. Wilke) find more pleasing and am willing to use in publications.
 
-The **cowplot** package is a simple add-on to **ggplot2**. It's primary purpose is to change the default ggplot2 theme into something I (Claus O. Wilke) find more pleasing and am willing to use in publications.
+# Plot design
 
-```{r message=FALSE}
+The default **ggplot2** design is ugly, in my opinion. The gray background grid is a prim example of [chartjunk.](http://en.wikipedia.org/wiki/Chartjunk)
+```{r echo=FALSE, message=FALSE}
 require(ggplot2)
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point()
-
-# doesn't work yet, need to build and install package first
-#require(cowplot)
-#ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point()
 ```
+```{r message=FALSE}
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+```
+
+The default design of **cowplot**, by contrast, is clean and simple. It looks similar to **ggplot2**'s `theme_classic()`, but there are important but subtle difference we'll discuss later.
+```{r echo=FALSE, message=FALSE}
+require(cowplot)
+theme_set(theme_cowplot(font_size=11)) # default fontsize doesn't work well for online viewing
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+```
+
+In particular, the defautl theme works nicely in conjunction with the `save_plot()` function provided such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling.
+```{r eval=FALSE}
+require(cowplot)
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+save_plot("mpg.pdf", plot.mpg) # use this instead of ggsave() when using cowplot
+```
+
+# Plot annotations
+
+The other headache with **ggplot2** is adding labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and it's generally easy to modify one or the other but not both.
+
+To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. For example, let's take the mpg image from the previous section, label it with an A in the top-left corner, and mark it as a draft:
+```{r message=FALSE}
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+ggdraw(plot.mpg) + 
+  draw_plot_label("A", size = 13) + 
+  draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
+```
+
+The function `ggdraw` sets up the drawing layer, and functions that are meant to operate on this drawing layer all start with `draw_`. The resulting object is again a standard **ggplot2** object, and you can do with it whatever you might do with a regular **ggplot2** plot, such as save it with `ggsave()`. [However, I recommend using `save_plot()` instead. It's a think wrapper around `ggsave()` that has some useful features.]
+
+In fact, because `ggdraw()` produces a standard **ggplot2** object, we can draw on it with standard geoms if we want to. For example:
+```{r message=FALSE}
+t <- (0:1000)/1000
+df <- data.frame(x = .45+.55*t*cos(t*15), y = .55-.55*t*sin(t*15), t)
+ggdraw(plot.mpg) + 
+  geom_path(data = df, aes(x = x, y = y, colour = t), size = 6, alpha = .4)
+```
+
+I don't know if this is useful in any way, but it shows the power of the approach.
+
+Importantly, though, in all cases discussed so far, the main plot was below all other elements. Sometimes, you might want the plot on top. In this case, you can start an empty drawing canvas by calling `ggdraw()` without any parameters. You then place the plot by calling `draw_plot()`:
+```{r message=FALSE}
+df <- data.frame(
+  x = sample((0:36)/40, 50, replace = TRUE),
+  y = sample((0:36)/40, 50, replace = TRUE)
+)
+ggdraw() + 
+  geom_rect(data = df, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
+            colour = "gray60", fill = "gray80") +
+  draw_plot(plot.mpg)
+```
+
+
+
+```{r message=FALSE, fig.width=7, fig.height=5}
+plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
+  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm")
+plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+ggdraw() +
+  draw_plot(plot.iris, 0, .5, 1, .5) +
+  draw_plot(plot.mpg, 0, 0, .5, .5) +
+  draw_plot(plot.diamonds, .5, 0, .5, .5) +
+  draw_plot_label(c("A", "B", "C"), c(0, 0, 0.5), c(1, 0.5, 0.5), size = 15)
+```
+

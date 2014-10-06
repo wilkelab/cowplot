@@ -3,8 +3,8 @@
 \alias{draw_plot_label}
 \title{Draw plot label}
 \usage{
-draw_plot_label(label, x = 0, y = 1, hjust = -0.3, vjust = 1.3,
-  size = 14, fontface = "bold", ...)
+draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
+  size = 16, fontface = "bold", ...)
 }
 \description{
 This function adds a plot label to the upper left corner of a graph. It takes all the same parameters

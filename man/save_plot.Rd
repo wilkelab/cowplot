@@ -4,7 +4,7 @@
 \title{Alternative to ggsave.}
 \usage{
 save_plot(filename, plot, cols = 1, rows = 1, base_width = 5,
-  base_height = 3.5, dpi = 300, units = "in", useDingbats = FALSE)
+  base_height = 4, dpi = 300, useDingbats = FALSE)
 }
 \description{
 This function is just a thin wrapper around ggsave.
