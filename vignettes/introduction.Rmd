@@ -53,27 +53,35 @@ The function `ggdraw` sets up the drawing layer, and functions that are meant to
 In fact, because `ggdraw()` produces a standard **ggplot2** object, we can draw on it with standard geoms if we want to. For example:
 ```{r message=FALSE}
 t <- (0:1000)/1000
-df <- data.frame(x = .45+.55*t*cos(t*15), y = .55-.55*t*sin(t*15), t)
+spiral <- data.frame(x = .45+.55*t*cos(t*15), y = .55-.55*t*sin(t*15), t)
 ggdraw(plot.mpg) + 
-  geom_path(data = df, aes(x = x, y = y, colour = t), size = 6, alpha = .4)
+  geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .4)
 ```
 
 I don't know if this is useful in any way, but it shows the power of the approach.
 
-Importantly, though, in all cases discussed so far, the main plot was below all other elements. Sometimes, you might want the plot on top. In this case, you can start an empty drawing canvas by calling `ggdraw()` without any parameters. You then place the plot by calling `draw_plot()`:
-```{r message=FALSE}
-df <- data.frame(
-  x = sample((0:36)/40, 50, replace = TRUE),
-  y = sample((0:36)/40, 50, replace = TRUE)
+Importantly, though, in all cases discussed so far, the main plot was below all other elements. Sometimes, you might want the plot on top. In this case, you can start an empty drawing canvas by calling `ggdraw()` without any parameters. You then place the plot by calling `draw_plot()`. Notice the difference in the two plots produced by the following code:
+```{r message=FALSE, fig.show="hold"}
+boxes <- data.frame(
+  x = sample((0:36)/40, 40, replace = TRUE),
+  y = sample((0:32)/40, 40, replace = TRUE)
 )
+# plot on top of annotations
 ggdraw() + 
-  geom_rect(data = df, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
+  geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") +
-  draw_plot(plot.mpg)
+  draw_plot(plot.mpg) +
+  draw_text("Plot is on top of the grey boxes", x = 1, y = 1, vjust = 1, hjust = 1, size = 10, fontface = 'bold')
+# plot below annotations
+ggdraw(plot.mpg) + 
+  geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
+            colour = "gray60", fill = "gray80") + 
+  draw_text("Plot is underneath the grey boxes", x = 1, y = 1, vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 ```
 
+Note that placing a plot on top of annotations only makes sense if the plot background is transparent. This is one of the main differences between `theme_cowplot()` and `theme_classic()`. If you tried the same example with `theme_classic()`, the gray boxes underneath the plot would not show.
 
-
+Finally, the `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots in a layout that is not a simple grid, e.g. with one sub-plot spanning the entire width of the figure and two other figures using up half of the figure width:
 ```{r message=FALSE, fig.width=7, fig.height=5}
 plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
   geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm")
@@ -84,5 +92,18 @@ ggdraw() +
   draw_plot(plot.mpg, 0, 0, .5, .5) +
   draw_plot(plot.diamonds, .5, 0, .5, .5) +
   draw_plot_label(c("A", "B", "C"), c(0, 0, 0.5), c(1, 0.5, 0.5), size = 15)
+```
+
+Of course, we can also go crazy:
+```{r message=FALSE, fig.width=7, fig.height=5}
+ggdraw() +
+  #geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
+  #          colour = "gray60", fill = "red", alpha=.03) +
+  geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .2) +
+  draw_plot(plot.diamonds, 0, 0, .4, .4) +
+  draw_plot(plot.diamonds, .55, -.1, .5, .5) +
+  draw_plot(plot.mpg, .3, .35, .3, .3) +
+  draw_plot(plot.iris, 0, .7, .7, .35 ) +
+  draw_plot(plot.iris, .6, .4, .6, .3 )
 ```
 
