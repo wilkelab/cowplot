@@ -75,10 +75,15 @@ watermark <- function(label="Draft"){
   annotation_custom(my_grob)
 }
 
-
-line <- function(x1, y1, x2, y2){
-  d <- data.frame(x = c(x1, x2), y = c(y1, y2))
-  geom_line(data = d, aes(x = x, y = y), colour = 'green')
+#' Draw an annotation line.
+#'
+#' @param x vector of x coordinates
+#' @param y vector of y coordinates
+#' @param ... style parameters, such as 'colour', 'alpha', size', etc.
+ann_line <- function(x, y, ...){
+  geom_line(data = data.frame(x, y),
+            aes(x = x, y = y),
+            ...)
 }
 
 
@@ -95,7 +100,7 @@ test <- function(plot){
   plot.grob <- grid::grobTree(ggplot2::ggplotGrob(plot))
   text.grob <- grid::grobTree(grid::textGrob("this is a test", x = 0.45,  y = 0.5, rot = 45,
                                           gp=grid::gpar(col = "red", alpha = .4, fontsize = 120)))
-  p + annotation_custom(text.grob) + annotation_custom(plot.grob) + line(1, 0, .5, .5)
+  p + annotation_custom(text.grob) + annotation_custom(plot.grob) + ann_line(c(1, .5), c(0, .5), colour='green', size=3)
 }
 
 .onAttach <- function(libname, pkgname) {
