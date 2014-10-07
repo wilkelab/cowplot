@@ -2,7 +2,7 @@
 require(ggplot2)
 
 ## ----message=FALSE-------------------------------------------------------
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + theme_gray() + geom_point(size=2.5)
 
 ## ----echo=FALSE, message=FALSE-------------------------------------------
 require(cowplot)

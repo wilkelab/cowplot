@@ -19,7 +19,7 @@ The default **ggplot2** design is ugly, in my opinion. The gray background grid 
 require(ggplot2)
 ```
 ```{r message=FALSE}
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + theme_gray() + geom_point(size=2.5)
 ```
 
 The default design of **cowplot**, by contrast, is clean and simple. It looks similar to **ggplot2**'s `theme_classic()`, but there are important but subtle difference we'll discuss later.
