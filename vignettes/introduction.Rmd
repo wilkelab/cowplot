@@ -10,11 +10,13 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
-The **cowplot** package is a simple add-on to **ggplot2**. It's primary purpose is to change the default **ggplot2** theme into something I (Claus O. Wilke) find more pleasing and am willing to use in publications.
+The **cowplot** package is a simple add-on to **ggplot2**. It is meant to provide a publication-ready theme for **ggplot2**, one that requires a minimum amount of fiddling with sizes of axis labels, plot backgrounds, etc. Its primary purpose is to give my students and postdocs an easy way to make figures that I will approve of. Thus, this package meets my personal needs and tastes. Yours may be different.
+
+In addition to providing a modified plot theme, this package also offers functionality for custom annotations to *ggplot2* plots. It turns out that the easiest way to offer this functionality was to implement a general-purpose drawing canvas on top of *ggplot2*. As a result, you can achieve quite unusual effects with this package (see more below).  
 
 # Plot design
 
-The default **ggplot2** design is ugly, in my opinion. The gray background grid is a prime example of [chartjunk.](http://en.wikipedia.org/wiki/Chartjunk)
+The default **ggplot2** design is not particularly elegant, in my opinion. In particular, the gray background grid is a prime example of [chartjunk,](http://en.wikipedia.org/wiki/Chartjunk) which stands for graphical elements that distract the viewer without providing any useful information. For example, see this **ggplot2** visualization of the `mpg` data set:
 ```{r echo=FALSE, message=FALSE}
 require(ggplot2)
 ```
@@ -29,7 +31,7 @@ theme_set(theme_cowplot(font_size=11)) # default fontsize doesn't work well for 
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
 ```
 
-In particular, the defautl theme works nicely in conjunction with the `save_plot()` function provided such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling.
+In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling.
 ```{r eval=FALSE}
 require(cowplot)
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
