@@ -2,20 +2,24 @@
 require(ggplot2)
 
 ## ----message=FALSE-------------------------------------------------------
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + theme_gray() + geom_point(size=2.5)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size=2.5) + theme_gray()
 
 ## ----echo=FALSE, message=FALSE-------------------------------------------
 require(cowplot)
 theme_set(theme_cowplot(font_size=11)) # default fontsize doesn't work well for online viewing
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
+  geom_point(size=2.5)
 
 ## ----eval=FALSE----------------------------------------------------------
 #  require(cowplot)
-#  plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+#  plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
+#    geom_point(size=2.5)
 #  save_plot("mpg.pdf", plot.mpg) # use this instead of ggsave() when using cowplot
 
 ## ----message=FALSE-------------------------------------------------------
-plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+  geom_point(size=2.5)
 ggdraw(plot.mpg) + 
   draw_plot_label("A", size = 13) + 
   draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
@@ -36,12 +40,14 @@ ggdraw() +
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") +
   draw_plot(plot.mpg) +
-  draw_text("Plot is on top of the grey boxes", x = 1, y = 1, vjust = 1, hjust = 1, size = 10, fontface = 'bold')
+  draw_text("Plot is on top of the grey boxes", x = 1, y = 1,
+            vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 # plot below annotations
 ggdraw(plot.mpg) + 
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") + 
-  draw_text("Plot is underneath the grey boxes", x = 1, y = 1, vjust = 1, hjust = 1, size = 10, fontface = 'bold')
+  draw_text("Plot is underneath the grey boxes", x = 1, y = 1,
+            vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 
 ## ----message=FALSE, fig.width=7, fig.height=5----------------------------
 plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
@@ -59,9 +65,9 @@ ggdraw() +
   #geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
   #          colour = "gray60", fill = "red", alpha=.03) +
   geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .4) +
-  draw_plot(plot.diamonds, -.05, -.05, .55, .55) +
-  draw_plot(plot.diamonds, .55, -.05, .5, .5) +
-  draw_plot(plot.mpg, .25, .3, .4, .4) +
+  draw_plot(plot.diamonds, -.05, -.1, .55, .55) +
+  draw_plot(plot.diamonds, .65, .4, .5, .5) +
+  draw_plot(plot.mpg, .3, .3, .4, .4) +
   draw_plot(plot.iris, 0, .7, .7, .35 ) +
-  draw_plot(plot.iris, .6, .4, .6, .3 )
+  draw_plot(plot.iris, .45, .0, .6, .3 )
 
