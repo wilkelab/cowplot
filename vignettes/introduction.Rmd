@@ -116,4 +116,3 @@ ggdraw() +
   draw_plot(plot.iris, 0, .7, .7, .35 ) +
   draw_plot(plot.iris, .45, .0, .6, .3 )
 ```
-
