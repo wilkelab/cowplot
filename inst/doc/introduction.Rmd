@@ -1,5 +1,5 @@
 ---
-title: "Introduction to cowplot"
+title: "Introduction to COWplot"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
 output:
