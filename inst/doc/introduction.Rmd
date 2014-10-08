@@ -94,7 +94,9 @@ Note that placing a plot on top of annotations only makes sense if the plot back
 Finally, the `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with one sub-plot spanning the entire width of the figure and two other figures using up half of the figure width:
 ```{r message=FALSE, fig.width=7, fig.height=5}
 plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm")
+  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
+  panel_border() # and a border around each panel
 plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5))
 ggdraw() +
@@ -103,6 +105,8 @@ ggdraw() +
   draw_plot(plot.diamonds, .5, 0, .5, .5) +
   draw_plot_label(c("A", "B", "C"), c(0, 0, 0.5), c(1, 0.5, 0.5), size = 15)
 ```
+The functions `background_grid()` and `panel_border()` are convenience functions defined by **cowplot** to save some typing when manipulating the background grid and panel border. 
+
 
 Of course, we can also go crazy:
 ```{r message=FALSE, fig.width=7, fig.height=5}
@@ -116,4 +120,3 @@ ggdraw() +
   draw_plot(plot.iris, 0, .7, .7, .35 ) +
   draw_plot(plot.iris, .45, .0, .6, .3 )
 ```
-

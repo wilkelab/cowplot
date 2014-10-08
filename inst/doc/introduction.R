@@ -51,7 +51,9 @@ ggdraw(plot.mpg) +
 
 ## ----message=FALSE, fig.width=7, fig.height=5----------------------------
 plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm")
+  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
+  panel_border() # and a border around each panel
 plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5))
 ggdraw() +

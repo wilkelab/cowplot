@@ -89,6 +89,58 @@ theme_nothing <- function(base_size = 12, base_family = ""){
 }
 
 
+#' Add/modify/remove the background grid in a ggplot2 plot
+#'
+#' This function provides a simple way to modify the background grid in ggplot2. It
+#' doesn't do anything that can't be done just the same with theme(). However, it simplifies
+#' creation of the most commonly needed variations.
+background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
+                            minor = c("xy", "x", "y", "none"),
+                            size.major = 0.2, size.minor = 0.5,
+                            colour.major = "grey90", colour.minor = "grey98"){
+
+  if (major[1] == "none") return(theme(panel.grid = element_blank()))
+
+  t <- switch( major[1],
+               x = theme(panel.grid.major   = element_line(colour = colour.major,
+                                                           size = size.major),
+                         panel.grid.major.y = element_blank()),
+               y = theme(panel.grid.major   = element_line(colour = colour.major,
+                                                           size = size.major),
+                         panel.grid.major.x = element_blank()),
+               xy = theme(panel.grid.major = element_line(colour = colour.major,
+                                                          size = size.major)),
+               yx = theme(panel.grid.major = element_line(colour = colour.major,
+                                                          size = size.major)),
+               theme(panel.grid.major = element_blank()))
+
+  t + switch( minor[1],
+              x = theme(panel.grid.minor   = element_line(colour = colour.minor,
+                                                          size = size.minor),
+                        panel.grid.minor.y = element_blank()),
+              y = theme(panel.grid.minor   = element_line(colour = colour.minor,
+                                                          size = size.minor),
+                        panel.grid.minor.x = element_blank()),
+              xy = theme(panel.grid.minor = element_line(colour = colour.minor,
+                                                         size = size.minor)),
+              yx = theme(panel.grid.minor = element_line(colour = colour.minor,
+                                                         size = size.minor)),
+              theme(panel.grid.minor = element_blank()))
+}
+
+
+#' Add/remove the panel border in a ggplot2 plot
+#'
+#' This function provides a simple way to modify the panel border in ggplot2. It
+#' doesn't do anything that can't be done just the same with theme(). However, it
+#' saves some typing.
+panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = FALSE){
+  if (remove){
+    return(theme(panel.border = element_blank()))
+  }
+  theme(panel.border = element_rect(colour = colour, fill=NA, linetype = 1, size = 0.5))
+}
+
 
 # *************************************************
 #                     Output
