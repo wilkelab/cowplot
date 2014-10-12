@@ -1,4 +1,5 @@
 Ideas for further development
 =============================
-- add functionality to arrange plots in a grid and label them at the same time
-- write more documentation
+- add more finegrained formatting options to plot_grid, e.g., per-plot x and y offsets, same for labels, label colors & fonts, etc. 
+- make a theme for individual plots and one for grouped plots (and one for faceted plots?), make sure that all default settings work well together.
+- write more documentation. in particular, a vignette about arranging plots on a grid, and one about themes, background grids, faceting, etc.
