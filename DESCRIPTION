@@ -5,7 +5,7 @@ Authors@R: "Claus O. Wilke <wilke@austin.utexas.edu> [aut, cre]"
 Description: Some helpful extensions and modifications to ggplot2 library
 URL: https://github.com/wilkelab/cowplot
 Depends:
-    R (>= 3.1.1),
+    R (>= 3.0.0),
     ggplot2 (>= 0.9.2)
 Imports:
     grid

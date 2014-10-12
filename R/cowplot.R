@@ -242,16 +242,73 @@ ggdraw <- function(plot = NULL){
   p # return ggplot drawing layer
 }
 
-# one method that will definitely work is to create a new graph that only holds an empty plotting area
-# and then place the original graph and annotations using annotation_custom()
 
-test <- function(plot){
-  p <- qplot(x=1:10, y=(1:10)^2) #+ theme_gray()
-  p_ann <- ggdraw(p) +
-    draw_plot_label("A") +
-    draw_text("Draft", size = 90, colour = 'red', angle = 45, alpha = .3)
-  print(p_ann)
-  save_plot("test.pdf", p_ann)
+#' Arrange multiple plots into a grid
+#'
+#' @param scale Allows to set an overall scaling of each sub-plot. Can be set separately for
+#'              each subplot, by giving a vector of scale values, or at once for all subplots,
+#'              by giving a single value
+#' @examples
+#' p1 <- qplot(1, 1)
+#' p2 <- qplot(2, 2)
+#' p3 <- qplot(3, 3)
+#' p4 <- qplot(4, 4)
+#' plot_grid(p1, p2, p3, p4)
+#' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
+#' plot_grid(p1, p2, p3, rows=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, rows=3, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+plot_grid <- function(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1, labels = NULL,
+                      label_size = 16 ) {
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  num_plots <- length(plots)
+
+  if (is.null(cols) && is.null(rows)){
+    # if neither rows nor cols are given, we make a square grid
+    cols <- ceiling(sqrt(num_plots))
+    rows <- ceiling(sqrt(num_plots))
+  }
+  # alternatively, we know at least how many rows or how many columns we need
+  if (is.null(cols)) cols <- ceiling(num_plots/rows)
+  if (is.null(rows)) rows <- ceiling(num_plots/cols)
+
+  # in general, we allow for separate scale values for each graph
+  if (length(scale)==1)
+    scale <- rep(scale, num_plots)
+
+  # now place all the plots
+  p <- ggdraw() # set up empty plot
+  col_count <- 0
+  row_count <- 1
+  x_delta <- 1/cols
+  y_delta <- 1/rows
+  for (i in 1:(rows*cols)){
+    if (i > num_plots) break
+
+    # calculate width, offset, etc
+    width <- x_delta * scale[i]
+    height <- y_delta * scale[i]
+    x_off <- (x_delta - width)/2
+    y_off <- (y_delta - height)/2
+    x <- col_count * x_delta + x_off
+    y <- (rows - row_count) * y_delta + y_off
+
+    # place the plot
+    p_next <- plots[[i]]
+    if (!is.null(p_next)){
+      p <- p + draw_plot(p_next, x, y, width, height)
+    }
+    # place a label if we have one
+    if (i <= length(labels)){
+      p <- p + draw_plot_label(labels[i], x, y + height, size=label_size)
+    }
+    # move on to next grid position
+    col_count <- col_count + 1
+    if (col_count >= cols){
+       col_count <- 0
+       row_count <- row_count + 1
+    }
+  }
+  p
 }
-
-
