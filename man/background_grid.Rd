@@ -9,7 +9,7 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 }
 \description{
 This function provides a simple way to modify the background grid in ggplot2. It
-doesn't do anything that can't be done just the same with theme(). However, it simplifies
+doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
 creation of the most commonly needed variations.
 }
 

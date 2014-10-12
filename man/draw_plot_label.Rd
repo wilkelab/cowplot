@@ -8,6 +8,6 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 }
 \description{
 This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-as draw_text(), but has defaults that make it convenient to label graphs.
+as \code{draw_text()}, but has defaults that make it convenient to label graphs.
 }
 

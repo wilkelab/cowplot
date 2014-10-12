@@ -8,7 +8,7 @@ panel_border(colour = "gray80", size = 0.5, linetype = 1,
 }
 \description{
 This function provides a simple way to modify the panel border in ggplot2. It
-doesn't do anything that can't be done just the same with theme(). However, it
+doesn't do anything that can't be done just the same with \code{theme()}. However, it
 saves some typing.
 }
 

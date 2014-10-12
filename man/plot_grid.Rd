@@ -9,10 +9,10 @@ plot_grid(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1,
 \arguments{
 \item{scale}{Allows to set an overall scaling of each sub-plot. Can be set separately for
 each subplot, by giving a vector of scale values, or at once for all subplots,
-by giving a single value}
+by giving a single value.}
 }
 \description{
-Arrange multiple plots into a grid
+Arrange multiple plots into a grid.
 }
 \examples{
 p1 <- qplot(1, 1)
@@ -22,6 +22,6 @@ p4 <- qplot(4, 4)
 plot_grid(p1, p2, p3, p4)
 plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
 plot_grid(p1, p2, p3, rows=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-plot_grid(p1, NULL, NULL, p2, p3, NULL, rows=3, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+plot_grid(p1, NULL, NULL, p2, p3, NULL, cols=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 }
 

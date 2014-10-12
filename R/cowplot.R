@@ -33,6 +33,7 @@ NULL
 #' @return The theme.
 #' @examples
 #' qplot(1:10, 1:10^2) + theme_cow(font_size = 15)
+#' @export
 theme_cowplot <- function(font_size = 13, font_family = "", line_size = .5) {
   # Start with default theme_grey and then modify some parts
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
@@ -65,11 +66,12 @@ theme_cowplot <- function(font_size = 13, font_family = "", line_size = .5) {
 #'
 #' The theme created by this function shows nothing but the plot panel. Unfortunately,
 #' due to ggplot2 peculiarities, a little bit of padding remains to the left and bottom of
-#' the panel. This can be removed by adding labs(x = NULL, y = NULL) to the plot, see examples.
+#' the panel. This can be removed by adding \code{labs(x = NULL, y = NULL)} to the plot, see examples.
 #' @param base_size The overall font size. Default is 14.
 #' @return The theme.
 #' @examples
 #' qplot(1:10, 1:10^2) + theme_cow(base_size = 16)
+#' @export
 theme_nothing <- function(base_size = 12, base_family = ""){
   theme_grey(base_size = base_size, base_family = base_family) %+replace%
     theme(
@@ -92,8 +94,9 @@ theme_nothing <- function(base_size = 12, base_family = ""){
 #' Add/modify/remove the background grid in a ggplot2 plot
 #'
 #' This function provides a simple way to modify the background grid in ggplot2. It
-#' doesn't do anything that can't be done just the same with theme(). However, it simplifies
+#' doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
 #' creation of the most commonly needed variations.
+#' @export
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             minor = c("xy", "x", "y", "none"),
                             size.major = 0.2, size.minor = 0.5,
@@ -132,8 +135,9 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' Add/remove the panel border in a ggplot2 plot
 #'
 #' This function provides a simple way to modify the panel border in ggplot2. It
-#' doesn't do anything that can't be done just the same with theme(). However, it
+#' doesn't do anything that can't be done just the same with \code{theme()}. However, it
 #' saves some typing.
+#' @export
 panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = FALSE){
   if (remove){
     return(theme(panel.border = element_blank()))
@@ -147,13 +151,15 @@ panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = F
 # *************************************************
 
 # never, ever again worry about misrendered dingbats
+#' @export
 ggsave <- function(...){
   ggplot2::ggsave(..., useDingbats = FALSE)
 }
 
 #' Alternative to ggsave.
 #'
-#' This function is just a thin wrapper around ggsave.
+#' This function is just a thin wrapper around \code{ggsave()}.
+#' @export
 save_plot <- function(filename, plot, cols = 1, rows = 1,
                       base_width = 5, base_height = 4, dpi = 300,
                       useDingbats = FALSE){
@@ -170,11 +176,12 @@ save_plot <- function(filename, plot, cols = 1, rows = 1,
 
 #' Draw a line.
 #'
-#' This is a convenience function. It's just a thin wrapper around geom_line.
+#' This is a convenience function. It's just a thin wrapper around \code{geom_line()}.
 #'
 #' @param x vector of x coordinates
 #' @param y vector of y coordinates
-#' @param ... style parameters, such as 'colour', 'alpha', size', etc.
+#' @param ... style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.
+#' @export
 draw_line <- function(x, y, ...){
   geom_path(data = data.frame(x, y),
             aes(x = x, y = y),
@@ -183,19 +190,20 @@ draw_line <- function(x, y, ...){
 
 #' Draw text.
 #'
-#' This is a convenience function. It's just a thin wrapper around geom_text. It can take either an
+#' This is a convenience function. It's just a thin wrapper around \code{geom_text()}. It can take either an
 #' individual piece of text to be drawn or a vector of separate text labels, with associated coordinates.
 #'
 #' Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in
 #' the theme. This is different from geom_text in ggplot2.
 #'
-#' By default, the x and y coordinates specify the center of the text box. Set hjust = 0, vjust = 0 to specify
-#' the lower left corner, and other values of hjust and vjust for any other relative location you want to
+#' By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
+#' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
 #' @param text character or expression vector specifying the text to be written.
 #' @param x vector of x coordinates
 #' @param y vector of y coordinates
-#' @param ... style parameters, such as 'colour', 'alpha', 'angle', 'size', etc.
+#' @param ... style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
+#' @export
 draw_text <- function(text, x = 0.5, y = 0.5, size = 13, ...){
   geom_text(data = data.frame(text, x, y),
             aes(label = text, x = x, y = y),
@@ -206,7 +214,8 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 13, ...){
 #' Draw plot label
 #'
 #' This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-#' as draw_text(), but has defaults that make it convenient to label graphs.
+#' as \code{draw_text()}, but has defaults that make it convenient to label graphs.
+#' @export
 draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold', ...){
   draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface, ...)
 }
@@ -221,12 +230,14 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 #' @param y y location of the lower left corner of the plot
 #' @param width width of the plot
 #' @param height height of the plot
+#' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
   plot.grob <- grid::grobTree(ggplot2::ggplotGrob(plot))
   annotation_custom(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height)
 }
 
 #' Set up a drawing layer on top of a ggplot
+#' @export
 ggdraw <- function(plot = NULL){
   d <- data.frame(x=0:1, y=0:1) # dummy data
   p <- ggplot(d, aes(x=x, y=y)) + # empty plot
@@ -245,9 +256,10 @@ ggdraw <- function(plot = NULL){
 
 #' Arrange multiple plots into a grid
 #'
+#' Arrange multiple plots into a grid.
 #' @param scale Allows to set an overall scaling of each sub-plot. Can be set separately for
 #'              each subplot, by giving a vector of scale values, or at once for all subplots,
-#'              by giving a single value
+#'              by giving a single value.
 #' @examples
 #' p1 <- qplot(1, 1)
 #' p2 <- qplot(2, 2)
@@ -256,7 +268,8 @@ ggdraw <- function(plot = NULL){
 #' plot_grid(p1, p2, p3, p4)
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
 #' plot_grid(p1, p2, p3, rows=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, rows=3, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, cols=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+#' @export
 plot_grid <- function(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1, labels = NULL,
                       label_size = 16 ) {
 

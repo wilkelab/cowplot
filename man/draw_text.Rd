@@ -12,18 +12,18 @@ draw_text(text, x = 0.5, y = 0.5, size = 13, ...)
 
 \item{y}{vector of y coordinates}
 
-\item{...}{style parameters, such as 'colour', 'alpha', 'angle', 'size', etc.}
+\item{...}{style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
 \description{
-This is a convenience function. It's just a thin wrapper around geom_text. It can take either an
+This is a convenience function. It's just a thin wrapper around \code{geom_text()}. It can take either an
 individual piece of text to be drawn or a vector of separate text labels, with associated coordinates.
 }
 \details{
 Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in
 the theme. This is different from geom_text in ggplot2.
 
-By default, the x and y coordinates specify the center of the text box. Set hjust = 0, vjust = 0 to specify
-the lower left corner, and other values of hjust and vjust for any other relative location you want to
+By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
+the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 specify.
 }
 

@@ -14,7 +14,7 @@ The theme.
 \description{
 The theme created by this function shows nothing but the plot panel. Unfortunately,
 due to ggplot2 peculiarities, a little bit of padding remains to the left and bottom of
-the panel. This can be removed by adding labs(x = NULL, y = NULL) to the plot, see examples.
+the panel. This can be removed by adding \code{labs(x = NULL, y = NULL)} to the plot, see examples.
 }
 \examples{
 qplot(1:10, 1:10^2) + theme_cow(base_size = 16)
