@@ -291,7 +291,7 @@ plot_grid <- function(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1,
     scale <- rep(scale, num_plots)
 
   # now place all the plots
-  p <- ggdraw() # set up empty plot
+  p <- ggdraw() # start with nothing
   col_count <- 0
   row_count <- 1
   x_delta <- 1/cols
@@ -325,3 +325,4 @@ plot_grid <- function(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1,
   }
   p
 }
+
