@@ -152,7 +152,7 @@ panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = F
 # *************************************************
 
 # never, ever again worry about misrendered dingbats
-#' @export
+# not currently exported because it is broken.
 ggsave <- function(...){
   ggplot2::ggsave(..., useDingbats = FALSE)
 }
