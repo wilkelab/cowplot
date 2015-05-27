@@ -3,8 +3,9 @@
 \alias{save_plot}
 \title{Alternative to ggsave.}
 \usage{
-save_plot(filename, plot, cols = 1, rows = 1, base_width = 5,
-  base_height = 4, dpi = 300, useDingbats = FALSE)
+save_plot(filename, plot, ncol = 1, nrow = 1, base_width = 5,
+  base_height = 4, dpi = 300, useDingbats = FALSE, cols = NULL,
+  rows = NULL)
 }
 \description{
 This function is just a thin wrapper around \code{ggsave()}.

@@ -161,9 +161,27 @@ ggsave <- function(...){
 #'
 #' This function is just a thin wrapper around \code{ggsave()}.
 #' @export
-save_plot <- function(filename, plot, cols = 1, rows = 1,
+save_plot <- function(filename, plot, ncol = 1, nrow = 1,
                       base_width = 5, base_height = 4, dpi = 300,
-                      useDingbats = FALSE){
+                      useDingbats = FALSE,
+                      cols = NULL, rows = NULL ){
+
+  if (!is.null(cols)){
+    warning("Argument 'cols' is deprecated. Use 'ncol' instead.")
+  }
+
+  if (!is.null(rows)){
+    warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
+  }
+
+  # internally, this function operates with variables cols and rows instead of ncol and nrow
+  if (!is.null(ncol)){
+    cols <- ncol
+  }
+  if (!is.null(nrow)){
+    rows <- nrow
+  }
+
   ggplot2::ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows,
                   useDingbats = useDingbats)
 }
@@ -258,30 +276,53 @@ ggdraw <- function(plot = NULL){
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
-#' @param scale Allows to set an overall scaling of each sub-plot. Can be set separately for
+#' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
+#' individually as the first n arguments of the function plot_grid (see examples).
+#' @param nrow (optional) Number of rows in the plot grid.
+#' @param ncol (optional) Number of columns in the plot grid.
+#' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
 #'              each subplot, by giving a vector of scale values, or at once for all subplots,
 #'              by giving a single value.
+#' @param labels (optional) List of labels to be added to the plots.
+#' @param label_size (optional) Numerical value indicating the label size. Default is 16.
 #' @examples
-#' p1 <- qplot(1, 1)
-#' p2 <- qplot(2, 2)
-#' p3 <- qplot(3, 3)
-#' p4 <- qplot(4, 4)
+#' p1 <- qplot(1:10, 1:10)
+#' p2 <- qplot(1:10, (1:10)^2)
+#' p3 <- qplot(1:10, (1:10)^3)
+#' p4 <- qplot(1:10, (1:10)^4)
 #' plot_grid(p1, p2, p3, p4)
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
-#' plot_grid(p1, p2, p3, rows=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, cols=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+#' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 #' @export
-plot_grid <- function(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1, labels = NULL,
-                      label_size = 16 ) {
+plot_grid <- function(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
+                      label_size = 16, cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
 
+  if (!is.null(cols)){
+    warning("Argument 'cols' is deprecated. Use 'ncol' instead.")
+  }
+
+  if (!is.null(rows)){
+    warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
+  }
+
+  # internally, this function operates with variables cols and rows instead of ncol and nrow
+  if (!is.null(ncol)){
+    cols <- ncol
+  }
+  if (!is.null(nrow)){
+    rows <- nrow
+  }
+
+  # calculate grid dimensions
   if (is.null(cols) && is.null(rows)){
     # if neither rows nor cols are given, we make a square grid
     cols <- ceiling(sqrt(num_plots))
-    rows <- ceiling(sqrt(num_plots))
+    rows <- ceiling(num_plots/cols)
   }
   # alternatively, we know at least how many rows or how many columns we need
   if (is.null(cols)) cols <- ceiling(num_plots/rows)

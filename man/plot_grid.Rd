@@ -3,11 +3,15 @@
 \alias{plot_grid}
 \title{Arrange multiple plots into a grid}
 \usage{
-plot_grid(..., plotlist = NULL, cols = NULL, rows = NULL, scale = 1,
-  labels = NULL, label_size = 16)
+plot_grid(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1,
+  labels = NULL, label_size = 16, cols = NULL, rows = NULL)
 }
 \arguments{
-\item{scale}{Allows to set an overall scaling of each sub-plot. Can be set separately for
+\item{nrow}{(optional) Number of rows in the plot grid.}
+
+\item{ncol}{(optional) Number of columns in the plot grid.}
+
+\item{scale}{(optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
 each subplot, by giving a vector of scale values, or at once for all subplots,
 by giving a single value.}
 }
@@ -15,13 +19,13 @@ by giving a single value.}
 Arrange multiple plots into a grid.
 }
 \examples{
-p1 <- qplot(1, 1)
-p2 <- qplot(2, 2)
-p3 <- qplot(3, 3)
-p4 <- qplot(4, 4)
+p1 <- qplot(1:10, 1:10)
+p2 <- qplot(1:10, (1:10)^2)
+p3 <- qplot(1:10, (1:10)^3)
+p4 <- qplot(1:10, (1:10)^4)
 plot_grid(p1, p2, p3, p4)
 plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
-plot_grid(p1, p2, p3, rows=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-plot_grid(p1, NULL, NULL, p2, p3, NULL, cols=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
+plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 }
 
