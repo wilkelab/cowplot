@@ -249,8 +249,7 @@ ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
 #' This function is just a thin wrapper around \code{ggsave()}.
 #' @export
 save_plot <- function(filename, plot, ncol = 1, nrow = 1,
-                      base_width = 5, base_height = 4, dpi = 300,
-                      useDingbats = FALSE,
+                      base_width = NULL, base_height = 4, base_aspect_ratio = 1.25, ...,
                       cols = NULL, rows = NULL ){
 
   if (!is.null(cols)){
@@ -269,8 +268,11 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
     rows <- nrow
   }
 
-  ggplot2::ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows,
-                  useDingbats = useDingbats)
+  if (is.null(base_width)){
+    base_width <- base_height * base_aspect_ratio
+  }
+  # TODO: need to switch over to cowplot version of ggsave
+  ggplot::ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows, ...)
 }
 
 
