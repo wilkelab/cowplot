@@ -7,6 +7,9 @@ plot_grid(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1,
   labels = NULL, label_size = 16, cols = NULL, rows = NULL)
 }
 \arguments{
+\item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
+individually as the first n arguments of the function plot_grid (see examples).}
+
 \item{nrow}{(optional) Number of rows in the plot grid.}
 
 \item{ncol}{(optional) Number of columns in the plot grid.}
@@ -14,6 +17,10 @@ plot_grid(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1,
 \item{scale}{(optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
 each subplot, by giving a vector of scale values, or at once for all subplots,
 by giving a single value.}
+
+\item{labels}{(optional) List of labels to be added to the plots.}
+
+\item{label_size}{(optional) Numerical value indicating the label size. Default is 16.}
 }
 \description{
 Arrange multiple plots into a grid.
