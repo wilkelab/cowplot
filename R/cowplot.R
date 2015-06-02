@@ -97,6 +97,14 @@ theme_nothing <- function(base_size = 12, base_family = ""){
 #' This function provides a simple way to modify the background grid in ggplot2. It
 #' doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
 #' creation of the most commonly needed variations.
+#' @param major Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
+#'  "y", "only_minor" (disables major grid lines but allows you to switch on minor grid lines), "none".
+#' @param minor Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
+#'  "y", "none".
+#' @param size.major Size of the major grid lines
+#' @param size.minor Size of the minor grid lines
+#' @param colour.major Color of the major grid lines
+#' @param colour.minor Color of the minor grid lines
 #' @export
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             minor = c("xy", "x", "y", "none"),

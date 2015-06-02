@@ -2,7 +2,7 @@ Package: cowplot
 Title: C. O. Wilke-approved plots using ggplot2
 Version: 0.3
 Authors@R: "Claus O. Wilke <wilke@austin.utexas.edu> [aut, cre]"
-Description: Some helpful extensions and modifications to ggplot2 library
+Description: Some helpful extensions and modifications to the ggplot2 library
 URL: https://github.com/wilkelab/cowplot
 Depends:
     R (>= 3.0.0),

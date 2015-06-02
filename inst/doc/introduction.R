@@ -15,11 +15,42 @@ ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 #  require(cowplot)
 #  plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 #    geom_point(size=2.5)
-#  save_plot("mpg.pdf", plot.mpg) # use this instead of ggsave() when using cowplot
+#  # use save_plot() instead of ggsave() when using cowplot
+#  save_plot("mpg.pdf", plot.mpg,
+#            base_aspect_ratio = 1.3 # make room for figure legend
+#            )
+
+## ----message=FALSE-------------------------------------------------------
+plot.mpg + background_grid(major = "xy", minor = "none")
 
 ## ----message=FALSE-------------------------------------------------------
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
+plot.mpg
+plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+plot.diamonds
+
+## ----message=FALSE, fig.width=7, fig.height=2.5--------------------------
+plot_grid(plot.mpg, plot.diamonds, labels=c("A", "B"))
+
+## ----message=FALSE, fig.width=7, fig.height=5----------------------------
+plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels=c("A", "B", "C", "D"), ncol = 2)
+
+## ----message=FALSE, fig.width=10, fig.height=2.5-------------------------
+plot_grid(plot.mpg, plot.diamonds, plot.mpg, labels=c("A", "B", "C"), nrow = 1)
+
+## ----eval=FALSE----------------------------------------------------------
+#  plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
+#                        labels=c("A", "B", "C", "D"), ncol = 2)
+#  save_plot("plot2by2.pdf", plot2by2,
+#            ncol = 2, # we're saving a grid plot of 2 columns
+#            nrow = 2, # and 2 rows
+#            # each individual subplot should have an aspect ratio of 1.3
+#            base_aspect_ratio = 1.3
+#            )
+
+## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 
   draw_plot_label("A", size = 13) + 
   draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
@@ -54,8 +85,7 @@ plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
   background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
   panel_border() # and a border around each panel
-plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+# plot.mpt and plot.diamonds were defined earlier
 ggdraw() +
   draw_plot(plot.iris, 0, .5, 1, .5) +
   draw_plot(plot.mpg, 0, 0, .5, .5) +

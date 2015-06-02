@@ -35,28 +35,80 @@ ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
   geom_point(size=2.5)
 ```
 
-In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling.
+In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling:
 ```{r eval=FALSE}
 require(cowplot)
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
-save_plot("mpg.pdf", plot.mpg) # use this instead of ggsave() when using cowplot
+# use save_plot() instead of ggsave() when using cowplot
+save_plot("mpg.pdf", plot.mpg,
+          base_aspect_ratio = 1.3 # make room for figure legend
+          )
 ```
 
-# Plot annotations
+By default, **cowplot** disables grid lines on the plot. In many cases, this is the cleanest and most elegant way to display the data. However, sometimes gridlines may be useful, and thus **copwlot** provides a simple way of adding gridlines, via the function `background_grid()`:
+```{r message=FALSE}
+plot.mpg + background_grid(major = "xy", minor = "none")
+```
 
-The other headache with **ggplot2** is adding labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and it's generally easy to modify one or the other but not both.
+While the same result could be obtained using the function `theme()`, the function `background_grid()` makes the most commonly used option easily accessible. See the reference documentation for details.
 
-To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. For example, let's take the mpg image from the previous section, label it with an A in the top-left corner, and mark it as a draft:
+
+# Arranging graphs in a grid
+
+A major problem with **ggplot2** is that it is not particularly easy to add labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and while it's generally easy to modify one or the other we cannot easily change both. To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. This concept will be discussed in detail in the next section. For now, let's discuss how this capability allows us to make nice compound plots.
+
+The need for compound plots arises frequently when writing scientific publications. For example, let's assume we have created the following two plots, and we would like to combine them into a two-part figure with parts A and B. In our case, the plots are the following:
 ```{r message=FALSE}
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
+plot.mpg
+plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
+  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+plot.diamonds
+```
+
+**cowplot** allows us to combine them into one graph via the function `plot_grid()`: 
+```{r message=FALSE, fig.width=7, fig.height=2.5}
+plot_grid(plot.mpg, plot.diamonds, labels=c("A", "B"))
+```
+
+
+By default, the function will attempt to achieve a reasonable layout of the plots provided. However, you can precisely manipulate the layout by specifying the number of rows or columns or both:
+```{r message=FALSE, fig.width=7, fig.height=5}
+plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels=c("A", "B", "C", "D"), ncol = 2)
+```
+
+```{r message=FALSE, fig.width=10, fig.height=2.5}
+plot_grid(plot.mpg, plot.diamonds, plot.mpg, labels=c("A", "B", "C"), nrow = 1)
+```
+
+The function `plot_grid()` works nicely in combination with the function `save_plot()`, which can be told
+about the grid layout. For example, if we want to save a 2-by-2 figure, we might use this code:
+```{r eval=FALSE}
+plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
+                      labels=c("A", "B", "C", "D"), ncol = 2)
+save_plot("plot2by2.pdf", plot2by2,
+          ncol = 2, # we're saving a grid plot of 2 columns
+          nrow = 2, # and 2 rows
+          # each individual subplot should have an aspect ratio of 1.3
+          base_aspect_ratio = 1.3
+          )
+```
+The advantage of saving figures in this way is that you can first develop the code for individual figures, and once each individual figure looks the way you want it to you can easily combine the figures into a grid. `save_plot()` will make sure to scale the overall figure size such that the individual figures look the way they do when saved individually (as long as they all have the same `base_aspect_ratio`).
+
+
+
+# Generic plot annotations
+
+Finally, let's discuss how we can use **cowplot** to create more unusual plot designs. For example, let's take the mpg image from the previous section, label it with an A in the top-left corner, and mark it as a draft:
+```{r message=FALSE}
 ggdraw(plot.mpg) + 
   draw_plot_label("A", size = 13) + 
   draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
 ```
 
-The function `ggdraw` sets up the drawing layer, and functions that are meant to operate on this drawing layer all start with `draw_`. The resulting object is again a standard **ggplot2** object, and you can do with it whatever you might do with a regular **ggplot2** plot, such as save it with `ggsave()`. [However, as mentioned before, I recommend using `save_plot()` instead. It's a thin wrapper around `ggsave()` that has some useful features.]
+The function `ggdraw()` sets up the drawing layer, and functions that are meant to operate on this drawing layer all start with `draw_`. The resulting object is again a standard **ggplot2** object, and you can do with it whatever you might do with a regular **ggplot2** plot, such as save it with `ggsave()`. [However, as mentioned before, I recommend using `save_plot()` instead.]
 
 In fact, because `ggdraw()` produces a standard **ggplot2** object, we can draw on it with standard geoms if we want to. For example:
 ```{r message=FALSE}
@@ -97,8 +149,7 @@ plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
   background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
   panel_border() # and a border around each panel
-plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+# plot.mpt and plot.diamonds were defined earlier
 ggdraw() +
   draw_plot(plot.iris, 0, .5, 1, .5) +
   draw_plot(plot.mpg, 0, 0, .5, .5) +
