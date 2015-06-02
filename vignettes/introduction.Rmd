@@ -54,7 +54,7 @@ plot.mpg + background_grid(major = "xy", minor = "none")
 While the same result could be obtained using the function `theme()`, the function `background_grid()` makes the most commonly used option easily accessible. See the reference documentation for details.
 
 
-# Arranging graphs in a grid
+# Arranging graphs into a grid
 
 A major problem with **ggplot2** is that it is not particularly easy to add labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and while it's generally easy to modify one or the other we cannot easily change both. To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. This concept will be discussed in detail in the next section. For now, let's discuss how this capability allows us to make nice compound plots.
 

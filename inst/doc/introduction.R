@@ -7,7 +7,7 @@ ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 
 ## ----echo=FALSE, message=FALSE-------------------------------------------
 require(cowplot)
-theme_set(theme_cowplot(font_size=11)) # default fontsize doesn't work well for online viewing
+theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
   geom_point(size=2.5)
 
