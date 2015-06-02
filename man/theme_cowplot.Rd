@@ -3,7 +3,7 @@
 \alias{theme_cowplot}
 \title{Create the default cowplot theme}
 \usage{
-theme_cowplot(font_size = 13, font_family = "", line_size = 0.5)
+theme_cowplot(font_size = 14, font_family = "", line_size = 0.5)
 }
 \arguments{
 \item{font_size}{The overall font size. Default is 13.}

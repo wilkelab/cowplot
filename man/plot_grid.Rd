@@ -4,7 +4,7 @@
 \title{Arrange multiple plots into a grid}
 \usage{
 plot_grid(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1,
-  labels = NULL, label_size = 16, cols = NULL, rows = NULL)
+  labels = NULL, label_size = 14, cols = NULL, rows = NULL)
 }
 \arguments{
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
@@ -20,7 +20,7 @@ by giving a single value.}
 
 \item{labels}{(optional) List of labels to be added to the plots.}
 
-\item{label_size}{(optional) Numerical value indicating the label size. Default is 16.}
+\item{label_size}{(optional) Numerical value indicating the label size. Default is 14.}
 }
 \description{
 Arrange multiple plots into a grid.

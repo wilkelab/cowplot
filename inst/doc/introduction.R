@@ -52,7 +52,7 @@ plot_grid(plot.mpg, plot.diamonds, plot.mpg, labels=c("A", "B", "C"), nrow = 1)
 
 ## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 
-  draw_plot_label("A", size = 13) + 
+  draw_plot_label("A", size = 14) + 
   draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
 
 ## ----message=FALSE-------------------------------------------------------

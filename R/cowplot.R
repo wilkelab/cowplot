@@ -34,7 +34,7 @@ NULL
 #' @examples
 #' qplot(1:10, 1:10^2) + theme_cow(font_size = 15)
 #' @export
-theme_cowplot <- function(font_size = 13, font_family = "", line_size = .5) {
+theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
   # Start with default theme_grey and then modify some parts
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
@@ -421,7 +421,7 @@ ggdraw <- function(plot = NULL){
 #'              each subplot, by giving a vector of scale values, or at once for all subplots,
 #'              by giving a single value.
 #' @param labels (optional) List of labels to be added to the plots.
-#' @param label_size (optional) Numerical value indicating the label size. Default is 16.
+#' @param label_size (optional) Numerical value indicating the label size. Default is 14.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -433,7 +433,7 @@ ggdraw <- function(plot = NULL){
 #' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 #' @export
 plot_grid <- function(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
-                      label_size = 16, cols = NULL, rows = NULL ) {
+                      label_size = 14, cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)

@@ -104,7 +104,7 @@ The advantage of saving figures in this way is that you can first develop the co
 Finally, let's discuss how we can use **cowplot** to create more unusual plot designs. For example, let's take the mpg image from the previous section, label it with an A in the top-left corner, and mark it as a draft:
 ```{r message=FALSE}
 ggdraw(plot.mpg) + 
-  draw_plot_label("A", size = 13) + 
+  draw_plot_label("A", size = 14) + 
   draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
 ```
 
