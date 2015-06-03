@@ -20,5 +20,5 @@ Note that cowplot is in the early stages of development. While you may find it u
 # Usage
 
 To get a quick introduction to the main features of this package, read the 
-[vignette available here.](http://htmlpreview.github.io/?https://github.com/wilkelab/cowplot/blob/master/inst/doc/introduction.html)  
+[vignette available here.](http://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)  
 
