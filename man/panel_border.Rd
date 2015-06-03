@@ -6,6 +6,15 @@
 panel_border(colour = "gray80", size = 0.5, linetype = 1,
   remove = FALSE)
 }
+\arguments{
+\item{colour}{The color of the border.}
+
+\item{size}{Size.}
+
+\item{linetype}{Line type.}
+
+\item{remove}{If \code{TRUE}, removes the current panel border.}
+}
 \description{
 This function provides a simple way to modify the panel border in ggplot2. It
 doesn't do anything that can't be done just the same with \code{theme()}. However, it

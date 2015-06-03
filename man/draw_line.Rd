@@ -6,11 +6,11 @@
 draw_line(x, y, ...)
 }
 \arguments{
-\item{x}{vector of x coordinates}
+\item{x}{Vector of x coordinates.}
 
-\item{y}{vector of y coordinates}
+\item{y}{Vector of y coordinates.}
 
-\item{...}{style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.}
+\item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.}
 }
 \description{
 This is a convenience function. It's just a thin wrapper around \code{geom_line()}.

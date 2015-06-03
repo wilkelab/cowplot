@@ -14,13 +14,13 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 \item{minor}{Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
 "y", "none".}
 
-\item{size.major}{Size of the major grid lines}
+\item{size.major}{Size of the major grid lines.}
 
-\item{size.minor}{Size of the minor grid lines}
+\item{size.minor}{Size of the minor grid lines.}
 
-\item{colour.major}{Color of the major grid lines}
+\item{colour.major}{Color of the major grid lines.}
 
-\item{colour.minor}{Color of the minor grid lines}
+\item{colour.minor}{Color of the minor grid lines.}
 }
 \description{
 This function provides a simple way to modify the background grid in ggplot2. It

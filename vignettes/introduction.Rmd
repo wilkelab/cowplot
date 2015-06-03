@@ -1,5 +1,5 @@
 ---
-title: "Introduction to COWplot"
+title: "Introduction to cowplot"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
 output:
@@ -31,8 +31,9 @@ The default design of **cowplot**, by contrast, is clean and simple. It looks si
 ```{r echo=FALSE, message=FALSE}
 require(cowplot)
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
+plot.mpg
 ```
 
 In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling:

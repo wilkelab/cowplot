@@ -1,6 +1,5 @@
 #' cowplot.
 #'
-#' A simple add-on to ggplot2 that changes the default theme and provides a few additional, useful things.
 #' @name cowplot
 #' @docType package
 #' @import ggplot2
@@ -28,11 +27,12 @@ NULL
 #' After loading the cowplot package, this theme will be the default
 #' for all graphs made with ggplot2.
 #'
-#' @param font_size The overall font size. Default is 13.
-#' @param font_family The default font family.
+#' @param font_size Overall font size. Default is 14.
+#' @param font_family Default font family.
+#' @param line_size Default line size.
 #' @return The theme.
 #' @examples
-#' qplot(1:10, 1:10^2) + theme_cow(font_size = 15)
+#' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 #' @export
 theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
   # Start with default theme_grey and then modify some parts
@@ -68,10 +68,14 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
 #' The theme created by this function shows nothing but the plot panel. Unfortunately,
 #' due to ggplot2 peculiarities, a little bit of padding remains to the left and bottom of
 #' the panel. This can be removed by adding \code{labs(x = NULL, y = NULL)} to the plot, see examples.
-#' @param base_size The overall font size. Default is 14.
+#' @param base_size Overall font size. Default is 14.
+#' @param base_family Base font family.
 #' @return The theme.
 #' @examples
-#' qplot(1:10, 1:10^2) + theme_cow(base_size = 16)
+#' # plot with small amount of remaining padding
+#' qplot(1:10, (1:10)^2) + theme_nothing()
+#' # remaining padding removed
+#' qplot(1:10, (1:10)^2) + theme_nothing() + labs(x = NULL, y = NULL)
 #' @export
 theme_nothing <- function(base_size = 12, base_family = ""){
   theme_grey(base_size = base_size, base_family = base_family) %+replace%
@@ -101,10 +105,10 @@ theme_nothing <- function(base_size = 12, base_family = ""){
 #'  "y", "only_minor" (disables major grid lines but allows you to switch on minor grid lines), "none".
 #' @param minor Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
 #'  "y", "none".
-#' @param size.major Size of the major grid lines
-#' @param size.minor Size of the minor grid lines
-#' @param colour.major Color of the major grid lines
-#' @param colour.minor Color of the minor grid lines
+#' @param size.major Size of the major grid lines.
+#' @param size.minor Size of the minor grid lines.
+#' @param colour.major Color of the major grid lines.
+#' @param colour.minor Color of the minor grid lines.
 #' @export
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             minor = c("xy", "x", "y", "none"),
@@ -146,6 +150,10 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' This function provides a simple way to modify the panel border in ggplot2. It
 #' doesn't do anything that can't be done just the same with \code{theme()}. However, it
 #' saves some typing.
+#' @param colour The color of the border.
+#' @param size Size.
+#' @param linetype Line type.
+#' @param remove If \code{TRUE}, removes the current panel border.
 #' @export
 panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = FALSE){
   if (remove){
@@ -165,6 +173,20 @@ panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = F
 #' with the main difference being that by default it doesn't use the Dingbats
 #' font for pdf output. If you ever have trouble with this function, you can
 #' try using \code{ggplot2::ggsave()} instead.
+#' @param filename Filename of plot
+#' @param plot Plot to save, defaults to last plot displayed.
+#' @param device Device to use, automatically extract from file name extension.
+#' @param path Path to save plot to (if you just want to set path and not
+#'    filename).
+#' @param scale Scaling factor.
+#' @param width Width (defaults to the width of current plotting window).
+#' @param height Height (defaults to the height of current plotting window).
+#' @param units Units for width and height when either one is explicitly specified (in, cm, or mm).
+#' @param dpi DPI to use for raster graphics.
+#' @param limitsize When \code{TRUE} (the default), \code{ggsave} will not
+#'   save images larger than 50x50 inches, to prevent the common error of
+#'   specifying dimensions in pixels.
+#' @param ... Other arguments to be handed to the plot device.
 #' @export
 ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
                    device = default_device(filename), path = NULL, scale = 1,
@@ -273,6 +295,8 @@ ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
 #' to one sup-plot, and we then specify how many rows and columns of subplots we have. This means that
 #' if we have code that can save a single figure, it is trivial to adapt this code to save a combination
 #' of multiple comparable figures. See examples for details.
+#' @param filename Name of the plot file to generate.
+#' @param plot Plot to save.
 #' @param nrow Number of subplot rows.
 #' @param ncol Number of subplot columns.
 #' @param base_height The height (in inches) of the plot or of one sub-plot if \code{nrow}
@@ -283,6 +307,9 @@ ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
 #' @param base_aspect_ratio The aspect ratio of the plot or of one sub-plot if \code{nrow}
 #' or \code{ncol} > 1. This argument is only used if \code{base_width = NULL}. The default is 1.1,
 #' which works well for figures without a legend.
+#' @param rows Deprecated. Like \code{nrow}.
+#' @param cols Deprecated. Like \code{ncol}.
+#' @param ... Other arguments to be handed to \code{ggsave()}.
 #' @examples
 #' # save a single plot without legend
 #' x <- (1:100)/10
@@ -334,9 +361,9 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
 #'
 #' This is a convenience function. It's just a thin wrapper around \code{geom_line()}.
 #'
-#' @param x vector of x coordinates
-#' @param y vector of y coordinates
-#' @param ... style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.
+#' @param x Vector of x coordinates.
+#' @param y Vector of y coordinates.
+#' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.
 #' @export
 draw_line <- function(x, y, ...){
   geom_path(data = data.frame(x, y),
@@ -355,12 +382,13 @@ draw_line <- function(x, y, ...){
 #' By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
-#' @param text character or expression vector specifying the text to be written.
-#' @param x vector of x coordinates
-#' @param y vector of y coordinates
-#' @param ... style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
+#' @param text Character or expression vector specifying the text to be written.
+#' @param x Vector of x coordinates.
+#' @param y Vector of y coordinates.
+#' @param size Font size of the text to be drawn.
+#' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
 #' @export
-draw_text <- function(text, x = 0.5, y = 0.5, size = 13, ...){
+draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
   geom_text(data = data.frame(text, x, y),
             aes(label = text, x = x, y = y),
             size = size / .pt, # scale font size to match size in theme definition
@@ -371,6 +399,14 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 13, ...){
 #'
 #' This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
 #' as \code{draw_text()}, but has defaults that make it convenient to label graphs.
+#' @param label String to be drawn as the label.
+#' @param x The x position of the label.
+#' @param y The y position of the label.
+#' @param hjust Horizontal adjustment.
+#' @param vjust Vertical adjustment.
+#' @param size Font size of the label to be drawn.
+#' @param fontface Font face of the label to be drawn.
+#' @param ... Other arguments to be handed to \code{draw_text()}.
 #' @export
 draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold', ...){
   draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface, ...)
@@ -381,11 +417,11 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 #'
 #' Places a plot somewhere onto the drawing canvas. By default, coordinates run from
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
-#' @param plot The plot to place
-#' @param x x location of the lower left corner of the plot
-#' @param y y location of the lower left corner of the plot
-#' @param width width of the plot
-#' @param height height of the plot
+#' @param plot The plot to place.
+#' @param x The x location of the lower left corner of the plot.
+#' @param y The y location of the lower left corner of the plot.
+#' @param width Width of the plot.
+#' @param height Height of the plot.
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
   plot.grob <- grid::grobTree(ggplot2::ggplotGrob(plot))
@@ -393,10 +429,11 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
 }
 
 #' Set up a drawing layer on top of a ggplot
+#' @param plot The ggplot2 plot object to use as a starting point.
 #' @export
 ggdraw <- function(plot = NULL){
   d <- data.frame(x=0:1, y=0:1) # dummy data
-  p <- ggplot(d, aes(x=x, y=y)) + # empty plot
+  p <- ggplot(d, aes_string(x="x", y="y")) + # empty plot
     scale_x_continuous(limits = c(0, 1), expand = c(0, 0)) +
     scale_y_continuous(limits = c(0, 1), expand = c(0, 0)) +
     theme_nothing() + # with empty theme
@@ -413,6 +450,7 @@ ggdraw <- function(plot = NULL){
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
+#' @param ... List of plots to be arranged into the grid.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param nrow (optional) Number of rows in the plot grid.
@@ -422,6 +460,8 @@ ggdraw <- function(plot = NULL){
 #'              by giving a single value.
 #' @param labels (optional) List of labels to be added to the plots.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
+#' #' @param rows Deprecated. Like \code{nrow}.
+#' @param cols Deprecated. Like \code{ncol}.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -430,7 +470,8 @@ ggdraw <- function(plot = NULL){
 #' plot_grid(p1, p2, p3, p4)
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
 #' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
+#'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 #' @export
 plot_grid <- function(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
                       label_size = 14, cols = NULL, rows = NULL ) {

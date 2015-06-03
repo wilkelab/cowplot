@@ -7,6 +7,8 @@ plot_grid(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1,
   labels = NULL, label_size = 14, cols = NULL, rows = NULL)
 }
 \arguments{
+\item{...}{List of plots to be arranged into the grid.}
+
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
 individually as the first n arguments of the function plot_grid (see examples).}
 
@@ -20,7 +22,12 @@ by giving a single value.}
 
 \item{labels}{(optional) List of labels to be added to the plots.}
 
-\item{label_size}{(optional) Numerical value indicating the label size. Default is 14.}
+\item{label_size}{(optional) Numerical value indicating the label size. Default is 14.
+#'}
+
+\item{cols}{Deprecated. Like \code{ncol}.}
+
+\item{rows}{Deprecated. Like \code{nrow}.}
 }
 \description{
 Arrange multiple plots into a grid.
@@ -33,6 +40,7 @@ p4 <- qplot(1:10, (1:10)^4)
 plot_grid(p1, p2, p3, p4)
 plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
 plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2, labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
+plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
+ labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 }
 

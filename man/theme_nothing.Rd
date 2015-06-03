@@ -6,7 +6,9 @@
 theme_nothing(base_size = 12, base_family = "")
 }
 \arguments{
-\item{base_size}{The overall font size. Default is 14.}
+\item{base_size}{Overall font size. Default is 14.}
+
+\item{base_family}{Base font family.}
 }
 \value{
 The theme.
@@ -17,6 +19,9 @@ due to ggplot2 peculiarities, a little bit of padding remains to the left and bo
 the panel. This can be removed by adding \code{labs(x = NULL, y = NULL)} to the plot, see examples.
 }
 \examples{
-qplot(1:10, 1:10^2) + theme_cow(base_size = 16)
+# plot with small amount of remaining padding
+qplot(1:10, (1:10)^2) + theme_nothing()
+# remaining padding removed
+qplot(1:10, (1:10)^2) + theme_nothing() + labs(x = NULL, y = NULL)
 }
 

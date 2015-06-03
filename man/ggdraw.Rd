@@ -5,6 +5,9 @@
 \usage{
 ggdraw(plot = NULL)
 }
+\arguments{
+\item{plot}{The ggplot2 plot object to use as a starting point.}
+}
 \description{
 Set up a drawing layer on top of a ggplot
 }

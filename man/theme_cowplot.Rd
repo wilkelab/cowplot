@@ -6,9 +6,11 @@
 theme_cowplot(font_size = 14, font_family = "", line_size = 0.5)
 }
 \arguments{
-\item{font_size}{The overall font size. Default is 13.}
+\item{font_size}{Overall font size. Default is 14.}
 
-\item{font_family}{The default font family.}
+\item{font_family}{Default font family.}
+
+\item{line_size}{Default line size.}
 }
 \value{
 The theme.
@@ -18,6 +20,6 @@ After loading the cowplot package, this theme will be the default
 for all graphs made with ggplot2.
 }
 \examples{
-qplot(1:10, 1:10^2) + theme_cow(font_size = 15)
+qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 }
 

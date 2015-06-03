@@ -8,6 +8,10 @@ save_plot(filename, plot, ncol = 1, nrow = 1, base_height = 4,
   rows = NULL)
 }
 \arguments{
+\item{filename}{Name of the plot file to generate.}
+
+\item{plot}{Plot to save.}
+
 \item{ncol}{Number of subplot columns.}
 
 \item{nrow}{Number of subplot rows.}
@@ -22,6 +26,12 @@ which works well for figures without a legend.}
 \item{base_width}{The width (in inches) of the plot or of one sub-plot if \code{nrow}
 or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calculated from
 \code{height} and \code{base_aspect_ratio}.}
+
+\item{...}{Other arguments to be handed to \code{ggsave()}.}
+
+\item{cols}{Deprecated. Like \code{ncol}.}
+
+\item{rows}{Deprecated. Like \code{nrow}.}
 }
 \description{
 This function replaces the standard \code{ggsave()} function for saving a plot into a file. It

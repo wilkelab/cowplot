@@ -8,6 +8,32 @@ ggsave(filename = NULL, plot = ggplot2::last_plot(),
   width = par("din")[1], height = par("din")[2], units = c("in", "cm",
   "mm"), dpi = 300, limitsize = TRUE, ...)
 }
+\arguments{
+\item{filename}{Filename of plot}
+
+\item{plot}{Plot to save, defaults to last plot displayed.}
+
+\item{device}{Device to use, automatically extract from file name extension.}
+
+\item{path}{Path to save plot to (if you just want to set path and not
+filename).}
+
+\item{scale}{Scaling factor.}
+
+\item{width}{Width (defaults to the width of current plotting window).}
+
+\item{height}{Height (defaults to the height of current plotting window).}
+
+\item{units}{Units for width and height when either one is explicitly specified (in, cm, or mm).}
+
+\item{dpi}{DPI to use for raster graphics.}
+
+\item{limitsize}{When \code{TRUE} (the default), \code{ggsave} will not
+save images larger than 50x50 inches, to prevent the common error of
+specifying dimensions in pixels.}
+
+\item{...}{Other arguments to be handed to the plot device.}
+}
 \description{
 This function should behave just like \code{ggsave()} from ggplot2,
 with the main difference being that by default it doesn't use the Dingbats

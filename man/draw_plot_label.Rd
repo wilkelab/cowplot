@@ -6,6 +6,23 @@
 draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
   size = 16, fontface = "bold", ...)
 }
+\arguments{
+\item{label}{String to be drawn as the label.}
+
+\item{x}{The x position of the label.}
+
+\item{y}{The y position of the label.}
+
+\item{hjust}{Horizontal adjustment.}
+
+\item{vjust}{Vertical adjustment.}
+
+\item{size}{Font size of the label to be drawn.}
+
+\item{fontface}{Font face of the label to be drawn.}
+
+\item{...}{Other arguments to be handed to \code{draw_text()}.}
+}
 \description{
 This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
 as \code{draw_text()}, but has defaults that make it convenient to label graphs.

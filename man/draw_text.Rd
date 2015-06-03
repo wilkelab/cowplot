@@ -3,16 +3,18 @@
 \alias{draw_text}
 \title{Draw text.}
 \usage{
-draw_text(text, x = 0.5, y = 0.5, size = 13, ...)
+draw_text(text, x = 0.5, y = 0.5, size = 14, ...)
 }
 \arguments{
-\item{text}{character or expression vector specifying the text to be written.}
+\item{text}{Character or expression vector specifying the text to be written.}
 
-\item{x}{vector of x coordinates}
+\item{x}{Vector of x coordinates.}
 
-\item{y}{vector of y coordinates}
+\item{y}{Vector of y coordinates.}
 
-\item{...}{style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
+\item{size}{Font size of the text to be drawn.}
+
+\item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
 \description{
 This is a convenience function. It's just a thin wrapper around \code{geom_text()}. It can take either an

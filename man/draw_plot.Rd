@@ -6,15 +6,15 @@
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 }
 \arguments{
-\item{plot}{The plot to place}
+\item{plot}{The plot to place.}
 
-\item{x}{x location of the lower left corner of the plot}
+\item{x}{The x location of the lower left corner of the plot.}
 
-\item{y}{y location of the lower left corner of the plot}
+\item{y}{The y location of the lower left corner of the plot.}
 
-\item{width}{width of the plot}
+\item{width}{Width of the plot.}
 
-\item{height}{height of the plot}
+\item{height}{Height of the plot.}
 }
 \description{
 Places a plot somewhere onto the drawing canvas. By default, coordinates run from

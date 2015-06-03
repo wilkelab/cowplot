@@ -5,6 +5,6 @@
 \alias{cowplot-package}
 \title{cowplot.}
 \description{
-A simple add-on to ggplot2 that changes the default theme and provides a few additional, useful things.
+cowplot.
 }
 
