@@ -1,3 +1,8 @@
+## Resubmission
+This is a resubmission. In this version I have:
+* Enclosed 'ggplot2' in single quotes in Title and Description.
+* Added an explanation for the package name.
+
 ## Test environments
 * local OS X install x86_64-apple-darwin13.4.0 (64-bit), R 3.1.2
 * win-builder (via devtools::build_win())
