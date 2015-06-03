@@ -1,5 +1,5 @@
 Package: cowplot
-Title: Streamlined plot theme and plot annotations for ggplot2
+Title: Streamlined Plot Theme and Plot Annotations for ggplot2
 Version: 0.3.0
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
     "wilke@austin.utexas.edu"), person("Hadley", "Wickham", role = c("cph"),
