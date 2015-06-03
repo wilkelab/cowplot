@@ -6,7 +6,7 @@ output:
   rmarkdown::html_vignette:
     fig_width: 4
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Introduction to cowplot}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

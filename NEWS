@@ -1,3 +1,7 @@
+cowplot 0.3.1
+----------------------------------------------------------------
+Fix Vignette title
+
 cowplot 0.3.0
 ----------------------------------------------------------------
 First complete implementation ready for initial release.
