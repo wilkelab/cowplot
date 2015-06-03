@@ -1,4 +1,4 @@
-COWplot -- An add-on to the ggplot2 plotting package
+cowplot -- An add-on to the ggplot2 plotting package
 ====================================================
 
 The cowplot package is meant to provide a publication-ready theme for ggplot2, one that requires a minimum amount of fiddling with sizes of axis labels, plot backgrounds, etc. It meets my personal needs; you may or may not like my style.
@@ -7,11 +7,11 @@ The package also fixes a couple of other annoyances that I encountered when tryi
 
 # Installation
 
-To install this package, you need the devtools package. In your R console, simply enter:
+You can install the latest development version of this package using the devtools package. In your R console, simply enter:
 
     devtools::install_github("wilkelab/cowplot")
 
-Note that cowplot is in the early stages of development. While you may find it useful for certain graphing problems you encounter, it may have major problems or undergo substantial changes in the near future. In particular, at this point I make no guarantees that the default theme will remain unchanged.
+Note that cowplot is in the early stages of development. While you may find it useful for certain graphing problems you encounter, it may have major problems or undergo substantial changes in the future. In particular, at this point I make no guarantees that the default theme will remain unchanged.
 
 # Usage
 
