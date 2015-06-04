@@ -27,7 +27,7 @@ ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
    geom_point(size=2.5) + theme_gray()
 ```
 
-The default design of **cowplot**, by contrast, is clean and simple. It looks similar to **ggplot2**'s `theme_classic()`, but there are important but subtle difference we'll discuss later.
+The default design of **cowplot**, by contrast, is clean and simple. It looks similar to **ggplot2**'s `theme_classic()`, but there are important but subtle differences we'll discuss later.
 ```{r echo=FALSE, message=FALSE}
 require(cowplot)
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
