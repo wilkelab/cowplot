@@ -4,12 +4,12 @@ Version: 0.3.1
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
     "wilke@austin.utexas.edu"), person("Hadley", "Wickham", role = c("cph"),
     email = "h.wickham@gmail.com") )
-Description: Some helpful extensions and modifications to the 'ggplot2' library.
-    In particular, this package makes it easy to combine multiple 'ggplot2' plots
-    into one and label them with letters, e.g. A, B, C, etc., as is often required
-    for scientific publications. The package also provides a streamlined and clean
-    theme that is used in the Wilke lab, hence the package name, which stands for
-    Claus O. Wilke's plot library.
+Description: Some helpful extensions and modifications to the 'ggplot2'
+    library. In particular, this package makes it easy to combine multiple
+    'ggplot2' plots into one and label them with letters, e.g. A, B, C, etc.,
+    as is often required for scientific publications. The package also provides
+    a streamlined and clean theme that is used in the Wilke lab, hence the
+    package name, which stands for Claus O. Wilke's plot library.
 URL: https://github.com/wilkelab/cowplot
 Depends:
     R (>= 3.0.0),
