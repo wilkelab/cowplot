@@ -18,16 +18,17 @@ The **cowplot** source code is available on github: [https://github.com/wilkelab
 
 # Plot design
 
-The default **ggplot2** design is not particularly elegant, in my opinion. In particular, the gray background grid is a prime example of [chartjunk,](http://en.wikipedia.org/wiki/Chartjunk) which stands for graphical elements that distract the viewer without providing any useful information. For example, see this **ggplot2** visualization of the `mpg` data set:
+The default **ggplot2** design is not particularly elegant, in my opinion. In particular, I don't like the gray background grid. I feel it often distracts from the data. For example, see this **ggplot2** visualization of the `mpg` data set:
 ```{r echo=FALSE, message=FALSE}
 require(ggplot2)
 ```
 ```{r message=FALSE}
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size=2.5) + theme_gray()
+   geom_point(size=2.5)
 ```
 
-The default design of **cowplot**, by contrast, is clean and simple. It looks similar to **ggplot2**'s `theme_classic()`, but there are important but subtle differences we'll discuss later.
+I prefer a clean and sparse layout for publication. I also prefer the approach of building a graph by adding elements rather than taking them away. Therefore, the default design of **cowplot** has no grid at all. It looks similar to **ggplot2**'s `theme_classic()`, but there are a few important but subtle differences, mostly with respect to font sizes.
+
 ```{r echo=FALSE, message=FALSE}
 require(cowplot)
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
@@ -53,6 +54,12 @@ plot.mpg + background_grid(major = "xy", minor = "none")
 ```
 
 While the same result could be obtained using the function `theme()`, the function `background_grid()` makes the most commonly used option easily accessible. See the reference documentation for details.
+
+Note that if you ever want to use the default **ggplot2** theme while using the **cowplot** package, simply add `theme_gray()` to your plot or call `theme_set(theme_gray())` to set this theme for all subsequent plots.
+```{r eval=FALSE}
+plot.mpg + theme_gray() # create plot with default ggplot2 theme
+theme_set(theme_gray()) # switch to default ggplot2 theme for good
+```
 
 
 # Arranging graphs into a grid
@@ -160,8 +167,8 @@ ggdraw() +
 The functions `background_grid()` and `panel_border()` are convenience functions defined by **cowplot** to save some typing when manipulating the background grid and panel border. 
 
 
-Of course, we can also go crazy:
-```{r message=FALSE, fig.width=7, fig.height=5}
+```{r eval=FALSE, echo=FALSE, message=FALSE, fig.width=7, fig.height=5}
+# Of course, we can also go crazy:
 ggdraw() +
   #geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
   #          colour = "gray60", fill = "red", alpha=.03) +
