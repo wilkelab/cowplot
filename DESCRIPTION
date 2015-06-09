@@ -22,3 +22,10 @@ Suggests:
     knitr
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
+Collate:
+    'cowplot.R'
+    'draw.R'
+    'plot_grid.R'
+    'save.R'
+    'setup.R'
+    'themes.R'
