@@ -85,9 +85,9 @@ By default, the plots are simply placed into the grid as they are, and so the ax
 ```{r message=FALSE, fig.width=7, fig.height=2.5}
 plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), align = "h")
 ```
+Note that it is only possible to align graphs with the same internal structure. What this means is that you cannot align a faceted and a regular plot. You can align two faceted plots, but only if they have the same number of facets in the direction orthogonal to your alignment direction.
 
-
-By default, the function will attempt to achieve a reasonable layout of the plots provided. However, you can precisely manipulate the layout by specifying the number of rows or columns or both:
+The function `plot_grid()` will attempt to achieve a reasonable layout of the plots provided. However, you can precisely manipulate the layout by specifying the number of rows or columns or both:
 ```{r message=FALSE, fig.width=7, fig.height=5}
 plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels = c("A", "B", "C", "D"), ncol = 2)
 ```
