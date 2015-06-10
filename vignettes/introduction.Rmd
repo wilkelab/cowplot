@@ -24,7 +24,7 @@ require(ggplot2)
 ```
 ```{r message=FALSE}
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size=2.5)
+   geom_point(size = 2.5)
 ```
 
 I prefer a clean and sparse layout for publication. I also prefer the approach of building a graph by adding elements rather than taking them away. Therefore, the default design of **cowplot** has no grid at all. It looks similar to **ggplot2**'s `theme_classic()`, but there are a few important but subtle differences, mostly with respect to font sizes.
@@ -33,7 +33,7 @@ I prefer a clean and sparse layout for publication. I also prefer the approach o
 require(cowplot)
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size=2.5)
+  geom_point(size = 2.5)
 plot.mpg
 ```
 
@@ -78,17 +78,22 @@ plot.diamonds
 
 **cowplot** allows us to combine them into one graph via the function `plot_grid()`: 
 ```{r message=FALSE, fig.width=7, fig.height=2.5}
-plot_grid(plot.mpg, plot.diamonds, labels=c("A", "B"))
+plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"))
+```
+
+By default, the plots are simply placed into the grid as they are, and so the axes are not aligned. If axis alignment is required, it can be switched on via the `align` option:
+```{r message=FALSE, fig.width=7, fig.height=2.5}
+plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), align = "h")
 ```
 
 
 By default, the function will attempt to achieve a reasonable layout of the plots provided. However, you can precisely manipulate the layout by specifying the number of rows or columns or both:
 ```{r message=FALSE, fig.width=7, fig.height=5}
-plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels=c("A", "B", "C", "D"), ncol = 2)
+plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels = c("A", "B", "C", "D"), ncol = 2)
 ```
 
-```{r message=FALSE, fig.width=10, fig.height=2.5}
-plot_grid(plot.mpg, plot.diamonds, plot.mpg, labels=c("A", "B", "C"), nrow = 1)
+```{r message=FALSE, fig.width=4, fig.height=5}
+plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), nrow = 2, align = "v")
 ```
 
 The function `plot_grid()` works nicely in combination with the function `save_plot()`, which can be told

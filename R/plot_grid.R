@@ -25,8 +25,8 @@
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
 #' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12, align="v")
 #' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
-#'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
-#'  @export
+#'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12, align="v")
+#' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                        nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
                        label_size = 14, cols = NULL, rows = NULL ) {
@@ -163,31 +163,6 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 }
 
 # Old version of plot_grid(), without alignment
-#' Arrange multiple plots into a grid
-#'
-#' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid.
-#' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
-#' individually as the first n arguments of the function plot_grid (see examples).
-#' @param nrow (optional) Number of rows in the plot grid.
-#' @param ncol (optional) Number of columns in the plot grid.
-#' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
-#'              each subplot, by giving a vector of scale values, or at once for all subplots,
-#'              by giving a single value.
-#' @param labels (optional) List of labels to be added to the plots.
-#' @param label_size (optional) Numerical value indicating the label size. Default is 14.
-#' #' @param rows Deprecated. Like \code{nrow}.
-#' @param cols Deprecated. Like \code{ncol}.
-#' @examples
-#' p1 <- qplot(1:10, 1:10)
-#' p2 <- qplot(1:10, (1:10)^2)
-#' p3 <- qplot(1:10, (1:10)^3)
-#' p4 <- qplot(1:10, (1:10)^4)
-#' plot_grid(p1, p2, p3, p4)
-#' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'))
-#' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12)
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
-#'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12)
 plot_grid2 <- function(..., plotlist = NULL, nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
                       label_size = 14, cols = NULL, rows = NULL ) {
 
