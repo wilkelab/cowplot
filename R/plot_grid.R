@@ -12,6 +12,11 @@
 #' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
 #'              each subplot, by giving a vector of scale values, or at once for all subplots,
 #'              by giving a single value.
+#' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
+#'              grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
+#'              second column.
+#' @param rel_heights (optional) Numerical vector of relative columns heights. Works just as
+#'              \code{rel_widths} does, but for rows rather than columns.
 #' @param labels (optional) List of labels to be added to the plots.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
 #' #' @param rows Deprecated. Like \code{nrow}.
@@ -21,15 +26,22 @@
 #' p2 <- qplot(1:10, (1:10)^2)
 #' p3 <- qplot(1:10, (1:10)^3)
 #' p4 <- qplot(1:10, (1:10)^4)
+#' # simple grid
 #' plot_grid(p1, p2, p3, p4)
+#' # simple grid with labels and aligned plots
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
+#' # manually setting the number of rows
 #' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12, align="v")
+#' # missing plots in some grid locations
 #' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
 #'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12, align="v")
+#' # making rows and columns of different widths/heights
+#' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
-                       nrow = NULL, ncol = NULL, scale = 1, labels = NULL,
-                       label_size = 14, cols = NULL, rows = NULL ) {
+                      nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
+                      rel_heights = 1, labels = NULL, label_size = 14,
+                      cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
@@ -126,22 +138,31 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   if (length(scale)==1)
     scale <- rep(scale, num_plots)
 
+  # calculate appropriate vectors of rel. heights and widths
+  rel_heights <- rep(rel_heights, length.out = rows)
+  rel_widths <- rep(rel_widths, length.out = cols)
+  # calculate the appropriate coordinates and deltas for each row and column
+  x_deltas <- rel_widths/sum(rel_widths)
+  y_deltas <- rel_heights/sum(rel_heights)
+  xs <- cumsum(rel_widths)/sum(rel_widths) - x_deltas
+  ys <- 1 - cumsum(rel_heights)/sum(rel_heights)
+
   # now place all the plots
   p <- ggdraw() # start with nothing
   col_count <- 0
   row_count <- 1
-  x_delta <- 1/cols
-  y_delta <- 1/rows
   for (i in 1:(rows*cols)){
     if (i > num_plots) break
 
+    x_delta <- x_deltas[col_count+1]
+    y_delta <- y_deltas[row_count]
     # calculate width, offset, etc
     width <- x_delta * scale[i]
     height <- y_delta * scale[i]
     x_off <- (x_delta - width)/2
     y_off <- (y_delta - height)/2
-    x <- col_count * x_delta + x_off
-    y <- (rows - row_count) * y_delta + y_off
+    x <- xs[col_count+1] + x_off
+    y <- ys[row_count] + y_off
 
     # place the plot
     p_next <- grobs[[i]]
