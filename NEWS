@@ -2,6 +2,7 @@ cowplot devel
 ----------------------------------------------------------------
 Major changes:
 - plot_grid() can now align graphs
+- plot_grid() can now make grids with varying column widths and row heights
 
 Other changes:
 - Various improvements in the documentation

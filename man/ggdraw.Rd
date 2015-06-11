@@ -7,7 +7,7 @@
 ggdraw(plot = NULL)
 }
 \arguments{
-\item{plot}{The ggplot2 plot object to use as a starting point.}
+\item{plot}{The plot to use as a starting point. Can be either a ggplot2 plot or an arbitrary gtable.}
 }
 \description{
 Set up a drawing layer on top of a ggplot

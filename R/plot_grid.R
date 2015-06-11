@@ -2,7 +2,8 @@
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid.
+#' @param ... List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
+#'              or arbitrary gtables.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
@@ -47,8 +48,8 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
 
-  # convert list of plots into list of grobs
-  grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot2::ggplotGrob(x) else NULL})
+  # convert list of plots into list of grobs / gtables
+  grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
 
 
   if (!is.null(cols)){

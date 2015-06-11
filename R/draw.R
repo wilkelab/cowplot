@@ -3,6 +3,21 @@
 # *************************************************
 
 
+# ****** Internal functions used by drawing code ******
+ggplot_to_gtable <- function(plot)
+{
+  if (is(plot, "ggplot")){
+    ggplot2::ggplotGrob(plot)
+  }
+  else if (is(plot, "gtable")){
+    plot
+  }
+  else{
+    stop('Argument needs to be of class "ggplot" or "gtable"' )
+  }
+}
+
+
 #' Draw a line.
 #'
 #' This is a convenience function. It's just a thin wrapper around \code{geom_line()}.
@@ -63,14 +78,15 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 #'
 #' Places a plot somewhere onto the drawing canvas. By default, coordinates run from
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
-#' @param plot The plot to place.
+#' @param plot The plot to place. Can be either a ggplot2 plot or an arbitrary gtable.
 #' @param x The x location of the lower left corner of the plot.
 #' @param y The y location of the lower left corner of the plot.
 #' @param width Width of the plot.
 #' @param height Height of the plot.
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
-  plot.grob <- grid::grobTree(ggplot2::ggplotGrob(plot))
+  g <- ggplot_to_gtable(plot) # convert to gtable if necessary
+  plot.grob <- grid::grobTree(g)
   annotation_custom(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height)
 }
 
@@ -85,13 +101,13 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
 #' @param height Height of the grob.
 #' @export
 draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1){
-  annotation_custom(grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height)
+  annotation_custom(grid::grobTree(grob), xmin = x, xmax = x+width, ymin = y, ymax = y+height)
 }
 
 
 
 #' Set up a drawing layer on top of a ggplot
-#' @param plot The ggplot2 plot object to use as a starting point.
+#' @param plot The plot to use as a starting point. Can be either a ggplot2 plot or an arbitrary gtable.
 #' @export
 ggdraw <- function(plot = NULL){
   d <- data.frame(x=0:1, y=0:1) # dummy data
@@ -102,7 +118,8 @@ ggdraw <- function(plot = NULL){
     labs(x=NULL, y=NULL) # and absolutely no axes
 
   if (!is.null(plot)){
-    plot.grob <- grid::grobTree(ggplot2::ggplotGrob(plot))
+    g <- ggplot_to_gtable(plot) # convert to gtable if necessary
+    plot.grob <- grid::grobTree(g)
     p <- p + annotation_custom(plot.grob)
   }
   p # return ggplot drawing layer
