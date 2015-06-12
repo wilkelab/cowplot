@@ -1,6 +1,8 @@
 cowplot devel
 ----------------------------------------------------------------
 Major changes:
+- Added a function switch_axis_position() which can move/copy the x and/or y axis of a
+  plot to the other side
 - plot_grid() can now align graphs
 - plot_grid() can now make grids with varying column widths and row heights
 
