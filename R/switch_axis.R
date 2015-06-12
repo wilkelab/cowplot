@@ -2,7 +2,7 @@
 switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
 {
   # locate panel
-  pp <- subset(gt$layout, name == "panel")
+  pp <- gt$layout[gt$layout$name == "panel",]
   if (nrow(pp) != 1)
   {
     stop("Can only switch axes on plots with exactly one panel.")
@@ -40,7 +40,7 @@ switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
   # remove left axis and ylab, squash corresponding columns
   if (!keep.original)
   {
-    i <- subset(g$layout, name %in% c("ylab", "axis-l"))
+    i <- g$layout[g$layout$name %in% c("ylab", "axis-l"),]
     g <- gtable_squash_cols(g, i$l)
     g <- gtable_remove_grobs(g, c("ylab", "axis-l"))
   }
@@ -53,7 +53,7 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
 {
 
   # locate panel
-  pp <- subset(gt$layout, name == "panel")
+  pp <- gt$layout[gt$layout$name == "panel",]
   if (nrow(pp) != 1)
   {
     stop("Can only switch axes on plots with exactly one panel.")
@@ -91,7 +91,7 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   # remove bottom axis and xlab, squash corresponding rows
   if (!keep.original)
   {
-    i <- subset(g$layout, name %in% c("xlab", "axis-b"))
+    i <- g$layout[g$layout$name %in% c("xlab", "axis-b"),]
     g <- gtable_squash_rows(g, i$t)
     g <- gtable_remove_grobs(g, c("xlab", "axis-b"))
   }
