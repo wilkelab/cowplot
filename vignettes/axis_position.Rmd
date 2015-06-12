@@ -46,6 +46,6 @@ p2 <- ggplot(mtcars, aes(mpg, qsec)) + geom_line(colour = 'green') + ylim(14, 25
   background_grid(minor='none')
 g2 <- ggplotGrob(p2)
 g2 <- gtable_add_cols(g2, g1$widths[5:6], 4) # add the two additional columns that g1 has
-g2 <- gtable_squash_rows(g2, 1:2) # set top 2 cells to 0 height
+g2 <- gtable_squash_rows(g2, 1:2) # set top two rows to 0 height
 plot_grid(g1, g2, ncol=1, align='v')
 ```
