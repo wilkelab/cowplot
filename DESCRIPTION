@@ -15,7 +15,9 @@ Depends:
     R (>= 3.0.0),
     ggplot2 (>= 1.0.0)
 Imports:
-    grid
+    grid (>= 3.0.0),
+    gtable (>= 0.1.2),
+    plyr (>= 1.8.2)
 License: GPL-2
 LazyData: true
 Suggests:
@@ -25,7 +27,9 @@ BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
     'cowplot.R'
     'draw.R'
+    'gtable.R'
     'plot_grid.R'
     'save.R'
     'setup.R'
+    'switch_axis.R'
     'themes.R'
