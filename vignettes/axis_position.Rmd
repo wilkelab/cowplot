@@ -33,7 +33,7 @@ p2 <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
 ggdraw(switch_axis_position(p2, axis = 'x'))
 ```
 
-In combination with some clever gtable manipulations, we can also align plots with axes that have been switched. A few of the functions I'm using here are convenience functions defined by **cowplot**, specifically `gtable_remove_grobs()` and `gtable_squash_rows()`.
+In combination with some clever gtable manipulations, we can also align multiple plots with axes that have been switched. Note that the function `gtable_squash_rows()` I'm using here is one of a few functions **cowplot** defines for manipulating gtables.
 ```{r, message=FALSE, fig.width=5, fig.height=6}
 require(gtable)
 # top plot
