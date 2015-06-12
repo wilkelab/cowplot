@@ -10,6 +10,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+**Note: The functionality described here is currently only available in the development version of cowplot on github.**
+
 The **cowplot** package defines a function `switch_axis_position()` that allows us to take the x and/or y axis of a plot and copy or move it to the other side of the plot (y axis to right, x axis to top). Here are some examples of moving or copying various axes. As we can see, this works regardless of the chosen theme.
 
 Importantly, the return object is a gtable, not a ggplot object, so we need to feed it into `ggdraw()` to display in the usual manner or to save with `ggsave()` or `save_plot()`.
@@ -24,7 +26,7 @@ ggdraw(switch_axis_position(p1 + theme(axis.ticks.length=unit(0.3, "cm"),
         axis.ticks.margin=unit(0.2, "cm")), axis = 'xy'))
 ```
 
-Moving the axes also works if there is a legend. What is not currently implemented, however, is to move axes on faceted plots.
+Moving the axes also works if there is a legend. What is not currently implemented, however, is moving axes on faceted plots.
 ```{r, message=FALSE, fig.width=5, fig.height=4}
 p2 <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
   theme(axis.text.x = element_text(angle=70, vjust=0.5))
