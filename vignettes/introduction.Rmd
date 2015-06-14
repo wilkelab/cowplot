@@ -48,7 +48,7 @@ save_plot("mpg.pdf", plot.mpg,
           )
 ```
 
-By default, **cowplot** disables grid lines on the plot. In many cases, this is the cleanest and most elegant way to display the data. However, sometimes gridlines may be useful, and thus **copwlot** provides a simple way of adding gridlines, via the function `background_grid()`:
+By default, **cowplot** disables grid lines on the plot. In many cases, this is the cleanest and most elegant way to display the data. However, sometimes gridlines may be useful, and thus **cowplot** provides a simple way of adding gridlines, via the function `background_grid()`:
 ```{r message=FALSE}
 plot.mpg + background_grid(major = "xy", minor = "none")
 ```
