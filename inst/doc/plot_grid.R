@@ -10,7 +10,7 @@ plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'))
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h')
 
-## ---- message=FALSE, fig.width=3.4, fig.height=5.1-----------------------
+## ---- message=FALSE, fig.width=3.9, fig.height=5.1-----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), ncol = 1, align = 'v')
 
 ## ---- message=FALSE, fig.width=4.25, fig.height=5.1----------------------

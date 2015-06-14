@@ -29,7 +29,7 @@ By default, the plots are not aligned, but in many cases they can be aligned via
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h')
 ```
 
-```{r, message=FALSE, fig.width=3.4, fig.height=5.1}
+```{r, message=FALSE, fig.width=3.9, fig.height=5.1}
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), ncol = 1, align = 'v')
 ```
 
@@ -43,7 +43,7 @@ plot_grid(plot.iris, plot.mpg, labels = c('A', 'B'), ncol = 1,
           align = 'v') # aligning does not work here
 ```
 
-In cases where `plot_grid()` cannot automatcially align plots, you can still align them manually if you have some knowledge of gtable, the internal layouting mechanism used by ggplot2. You simply have to convert both graphs into gtable objects and then adjust the relevant widths or heights. In the previous example, you could do the following, for example:
+In cases where `plot_grid()` cannot automatcially align plots, you can still align them manually if you have some knowledge of gtable, the internal layouting mechanism used by ggplot2. You simply have to convert both graphs into gtable objects and then adjust the relevant widths or heights. For the plot from the previous example, for example, you could do the following:
 ```{r, message=FALSE, fig.width=4.25, fig.height=5.1}
 require(grid) # for unit.pmax()
 g.iris <- ggplotGrob(plot.iris) # convert to gtable

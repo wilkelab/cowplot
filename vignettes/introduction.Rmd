@@ -19,12 +19,14 @@ The **cowplot** source code is available on github: [https://github.com/wilkelab
 # Plot design
 
 The default **ggplot2** design is not particularly elegant, in my opinion. In particular, I don't like the gray background grid. I feel it often distracts from the data. For example, see this **ggplot2** visualization of the `mpg` data set:
-```{r echo=FALSE, message=FALSE}
-require(ggplot2)
-```
-```{r message=FALSE}
+```{r eval=FALSE}
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
    geom_point(size = 2.5)
+```
+```{r echo=FALSE, message=FALSE}
+require(ggplot2)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size = 2.5) + theme_gray()
 ```
 
 I prefer a clean and sparse layout for publication. I also prefer the approach of building a graph by adding elements rather than taking them away. Therefore, the default design of **cowplot** has no grid at all. It looks similar to **ggplot2**'s `theme_classic()`, but there are a few important but subtle differences, mostly with respect to font sizes.
