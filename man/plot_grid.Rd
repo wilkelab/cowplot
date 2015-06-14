@@ -36,8 +36,7 @@ second column.}
 
 \item{labels}{(optional) List of labels to be added to the plots.}
 
-\item{label_size}{(optional) Numerical value indicating the label size. Default is 14.
-#'}
+\item{label_size}{(optional) Numerical value indicating the label size. Default is 14.}
 
 \item{cols}{Deprecated. Like \code{ncol}.}
 

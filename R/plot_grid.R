@@ -20,7 +20,7 @@
 #'              \code{rel_widths} does, but for rows rather than columns.
 #' @param labels (optional) List of labels to be added to the plots.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
-#' #' @param rows Deprecated. Like \code{nrow}.
+#' @param rows Deprecated. Like \code{nrow}.
 #' @param cols Deprecated. Like \code{ncol}.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
