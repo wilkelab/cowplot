@@ -79,13 +79,28 @@ add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpa
 
   # locate xlab
   xi <- gt$layout[gt$layout$name == "xlab",]
-  if (nrow(xi) != 1)
+  if (nrow(xi) == 1)
   {
-    stop("Can only insert sub on plots with exactly one xlab element.")
+    t <- xi$b+1; l <- xi$l; b <- xi$b+1; r <- xi$r
+  }
+  else
+  {
+    # if we can't locate xlab, locate title for left/right boundary
+    xi <- gt$layout[gt$layout$name == "title",]
+    if (nrow(xi) == 1)
+    {
+      t <- length(gt$heights)-1; b <- t; l <- xi$l; r <- xi$r
+    }
+    else
+    {
+      # failsave
+      t <- length(gt$heights)-1; b <- t; l <- 1; r <- length(gt$widths)
+      print(c(t,b,l,r))
+    }
   }
 
-  g <- gtable::gtable_add_rows(gt, grid::unit(1, "grobheight", ann.grob) + vpadding, xi$b)
-  g <- gtable::gtable_add_grob(g, ann.grob, xi$b+1, xi$l, xi$b+1, xi$r, clip = "off", name="sub")
+  g <- gtable::gtable_add_rows(gt, grid::unit(1, "grobheight", ann.grob) + vpadding, t-1)
+  g <- gtable::gtable_add_grob(g, ann.grob, t, l, b, r, clip = "off", name="sub")
 
   # return
   g
