@@ -25,6 +25,18 @@ add_sub(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 \item{vpadding}{Vertical padding. The total vertical space added to the label, given in grid
 units. By default, this is added equally above and below the label. However, by changing the
 y and vjust parameters, this can be changed.}
+
+\item{font_family}{The font family}
+
+\item{font_face}{The font face ("plain", "bold", etc.)}
+
+\item{colour}{Text color}
+
+\item{size}{Point size of text}
+
+\item{angle}{Angle at which text is drawn}
+
+\item{lineheight}{Line height of text}
 }
 \value{
 A gtable object holding the modified plot.
@@ -34,10 +46,10 @@ Adds annotation underneath a plot, similar to the `sub` parameter in base R.
 }
 \examples{
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
-ggdraw(add_sub(p1, "This is an annotation\\nspanning two lines."))
+ggdraw(add_sub(p1, "This is an annotation.\\nAnnotations can span multiple lines."))
 
 # You can also do this repeatedly. Just be aware that new annotations are added above previous ones:
-p2 <- add_sub(p1, expression(paste(a^2+b^2, "=", c^2)))
+p2 <- add_sub(p1, expression(paste(a^2+b^2, " = ", c^2)))
 p3 <- add_sub(p2, "This formula has no relevance here:", y  = 0, vjust = 0)
 ggdraw(p3)
 

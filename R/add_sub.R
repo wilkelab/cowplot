@@ -9,6 +9,12 @@
 #' @param vpadding Vertical padding. The total vertical space added to the label, given in grid
 #'    units. By default, this is added equally above and below the label. However, by changing the
 #'    y and vjust parameters, this can be changed.
+#' @param font_family The font family
+#' @param font_face The font face ("plain", "bold", etc.)
+#' @param colour Text color
+#' @param size Point size of text
+#' @param angle Angle at which text is drawn
+#' @param lineheight Line height of text
 #' @return A gtable object holding the modified plot.
 #' @examples
 #' p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
