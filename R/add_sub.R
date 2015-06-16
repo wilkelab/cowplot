@@ -1,4 +1,30 @@
-#' Adds annotation underneath a plot, similar to the `sub` parameter in base R.
+#' Add annotation underneath a plot
+#'
+#' This function can add an arbitrary label or mathematical expression underneath
+#' the plot, similar to the \code{sub} parameter in base R.
+#'
+#' The exact location where the
+#' label is placed is controlled by the parameters \code{x}, \code{y}, \code{hjust}, and
+#' \code{vjust}. By default, all these parameters are set to 0.5, which places the label
+#' centered underneath the plot panel. A value of \code{x = 0} indicates the left boundary
+#' of the plot panel and a value of \code{x = 1} indicates the right boundary. The parameter
+#' \code{hjust} works just as elsewhere in ggplot2. Thus, \code{x = 0, hjust = 0} places
+#' the label left-justified at the left boundary of the plot panel, \code{x = 0.5, hjust = 0.5}
+#' places the label centered underneath the plot panel, and \code{x = 1, hjust = 1} places
+#' it right-justified at the right boundary of the plot panel. \code{x}-values below 0 or
+#' above 1 are allowed, and they move the label beyond the limits of the plot panel.
+#'
+#' The \code{y} coordinates are relative to the added vertical space that is introduced
+#' underneath the x-axis label to place the annotation. A value of \code{y=0} indicates
+#' the bottom-most edge of that space and a value of \code{y=1} indicates the top-most
+#' edge of that space. The total height of the added space is given by the height needed
+#' to draw the label plus the value of \code{vpadding}. Thus, if \code{y=0, vjust=0} then
+#' the extra padding is added entirely above the label, if \code{y=1, vjust=1} then the
+#' extra padding is added entirely below the label, and if \code{y=0.5, vjust=0.5} (the
+#' default) then the extra padding is added equally above and below the label. As is the
+#' case with \code{x}, \code{y}-values outside the range 0-1 are allowed. In particular,
+#' for sufficiently large values of \code{y}, the label will eventually be located inside
+#' the plot panel.
 #'
 #' @param plot A ggplot object or gtable object derived from a ggplot object.
 #' @param label The label with which the plot should be annotated. Can be a plotmath expression.
@@ -34,7 +60,7 @@
 #' ggdraw(p2)
 #'
 #' # Finally, it is possible to move the annotation inside of the plot if desired.
-#' ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"), y = 6, x = 0.02, hjust = 0))
+#' ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"), y = 6, x = 0.03, hjust = 0))
 #' @export
 add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpadding = grid::unit(1, "lines"),
                     font_family = "", font_face = "plain", colour = "black", size = 14, angle = 0, lineheight = 0.9)
@@ -59,7 +85,7 @@ add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpa
   }
 
   g <- gtable::gtable_add_rows(gt, grid::unit(1, "grobheight", ann.grob) + vpadding, xi$b)
-  g <- gtable::gtable_add_grob(g, ann.grob, xi$b+1, xi$l, xi$b+1, xi$r+1, clip = "off", name="sub")
+  g <- gtable::gtable_add_grob(g, ann.grob, xi$b+1, xi$l, xi$b+1, xi$r, clip = "off", name="sub")
 
   # return
   g
