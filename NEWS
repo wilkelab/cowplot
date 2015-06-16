@@ -1,6 +1,10 @@
 cowplot 0.4.0.devel
 ----------------------------------------------------------------
-Improve vignettes.
+Major changes:
+- Add annotations underneath plot, via add_sub() function.
+
+Other changes:
+- Improve vignettes.
 
 cowplot 0.4.0
 ----------------------------------------------------------------

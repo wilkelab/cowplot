@@ -25,6 +25,7 @@ Suggests:
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
+    'add_sub.R'
     'cowplot.R'
     'draw.R'
     'gtable.R'
