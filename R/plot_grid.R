@@ -20,6 +20,10 @@
 #'              \code{rel_widths} does, but for rows rather than columns.
 #' @param labels (optional) List of labels to be added to the plots.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
+#' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
+#'              to the rigth on the plot canvas. Default is -0.5.
+#' @param vjust Adjusts the vertical position of each label. More positive values move the label further
+#'              down on the plot canvas. Default is 1.5.
 #' @param rows Deprecated. Like \code{nrow}.
 #' @param cols Deprecated. Like \code{ncol}.
 #' @examples
@@ -42,6 +46,7 @@
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
                       rel_heights = 1, labels = NULL, label_size = 14,
+                      hjust = -0.5, vjust = 1.5,
                       cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
@@ -139,6 +144,13 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   if (length(scale)==1)
     scale <- rep(scale, num_plots)
 
+  # we also allow for separate hjust and vjust values for each label
+  if (length(hjust)==1)
+    hjust <- rep(hjust, length(labels))
+
+  if (length(vjust)==1)
+    vjust <- rep(vjust, length(labels))
+
   # calculate appropriate vectors of rel. heights and widths
   rel_heights <- rep(rel_heights, length.out = rows)
   rel_widths <- rep(rel_widths, length.out = cols)
@@ -172,7 +184,8 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     }
     # place a label if we have one
     if (i <= length(labels)){
-      p <- p + draw_plot_label(labels[i], x, y + height, size=label_size)
+      p <- p + draw_plot_label(labels[i], x, y + height, size = label_size,
+                               hjust = hjust[i], vjust = vjust[i])
     }
     # move on to next grid position
     col_count <- col_count + 1

@@ -69,6 +69,14 @@ You can adjust the label size via the `label_size` option. Default is 14, so lar
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', label_size = 12)
 ```
 
+Labels can be moved via the `hjust` and `vjust` options. More negative numbers move the labels to the right or up, respectively:
+```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
+plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', label_size = 12,
+          hjust = -1, vjust = 2.5 )
+```
+
+It is possible to adjust individual labels one by one by passing vectors of adjustment values to the options `hjust` and `vjust`. 
+
 You can also adjust the relative widths and heights of rows and columns:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', rel_widths = c(1, 1.3))

@@ -6,8 +6,8 @@
 \usage{
 plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
-  rel_heights = 1, labels = NULL, label_size = 14, cols = NULL,
-  rows = NULL)
+  rel_heights = 1, labels = NULL, label_size = 14, hjust = -0.5,
+  vjust = 1.5, cols = NULL, rows = NULL)
 }
 \arguments{
 \item{...}{List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
@@ -37,6 +37,12 @@ second column.}
 \item{labels}{(optional) List of labels to be added to the plots.}
 
 \item{label_size}{(optional) Numerical value indicating the label size. Default is 14.}
+
+\item{hjust}{Adjusts the horizontal position of each label. More negative values move the label further
+to the rigth on the plot canvas. Default is -0.5.}
+
+\item{vjust}{Adjusts the vertical position of each label. More positive values move the label further
+down on the plot canvas. Default is 1.5.}
 
 \item{cols}{Deprecated. Like \code{ncol}.}
 

@@ -56,6 +56,27 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
             ...)
 }
 
+
+## alternative draw_text implementation that can handle plotmath expressions
+## needs more testing before it can be exported, but seems to work correctly
+draw_text2 <- function(text, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
+                    font_family = "", font_face = "plain", colour = "black", size = 14,
+                    angle = 0, lineheight = 0.9, alpha = 1)
+{
+  text_par <- grid::gpar(col = colour,
+                         fontsize = size,
+                         fontfamily = font_family,
+                         fontface = font_face,
+                         lineheight = lineheight,
+                         alpha = alpha)
+
+  # render the label
+  text.grob <- grid::textGrob(text, x = grid::unit(0.5, "npc"), y = grid::unit(0.5, "npc"),
+                             hjust = hjust, vjust = vjust, rot = angle, gp = text_par)
+  annotation_custom(text.grob, xmin = x, xmax = x, ymin = y, ymax = y)
+}
+
+
 #' Draw plot label
 #'
 #' This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
