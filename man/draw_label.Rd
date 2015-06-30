@@ -19,6 +19,10 @@ draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 
 \item{vjust}{Vertical justification}
 
+\item{fontfamily}{The font family}
+
+\item{fontface}{The font face ("plain", "bold", etc.)}
+
 \item{colour}{Text color}
 
 \item{size}{Point size of text}
@@ -28,10 +32,6 @@ draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 \item{lineheight}{Line height of text}
 
 \item{alpha}{The alpha value of the text}
-
-\item{font_family}{The font family}
-
-\item{font_face}{The font face ("plain", "bold", etc.)}
 }
 \description{
 This function can draw either a character string or mathematical expression at the given
@@ -41,5 +41,15 @@ coordinates.
 By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 specify.
+}
+\examples{
+p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
+c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
+label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
+                    list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
+# adding label via ggdraw, in the ggdraw coordinates
+ggdraw(p) + draw_label(label, .7, .9)
+# adding label directly to plot, in the data coordinates
+p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
 }
 

@@ -18,11 +18,8 @@ draw_text(text, x = 0.5, y = 0.5, size = 14, ...)
 \item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
 \description{
-This function is deprecated. In most cases you probably want to use \code{draw_label} instead.
-The advantage of \code{draw_label} is that it can draw arbitrary text or mathematical expressions,
-while \code{draw_text} can only draw character strings. However, on the flip side, \code{draw_text}
-is vectorized. It can take a vector of separate text labels, with associated coordinates, and
-draw all of them at once.
+This is a convenience function to plot multiple pieces of text at the same time. It cannot
+handle mathematical expressions, though. For those, use \code{draw_label}.
 }
 \details{
 Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in

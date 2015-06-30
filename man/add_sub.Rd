@@ -86,6 +86,7 @@ p2 <- add_sub(plot.iris, "Annotation underneath a faceted plot, left justified."
 ggdraw(p2)
 
 # Finally, it is possible to move the annotation inside of the plot if desired.
-ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"), y = 6, x = 0.03, hjust = 0))
+ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"),
+       y = 6, x = 0.03, hjust = 0))
 }
 

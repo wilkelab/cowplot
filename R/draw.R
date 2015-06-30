@@ -60,7 +60,8 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
 #' Draw a text label or mathematical expression.
 #'
 #' This function can draw either a character string or mathematical expression at the given
-#' coordinates.
+#' coordinates. It works both on top of \code{ggdraw} and directly with \code{ggplot}, depending
+#' on which coordinate system is desired (see examples).
 #'
 #' By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
@@ -70,13 +71,22 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
 #' @param y The y location of the label.
 #' @param hjust Horizontal justification
 #' @param vjust Vertical justification
-#' @param font_family The font family
-#' @param font_face The font face ("plain", "bold", etc.)
+#' @param fontfamily The font family
+#' @param fontface The font face ("plain", "bold", etc.)
 #' @param colour Text color
 #' @param size Point size of text
 #' @param angle Angle at which text is drawn
 #' @param lineheight Line height of text
 #' @param alpha The alpha value of the text
+#' @examples
+#' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
+#' c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
+#' label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
+#'                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
+#' # adding label via ggdraw, in the ggdraw coordinates
+#' ggdraw(p) + draw_label(label, .7, .9)
+#' # adding label directly to plot, in the data coordinates
+#' p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
 #' @export
 draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
                     fontfamily = "", fontface = "plain", colour = "black", size = 14,

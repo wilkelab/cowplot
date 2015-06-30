@@ -60,7 +60,8 @@
 #' ggdraw(p2)
 #'
 #' # Finally, it is possible to move the annotation inside of the plot if desired.
-#' ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"), y = 6, x = 0.03, hjust = 0))
+#' ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"),
+#'        y = 6, x = 0.03, hjust = 0))
 #' @export
 add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpadding = grid::unit(1, "lines"),
                     fontfamily = "", fontface = "plain", colour = "black", size = 14, angle = 0, lineheight = 0.9)

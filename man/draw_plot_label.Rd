@@ -8,11 +8,11 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
   size = 16, fontface = "bold", ...)
 }
 \arguments{
-\item{label}{String to be drawn as the label.}
+\item{label}{String (or vector of strings) to be drawn as the label.}
 
-\item{x}{The x position of the label.}
+\item{x}{The x position (or vector thereof) of the label(s).}
 
-\item{y}{The y position of the label.}
+\item{y}{The y position (or vector thereof) of the label(s).}
 
 \item{hjust}{Horizontal adjustment.}
 
@@ -20,12 +20,13 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 
 \item{size}{Font size of the label to be drawn.}
 
-\item{...}{Other arguments to be handed to \code{draw_label()}.}
+\item{fontface}{Font face of the label to be drawn.}
 
-\item{font_face}{Font face of the label to be drawn.}
+\item{...}{Other arguments to be handed to \code{draw_text()}.}
 }
 \description{
 This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-as \code{draw_label()}, but has defaults that make it convenient to label graphs.
+as \code{draw_text()}, but has defaults that make it convenient to label graphs. Just like \code{draw_text()},
+it can handle vectors of labels with associated coordinates.
 }
 
