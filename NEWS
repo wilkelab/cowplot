@@ -1,4 +1,4 @@
-cowplot 0.4.0.devel
+cowplot 0.5.0
 ----------------------------------------------------------------
 Major changes:
 - Fix label positioning in plot_grid() so it is not affected by the scale parameter

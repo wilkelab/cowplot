@@ -35,7 +35,8 @@ draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 }
 \description{
 This function can draw either a character string or mathematical expression at the given
-coordinates.
+coordinates. It works both on top of \code{ggdraw} and directly with \code{ggplot}, depending
+on which coordinate system is desired (see examples).
 }
 \details{
 By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
