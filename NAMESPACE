@@ -3,6 +3,7 @@
 export(add_sub)
 export(background_grid)
 export(draw_grob)
+export(draw_label)
 export(draw_line)
 export(draw_plot)
 export(draw_plot_label)

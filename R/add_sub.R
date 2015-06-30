@@ -35,8 +35,8 @@
 #' @param vpadding Vertical padding. The total vertical space added to the label, given in grid
 #'    units. By default, this is added equally above and below the label. However, by changing the
 #'    y and vjust parameters, this can be changed.
-#' @param font_family The font family
-#' @param font_face The font face ("plain", "bold", etc.)
+#' @param fontfamily The font family
+#' @param fontface The font face ("plain", "bold", etc.)
 #' @param colour Text color
 #' @param size Point size of text
 #' @param angle Angle at which text is drawn
@@ -63,12 +63,12 @@
 #' ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"), y = 6, x = 0.03, hjust = 0))
 #' @export
 add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpadding = grid::unit(1, "lines"),
-                    font_family = "", font_face = "plain", colour = "black", size = 14, angle = 0, lineheight = 0.9)
+                    fontfamily = "", fontface = "plain", colour = "black", size = 14, angle = 0, lineheight = 0.9)
 {
   text_par <- grid::gpar(col = colour,
                    fontsize = size,
-                   fontfamily = font_family,
-                   fontface = font_face,
+                   fontfamily = fontfamily,
+                   fontface = fontface,
                    lineheight = lineheight)
 
   # render the annotation

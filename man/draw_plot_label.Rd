@@ -20,12 +20,12 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 
 \item{size}{Font size of the label to be drawn.}
 
-\item{fontface}{Font face of the label to be drawn.}
+\item{...}{Other arguments to be handed to \code{draw_label()}.}
 
-\item{...}{Other arguments to be handed to \code{draw_text()}.}
+\item{font_face}{Font face of the label to be drawn.}
 }
 \description{
 This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-as \code{draw_text()}, but has defaults that make it convenient to label graphs.
+as \code{draw_label()}, but has defaults that make it convenient to label graphs.
 }
 

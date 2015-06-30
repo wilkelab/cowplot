@@ -120,7 +120,7 @@ Finally, let's discuss how we can use **cowplot** to create more unusual plot de
 ```{r message=FALSE}
 ggdraw(plot.mpg) + 
   draw_plot_label("A", size = 14) + 
-  draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
+  draw_label("DRAFT!", angle = 45, size = 80, alpha = .2)
 ```
 
 The function `ggdraw()` sets up the drawing layer, and functions that are meant to operate on this drawing layer all start with `draw_`. The resulting object is again a standard **ggplot2** object, and you can do with it whatever you might do with a regular **ggplot2** plot, such as save it with `ggsave()`. [However, as mentioned before, I recommend using `save_plot()` instead.]
@@ -146,13 +146,13 @@ ggdraw() +
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") +
   draw_plot(plot.mpg) +
-  draw_text("Plot is on top of the grey boxes", x = 1, y = 1,
+  draw_label("Plot is on top of the grey boxes", x = 1, y = 1,
             vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 # plot below annotations
 ggdraw(plot.mpg) + 
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") + 
-  draw_text("Plot is underneath the grey boxes", x = 1, y = 1,
+  draw_label("Plot is underneath the grey boxes", x = 1, y = 1,
             vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 ```
 

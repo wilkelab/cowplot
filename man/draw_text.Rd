@@ -18,12 +18,15 @@ draw_text(text, x = 0.5, y = 0.5, size = 14, ...)
 \item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
 \description{
-This is a convenience function. It's just a thin wrapper around \code{geom_text()}. It can take either an
-individual piece of text to be drawn or a vector of separate text labels, with associated coordinates.
+This function is deprecated. In most cases you probably want to use \code{draw_label} instead.
+The advantage of \code{draw_label} is that it can draw arbitrary text or mathematical expressions,
+while \code{draw_text} can only draw character strings. However, on the flip side, \code{draw_text}
+is vectorized. It can take a vector of separate text labels, with associated coordinates, and
+draw all of them at once.
 }
 \details{
 Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in
-the theme. This is different from geom_text in ggplot2.
+the theme. This is different from \code{geom_text} in ggplot2.
 
 By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to

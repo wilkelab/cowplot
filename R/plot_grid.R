@@ -184,7 +184,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     }
     # place a label if we have one
     if (i <= length(labels)){
-      p <- p + draw_plot_label(labels[i], x, y + height, size = label_size,
+      p <- p + draw_plot_label(labels[i], x - x_off, y + height - y_off, size = label_size,
                                hjust = hjust[i], vjust = vjust[i])
     }
     # move on to next grid position

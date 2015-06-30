@@ -1,8 +1,10 @@
 cowplot 0.4.0.devel
 ----------------------------------------------------------------
 Major changes:
-- Add annotations underneath plot, via add_sub() function
+- Fix label positioning in plot_grid() so it is not affected by the scale parameter
+- Add draw_label() function which can draw both text and plotmath expressions
 - Add parameters hjust and vjust to plot_grid() to allow fine-tuning of label position
+- Add annotations underneath plot, via add_sub() function
 
 Other changes:
 - Improve vignettes

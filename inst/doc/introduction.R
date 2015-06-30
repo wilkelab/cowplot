@@ -63,7 +63,7 @@ plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), nrow = 2, align = "v")
 ## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 
   draw_plot_label("A", size = 14) + 
-  draw_text("DRAFT!", angle = 45, size = 80, alpha = .2)
+  draw_label("DRAFT!", angle = 45, size = 80, alpha = .2)
 
 ## ----message=FALSE-------------------------------------------------------
 t <- (0:1000)/1000
@@ -81,13 +81,13 @@ ggdraw() +
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") +
   draw_plot(plot.mpg) +
-  draw_text("Plot is on top of the grey boxes", x = 1, y = 1,
+  draw_label("Plot is on top of the grey boxes", x = 1, y = 1,
             vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 # plot below annotations
 ggdraw(plot.mpg) + 
   geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
             colour = "gray60", fill = "gray80") + 
-  draw_text("Plot is underneath the grey boxes", x = 1, y = 1,
+  draw_label("Plot is underneath the grey boxes", x = 1, y = 1,
             vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 
 ## ----message=FALSE, fig.width=7, fig.height=5----------------------------
