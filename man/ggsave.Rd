@@ -6,8 +6,8 @@
 \usage{
 ggsave(filename = NULL, plot = ggplot2::last_plot(),
   device = default_device(filename), path = NULL, scale = 1,
-  width = par("din")[1], height = par("din")[2], units = c("in", "cm",
-  "mm"), dpi = 300, limitsize = TRUE, ...)
+  width = graphics::par("din")[1], height = graphics::par("din")[2],
+  units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...)
 }
 \arguments{
 \item{filename}{Filename of plot}

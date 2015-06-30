@@ -6,7 +6,7 @@
 # ****** Internal functions used by drawing code ******
 ggplot_to_gtable <- function(plot)
 {
-  if (is(plot, "ggplot")){
+  if (methods::is(plot, "ggplot")){
     ggplot2::ggplotGrob(plot)
   }
   else if (is(plot, "gtable")){

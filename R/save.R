@@ -25,7 +25,7 @@
 #' @export
 ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
                    device = default_device(filename), path = NULL, scale = 1,
-                   width = par("din")[1], height = par("din")[2], units = c("in", "cm", "mm"),
+                   width = graphics::par("din")[1], height = graphics::par("din")[2], units = c("in", "cm", "mm"),
                    dpi = 300, limitsize = TRUE, ...) {
   # this code is copied directly from ggplot2. ugly, but
   # the only way to implement this properly.
@@ -109,7 +109,7 @@ ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
     filename <- file.path(path, filename)
   }
   device(file=filename, width=width, height=height, ...)
-  on.exit(capture.output(dev.off()))
+  on.exit(utils::capture.output(grDevices::dev.off()))
   print(plot)
 
   invisible()
