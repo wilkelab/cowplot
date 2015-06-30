@@ -9,7 +9,7 @@ ggplot_to_gtable <- function(plot)
   if (methods::is(plot, "ggplot")){
     ggplot2::ggplotGrob(plot)
   }
-  else if (is(plot, "gtable")){
+  else if (methods::is(plot, "gtable")){
     plot
   }
   else{
