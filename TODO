@@ -1,4 +1,5 @@
 Ideas for further development
 =============================
-- add more finegrained formatting options to plot_grid, e.g., per-plot x and y offsets, same for labels, label colors & fonts, etc. 
+- update ggsave code to the latest version currently in ggplot2.
+- add more finegrained formatting options to plot_grid, e.g., per-plot x and y offsets, same for labels, label colors & fonts, etc.
 - make a theme for individual plots and one for grouped plots (and one for faceted plots?), make sure that all default settings work well together.
