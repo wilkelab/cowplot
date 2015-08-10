@@ -45,10 +45,25 @@ p
 # (clearly the whole thing only makes sense if all plots
 # have the same legend, so we can arbitrarily pick one.)
 grobs <- ggplotGrob(p1 + theme(legend.position="bottom"))$grobs
-legend <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
+legend_b <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
 
 # add the legend underneath the row we made earlier. Give it 10% of the height
 # of one plot (via rel_heights).
-p <- plot_grid( prow, legend, ncol = 1, rel_heights = c(1, .1))
+p <- plot_grid( prow, legend_b, ncol = 1, rel_heights = c(1, .1))
 p
+
+## ----fig.width=10, fig.height=3------------------------------------------
+# arrange the three plots in a single row, leaving space between plot B and C
+prow <- plot_grid( p1 + theme(legend.position="none"),
+           p2 + theme(legend.position="none"),
+           NULL,
+           p3 + theme(legend.position="none"),
+           align = 'vh',
+           labels = c("A", "B", "", "C"),
+           hjust = -1,
+           nrow = 1,
+           rel_widths = c(1, 1, .3, 1)
+           )
+
+prow + draw_grob(legend, 2/3.3, 0, .3/3.3, 1)
 
