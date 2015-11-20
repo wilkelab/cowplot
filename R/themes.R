@@ -15,31 +15,75 @@
 #' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 #' @export
 theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
-  # Start with default theme_grey and then modify some parts
-  theme_grey(base_size = font_size, base_family = font_family) %+replace%
-    theme(
-      rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
-      text              = element_text(family = font_family, face = "plain", colour = "black",
-                                       size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9),
-      axis.text         = element_text(colour = "black", size = font_size),
-      axis.title        = element_text(face = "bold"),
-      axis.title.x      = element_text(vjust = 0),
-      axis.title.y      = element_text(vjust = 1, angle = 90),
-      axis.ticks        = element_line(colour = "black", size = line_size),
-      axis.line         = element_line(colour = "black", size = line_size),
-      legend.key        = element_blank(),
-      legend.margin     = grid::unit(0.1, "cm"),
-      legend.key.size   = grid::unit(1, "lines"),
-  #    legend.position   = c(-0.03, 1.05),
-  #    legend.justification = c("left", "top"),
-      panel.background  = element_blank(),
-      panel.border      = element_blank(),
-      panel.grid.major  = element_blank(),
-      panel.grid.minor  = element_blank(),
-      plot.background   = element_blank(),
-      plot.title        = element_text(face = "bold", size = font_size),
-      strip.background  = element_rect(fill = "grey80", colour = "grey50", size = 0)
-    )
+  if (.ggplot1.0){
+    # Start with default theme_grey and then modify some parts
+    theme_grey(base_size = font_size, base_family = font_family) %+replace%
+      theme(
+        rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
+        text              = element_text(family = font_family, face = "plain", colour = "black",
+                                         size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9),
+        axis.text         = element_text(colour = "black", size = font_size),
+        axis.title        = element_text(face = "bold"),
+        axis.title.x      = element_text(vjust = 0),
+        axis.title.y      = element_text(vjust = 1, angle = 90),
+        axis.ticks        = element_line(colour = "black", size = line_size),
+        axis.line         = element_line(colour = "black", size = line_size),
+        legend.key        = element_blank(),
+        legend.margin     = grid::unit(0.1, "cm"),
+        legend.key.size   = grid::unit(1, "lines"),
+   #    legend.position   = c(-0.03, 1.05),
+   #    legend.justification = c("left", "top"),
+        panel.background  = element_blank(),
+        panel.border      = element_blank(),
+        panel.grid.major  = element_blank(),
+        panel.grid.minor  = element_blank(),
+        plot.background   = element_blank(),
+        plot.title        = element_text(face = "bold", size = font_size),
+        strip.background  = element_rect(fill = "grey80", colour = "grey50", size = 0)
+      )
+  }
+  else {
+    half_line <- font_size / 2
+    small_rel <- 0.857
+    small_size <- small_rel * font_size
+
+    theme_grey(base_size = font_size, base_family = font_family) %+replace%
+      theme(
+        rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
+        text              = element_text(family = font_family, face = "plain", colour = "black",
+                                         size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
+                                         margin = margin(), debug = FALSE),
+        axis.text         = element_text(colour = "black", size = small_size),
+        #axis.title        = element_text(face = "bold"),
+        axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
+        axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
+        axis.title.x      = element_text(
+                              margin = margin(t = small_size / 2, b = small_size / 4)
+                            ),
+        axis.title.y      = element_text(
+                              angle = 90,
+                              margin = margin(r = small_size / 2, l = small_size / 4),
+                            ),
+        axis.ticks        = element_line(colour = "black", size = line_size),
+        axis.line         = element_line(colour = "black", size = line_size),
+        legend.key        = element_blank(),
+        legend.margin     = grid::unit(0.1, "cm"),
+        legend.key.size   = grid::unit(1, "lines"),
+        legend.text       = element_text(size = rel(small_rel)),
+        #    legend.position   = c(-0.03, 1.05),
+        #    legend.justification = c("left", "top"),
+        panel.background  = element_blank(),
+        panel.border      = element_blank(),
+        panel.grid.major  = element_blank(),
+        panel.grid.minor  = element_blank(),
+        strip.text        = element_text(size = rel(small_rel)),
+        strip.background  = element_rect(fill = "grey80", colour = "grey50", size = 0),
+        plot.background   = element_blank(),
+        plot.title        = element_text(face = "bold",
+                                         size = font_size,
+                                         margin = margin(b = half_line))
+      )
+  }
 }
 
 
@@ -58,21 +102,39 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
 #' qplot(1:10, (1:10)^2) + theme_nothing() + labs(x = NULL, y = NULL)
 #' @export
 theme_nothing <- function(base_size = 12, base_family = ""){
-  theme_grey(base_size = base_size, base_family = base_family) %+replace%
-    theme(
-      rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
-      line              = element_blank(),
-      text              = element_blank(),
-      title             = element_blank(),
-      # to debug, uncomment next line
-      #plot.background   = element_rect(colour = "blue", fill = "cyan"),
-      panel.background  = element_blank(),
-      axis.ticks.margin = grid::unit(0, "lines"),
-      axis.ticks.length = grid::unit(0, "lines"),
-      legend.position   = "none",
-      panel.margin      = grid::unit(c(0, 0, 0, 0), "lines"),
-      plot.margin       = grid::unit(c(0, 0, 0, 0), "lines")
-    )
+  if (.ggplot1.0){
+    theme_grey(base_size = base_size, base_family = base_family) %+replace%
+      theme(
+        rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
+        line              = element_blank(),
+        text              = element_blank(),
+        title             = element_blank(),
+        # to debug, uncomment next line
+        #plot.background   = element_rect(colour = "blue", fill = "cyan"),
+        panel.background  = element_blank(),
+        axis.ticks.margin = grid::unit(0, "lines"),
+        axis.ticks.length = grid::unit(0, "lines"),
+        legend.position   = "none",
+        panel.margin      = grid::unit(c(0, 0, 0, 0), "lines"),
+        plot.margin       = grid::unit(c(0, 0, 0, 0), "lines")
+      )
+  }
+  else {
+    theme_grey(base_size = base_size, base_family = base_family) %+replace%
+      theme(
+        rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
+        line              = element_blank(),
+        text              = element_blank(),
+        title             = element_blank(),
+        # to debug, uncomment next line
+        #plot.background   = element_rect(colour = "blue", fill = "cyan"),
+        panel.background  = element_blank(),
+        axis.ticks.length = grid::unit(0, "lines"),
+        legend.position   = "none",
+        panel.margin      = grid::unit(c(0, 0, 0, 0), "lines"),
+        plot.margin       = grid::unit(c(0, 0, 0, 0), "lines")
+      )
+  }
 }
 
 
