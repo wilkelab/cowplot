@@ -4,10 +4,9 @@
 \alias{ggsave}
 \title{Cowplot reimplementation of ggsave.}
 \usage{
-ggsave(filename = NULL, plot = ggplot2::last_plot(),
-  device = default_device(filename), path = NULL, scale = 1,
-  width = graphics::par("din")[1], height = graphics::par("din")[2],
-  units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...)
+ggsave(filename, plot = ggplot2::last_plot(), device = NULL, path = NULL,
+  scale = 1, width = NA, height = NA, units = c("in", "cm", "mm"),
+  dpi = 300, limitsize = TRUE, ...)
 }
 \arguments{
 \item{filename}{Filename of plot}

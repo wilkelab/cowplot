@@ -1,26 +1,4 @@
-Porting to new ggplot2 version
-==============================
-Files that are not ported:
-- save.R
-
-Files that are partially ported (things seem to work, but not fully tested):
-- draw.R
-- plot_grid.R
-- add_sub.R
-- gtable.R
-- switch_axis.R
-
-Files that are fully ported:
-- cowplot.R
-- setup.R
-- themes.R
-
 Ideas for further development
 =============================
-For next version:
-- update ggsave code to the latest version currently in ggplot2.
-- write vignette for add_sub(), draw_label(), shared title (maybe called "Plot annotations")
-
-Longer term:
 - add more finegrained formatting options to plot_grid, e.g., per-plot x and y offsets, label colors & fonts, etc.
 - make a theme for individual plots and one for grouped plots (and one for faceted plots?), make sure that all default settings work well together.

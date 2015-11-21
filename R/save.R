@@ -1,3 +1,6 @@
+# Much of the code in this file was copied verbatim from the ggplot2 source. Ugly, but
+# necessary to fix the dingbats issue.
+
 # *************************************************
 #                     Output
 # *************************************************
@@ -23,96 +26,100 @@
 #'   specifying dimensions in pixels.
 #' @param ... Other arguments to be handed to the plot device.
 #' @export
-ggsave <- function(filename = NULL, plot = ggplot2::last_plot(),
-                   device = default_device(filename), path = NULL, scale = 1,
-                   width = graphics::par("din")[1], height = graphics::par("din")[2], units = c("in", "cm", "mm"),
+ggsave <- function(filename, plot = ggplot2::last_plot(),
+                   device = NULL, path = NULL, scale = 1,
+                   width = NA, height = NA, units = c("in", "cm", "mm"),
                    dpi = 300, limitsize = TRUE, ...) {
-  # this code is copied directly from ggplot2. ugly, but
-  # the only way to implement this properly.
 
-  if (is.null(filename)) stop("filename is required")
-  if (!inherits(plot, "ggplot")) stop("plot should be a ggplot2 plot")
-
-  eps <- ps <- function(..., width, height)
-    grDevices::postscript(..., width=width, height=height, onefile=FALSE,
-                          horizontal = FALSE, paper = "special")
-  tex <- function(..., width, height)
-    grDevices::pictex(..., width=width, height=height)
-  pdf <- function(..., version="1.4"){
-    if ("useDingbats" %in% names(list(...)))
-      grDevices::pdf(..., version=version)
-    else
-      grDevices::pdf(..., useDingbats = FALSE, version=version)
-  }
-  svg <- function(...)
-    grDevices::svg(...)
-  wmf <- function(..., width, height)
-    grDevices::win.metafile(..., width=width, height=height)
-  emf <- function(..., width, height)
-    grDevices::win.metafile(..., width=width, height=height)
-
-  png <- function(..., width, height)
-    grDevices::png(...,  width=width, height=height, res = dpi, units = "in")
-  jpg <- jpeg <- function(..., width, height)
-    grDevices::jpeg(..., width=width, height=height, res = dpi, units = "in")
-  bmp <- function(..., width, height)
-    grDevices::bmp(...,  width=width, height=height, res = dpi, units = "in")
-  tiff <- function(..., width, height)
-    grDevices::tiff(..., width=width, height=height, res = dpi, units = "in")
-
-  default_device <- function(filename) {
-    pieces <- strsplit(filename, "\\.")[[1]]
-    ext <- tolower(pieces[length(pieces)])
-    match.fun(ext)
-  }
-
-  units <- match.arg(units)
-  convert_to_inches <- function(x, units) {
-    x <- switch(units,
-                `in` = x,
-                cm = x / 2.54,
-                mm = x / 2.54 /10
-    )
-  }
-
-  convert_from_inches <- function(x, units) {
-    x <- switch(units,
-                `in` = x,
-                cm = x * 2.54,
-                mm = x * 2.54 * 10
-    )
-  }
-
-  # dimensions need to be in inches for all graphic devices
-  # convert width and height into inches when they are specified
-  if (!missing(width)) {
-    width <- convert_to_inches(width, units)
-  }
-  if (!missing(height)) {
-    height <- convert_to_inches(height, units)
-  }
-  # if either width or height is not specified, display an information message
-  # units are those specified by the user
-  if (missing(width) || missing(height)) {
-    message("Saving ", prettyNum(convert_from_inches(width * scale, units), digits=3), " x ", prettyNum(convert_from_inches(height * scale, units), digits=3), " ", units, " image")
-  }
-
-  width <- width * scale
-  height <- height * scale
-
-  if (limitsize && (width >= 50 || height >= 50)) {
-    stop("Dimensions exceed 50 inches (height and width are specified in inches/cm/mm, not pixels).",
-         " If you are sure you want these dimensions, use 'limitsize=FALSE'.")
-  }
+  dev <- plot_dev(device, filename, dpi = dpi)
+  dim <- plot_dim(c(width, height), scale = scale, units = units,
+                  limitsize = limitsize)
 
   if (!is.null(path)) {
     filename <- file.path(path, filename)
   }
-  device(file=filename, width=width, height=height, ...)
+  dev(file = filename, width = dim[1], height = dim[2], ...)
   on.exit(utils::capture.output(grDevices::dev.off()))
-  print(plot)
+  grid::grid.draw(plot)
 
   invisible()
+}
+
+## from ggplot2 source code
+plot_dim <- function(dim = c(NA, NA), scale = 1, units = c("in", "cm", "mm"),
+                     limitsize = TRUE) {
+
+  units <- match.arg(units)
+  to_inches <- function(x) x / c(`in` = 1, cm = 2.54, mm = 2.54 * 10)[units]
+  from_inches <- function(x) x * c(`in` = 1, cm = 2.54, mm = 2.54 * 10)[units]
+
+  dim <- to_inches(dim) * scale
+
+  if (any(is.na(dim))) {
+    if (length(grDevices::dev.list()) == 0) {
+      default_dim <- c(7, 7)
+    } else {
+      default_dim <- dev.size() * scale
+    }
+    dim[is.na(dim)] <- default_dim[is.na(dim)]
+    dim_f <- prettyNum(from_inches(dim), digits = 3)
+
+    message("Saving ", dim_f[1], " x ", dim_f[2], " ", units, " image")
+  }
+
+  if (limitsize && any(dim >= 50)) {
+    stop("Dimensions exceed 50 inches (height and width are specified in '",
+         units, "' not pixels). If you're sure you a plot that big, use ",
+         "`limitsize = FALSE`.", call. = FALSE)
+  }
+
+  dim
+}
+
+## from ggplot2 source code
+plot_dev <- function(device, filename, dpi = 300) {
+  if (is.function(device))
+    return(device)
+
+  eps <- function(...) {
+    grDevices::postscript(..., onefile = FALSE, horizontal = FALSE,
+                          paper = "special")
+  }
+  devices <- list(
+    eps =  eps,
+    ps =   eps,
+    tex =  function(...) grDevices::pictex(...),
+    pdf =  function(..., version = "1.4")
+    { # modification relative to original ggplot2 code
+      if ("useDingbats" %in% names(list(...)))
+        grDevices::pdf(..., version=version)
+      else
+        grDevices::pdf(..., useDingbats = FALSE, version=version)
+    },
+    # grDevices::pdf(..., version = version), # original ggplot2 code at this location
+    svg =  function(...) grDevices::svg(...),
+    emf =  function(...) grDevices::win.metafile(...),
+    wmf =  function(...) grDevices::win.metafile(...),
+    png =  function(...) grDevices::png(..., res = dpi, units = "in"),
+    jpg =  function(...) grDevices::jpeg(..., res = dpi, units = "in"),
+    jpeg = function(...) grDevices::jpeg(..., res = dpi, units = "in"),
+    bmp =  function(...) grDevices::bmp(..., res = dpi, units = "in"),
+    tiff = function(...) grDevices::tiff(..., res = dpi, units = "in")
+  )
+
+  if (is.null(device)) {
+    device <- tolower(tools::file_ext(filename))
+  }
+
+  if (!is.character(device) || length(device) != 1) {
+    stop("`device` must be NULL, a string or a function.", call. = FALSE)
+  }
+
+  dev <- devices[[device]]
+  if (is.null(dev)) {
+    stop("Unknown graphics device '", device, "'", call. = FALSE)
+  }
+  dev
 }
 
 #' Alternative to ggsave, with better support for multi-figure plots.

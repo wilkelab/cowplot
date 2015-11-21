@@ -1,6 +1,9 @@
-cowplot 0.5.0.9000
+cowplot 0.6.0
 ----------------------------------------------------------------
-Nothing done yet.
+Major changes:
+- Port to latest development version of ggplot2
+- Change the default design when used with development version of ggplot2. No more bold face for axis labels
+- Add vignettes describing plot annotations and shared legends among plots
 
 cowplot 0.5.0
 ----------------------------------------------------------------
