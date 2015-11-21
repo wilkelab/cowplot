@@ -2,17 +2,13 @@ Porting to new ggplot2 version
 ==============================
 Files that are not ported:
 - save.R
-- switch_axis.R
 
-Test code for switch_axis_position (doesn't run yet):
-> p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
-> switch_axis_position(p1, axis = 'y')
-
-Files that are partially ported (basic functionality seems to be there, but not fully tested):
+Files that are partially ported (things seem to work, but not fully tested):
 - draw.R
 - plot_grid.R
 - add_sub.R
 - gtable.R
+- switch_axis.R
 
 Files that are fully ported:
 - cowplot.R

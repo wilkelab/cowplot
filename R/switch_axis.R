@@ -21,6 +21,28 @@ hinvert_title_grob <- function(grob)
   }
 }
 
+# function that can vertically invert a title grob, with margins treated properly
+# title grobs are used a lot in the new ggplot2 version (>1.0.1)
+vinvert_title_grob <- function(grob)
+{
+  if (.ggplot1.0)
+  {
+    grob # nothing to do for old ggplot2
+  }
+  else
+  {
+    # fix the layout
+    heights <- grob$heights
+    grob$heights[1] <- heights[3]
+    grob$heights[3] <- heights[1]
+    grob$vp[[1]]$layout$heights[1] <- heights[3]
+    grob$vp[[1]]$layout$heights[3] <- heights[1]
+    # revert the text
+    grob$children[[1]]$vjust <- 1 - grob$children[[1]]$vjust # revert vjust
+    grob$children[[1]]$y <- grid::unit(1, "npc") - grob$children[[1]]$y
+    grob
+  }
+}
 
 # first define functions that do the heavy lifting, `switch_yaxis_position()` and `switch_xaxis_position()`
 switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
@@ -41,13 +63,6 @@ switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
   }
   else{
     gyl <- hinvert_title_grob(gyl)
-#     widths <- gyl$widths
-#     gyl$widths[1] <- widths[3]
-#     gyl$widths[3] <- widths[1]
-#     gyl$vp[[1]]$layout$widths[1] <- widths[3]
-#     gyl$vp[[1]]$layout$widths[3] <- widths[1]
-#     gyl$children[[1]]$hjust <- 1 - gyl$children[[1]]$hjust # revert hjust
-#     gyl$children[[1]]$x <- grid::unit(1, "npc") - gyl$children[[1]]$x
   }
   g <- gtable::gtable_add_cols(gt, gt$widths[gt$layout[iyl, ]$l], pp$r)
   g <- gtable::gtable_add_grob(g, gyl, pp$t, pp$r+1, pp$b, pp$r+1, clip = "off", name="ylab-r")
@@ -64,19 +79,16 @@ switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
   aticks <- ga$children[[2]]
   aticks$widths <- rev(aticks$widths)
   aticks$grobs <- rev(aticks$grobs)
-  if (.ggplot1.0){ # switch tick margins?
-    # tick lines
-    aticks$grobs[[1]]$x <- aticks$grobs[[1]]$x - grid::unit(1, "npc") + tick.length
-    # tick labels
+  # switch tick lines
+  aticks$grobs[[1]]$x <- aticks$grobs[[1]]$x - grid::unit(1, "npc") + tick.length
+  # switch tick labels
+  if (.ggplot1.0){
     aticks$grobs[[2]]$x <- grid::unit(1, "npc") - aticks$grobs[[2]]$x
     aticks$grobs[[2]]$hjust <- 1 - aticks$grobs[[2]]$hjust
   }
   else
   {
-    # tick labels
     aticks$grobs[[2]] <- hinvert_title_grob(aticks$grobs[[2]])
-    # tick lines
-    aticks$grobs[[1]]$x <- aticks$grobs[[1]]$x - grid::unit(1, "npc") + tick.length
   }
   ga$children[[2]] <- aticks
 
@@ -109,8 +121,13 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   # copy over xlab
   ixl <- which(gt$layout$name == "xlab")
   gxl <- gt$grobs[[ixl]]
-  gxl$y <- grid::unit(1, "npc")
-  gxl$vjust <- 1-gxl$vjust
+  if (.ggplot1.0){ # switch label margins
+    gxl$y <- grid::unit(1, "npc")
+    gxl$vjust <- 1-gxl$vjust
+  }
+  else{
+    gxl <- vinvert_title_grob(gxl)
+  }
   g <- gtable::gtable_add_rows(gt, gt$heights[gt$layout[ixl, ]$t], pp$t-1)
   g <- gtable::gtable_add_grob(g, gxl, pp$t, pp$l, pp$t, pp$r, clip = "off", name="xlab-t")
 
@@ -126,9 +143,17 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   aticks <- ga$children[[2]]
   aticks$heights <- rev(aticks$heights)
   aticks$grobs <- rev(aticks$grobs)
+  # switch tick lines
   aticks$grobs[[2]]$y <- aticks$grobs[[2]]$y - grid::unit(1, "npc") + tick.length
-  aticks$grobs[[1]]$y <- grid::unit(1, "npc") - aticks$grobs[[1]]$y
-  aticks$grobs[[1]]$vjust <- 1 - aticks$grobs[[1]]$vjust
+  # switch tick labels
+  if (.ggplot1.0){
+    aticks$grobs[[1]]$y <- grid::unit(1, "npc") - aticks$grobs[[1]]$y
+    aticks$grobs[[1]]$vjust <- 1 - aticks$grobs[[1]]$vjust
+  }
+  else
+  {
+    aticks$grobs[[1]] <- vinvert_title_grob(aticks$grobs[[1]])
+  }
   ga$children[[2]] <- aticks
 
   # add top axis
