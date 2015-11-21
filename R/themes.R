@@ -52,17 +52,17 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
         rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),
         text              = element_text(family = font_family, face = "plain", colour = "black",
                                          size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
-                                         margin = margin(), debug = FALSE),
+                                         margin = ggplot2::margin(), debug = FALSE),
         axis.text         = element_text(colour = "black", size = small_size),
         #axis.title        = element_text(face = "bold"),
-        axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
-        axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
+        axis.text.x       = element_text(margin = ggplot2::margin(t = small_size / 4), vjust = 1),
+        axis.text.y       = element_text(margin = ggplot2::margin(r = small_size / 4), hjust = 1),
         axis.title.x      = element_text(
-                              margin = margin(t = small_size / 2, b = small_size / 4)
+                              margin = ggplot2::margin(t = small_size / 2, b = small_size / 4)
                             ),
         axis.title.y      = element_text(
                               angle = 90,
-                              margin = margin(r = small_size / 2, l = small_size / 4),
+                              margin = ggplot2::margin(r = small_size / 2, l = small_size / 4),
                             ),
         axis.ticks        = element_line(colour = "black", size = line_size),
         axis.line         = element_line(colour = "black", size = line_size),
@@ -81,7 +81,7 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
         plot.background   = element_blank(),
         plot.title        = element_text(face = "bold",
                                          size = font_size,
-                                         margin = margin(b = half_line))
+                                         margin = ggplot2::margin(b = half_line))
       )
   }
 }
