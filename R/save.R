@@ -40,7 +40,12 @@ ggsave <- function(filename, plot = ggplot2::last_plot(),
   }
   dev(file = filename, width = dim[1], height = dim[2], ...)
   on.exit(utils::capture.output(grDevices::dev.off()))
-  grid::grid.draw(plot)
+  if (utils::packageVersion("ggplot2")<="1.0.1"){
+    print(plot)
+  }
+  else {
+    grid::grid.draw(plot)
+  }
 
   invisible()
 }

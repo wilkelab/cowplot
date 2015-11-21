@@ -2,7 +2,7 @@
 # title grobs are used a lot in the new ggplot2 version (>1.0.1)
 hinvert_title_grob <- function(grob)
 {
-  if (.ggplot1.0)
+  if (utils::packageVersion("ggplot2")<="1.0.1")
   {
     grob # nothing to do for old ggplot2
   }
@@ -25,7 +25,7 @@ hinvert_title_grob <- function(grob)
 # title grobs are used a lot in the new ggplot2 version (>1.0.1)
 vinvert_title_grob <- function(grob)
 {
-  if (.ggplot1.0)
+  if (utils::packageVersion("ggplot2")<="1.0.1")
   {
     grob # nothing to do for old ggplot2
   }
@@ -57,7 +57,7 @@ switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
   # copy over ylab
   iyl <- which(gt$layout$name == "ylab")
   gyl <- gt$grobs[[iyl]]
-  if (.ggplot1.0){ # switch label margins
+  if (utils::packageVersion("ggplot2")<="1.0.1"){ # switch label margins
     gyl$x <- gyl$x + grid::unit(0.5, "npc")
     gyl$hjust <- 1-gyl$hjust
   }
@@ -82,7 +82,7 @@ switch_yaxis_position <- function(gt, theme, keep.original = FALSE)
   # switch tick lines
   aticks$grobs[[1]]$x <- aticks$grobs[[1]]$x - grid::unit(1, "npc") + tick.length
   # switch tick labels
-  if (.ggplot1.0){
+  if (utils::packageVersion("ggplot2")<="1.0.1"){
     aticks$grobs[[2]]$x <- grid::unit(1, "npc") - aticks$grobs[[2]]$x
     aticks$grobs[[2]]$hjust <- 1 - aticks$grobs[[2]]$hjust
   }
@@ -121,7 +121,7 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   # copy over xlab
   ixl <- which(gt$layout$name == "xlab")
   gxl <- gt$grobs[[ixl]]
-  if (.ggplot1.0){ # switch label margins
+  if (utils::packageVersion("ggplot2")<="1.0.1"){ # switch label margins
     gxl$y <- grid::unit(1, "npc")
     gxl$vjust <- 1-gxl$vjust
   }
@@ -146,7 +146,7 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   # switch tick lines
   aticks$grobs[[2]]$y <- aticks$grobs[[2]]$y - grid::unit(1, "npc") + tick.length
   # switch tick labels
-  if (.ggplot1.0){
+  if (utils::packageVersion("ggplot2")<="1.0.1"){
     aticks$grobs[[1]]$y <- grid::unit(1, "npc") - aticks$grobs[[1]]$y
     aticks$grobs[[1]]$vjust <- 1 - aticks$grobs[[1]]$vjust
   }
