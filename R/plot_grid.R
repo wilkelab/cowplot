@@ -18,7 +18,8 @@
 #'              second column.
 #' @param rel_heights (optional) Numerical vector of relative columns heights. Works just as
 #'              \code{rel_widths} does, but for rows rather than columns.
-#' @param labels (optional) List of labels to be added to the plots.
+#' @param labels (optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to
+#'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
 #' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
 #'              to the rigth on the plot canvas. Default is -0.5.
@@ -35,11 +36,11 @@
 #' plot_grid(p1, p2, p3, p4)
 #' # simple grid with labels and aligned plots
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
-#' # manually setting the number of rows
-#' plot_grid(p1, p2, p3, nrow=3, labels=c('A', 'B', 'C', 'D'), label_size=12, align="v")
-#' # missing plots in some grid locations
+#' # manually setting the number of rows, auto-generate upper-case labels
+#' plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
+#' # missing plots in some grid locations, auto-generate lower-case labels
 #' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
-#'  labels=c('A', 'B', 'C', 'D', 'E', 'F'), label_size=12, align="v")
+#'  labels="auto", label_size=12, align="v")
 #' # making rows and columns of different widths/heights
 #' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
 #' @export
@@ -143,6 +144,11 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # in general, we allow for separate scale values for each graph
   if (length(scale)==1)
     scale <- rep(scale, num_plots)
+
+  if ("AUTO" %in% labels)
+    labels <- LETTERS[1:num_plots]
+  else if ("auto" %in% labels)
+    labels <- letters[1:num_plots]
 
   # we also allow for separate hjust and vjust values for each label
   if (length(hjust)==1)

@@ -15,7 +15,7 @@
 #' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 #' @export
 theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
-  if (utils::packageVersion("ggplot2")<="1.0.1"){
+  if (utils::packageVersion("ggplot2")<"2.0.0"){
     # Start with default theme_grey and then modify some parts
     theme_grey(base_size = font_size, base_family = font_family) %+replace%
       theme(
@@ -102,7 +102,7 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
 #' qplot(1:10, (1:10)^2) + theme_nothing() + labs(x = NULL, y = NULL)
 #' @export
 theme_nothing <- function(base_size = 12, base_family = ""){
-  if (utils::packageVersion("ggplot2")<="1.0.1"){
+  if (utils::packageVersion("ggplot2")<"2.0.0"){
     theme_grey(base_size = base_size, base_family = base_family) %+replace%
       theme(
         rect              = element_rect(fill = "transparent", colour = NA, color = NA, size = 0, linetype = 0),

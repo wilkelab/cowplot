@@ -40,7 +40,7 @@ ggsave <- function(filename, plot = ggplot2::last_plot(),
   }
   dev(file = filename, width = dim[1], height = dim[2], ...)
   on.exit(utils::capture.output(grDevices::dev.off()))
-  if (utils::packageVersion("ggplot2")<="1.0.1"){
+  if (utils::packageVersion("ggplot2")<"2.0.0"){
     print(plot)
   }
   else {

@@ -24,13 +24,22 @@ plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'))
 ```
 
+If you specify the labels as `labels="AUTO"` or `labels="auto"` then labels will be auto-generated in upper or lower case, respectively:
+```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO")
+```
+
+```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
+plot_grid(plot.mpg, plot.diamonds, labels = "auto")
+```
+
 By default, the plots are not aligned, but in many cases they can be aligned via the `align` option:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h')
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h')
 ```
 
 ```{r, message=FALSE, fig.width=3.9, fig.height=5.1}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), ncol = 1, align = 'v')
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", ncol = 1, align = 'v')
 ```
 
 In general, only plots that have the same number of visual elements can be aligned. Thus, a faceted and a non-faceted plot cannot be aligned. `plot_grid()` will know when it can and cannot align plots and will provide a warning in cases alignment is not possible:
@@ -39,7 +48,7 @@ plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
   background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
   panel_border() # and a border around each panel
-plot_grid(plot.iris, plot.mpg, labels = c('A', 'B'), ncol = 1, 
+plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1, 
           align = 'v') # aligning does not work here
 ```
 
@@ -57,7 +66,7 @@ g.iris$widths[1:3] <- max.widths # assign max. widths to iris gtable
 g.mpg$widths[1:3] <- max.widths # assign max widths to mpg gtable
 
 # plot_grid() can work directly with gtables, so this works
-plot_grid(g.iris, g.mpg, labels = c('A', 'B'), ncol = 1)
+plot_grid(g.iris, g.mpg, labels = "AUTO", ncol = 1)
 ```
 
 Notice how now the y axes in plots A and B are located at exactly the same horizontal position.
@@ -66,12 +75,12 @@ Notice how now the y axes in plots A and B are located at exactly the same horiz
 
 You can adjust the label size via the `label_size` option. Default is 14, so larger values will make the labels larger and smaller values will make them smaller:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', label_size = 12)
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12)
 ```
 
 Labels can be moved via the `hjust` and `vjust` options. More negative numbers move the labels to the right or up, respectively:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', label_size = 12,
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12,
           hjust = -1, vjust = 2.5 )
 ```
 
@@ -79,12 +88,12 @@ It is possible to adjust individual labels one by one by passing vectors of adju
 
 You can also adjust the relative widths and heights of rows and columns:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', rel_widths = c(1, 1.3))
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', rel_widths = c(1, 1.3))
 ```
 
 Finally, it is possible to scale the overall size of the plots up or down. This can be useful if the plots have too much or too little margin. Note that scale values >1 will not work if they move any part of a plot outside the entire plot area.
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'), align = 'h', rel_widths = c(1, 1.3), scale = 0.95)
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', rel_widths = c(1, 1.3), scale = 0.95)
 ```
 
 
@@ -96,5 +105,5 @@ bottom_row <- plot_grid(plot.mpg, plot.diamonds, labels = c('B', 'C'), align = '
 plot_grid(plot.iris, bottom_row, labels = c('A', ''), ncol = 1, rel_heights = c(1, 1.2))
 ```
 
-(Notice how we used `rel_heights` to make to bottom row higher than the top row, and `scale` to introduce a little extra white-space around the plots.)
+(Notice how we used `rel_heights` to make to bottom row higher than the top row, and `scale` to introduce a little extra white-space around the plots. Also, we can't auto-generate the labels in this case.)
 Alignment is a bit tricky in this case, though, and we won't discuss this here. In principle, it can again be achieved by appropriately manipulating the underlying gtables.
