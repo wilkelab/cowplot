@@ -1,8 +1,8 @@
 cowplot 0.6.0
 ----------------------------------------------------------------
 Major changes:
-- Port to latest development version of ggplot2
-- Change the default design when used with development version of ggplot2. No more bold face for axis labels
+- Now requires ggplot2 version 2.0.0 or higher. Use cowplot 0.5.0 with older versions of ggplot2.
+- Because of the dependency on ggplot2 2.0.0, the default design is changed. No more bold face for axis labels
 - Add auto-generation of labels in plot_grid()
 - Add vignettes describing plot annotations and shared legends among plots
 
