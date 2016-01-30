@@ -22,7 +22,7 @@
 #'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
 #' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
-#'              to the rigth on the plot canvas. Default is -0.5.
+#'              to the right on the plot canvas. Default is -0.5.
 #' @param vjust Adjusts the vertical position of each label. More positive values move the label further
 #'              down on the plot canvas. Default is 1.5.
 #' @param rows Deprecated. Like \code{nrow}.
