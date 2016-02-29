@@ -106,10 +106,10 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 }
 
 
-#' Draw plot label
+#' Add a label to a plot
 #'
-#' This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-#' as \code{draw_text()}, but has defaults that make it convenient to label graphs. Just like \code{draw_text()},
+#' This function adds a plot label to the upper left corner of a graph (or an arbitrarily specified position). It takes all the same parameters
+#' as \code{draw_text()}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
 #' it can handle vectors of labels with associated coordinates.
 #' @param label String (or vector of strings) to be drawn as the label.
 #' @param x The x position (or vector thereof) of the label(s).
@@ -124,6 +124,66 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
   draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface, ...)
 }
 
+
+#' Add a label to a figure
+#'
+#' This function is similar to \code{draw_plot_label()}, just with slightly different arguments and defaults. The main purpose of this
+#' function is to add labels specifying extra information about the figure, such as "Figure 1", which is sometimes useful.
+#' @param label Label to be drawn
+#' @param position Position of the label, can be one of "top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right". Default is "top.left"
+#' @param size (optional) Size of the label to be drawn. Default is the text size of the current theme
+#' @param fontface (optional) Font face of the label to be drawn. Default is the font face of the current theme
+#' @param ... other arguments passed to \code{draw_plot_label}
+#'
+#' @examples
+#'
+#' p1 <- qplot(1:10, 1:10)
+#' p2 <- qplot(1:10, (1:10)^2)
+#' p3 <- qplot(1:10, (1:10)^3)
+#' p4 <- qplot(1:10, (1:10)^4)
+#'
+#' # Create a simple grid
+#' p <- plot_grid(p1, p2, p3, p4, align = 'hv')
+#'
+#' # Default font size and position
+#' p + draw_figure_label(label = "Figure 1")
+#'
+#' # Different position and font size
+#' p + draw_figure_label(label = "Figure 1", position = "bottom.right", size = 10)
+#'
+#' # Using bold font face
+#' p + draw_figure_label(label = "Figure 1", fontface = "bold")
+#'
+#' # Making the label red and slanted
+#' p + draw_figure_label(label = "Figure 1", angle = -45, colour = "red")
+#'
+#' # Labeling an individual plot
+#' ggdraw(p2) + draw_figure_label(label = "Figure 1", position = "bottom.right", size = 10)
+#'
+#' @author Ulrik Stervbo (ulrik.stervbo [AT] gmail.com)
+#' @export
+draw_figure_label <- function(label, position = c("top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right"), size, fontface, ...){
+  # Get the position
+  position <- match.arg(position)
+
+  # Set default font size and face from the theme
+  if(missing(size)){
+    size <- theme_get()$text$size
+  }
+  if(missing(fontface)){
+    fontface <- theme_get()$text$face
+  }
+
+  # Call draw_plot_label() with appropriate label positions
+  switch(position,
+         top.left     = draw_plot_label(label, x = 0,   y = 1, hjust = -0.1, vjust = 1.1,  size = size, fontface = fontface, ...),
+         top          = draw_plot_label(label, x = 0.5, y = 1, hjust = 0,    vjust = 1.1,  size = size, fontface = fontface, ...),
+         top.right    = draw_plot_label(label, x = 1,   y = 1, hjust = 1.1,  vjust = 1.1,  size = size, fontface = fontface, ...),
+         bottom.left  = draw_plot_label(label, x = 0,   y = 0, hjust = -0.1, vjust = -0.1, size = size, fontface = fontface, ...),
+         bottom       = draw_plot_label(label, x = 0.5, y = 0, hjust = 0,    vjust = -0.1, size = size, fontface = fontface, ...),
+         bottom.right = draw_plot_label(label, x = 1,   y = 0, hjust = 1.1,  vjust = -0.1, size = size, fontface = fontface, ...)
+  )
+}
 
 #' Draw a (sub)plot.
 #'

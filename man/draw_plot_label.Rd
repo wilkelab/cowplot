@@ -2,7 +2,7 @@
 % Please edit documentation in R/draw.R
 \name{draw_plot_label}
 \alias{draw_plot_label}
-\title{Draw plot label}
+\title{Add a label to a plot}
 \usage{
 draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
   size = 16, fontface = "bold", ...)
@@ -25,8 +25,8 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 \item{...}{Other arguments to be handed to \code{draw_text()}.}
 }
 \description{
-This function adds a plot label to the upper left corner of a graph. It takes all the same parameters
-as \code{draw_text()}, but has defaults that make it convenient to label graphs. Just like \code{draw_text()},
+This function adds a plot label to the upper left corner of a graph (or an arbitrarily specified position). It takes all the same parameters
+as \code{draw_text()}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
 it can handle vectors of labels with associated coordinates.
 }
 
