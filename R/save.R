@@ -7,7 +7,7 @@
 
 #' Cowplot reimplementation of ggsave.
 #'
-#' This function should behave just like \code{ggsave()} from ggplot2,
+#' This function should behave just like \code{ggsave} from ggplot2,
 #' with the main difference being that by default it doesn't use the Dingbats
 #' font for pdf output. If you ever have trouble with this function, you can
 #' try using \code{ggplot2::ggsave()} instead.
@@ -124,11 +124,11 @@ plot_dev <- function(device, filename, dpi = 300) {
 
 #' Alternative to ggsave, with better support for multi-figure plots.
 #'
-#' This function replaces the standard \code{ggsave()} function for saving a plot into a file. It
-#' has several advantages over \code{ggsave()}. First, it uses default sizes that work well with
+#' This function replaces the standard \code{ggsave} function for saving a plot into a file. It
+#' has several advantages over \code{ggsave}. First, it uses default sizes that work well with
 #' the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 #' acknowledges that one often first develops individual plots and then combines them into
-#' multi-plot figures, and it makes it easy---in combination with \code{plot_grid()}---to carry out
+#' multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
 #' this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
 #' frequently necessary to accommodate the figure legend.
 #'
@@ -151,7 +151,7 @@ plot_dev <- function(device, filename, dpi = 300) {
 #' which works well for figures without a legend.
 #' @param rows Deprecated. Like \code{nrow}.
 #' @param cols Deprecated. Like \code{ncol}.
-#' @param ... Other arguments to be handed to \code{ggsave()}.
+#' @param ... Other arguments to be handed to \code{ggsave}.
 #' @examples
 #' # save a single plot without legend
 #' x <- (1:100)/10

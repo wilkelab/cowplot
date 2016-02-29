@@ -20,7 +20,7 @@ ggplot_to_gtable <- function(plot)
 
 #' Draw a line.
 #'
-#' This is a convenience function. It's just a thin wrapper around \code{geom_line()}.
+#' This is a convenience function. It's just a thin wrapper around \code{geom_line}.
 #'
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
@@ -109,7 +109,7 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 #' Add a label to a plot
 #'
 #' This function adds a plot label to the upper left corner of a graph (or an arbitrarily specified position). It takes all the same parameters
-#' as \code{draw_text()}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
+#' as \code{draw_text}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
 #' it can handle vectors of labels with associated coordinates.
 #' @param label String (or vector of strings) to be drawn as the label.
 #' @param x The x position (or vector thereof) of the label(s).
@@ -118,7 +118,7 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 #' @param vjust Vertical adjustment.
 #' @param size Font size of the label to be drawn.
 #' @param fontface Font face of the label to be drawn.
-#' @param ... Other arguments to be handed to \code{draw_text()}.
+#' @param ... Other arguments to be handed to \code{draw_text}.
 #' @export
 draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold', ...){
   draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface, ...)
@@ -127,7 +127,7 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 
 #' Add a label to a figure
 #'
-#' This function is similar to \code{draw_plot_label()}, just with slightly different arguments and defaults. The main purpose of this
+#' This function is similar to \code{draw_plot_label}, just with slightly different arguments and defaults. The main purpose of this
 #' function is to add labels specifying extra information about the figure, such as "Figure 1", which is sometimes useful.
 #' @param label Label to be drawn
 #' @param position Position of the label, can be one of "top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right". Default is "top.left"

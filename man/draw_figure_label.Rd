@@ -19,7 +19,7 @@ draw_figure_label(label, position = c("top.left", "top", "top.right",
 \item{...}{other arguments passed to \code{draw_plot_label}}
 }
 \description{
-This function is similar to \code{draw_plot_label()}, just with slightly different arguments and defaults. The main purpose of this
+This function is similar to \code{draw_plot_label}, just with slightly different arguments and defaults. The main purpose of this
 function is to add labels specifying extra information about the figure, such as "Figure 1", which is sometimes useful.
 }
 \examples{
@@ -29,7 +29,7 @@ p3 <- qplot(1:10, (1:10)^3)
 p4 <- qplot(1:10, (1:10)^4)
 
 # Create a simple grid
-p <- plot_grid(p1, p2, p3, p4)
+p <- plot_grid(p1, p2, p3, p4, align = 'hv')
 
 # Default font size and position
 p + draw_figure_label(label = "Figure 1")
@@ -42,6 +42,9 @@ p + draw_figure_label(label = "Figure 1", fontface = "bold")
 
 # Making the label red and slanted
 p + draw_figure_label(label = "Figure 1", angle = -45, colour = "red")
+
+# Labeling an individual plot
+ggdraw(p2) + draw_figure_label(label = "Figure 1", position = "bottom.right", size = 10)
 }
 \author{
 Ulrik Stervbo (ulrik.stervbo [AT] gmail.com)

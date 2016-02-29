@@ -28,18 +28,18 @@ which works well for figures without a legend.}
 or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calculated from
 \code{height} and \code{base_aspect_ratio}.}
 
-\item{...}{Other arguments to be handed to \code{ggsave()}.}
+\item{...}{Other arguments to be handed to \code{ggsave}.}
 
 \item{cols}{Deprecated. Like \code{ncol}.}
 
 \item{rows}{Deprecated. Like \code{nrow}.}
 }
 \description{
-This function replaces the standard \code{ggsave()} function for saving a plot into a file. It
-has several advantages over \code{ggsave()}. First, it uses default sizes that work well with
+This function replaces the standard \code{ggsave} function for saving a plot into a file. It
+has several advantages over \code{ggsave}. First, it uses default sizes that work well with
 the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 acknowledges that one often first develops individual plots and then combines them into
-multi-plot figures, and it makes it easy---in combination with \code{plot_grid()}---to carry out
+multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
 this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
 frequently necessary to accommodate the figure legend.
 }

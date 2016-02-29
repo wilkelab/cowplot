@@ -22,11 +22,11 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 
 \item{fontface}{Font face of the label to be drawn.}
 
-\item{...}{Other arguments to be handed to \code{draw_text()}.}
+\item{...}{Other arguments to be handed to \code{draw_text}.}
 }
 \description{
 This function adds a plot label to the upper left corner of a graph (or an arbitrarily specified position). It takes all the same parameters
-as \code{draw_text()}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
+as \code{draw_text}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
 it can handle vectors of labels with associated coordinates.
 }
 
