@@ -1,6 +1,5 @@
 Fixes and other issues
 ======================
-- Incorporate the function from [issue 19](https://github.com/wilkelab/cowplot/issues/19)
 - Verify the code to fix [issue 25](https://github.com/wilkelab/cowplot/issues/25)
 
 

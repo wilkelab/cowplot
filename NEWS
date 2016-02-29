@@ -1,6 +1,7 @@
 cowplot 0.6.0.9000
 ----------------------------------------------------------------
-Nothing yet.
+- Added new convenience function draw_figure_label() to label figures with labels such as "Figure 1".
+- Fixes in switch_axis_position() so that rotated axis labels work.
 
 cowplot 0.6.0
 ----------------------------------------------------------------
