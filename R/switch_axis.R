@@ -10,6 +10,7 @@ hinvert_title_grob <- function(grob)
   grob$vp[[1]]$layout$widths[3] <- widths[1]
   # revert the text
   grob$children[[1]]$hjust <- 1 - grob$children[[1]]$hjust # revert hjust
+  grob$children[[1]]$vjust <- 1 - grob$children[[1]]$vjust # revert vjust
   grob$children[[1]]$x <- grid::unit(1, "npc") - grob$children[[1]]$x
   grob
 }
@@ -25,6 +26,7 @@ vinvert_title_grob <- function(grob)
   grob$vp[[1]]$layout$heights[1] <- heights[3]
   grob$vp[[1]]$layout$heights[3] <- heights[1]
   # revert the text
+  grob$children[[1]]$hjust <- 1 - grob$children[[1]]$hjust # revert hjust
   grob$children[[1]]$vjust <- 1 - grob$children[[1]]$vjust # revert vjust
   grob$children[[1]]$y <- grid::unit(1, "npc") - grob$children[[1]]$y
   grob
