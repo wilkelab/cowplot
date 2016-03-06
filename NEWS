@@ -1,3 +1,7 @@
+cowplot 0.6.1.9999
+----------------------------------------------------------------
+- Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.
+
 cowplot 0.6.1
 ----------------------------------------------------------------
 - Added new convenience function draw_figure_label() to label figures with labels such as "Figure 1".

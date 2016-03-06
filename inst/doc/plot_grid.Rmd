@@ -52,6 +52,30 @@ plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1,
           align = 'v') # aligning does not work here
 ```
 
+In cases where `plot_grid()` cannot automatcially align plots, you can still align them manually if you have some knowledge of gtable, the internal layouting mechanism used by ggplot2. You simply have to convert both graphs into gtable objects and then adjust the relevant widths or heights. For the plot from the previous example, for example, you could do the following:
+```{r, message=FALSE, fig.width=4.25, fig.height=5.1}
+require(grid) # for unit.pmax(), unit.list()
+g.iris <- ggplotGrob(plot.iris) # convert to gtable
+g.mpg <- ggplotGrob(plot.mpg) # convert to gtable
+
+# we need to convert the widths to unit lists for the subsequent
+# manipulations to be possible
+g.iris$widths <- grid:::unit.list(g.iris$widths)   
+g.mpg$widths <-  grid:::unit.list(g.mpg$widths)
+
+iris.widths <- g.iris$widths[1:3] # extract the first three widths, 
+                                  # corresponding to left margin, y lab, and y axis
+mpg.widths <- g.mpg$widths[1:3] # same for mpg plot
+max.widths <- unit.pmax(iris.widths, mpg.widths) # calculate maximum widths
+g.iris$widths[1:3] <- max.widths # assign max widths to iris gtable
+g.mpg$widths[1:3] <- max.widths # assign max widths to mpg gtable
+
+# plot_grid() can work directly with gtables, so this works
+plot_grid(g.iris, g.mpg, labels = "AUTO", ncol = 1)
+```
+
+Notice how now the y axes in plots A and B are located at exactly the same horizontal position.
+
 # Fine-tuning the plot appearance
 
 You can adjust the label size via the `label_size` option. Default is 14, so larger values will make the labels larger and smaller values will make them smaller:
