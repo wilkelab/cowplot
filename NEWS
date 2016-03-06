@@ -1,7 +1,8 @@
-cowplot 0.6.0.9000
+cowplot 0.6.1
 ----------------------------------------------------------------
 - Added new convenience function draw_figure_label() to label figures with labels such as "Figure 1".
 - Fixes in switch_axis_position() so that rotated axis labels work.
+- Fix missing axis lines in ggplot2 2.1
 
 cowplot 0.6.0
 ----------------------------------------------------------------
