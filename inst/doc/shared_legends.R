@@ -49,7 +49,7 @@ legend_b <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
 
 # add the legend underneath the row we made earlier. Give it 10% of the height
 # of one plot (via rel_heights).
-p <- plot_grid( prow, legend_b, ncol = 1, rel_heights = c(1, .1))
+p <- plot_grid( prow, legend_b, ncol = 1, rel_heights = c(1, .2))
 p
 
 ## ----fig.width=10, fig.height=3------------------------------------------
