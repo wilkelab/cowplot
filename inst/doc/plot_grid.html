@@ -10,7 +10,7 @@
 
 <meta name="author" content="Claus O. Wilke" />
 
-<meta name="date" content="2016-03-06" />
+<meta name="date" content="2016-04-19" />
 
 <title>Arranging plots in a grid</title>
 
@@ -72,7 +72,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Arranging plots in a grid</h1>
 <h4 class="author"><em>Claus O. Wilke</em></h4>
-<h4 class="date"><em>2016-03-06</em></h4>
+<h4 class="date"><em>2016-04-19</em></h4>
 </div>
 
 
@@ -112,10 +112,13 @@ plot.diamonds &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamo
 g.iris &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(plot.iris) <span class="co"># convert to gtable</span>
 g.mpg &lt;-<span class="st"> </span><span class="kw">ggplotGrob</span>(plot.mpg) <span class="co"># convert to gtable</span>
 
-<span class="co"># we need to convert the widths to unit lists for the subsequent</span>
-<span class="co"># manipulations to be possible</span>
-g.iris$widths &lt;-<span class="st"> </span>grid:::<span class="kw">unit.list</span>(g.iris$widths)   
-g.mpg$widths &lt;-<span class="st">  </span>grid:::<span class="kw">unit.list</span>(g.mpg$widths)
+if(<span class="kw">getRversion</span>() &lt;<span class="st"> &quot;3.3.0&quot;</span>){
+  <span class="co"># We need to convert the widths to unit lists for the subsequent</span>
+  <span class="co"># manipulations to be possible.</span>
+  <span class="co"># Once R 3.3.0 is released, this will not be necessary anymore.</span>
+  g.iris$widths &lt;-<span class="st"> </span>grid:::<span class="kw">unit.list</span>(g.iris$widths)   
+  g.mpg$widths &lt;-<span class="st">  </span>grid:::<span class="kw">unit.list</span>(g.mpg$widths)
+}
 
 iris.widths &lt;-<span class="st"> </span>g.iris$widths[<span class="dv">1</span>:<span class="dv">3</span>] <span class="co"># extract the first three widths, </span>
                                   <span class="co"># corresponding to left margin, y lab, and y axis</span>

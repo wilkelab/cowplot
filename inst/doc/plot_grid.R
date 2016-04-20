@@ -32,10 +32,13 @@ require(grid) # for unit.pmax(), unit.list()
 g.iris <- ggplotGrob(plot.iris) # convert to gtable
 g.mpg <- ggplotGrob(plot.mpg) # convert to gtable
 
-# we need to convert the widths to unit lists for the subsequent
-# manipulations to be possible
-g.iris$widths <- grid:::unit.list(g.iris$widths)   
-g.mpg$widths <-  grid:::unit.list(g.mpg$widths)
+if(getRversion() < "3.3.0"){
+  # We need to convert the widths to unit lists for the subsequent
+  # manipulations to be possible.
+  # Once R 3.3.0 is released, this will not be necessary anymore.
+  g.iris$widths <- grid:::unit.list(g.iris$widths)   
+  g.mpg$widths <-  grid:::unit.list(g.mpg$widths)
+}
 
 iris.widths <- g.iris$widths[1:3] # extract the first three widths, 
                                   # corresponding to left margin, y lab, and y axis

@@ -1,4 +1,4 @@
-cowplot 0.6.1.9999
+cowplot 0.6.2
 ----------------------------------------------------------------
 - Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.
 

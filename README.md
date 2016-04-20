@@ -7,7 +7,7 @@ The package also fixes a couple of other annoyances that I encountered when tryi
 
 # Installation
 
-This package is available on CRAN [here](http://cran.r-project.org/web/packages/cowplot/index.html) and can be installed via
+This package is available on CRAN [here](https://cran.r-project.org/package=cowplot) and can be installed via
 
     install.packages("cowplot")
 

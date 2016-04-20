@@ -10,7 +10,7 @@
 
 <meta name="author" content="Claus O. Wilke" />
 
-<meta name="date" content="2016-03-06" />
+<meta name="date" content="2016-04-19" />
 
 <title>Changing the axis positions</title>
 
@@ -72,14 +72,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="header">
 <h1 class="title">Changing the axis positions</h1>
 <h4 class="author"><em>Claus O. Wilke</em></h4>
-<h4 class="date"><em>2016-03-06</em></h4>
+<h4 class="date"><em>2016-04-19</em></h4>
 </div>
 
 
 <p>The <strong>cowplot</strong> package defines a function <code>switch_axis_position()</code> that allows us to take the x and/or y axis of a plot and copy or move it to the other side of the plot (y axis to right, x axis to top). Here are some examples of moving or copying various axes. As we can see, this works regardless of the chosen theme.</p>
 <p>Importantly, the return object is a gtable, not a ggplot object, so we need to feed it into <code>ggdraw()</code> to display in the usual manner or to save with <code>ggsave()</code> or <code>save_plot()</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(cowplot)
-<span class="kw">require</span>(grid) <span class="co"># for unit()</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(cowplot)</code></pre></div>
+<pre><code>## Warning: package 'ggplot2' was built under R version 3.2.4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">require</span>(grid) <span class="co"># for unit()</span>
 <span class="kw">theme_set</span>(<span class="kw">theme_cowplot</span>(<span class="dt">font_size=</span><span class="dv">12</span>)) <span class="co"># reduce default font size</span>
 p1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(mtcars, <span class="kw">aes</span>(mpg, disp)) +<span class="st"> </span><span class="kw">geom_line</span>(<span class="dt">colour =</span> <span class="st">&quot;blue&quot;</span>)
 <span class="kw">ggdraw</span>(<span class="kw">switch_axis_position</span>(p1 +<span class="st"> </span><span class="kw">theme_gray</span>(), <span class="dt">axis =</span> <span class="st">'y'</span>))</code></pre></div>
