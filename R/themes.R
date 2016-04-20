@@ -154,6 +154,6 @@ panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = F
   if (remove){
     return(theme(panel.border = element_blank()))
   }
-  theme(panel.border = element_rect(colour = colour, fill=NA, linetype = 1, size = 0.5))
+  theme(panel.border = element_rect(colour = colour, fill=NA, linetype = linetype, size = size))
 }
 
