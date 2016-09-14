@@ -1,78 +1,26 @@
 
-#' Arrange multiple plots into a grid
+#' Align multiple plots vertically and/or horizontally
 #'
-#' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
-#'              or arbitrary gtables.
+#' Align multipl plots
+#' @param ... List of plots to be aligned.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
 #'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
-#' @param nrow (optional) Number of rows in the plot grid.
-#' @param ncol (optional) Number of columns in the plot grid.
-#' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
-#'              each subplot, by giving a vector of scale values, or at once for all subplots,
-#'              by giving a single value.
-#' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
-#'              grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
-#'              second column.
-#' @param rel_heights (optional) Numerical vector of relative columns heights. Works just as
-#'              \code{rel_widths} does, but for rows rather than columns.
-#' @param labels (optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to
-#'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
-#' @param label_size (optional) Numerical value indicating the label size. Default is 14.
-#' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
-#'              to the right on the plot canvas. Default is -0.5.
-#' @param vjust Adjusts the vertical position of each label. More positive values move the label further
-#'              down on the plot canvas. Default is 1.5.
-#' @param rows Deprecated. Like \code{nrow}.
-#' @param cols Deprecated. Like \code{ncol}.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
 #' p3 <- qplot(1:10, (1:10)^3)
 #' p4 <- qplot(1:10, (1:10)^4)
 #' # simple grid
-#' plot_grid(p1, p2, p3, p4)
-#' # simple grid with labels and aligned plots
-#' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
-#' # manually setting the number of rows, auto-generate upper-case labels
-#' plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
-#' # missing plots in some grid locations, auto-generate lower-case labels
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
-#'  labels="auto", label_size=12, align="v")
-#' # making rows and columns of different widths/heights
-#' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+#' align_plots(p1, p2, p3, p4)
 #' @export
-plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
-                      nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
-                      rel_heights = 1, labels = NULL, label_size = 14,
-                      hjust = -0.5, vjust = 1.5,
-                      cols = NULL, rows = NULL ) {
-
-  # Make a list from the ... arguments and plotlist
+align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv")){
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
 
   # convert list of plots into list of grobs / gtables
   grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
-
-
-  if (!is.null(cols)){
-    warning("Argument 'cols' is deprecated. Use 'ncol' instead.")
-  }
-
-  if (!is.null(rows)){
-    warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
-  }
-
-  # internally, this function operates with variables cols and rows instead of ncol and nrow
-  if (!is.null(ncol)){
-    cols <- ncol
-  }
-  if (!is.null(nrow)){
-    rows <- nrow
-  }
 
 
   #aligning graphs.
@@ -130,6 +78,84 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       if (halign) grobs[[i]]$heights <- max_heights
     }
   }
+  grobs
+}
+
+
+
+#' Arrange multiple plots into a grid
+#'
+#' Arrange multiple plots into a grid.
+#' @param ... List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
+#'              or arbitrary gtables.
+#' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
+#' individually as the first n arguments of the function plot_grid (see examples).
+#' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
+#'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
+#' @param nrow (optional) Number of rows in the plot grid.
+#' @param ncol (optional) Number of columns in the plot grid.
+#' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
+#'              each subplot, by giving a vector of scale values, or at once for all subplots,
+#'              by giving a single value.
+#' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
+#'              grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
+#'              second column.
+#' @param rel_heights (optional) Numerical vector of relative columns heights. Works just as
+#'              \code{rel_widths} does, but for rows rather than columns.
+#' @param labels (optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to
+#'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
+#' @param label_size (optional) Numerical value indicating the label size. Default is 14.
+#' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
+#'              to the right on the plot canvas. Default is -0.5.
+#' @param vjust Adjusts the vertical position of each label. More positive values move the label further
+#'              down on the plot canvas. Default is 1.5.
+#' @param rows Deprecated. Like \code{nrow}.
+#' @param cols Deprecated. Like \code{ncol}.
+#' @examples
+#' p1 <- qplot(1:10, 1:10)
+#' p2 <- qplot(1:10, (1:10)^2)
+#' p3 <- qplot(1:10, (1:10)^3)
+#' p4 <- qplot(1:10, (1:10)^4)
+#' # simple grid
+#' plot_grid(p1, p2, p3, p4)
+#' # simple grid with labels and aligned plots
+#' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
+#' # manually setting the number of rows, auto-generate upper-case labels
+#' plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
+#' # missing plots in some grid locations, auto-generate lower-case labels
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
+#'  labels="auto", label_size=12, align="v")
+#' # making rows and columns of different widths/heights
+#' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+#' @export
+plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
+                      nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
+                      rel_heights = 1, labels = NULL, label_size = 14,
+                      hjust = -0.5, vjust = 1.5,
+                      cols = NULL, rows = NULL ) {
+
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  num_plots <- length(plots)
+
+  if (!is.null(cols)){
+    warning("Argument 'cols' is deprecated. Use 'ncol' instead.")
+  }
+
+  if (!is.null(rows)){
+    warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
+  }
+
+  # internally, this function operates with variables cols and rows instead of ncol and nrow
+  if (!is.null(ncol)){
+    cols <- ncol
+  }
+  if (!is.null(nrow)){
+    rows <- nrow
+  }
+
+  # Align the plots (if specified)
+  grobs <- align_plots(plotlist = plots, align=align)
 
   # calculate grid dimensions
   if (is.null(cols) && is.null(rows)){
