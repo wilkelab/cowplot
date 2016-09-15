@@ -1,19 +1,18 @@
 
 #' Align multiple plots vertically and/or horizontally
 #'
-#' Align multipl plots
+#' Align multiple plots for plotting manually. Can be used to graph two separate y axis, but still doesn't work if second y axis needs to be shown.
 #' @param ... List of plots to be aligned.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
 #'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
 #' @examples
-#' p1 <- qplot(1:10, 1:10)
-#' p2 <- qplot(1:10, (1:10)^2)
-#' p3 <- qplot(1:10, (1:10)^3)
-#' p4 <- qplot(1:10, (1:10)^4)
+#' p1 <- qplot(1:10, rpois(10, lambda=15), geom="point")
+#' p2 <- qplot(1:10, (1:10)^2, geom="line") + theme_nothing()
 #' # simple grid
-#' align_plots(p1, p2, p3, p4)
+#' aligned_plots <- align_plots(p1, p2, align="hv")
+#' ggdraw() + draw_grob(aligned_plots[[1]]) + draw_grob(aligned_plots[[2]])
 #' @export
 align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv")){
   plots <- c(list(...), plotlist)
@@ -80,6 +79,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"))
   }
   grobs
 }
+
 
 
 
