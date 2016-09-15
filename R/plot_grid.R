@@ -10,7 +10,7 @@
 #' @examples
 #' p1 <- qplot(1:10, rpois(10, lambda=15), geom="point")
 #' p2 <- qplot(1:10, (1:10)^2, geom="line") + theme_nothing()
-#' # simple grid
+#' # manually align and plot on top of each other
 #' aligned_plots <- align_plots(p1, p2, align="hv")
 #' ggdraw() + draw_grob(aligned_plots[[1]]) + draw_grob(aligned_plots[[2]])
 #' @export
