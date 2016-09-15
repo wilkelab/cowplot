@@ -134,7 +134,7 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   g
 }
 
-#' Switches the axis position of the x or y axis in a ggplot2 plot.
+#' Switches the axis position of the x or y axis in a plot.
 #'
 #' @param plot The plot on which to perform the operation.
 #' @param axis String indicating which axis to switch. Valid options are"x", "y", and "xy".
@@ -166,7 +166,8 @@ switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none'
   )
 
   # extract gtable
-  gt <- ggplot2::ggplotGrob(plot)
+  gt <- ggplot_to_gtable(plot)
+
   # extract theme
   theme <- plot_theme(plot)
 
