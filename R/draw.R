@@ -7,7 +7,12 @@
 ggplot_to_gtable <- function(plot)
 {
   if (methods::is(plot, "ggplot")){
-    ggplot2::ggplotGrob(plot)
+    # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
+    # in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
+    pdf(NULL)
+    plot <- ggplot2::ggplotGrob(plot)
+    dev.off()
+    plot
   }
   else if (methods::is(plot, "gtable")){
     plot
