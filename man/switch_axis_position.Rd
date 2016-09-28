@@ -2,7 +2,7 @@
 % Please edit documentation in R/switch_axis.R
 \name{switch_axis_position}
 \alias{switch_axis_position}
-\title{Switches the axis position of the x or y axis in a ggplot2 plot.}
+\title{Switches the axis position of the x or y axis in a plot.}
 \usage{
 switch_axis_position(plot, axis = c("y", "x", "xy"), keep = c("none", "x",
   "y", "xy", "yx"))
@@ -20,7 +20,7 @@ are"x", "y", "xy", and "none". The default is "none".}
 A gtable object (not ggplot object!) on which the axes have been switched.
 }
 \description{
-Switches the axis position of the x or y axis in a ggplot2 plot.
+Switches the axis position of the x or y axis in a plot.
 }
 \examples{
 p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
