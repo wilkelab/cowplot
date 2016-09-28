@@ -1,3 +1,10 @@
+cowplot 0.6.3
+----------------------------------------------------------------
+- Fixes bug that creates an empty page on some plot devices. Fix provided by https://github.com/marcus1487
+- Fixes bug that hardcoded panel border line-type and size. Fix provided by Spencer Fox, https://github.com/sjfox
+- Adds the option of custom axes on the drawing layer. Code provided by https://github.com/zaczap
+- Separates out the alignment function from plot_grid(). Will likely be more useful further down the line. Code provided by Spencer Fox, https://github.com/sjfox
+
 cowplot 0.6.2
 ----------------------------------------------------------------
 - Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.
