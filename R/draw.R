@@ -7,7 +7,10 @@
 ggplot_to_gtable <- function(plot)
 {
   if (methods::is(plot, "ggplot")){
-    ggplot2::ggplotGrob(plot)
+    pdf(NULL)
+    plot <- ggplot2::ggplotGrob(plot)
+    dev.off()
+    plot
   }
   else if (methods::is(plot, "gtable")){
     plot
