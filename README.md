@@ -1,4 +1,4 @@
-cowplot -- An add-on to the ggplot2 plotting package
+cowplot – An add-on to the ggplot2 plotting package
 ====================================================
 
 The cowplot package is meant to provide a publication-ready theme for ggplot2, one that requires a minimum amount of fiddling with sizes of axis labels, plot backgrounds, etc. It meets my personal needs; you may or may not like my style.
@@ -19,6 +19,5 @@ Note that cowplot is in the early stages of development. While you may find it u
 
 # Usage
 
-To get a quick introduction to the main features of this package, read the 
-[vignette available here.](http://cran.r-project.org/web/packages/cowplot/vignettes/introduction.html)  
+To get a quick introduction to the main features of this package, read the vignettes provided with the [package on CRAN.](https://cran.r-project.org/package=cowplot)
 
