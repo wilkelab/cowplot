@@ -1,6 +1,5 @@
 
 ## Test environments
-* R devel (3.3.0 beta 2016-04-14 r70486) on win-builder [ via devtools::build_win() ]
 * R 3.3.1 on win-builder [ via devtools::build_win() ]
 * local OS X install x86_64-apple-darwin13.4.0 (64-bit), R 3.2.3
 
