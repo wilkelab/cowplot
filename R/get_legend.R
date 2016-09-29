@@ -1,8 +1,8 @@
-#' Retreive a just a plots legend
+#' Retrieve the legend of a plot
 #'
 #' This function extracts just the legend from a ggplot
 #'
-#' @param plot A ggplot or gtable from which to retreive the legend
+#' @param plot A ggplot or gtable from which to retrieve the legend
 #' @return A gtable object holding just the lengend
 #' @examples
 #' p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line()
