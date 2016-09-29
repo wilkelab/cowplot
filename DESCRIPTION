@@ -31,9 +31,11 @@ Collate:
     'add_sub.R'
     'cowplot.R'
     'draw.R'
+    'get_legend.R'
     'gtable.R'
     'plot_grid.R'
     'save.R'
     'setup.R'
     'switch_axis.R'
     'themes.R'
+RoxygenNote: 5.0.1
