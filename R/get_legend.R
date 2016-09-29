@@ -20,5 +20,13 @@
 get_legend <- function(plot)
 {
     grobs <- ggplot_to_gtable(plot)$grobs
-    legend <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
+    legendIndex <- which(sapply(grobs, function(x) x$name) == "guide-box")
+    ## make sure this plot has a legend to be extracted
+    ## note that multiple legends show up as one grob so this still works for multiple legend plots (i.e. color and shape)
+    ## not sure if it is possible to create a plot with multiple legend grobs, but also not sure how this function should handle those situations so this seems to be the best check to provide a useful message
+    if (length(legendIndex) == 1){
+        legend <- grobs[[legendIndex]]
+    } else {
+        stop('Plot must contain a legend')
+    }
 }
