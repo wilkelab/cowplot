@@ -32,8 +32,7 @@ prow
 # extract the legend from one of the plots
 # (clearly the whole thing only makes sense if all plots
 # have the same legend, so we can arbitrarily pick one.)
-grobs <- ggplotGrob(p1)$grobs
-legend <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
+legend <- get_legend(p1)
 
 # add the legend to the row we made earlier. Give it one-third of the width
 # of one plot (via rel_widths).
@@ -44,8 +43,7 @@ p
 # extract the legend from one of the plots
 # (clearly the whole thing only makes sense if all plots
 # have the same legend, so we can arbitrarily pick one.)
-grobs <- ggplotGrob(p1 + theme(legend.position="bottom"))$grobs
-legend_b <- grobs[[which(sapply(grobs, function(x) x$name) == "guide-box")]]
+legend_b <- get_legend(p1 + theme(legend.position="bottom"))
 
 # add the legend underneath the row we made earlier. Give it 10% of the height
 # of one plot (via rel_heights).

@@ -13,7 +13,9 @@
 #' legend <- get_legend(plot.mpg)
 #' plot.mpg <- plot.mpg + theme(legend.position='none')
 #' # Now plots are aligned vertically with the legend to the right
-#' ggdraw(plot_grid(plot_grid(p1, plot.mpg, ncol=1, align='v'), plot_grid(NULL, legend, ncol=1), rel_widths=c(1, 0.2)))
+#' ggdraw(plot_grid(plot_grid(p1, plot.mpg, ncol=1, align='v'),
+#'                  plot_grid(NULL, legend, ncol=1),
+#'                  rel_widths=c(1, 0.2)))
 #' @export
 get_legend <- function(plot)
 {
