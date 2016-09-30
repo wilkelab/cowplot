@@ -1,3 +1,4 @@
+Fixed the URL in README.md and replaced the word "library" with "package" in DESCRIPTION.
 
 ## Test environments
 * R 3.3.1 on win-builder [ via devtools::build_win() ]
