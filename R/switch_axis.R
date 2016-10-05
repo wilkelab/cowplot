@@ -143,13 +143,16 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
 #'      are"x", "y", "xy", and "none". The default is "none".
 #' @return A gtable object (not ggplot object!) on which the axes have been switched.
 #' @examples
+#' \dontrun{
 #' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
 #' ggdraw(switch_axis_position(p, axis = 'y'))
 #' ggdraw(switch_axis_position(p, axis = 'x'))
 #' ggdraw(switch_axis_position(p + theme_bw(), axis = 'xy', keep = 'x'))
+#' }
 #' @export
 switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none', 'x', 'y', 'xy', 'yx'))
 {
+  stopifnot(packageVersion("ggplot2")<=2.10) # this function doesn't work with ggplot2 2.2
   keep.x <- switch(keep[1],
                    x = TRUE,
                    y = FALSE,

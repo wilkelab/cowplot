@@ -23,9 +23,11 @@ A gtable object (not ggplot object!) on which the axes have been switched.
 Switches the axis position of the x or y axis in a plot.
 }
 \examples{
+\dontrun{
 p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
 ggdraw(switch_axis_position(p, axis = 'y'))
 ggdraw(switch_axis_position(p, axis = 'x'))
 ggdraw(switch_axis_position(p + theme_bw(), axis = 'xy', keep = 'x'))
+}
 }
 

@@ -1,3 +1,8 @@
+cowplot 0.6.9990
+----------------------------------------------------------------
+- The development version of cowplot is being switched over to ggplot2 2.2.0. Things may not work, things may break, things may be disabled. Use cowplot 0.6.3 and ggplot2 2.1.0 for production plots.
+- As of this version, cowplot requires R >= 3.3.0. This dependency was added because R 3.3 fixes a critical problem with lists of units.
+
 cowplot 0.6.3
 ----------------------------------------------------------------
 - Adds a get_legend() function that extracts the legend from a plot. Code provided by https://github.com/marcus1487

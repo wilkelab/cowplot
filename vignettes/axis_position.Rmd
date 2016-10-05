@@ -13,7 +13,7 @@ vignette: >
 The **cowplot** package defines a function `switch_axis_position()` that allows us to take the x and/or y axis of a plot and copy or move it to the other side of the plot (y axis to right, x axis to top). Here are some examples of moving or copying various axes. As we can see, this works regardless of the chosen theme.
 
 Importantly, the return object is a gtable, not a ggplot object, so we need to feed it into `ggdraw()` to display in the usual manner or to save with `ggsave()` or `save_plot()`.
-```{r, message=FALSE, fig.width=4.25, fig.height=3.4}
+```{r, eval=FALSE, message=FALSE, fig.width=4.25, fig.height=3.4}
 require(cowplot)
 require(grid) # for unit()
 theme_set(theme_cowplot(font_size=12)) # reduce default font size
@@ -26,14 +26,14 @@ ggdraw(switch_axis_position(p1 + theme(axis.ticks.length = unit(0.3, "cm"),
 ```
 
 Moving the axes also works if there is a legend. What is not currently implemented, however, is moving axes on faceted plots.
-```{r, message=FALSE, fig.width=4.25, fig.height=3.4}
+```{r, eval=FALSE, message=FALSE, fig.width=4.25, fig.height=3.4}
 p2 <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
   theme(axis.text.x = element_text(angle = 70, vjust = 0.5))
 ggdraw(switch_axis_position(p2, axis = 'x'))
 ```
 
 When rotating text, you may need to fidle with `hjust` and `vjust` to get the labels to be correctly justified.
-```{r, message=FALSE, fig.width=4.25, fig.height=3}
+```{r, eval=FALSE, message=FALSE, fig.width=4.25, fig.height=3}
 mtcars2 <- mtcars[1:15, ]
 mtcars2$name <- row.names(mtcars2)
 p3 <- ggplot(mtcars2, aes(x = name, y = mpg, fill = name)) + 
@@ -45,7 +45,7 @@ ggdraw(switch_axis_position(p3, axis = 'x'))
 ```
 
 In combination with some clever gtable manipulations, we can also align multiple plots with axes that have been switched. Note that the function `gtable_squash_rows()` I'm using here is one of a few functions **cowplot** defines for manipulating gtables.
-```{r, message=FALSE, fig.width=4.25, fig.height=5.1}
+```{r, eval=FALSE, message=FALSE, fig.width=4.25, fig.height=5.1}
 require(gtable)
 # top plot
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = 'blue') +
