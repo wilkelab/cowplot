@@ -4,7 +4,7 @@ require(grid) # for unit()
 theme_set(theme_cowplot(font_size=12)) # reduce default font size
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
 p1 + theme_gray() + scale_y_continuous(position = "right")
-p1 + theme_bw() + scale_x_continuous(sec.axis = dup_axis(name = derive()))
+p1 + theme_bw() + scale_x_continuous(sec.axis = dup_axis(name = waiver()))
 p1 + scale_x_continuous(sec.axis = dup_axis()) + scale_y_continuous(sec.axis = dup_axis())
 p1 + theme(axis.ticks.length = unit(0.3, "cm"),
            axis.text.x = element_text(margin = margin(0.2, unit = "cm"))) +
