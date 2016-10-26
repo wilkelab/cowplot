@@ -183,9 +183,9 @@ switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none'
   result
 }
 
-#' Get theme of a ggplot2 plot
-#' @param p The plot
-#' @export
+# Get theme of a ggplot2 plot
+# @param p The plot
+# @export
 plot_theme <- function(p) {
   plyr::defaults(p$theme, ggplot2::theme_get())
 }
