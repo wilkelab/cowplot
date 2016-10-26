@@ -4,7 +4,7 @@
 \alias{theme_nothing}
 \title{Create a completely empty theme}
 \usage{
-theme_nothing(base_size = 12, base_family = "")
+theme_nothing(base_size = 14, base_family = "")
 }
 \arguments{
 \item{base_size}{Overall font size. Default is 14.}
@@ -15,14 +15,11 @@ theme_nothing(base_size = 12, base_family = "")
 The theme.
 }
 \description{
-The theme created by this function shows nothing but the plot panel. Unfortunately,
-due to ggplot2 peculiarities, a little bit of padding remains to the left and bottom of
-the panel. This can be removed by adding \code{labs(x = NULL, y = NULL)} to the plot, see examples.
+The theme created by this function shows nothing but the plot panel. Since ggplot2 now
+provides \code{theme_void}, which serves the same purpose, this function is now just a
+wrapper around \code{theme_void}.
 }
 \examples{
-# plot with small amount of remaining padding
 qplot(1:10, (1:10)^2) + theme_nothing()
-# remaining padding removed
-qplot(1:10, (1:10)^2) + theme_nothing() + labs(x = NULL, y = NULL)
 }
 

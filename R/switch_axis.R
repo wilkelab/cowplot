@@ -1,3 +1,6 @@
+## The code in this file is not used anymore and is not exported. It will be deleted eventually.
+
+
 # function that can horizontally invert a title grob, with margins treated properly
 # title grobs are used a lot in the new ggplot2 version (>1.0.1)
 hinvert_title_grob <- function(grob)
@@ -134,25 +137,21 @@ switch_xaxis_position <- function(gt, theme, keep.original = FALSE)
   g
 }
 
-#' Switches the axis position of the x or y axis in a plot.
-#'
-#' @param plot The plot on which to perform the operation.
-#' @param axis String indicating which axis to switch. Valid options are"x", "y", and "xy".
-#'      The default is "y".
-#' @param keep String indicating which if any original axis to keep. Valid options
-#'      are"x", "y", "xy", and "none". The default is "none".
-#' @return A gtable object (not ggplot object!) on which the axes have been switched.
-#' @examples
-#' \dontrun{
-#' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
-#' ggdraw(switch_axis_position(p, axis = 'y'))
-#' ggdraw(switch_axis_position(p, axis = 'x'))
-#' ggdraw(switch_axis_position(p + theme_bw(), axis = 'xy', keep = 'x'))
-#' }
-#' @export
+# Switches the axis position of the x or y axis in a plot.
+#
+# @param plot The plot on which to perform the operation.
+# @param axis String indicating which axis to switch. Valid options are"x", "y", and "xy".
+#      The default is "y".
+# @param keep String indicating which if any original axis to keep. Valid options
+#      are"x", "y", "xy", and "none". The default is "none".
+# @return A gtable object (not ggplot object!) on which the axes have been switched.
+# @examples
+# p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue")
+# ggdraw(switch_axis_position(p, axis = 'y'))
+# ggdraw(switch_axis_position(p, axis = 'x'))
+# ggdraw(switch_axis_position(p + theme_bw(), axis = 'xy', keep = 'x'))
 switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none', 'x', 'y', 'xy', 'yx'))
 {
-  stopifnot(packageVersion("ggplot2")<=2.10) # this function doesn't work with ggplot2 2.2
   keep.x <- switch(keep[1],
                    x = TRUE,
                    y = FALSE,
