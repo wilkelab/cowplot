@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 0.6.9990
+Version: 0.7.0
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
     "wilke@austin.utexas.edu"), person("Hadley", "Wickham", role = c("cph"),
     email = "h.wickham@gmail.com") )
@@ -13,7 +13,7 @@ Description: Some helpful extensions and modifications to the 'ggplot2'
 URL: https://github.com/wilkelab/cowplot
 Depends:
     R (>= 3.3.0),
-    ggplot2 (>= 2.0.0),
+    ggplot2 (>= 2.1.0),
 Imports:
     grid (>= 3.0.0),
     gtable (>= 0.1.2),

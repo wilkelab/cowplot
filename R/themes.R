@@ -38,6 +38,9 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
       ),
       axis.ticks        = element_line(colour = "black", size = line_size),
       axis.line         = element_line(colour = "black", size = line_size),
+      # the following two lines are not needed for ggplot2 2.2.0 or later
+      axis.line.x         = element_line(colour = "black", size = line_size),
+      axis.line.y         = element_line(colour = "black", size = line_size),
       legend.key        = element_blank(),
       legend.key.size   = grid::unit(1, "lines"),
       legend.text       = element_text(size = rel(small_rel)),

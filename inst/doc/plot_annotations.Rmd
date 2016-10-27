@@ -14,7 +14,7 @@ vignette: >
 library(cowplot)
 ```
 
-The **cowplot** package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots.
+The **cowplot** package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots. Note that as **ggplot2** gains more of this functionality natively (e.g. as of version 2.2.0), we recommend to use the **ggplot2** methods rather than the **cowplot** methods. Any functionality that is duplicated between **ggplot2** and **cowplot** may be removed from future versions of **cowplot**.
 
 ## Annotations underneath plots
 

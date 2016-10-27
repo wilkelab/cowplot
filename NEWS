@@ -1,6 +1,6 @@
-cowplot 0.6.9990
+cowplot 0.7.0
 ----------------------------------------------------------------
-- The development version of cowplot is being prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been deprecated. Alternative axes will be natively supported by ggplot2 2.2.0.
+- This version of cowplot has been prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been removed. Alternative axes will be natively supported by ggplot2 2.2.0.
 - As of this version, cowplot requires R >= 3.3.0. This dependency was added because R 3.3 fixes a critical problem with lists of units.
 
 cowplot 0.6.3
