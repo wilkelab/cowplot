@@ -1,4 +1,42 @@
 
+align_axis <- function(sizes, margin_to_align) {
+  ## Function to align axis of plots based on list of plot sizes (widths or heights)
+  ## And which margin desired to be aligned.
+  # browser()
+  list_indices <- switch(margin_to_align,
+                            first = lapply(sizes, function(x) 1:(grep("null", x)[1]-1)),
+                            last = lapply(sizes, function(x) (grep("null", x)[length(grep("null", x))]+1):length(x)),
+                            stop("Invalid margin input, should be either 'first' or 'last'"))
+  extreme_margin <- switch(margin_to_align,
+                           first = lapply(sizes, function(x) 1),
+                           last = lapply(sizes, function(x) length(x)))
+
+  grob_seq <- seq_along(list_indices)
+
+  num <- unique(unlist(lapply(list_indices, function(x) length(x))))
+  num[num==0] <- NULL # remove entry for missing graphs
+
+  # Align if different number of items in margin
+  if(length(num) > 1){
+    margins <- lapply(grob_seq, function(x) {sum(sizes[[x]][list_indices[[x]]])})
+    largest_margin <- max(do.call(grid::unit.c, margins))
+    # For each grob, make the width of the first one equal to
+    lapply(grob_seq, function(x){
+      sizes[[x]][extreme_margin[[x]]]  <- largest_margin - sum(sizes[[x]][list_indices[[x]][which(list_indices[[x]] != extreme_margin[[x]])] ])
+      sizes[[x]]
+    })
+    # Align if left margin has same number of items
+  } else{
+    # If margins have same number of items, then make all the same length
+    max_margins <- do.call(unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]] ))
+    lapply(grob_seq, function(x){
+      sizes[[x]][list_indices[[x]]] <- max_margins
+      sizes[[x]]
+    })
+  }
+}
+
+
 #' Align multiple plots vertically and/or horizontally
 #'
 #' Align multiple plots for plotting manually. Can be used to graph two separate y axis, but still doesn't work if second y axis needs to be shown.
@@ -14,7 +52,8 @@
 #' aligned_plots <- align_plots(p1, p2, align="hv")
 #' ggdraw() + draw_grob(aligned_plots[[1]]) + draw_grob(aligned_plots[[2]])
 #' @export
-align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv")){
+align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"), axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr")){
+  # browser()
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
 
@@ -36,20 +75,33 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"))
                    FALSE
   )
 
+  vcomplex_align <- hcomplex_align <- FALSE
   # calculate the maximum widths and heights over all graphs, and find out whether
   # they can be aligned if necessary
   if (valign)
   {
     num_widths <- unique(lapply(grobs, function(x){length(x$widths)})) # count number of unique lengths
     num_widths[num_widths==0] <- NULL # remove entry for missing graphs
-    if (length(num_widths) > 1)
-    {
-      valign = FALSE
-      warning("Graphs cannot be vertically aligned. Placing graphs unaligned.")
-    }
-    else
-    {
-      max_widths <- do.call(grid::unit.pmax, lapply(grobs, function(x){x$widths}))
+    if (length(num_widths) > 1) {
+      # Complex aligns are ones that don't have the same number of elements that have sizes
+      vcomplex_align = TRUE
+      if(axis[1] == "none"){
+        warning("Complex graphs cannot be vertically aligned unless axis parameter is set properly. Placing graphs unaligned.")
+        valign=FALSE
+      }
+
+      max_widths <- lapply(grobs, function(x){x$widths})
+      #
+      # Aligning the Left margins
+      if(length(grep("l", axis[1])) > 0) {
+        max_widths <- align_axis(max_widths, "first")
+      }
+      if(length(grep("r", axis[1])) > 0){
+        max_widths <- align_axis(max_widths, "last")
+      }
+
+    } else {
+      max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$widths})))
     }
   }
 
@@ -57,24 +109,51 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"))
   {
     num_heights <- unique(lapply(grobs, function(x){length(x$heights)})) # count number of unique lengths
     num_heights[num_heights==0] <- NULL # remove entry for missing graphs
-    if (length(num_heights) > 1)
-    {
-      halign = FALSE
-      warning("Graphs cannot be horizontally aligned. Placing graphs unaligned.")
-    }
-    else
-    {
-      max_heights <- do.call(grid::unit.pmax, lapply(grobs, function(x){x$heights}))
+    if (length(num_heights) > 1) {
+      # Complex aligns are ones that don't have the same number of elements that have sizes
+      hcomplex_align = TRUE
+      if(axis[1] == "none"){
+        warning("Graphs cannot be horizontally aligned, unless axis parameter set. Placing graphs unaligned.")
+        halign=FALSE
+      }
+
+      max_heights <- lapply(grobs, function(x){x$heights})
+
+      if(length(grep("t", axis[1])) > 0){
+
+        max_heights <- align_axis(max_heights, "first")
+      }
+      if(length(grep("b", axis[1])) > 0) {
+
+        max_heights <- align_axis(max_heights, "last")
+      }
+
+    } else {
+      max_heights <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$heights})))
     }
   }
 
-  # now assing to all graphs
+  # now assign to all graphs
   for ( i in 1:num_plots )
   {
     if (!is.null(grobs[[i]]))
     {
-      if (valign) grobs[[i]]$widths <- max_widths
-      if (halign) grobs[[i]]$heights <- max_heights
+
+      if (valign) {
+        if(vcomplex_align){
+          grobs[[i]]$widths <- max_widths[[i]]
+        } else{
+          grobs[[i]]$widths <- max_widths[[1]]
+        }
+      }
+      if (halign) {
+        if(hcomplex_align){
+          grobs[[i]]$heights <- max_heights[[i]]
+        } else{
+          grobs[[i]]$heights <- max_heights[[1]]
+        }
+      }
+
     }
   }
   grobs
@@ -129,6 +208,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"))
 #' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
+                      axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
                       nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
                       rel_heights = 1, labels = NULL, label_size = 14,
                       hjust = -0.5, vjust = 1.5,
@@ -155,7 +235,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   }
 
   # Align the plots (if specified)
-  grobs <- align_plots(plotlist = plots, align=align)
+  grobs <- align_plots(plotlist = plots, align=align, axis=axis)
 
   # calculate grid dimensions
   if (is.null(cols) && is.null(rows)){
