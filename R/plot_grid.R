@@ -1,18 +1,23 @@
 
+#' Align width/height sizes of plots based on a specific margin
+#'
+#' Automatically aligns the sizes for a plot based on a specified margin. This aligns everything within the margin for all plots specified
+#' @param sizes list of vectors containing the sizes for each plot being aligned
+#' @param margin_to_align string either first/last for which part of plot sizes should be aligned
 align_axis <- function(sizes, margin_to_align) {
-  ## Function to align axis of plots based on list of plot sizes (widths or heights)
-  ## And which margin desired to be aligned.
-  # browser()
+
+  # finds the indices being aligned for each of the plots
   list_indices <- switch(margin_to_align,
                             first = lapply(sizes, function(x) 1:(grep("null", x)[1]-1)),
                             last = lapply(sizes, function(x) (grep("null", x)[length(grep("null", x))]+1):length(x)),
                             stop("Invalid margin input, should be either 'first' or 'last'"))
+
+  # Either 1 or length of the sizes for each plot, but used for flexible case handling
   extreme_margin <- switch(margin_to_align,
                            first = lapply(sizes, function(x) 1),
                            last = lapply(sizes, function(x) length(x)))
 
   grob_seq <- seq_along(list_indices)
-
   num <- unique(unlist(lapply(list_indices, function(x) length(x))))
   num[num==0] <- NULL # remove entry for missing graphs
 
