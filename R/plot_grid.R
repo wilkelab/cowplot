@@ -1,9 +1,19 @@
 
-#' Align width/height sizes of plots based on a specific margin
+#' Helper function for align_plots() to align width/height sizes of plots based on a specified margin
 #'
-#' Automatically aligns the sizes for a plot based on a specified margin. This aligns everything within the margin for all plots specified
-#' @param sizes list of vectors containing the sizes for each plot being aligned
-#' @param margin_to_align string either first/last for which part of plot sizes should be aligned
+#' The function takes in a list of sizes where each
+#' element of the list corresponds to a plot (grob) being aligned and a call to grob$heights or grob$widths
+#' depending on whether you are aligning vertically or horizontally. If one analyzes the grob$heights/grob$widths
+#' you will notice that 1null is used to describe the plotting area (if you have a faceted plot there are multiple
+#' 1null sizes). The margins of the plot are therefore anything that is outside of the single or multiple
+#' 1null region(s). This function therefore only needs to know which margin should be aligned (either first or last).
+#' If the same number of elements exist for all plots for the specified margin, the function will align individual elements
+#' on the margin. Otherwise, it will find the maximum margin size amongst the plots, and add whitespace on the border
+#' to the smaller margin plots so that the plot areas are aligned.
+#'
+#' @param sizes list of sizes for each plot, each obtained by a call to grob$heights or grob$widths
+#' @param margin_to_align string either "first" or "last" for which part of plot sizes should be aligned.
+#'  If vertically aligning, first aligns left margin and last aligns right margin
 align_axis <- function(sizes, margin_to_align) {
 
   # finds the indices being aligned for each of the plots
@@ -33,7 +43,7 @@ align_axis <- function(sizes, margin_to_align) {
     # Align if left margin has same number of items
   } else{
     # If margins have same number of items, then make all the same length
-    max_margins <- do.call(unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]] ))
+    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]] ))
     lapply(grob_seq, function(x){
       sizes[[x]][list_indices[[x]]] <- max_margins
       sizes[[x]]
@@ -44,18 +54,30 @@ align_axis <- function(sizes, margin_to_align) {
 
 #' Align multiple plots vertically and/or horizontally
 #'
-#' Align multiple plots for plotting manually. Can be used to graph two separate y axis, but still doesn't work if second y axis needs to be shown.
+#' Align the plot area of multiple plots. Takes a list of plots and then aligning parameters as inputs.
+#' Can choose between horizontal and/or vertical alignment. In the simplest case the function will align all
+#' elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to align_axis()).
+#' This function is called by the plot_grid function if alignment is desired, and is usually not called manually, though manual
+#' calling of the function is useful if plots with multiple y-axes are desired (see example).
+#'
 #' @param ... List of plots to be aligned.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
-#' individually as the first n arguments of the function plot_grid (see examples).
+#'  individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
 #'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
+#' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
+#'  margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins)
 #' @examples
-#' p1 <- qplot(1:10, rpois(10, lambda=15), geom="point")
-#' p2 <- qplot(1:10, (1:10)^2, geom="line") + theme_nothing()
+#'p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
+#'          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
+#'p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +
+#'  scale_y_continuous(position = "right") +
+#'  theme(axis.text.x = element_blank())
 #' # manually align and plot on top of each other
-#' aligned_plots <- align_plots(p1, p2, align="hv")
-#' ggdraw() + draw_grob(aligned_plots[[1]]) + draw_grob(aligned_plots[[2]])
+#'aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")
+#' # Note: In most cases two y-axes should not be used, but this example
+#' # illustrates how one would could accomplish it.
+#'ggdraw(aligned_plots[[1]]) +draw_plot(aligned_plots[[2]])
 #' @export
 align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"), axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr")){
   # browser()
@@ -176,6 +198,9 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
 #'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
+#' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
+#'  margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins).
+#'  Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired.
 #' @param nrow (optional) Number of rows in the plot grid.
 #' @param ncol (optional) Number of columns in the plot grid.
 #' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
@@ -200,6 +225,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' p2 <- qplot(1:10, (1:10)^2)
 #' p3 <- qplot(1:10, (1:10)^3)
 #' p4 <- qplot(1:10, (1:10)^4)
+#' p5 <- ggplot(mpg, aes(as.factor(year), hwy)) + geom_boxplot() + facet_wrap(~class, scales = "free_y")
 #' # simple grid
 #' plot_grid(p1, p2, p3, p4)
 #' # simple grid with labels and aligned plots
@@ -211,6 +237,10 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #'  labels="auto", label_size=12, align="v")
 #' # making rows and columns of different widths/heights
 #' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+#' # aligning complex plots in a grid
+#' plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
+#' # can align top of plotting area as well as bottom
+#' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
