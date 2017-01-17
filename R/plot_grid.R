@@ -1,20 +1,38 @@
 
-#' Helper function for align_plots() to align width/height sizes of plots based on a specified margin
+#' Align multiple plots along a specified margin
 #'
-#' The function takes in a list of sizes where each
-#' element of the list corresponds to a plot (grob) being aligned and a call to grob$heights or grob$widths
-#' depending on whether you are aligning vertically or horizontally. If one analyzes the grob$heights/grob$widths
-#' you will notice that 1null is used to describe the plotting area (if you have a faceted plot there are multiple
-#' 1null sizes). The margins of the plot are therefore anything that is outside of the single or multiple
-#' 1null region(s). This function therefore only needs to know which margin should be aligned (either first or last).
-#' If the same number of elements exist for all plots for the specified margin, the function will align individual elements
-#' on the margin. Otherwise, it will find the maximum margin size amongst the plots, and add whitespace on the border
-#' to the smaller margin plots so that the plot areas are aligned.
+#' The function aligns the dimensions of multiple plots along a specified axis, and is solely a helper function
+#' for \code{align_plots()} to reduce redundancy. Each element of the \code{sizes}
+#' list corresponds to the dimensions of a plot being aligned. They should be vectors created from calls to
+#' \code{grob$heights} or \code{grob$widths} depending on whether you are aligning vertically or horizontally.
+#' The list of dimensions is generated automatically by the \code{align_plots} function, but see examples.
+#' If the same number of elements exist for all plots for the specified
+#' margin, the function will align individual elements on the margin. Otherwise, it aligns the plot by adding
+#' white space to plot margins so that all margins have the same dimensions.
 #'
-#' @param sizes list of sizes for each plot, each obtained by a call to grob$heights or grob$widths
-#' @param margin_to_align string either "first" or "last" for which part of plot sizes should be aligned.
-#'  If vertically aligning, first aligns left margin and last aligns right margin
-align_axis <- function(sizes, margin_to_align) {
+#' @param sizes list of dimensions for each plot being aligned. Each element of list
+#'  obtained by a call to \code{grob$heights} or \code{grob$widths} (see example).
+#' @param margin_to_align string either "first" or "last" for which part of plot area should be aligned.
+#'  If vertically aligning, "first" aligns left margin and "last" aligns right margin. If horizontally aligning
+#'  "first" aligns top margin and "last" aligns bottom margin
+#' @examples
+#' # Example for how to utilize, though align_plots() does this internally and automatically
+#' p1 <- qplot(1:10, 1:10)
+#' p2 <- qplot(1:10, (1:10)^2)
+#' p3 <- qplot(1:10, (1:10)^3)
+#' plots <- list(p1, p2, p3)
+#' grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
+#' plot_widths <- lapply(grobs, function(x){x$widths})
+#' # Aligning the Left margins of all plots
+#' aligned_widths <- align_margin(plot_widths, "first")
+#' # Aligning the right margins of all plots as well
+#' aligned_widths <- align_margin(plot_widths, "last")
+#' # Setting the dimensions of plots to the aligned dimensions
+#' for(i in 1:3){
+#'    plots[[i]]$widths <- aligned_widths[[i]]
+#' }
+
+align_margin <- function(sizes, margin_to_align) {
 
   # finds the indices being aligned for each of the plots
   list_indices <- switch(margin_to_align,
@@ -56,17 +74,18 @@ align_axis <- function(sizes, margin_to_align) {
 #'
 #' Align the plot area of multiple plots. Takes a list of plots and then aligning parameters as inputs.
 #' Can choose between horizontal and/or vertical alignment. In the simplest case the function will align all
-#' elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to align_axis()).
-#' This function is called by the plot_grid function if alignment is desired, and is usually not called manually, though manual
+#' elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to \code{align_margin()}).
+#' This function is called by the \code{plot_grid} function if alignment is desired, and is usually not called manually, though manual
 #' calling of the function is useful if plots with multiple y-axes are desired (see example).
 #'
 #' @param ... List of plots to be aligned.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
-#'  individually as the first n arguments of the function plot_grid (see examples).
+#'  individually as the first n arguments of the function align_plots (see plot_grid examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
-#'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
+#'  vertically ("v") aligned. Options are \code{align="none"} (default), "hv" (align in both directions), "h", and "v".
 #' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
-#'  margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins)
+#'  margins. Options are \code{axis="none"} (default), or a string of any combination of "l", "r", "t", and/or "b" in any order
+#'  (e.g. \code{axis="tblr"} or \code{axis="rlbt"} for aligning all margins)
 #' @examples
 #'p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
 #'          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
@@ -121,10 +140,10 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       #
       # Aligning the Left margins
       if(length(grep("l", axis[1])) > 0) {
-        max_widths <- align_axis(max_widths, "first")
+        max_widths <- align_margin(max_widths, "first")
       }
       if(length(grep("r", axis[1])) > 0){
-        max_widths <- align_axis(max_widths, "last")
+        max_widths <- align_margin(max_widths, "last")
       }
 
     } else {
@@ -148,11 +167,11 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
       if(length(grep("t", axis[1])) > 0){
 
-        max_heights <- align_axis(max_heights, "first")
+        max_heights <- align_margin(max_heights, "first")
       }
       if(length(grep("b", axis[1])) > 0) {
 
-        max_heights <- align_axis(max_heights, "last")
+        max_heights <- align_margin(max_heights, "last")
       }
 
     } else {
