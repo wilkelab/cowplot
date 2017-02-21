@@ -185,6 +185,12 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
     rows <- nrow
   }
 
+  # when base_aspect_ratio and base_width are specified calculate base_height
+  if (!is.null(base_width) & base_aspect_ratio != 1.1) {
+    print('debug')
+    base_height <- base_width / base_aspect_ratio
+  }
+
   if (is.null(base_width)){
     base_width <- base_height * base_aspect_ratio
   }
