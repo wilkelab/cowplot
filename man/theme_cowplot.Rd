@@ -23,4 +23,3 @@ for all graphs made with ggplot2.
 \examples{
 qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 }
-

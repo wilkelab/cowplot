@@ -16,4 +16,3 @@ draw_line(x, y, ...)
 \description{
 This is a convenience function. It's just a thin wrapper around \code{geom_line}.
 }
-

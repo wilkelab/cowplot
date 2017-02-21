@@ -14,4 +14,3 @@ gtable_squash_rows(table, rows)
 \description{
 Set the height of given rows to 0.
 }
-

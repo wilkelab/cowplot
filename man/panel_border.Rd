@@ -21,4 +21,3 @@ This function provides a simple way to modify the panel border in ggplot2. It
 doesn't do anything that can't be done just the same with \code{theme()}. However, it
 saves some typing.
 }
-

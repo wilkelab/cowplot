@@ -21,4 +21,3 @@ draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 Places a plot somewhere onto the drawing canvas. By default, coordinates run from
 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
 }
-

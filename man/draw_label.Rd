@@ -53,4 +53,3 @@ ggdraw(p) + draw_label(label, .7, .9)
 # adding label directly to plot, in the data coordinates
 p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
 }
-

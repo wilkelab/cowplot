@@ -51,4 +51,3 @@ ggdraw(p2) + draw_figure_label(label = "Figure 1", position = "bottom.right", si
 \author{
 Ulrik Stervbo (ulrik.stervbo [AT] gmail.com)
 }
-

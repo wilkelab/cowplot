@@ -29,4 +29,3 @@ By default, the x and y coordinates specify the center of the text box. Set \cod
 the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 specify.
 }
-

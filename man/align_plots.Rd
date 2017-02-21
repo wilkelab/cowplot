@@ -4,25 +4,38 @@
 \alias{align_plots}
 \title{Align multiple plots vertically and/or horizontally}
 \usage{
-align_plots(..., plotlist = NULL, align = c("none", "h", "v", "hv"))
+align_plots(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
+  axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"))
 }
 \arguments{
 \item{...}{List of plots to be aligned.}
 
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
-individually as the first n arguments of the function plot_grid (see examples).}
+individually as the first n arguments of the function align_plots (see plot_grid examples).}
 
 \item{align}{(optional) Specifies whether graphs in the grid should be horizontally ("h") or
-vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".}
+vertically ("v") aligned. Options are \code{align="none"} (default), "hv" (align in both directions), "h", and "v".}
+
+\item{axis}{(optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
+margins. Options are \code{axis="none"} (default), or a string of any combination of "l", "r", "t", and/or "b" in any order
+(e.g. \code{axis="tblr"} or \code{axis="rlbt"} for aligning all margins)}
 }
 \description{
-Align multiple plots for plotting manually. Can be used to graph two separate y axis, but still doesn't work if second y axis needs to be shown.
+Align the plot area of multiple plots. Takes a list of plots and then aligning parameters as inputs.
+Can choose between horizontal and/or vertical alignment. In the simplest case the function will align all
+elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to \code{align_margin()}).
+This function is called by the \code{plot_grid} function if alignment is desired, and is usually not called manually, though manual
+calling of the function is useful if plots with multiple y-axes are desired (see example).
 }
 \examples{
-p1 <- qplot(1:10, rpois(10, lambda=15), geom="point")
-p2 <- qplot(1:10, (1:10)^2, geom="line") + theme_nothing()
+p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
+         theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
+p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +
+ scale_y_continuous(position = "right") +
+ theme(axis.text.x = element_blank())
 # manually align and plot on top of each other
-aligned_plots <- align_plots(p1, p2, align="hv")
-ggdraw() + draw_grob(aligned_plots[[1]]) + draw_grob(aligned_plots[[2]])
+aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")
+# Note: In most cases two y-axes should not be used, but this example
+# illustrates how one would could accomplish it.
+ggdraw(aligned_plots[[1]]) +draw_plot(aligned_plots[[2]])
 }
-
