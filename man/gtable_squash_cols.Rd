@@ -14,4 +14,3 @@ gtable_squash_cols(table, cols)
 \description{
 Set the width of given colums to 0.
 }
-

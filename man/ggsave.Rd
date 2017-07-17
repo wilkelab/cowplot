@@ -40,4 +40,3 @@ with the main difference being that by default it doesn't use the Dingbats
 font for pdf output. If you ever have trouble with this function, you can
 try using \code{ggplot2::ggsave()} instead.
 }
-

@@ -29,4 +29,3 @@ This function adds a plot label to the upper left corner of a graph (or an arbit
 as \code{draw_text}, but has defaults that make it convenient to label graphs with letters A, B, C, etc. Just like \code{draw_text()},
 it can handle vectors of labels with associated coordinates.
 }
-

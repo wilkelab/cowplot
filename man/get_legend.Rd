@@ -28,4 +28,3 @@ ggdraw(plot_grid(plot_grid(p1, plot.mpg, ncol=1, align='v'),
                  plot_grid(NULL, legend, ncol=1),
                  rel_widths=c(1, 0.2)))
 }
-

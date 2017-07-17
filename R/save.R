@@ -147,8 +147,9 @@ plot_dev <- function(device, filename, dpi = 300) {
 #' or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calculated from
 #' \code{height} and \code{base_aspect_ratio}.
 #' @param base_aspect_ratio The aspect ratio of the plot or of one sub-plot if \code{nrow}
-#' or \code{ncol} > 1. This argument is only used if \code{base_width = NULL}. The default is 1.1,
-#' which works well for figures without a legend.
+#' or \code{ncol} > 1. This argument is used if \code{base_width = NULL} or if \code{base_height = NULL};
+#' if width or height is missing the aspect ratio will be used calculate the \code{NULL} value.
+#' The default is 1.1, which works well for figures without a legend.
 #' @param rows Deprecated. Like \code{nrow}.
 #' @param cols Deprecated. Like \code{ncol}.
 #' @param ... Other arguments to be handed to \code{ggsave}.
@@ -164,6 +165,12 @@ plot_dev <- function(device, filename, dpi = 300) {
 #' # save a single plot with legend, changing the aspect ratio to make room for the legend
 #' p3 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
 #' save_plot("p3.png", p3, base_aspect_ratio = 1.3)
+#' # same as p3 but determine base_height given base_aspect_ratio and base_width
+#' p4 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+#' save_plot("p4.png", p4, base_height = NULL, base_aspect_ratio = 1.618, base_width = 6)
+#' # same as p4 but determine base_width given base_aspect_ratio and base_height
+#' p5 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
+#' save_plot("p5.png", p5, base_height = 6, base_aspect_ratio = 1.618, base_width = NULL)
 #' @export
 save_plot <- function(filename, plot, ncol = 1, nrow = 1,
                       base_height = 4, base_aspect_ratio = 1.1, base_width = NULL, ...,
@@ -185,7 +192,11 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
     rows <- nrow
   }
 
-  if (is.null(base_width)){
+  if (is.null(base_height) & !is.null(base_width)) {
+    base_height <- base_width / base_aspect_ratio
+  }
+
+  if (is.null(base_width) & !is.null(base_height)){
     base_width <- base_height * base_aspect_ratio
   }
 

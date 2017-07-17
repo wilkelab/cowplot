@@ -22,4 +22,3 @@ wrapper around \code{theme_void}.
 \examples{
 qplot(1:10, (1:10)^2) + theme_nothing()
 }
-

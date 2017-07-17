@@ -89,4 +89,3 @@ ggdraw(p2)
 ggdraw(add_sub(p1, "Annotation inside plot", vpadding=grid::unit(0, "lines"),
        y = 6, x = 0.03, hjust = 0))
 }
-

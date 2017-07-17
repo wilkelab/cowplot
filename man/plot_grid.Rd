@@ -5,9 +5,10 @@
 \title{Arrange multiple plots into a grid}
 \usage{
 plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
-  nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
-  rel_heights = 1, labels = NULL, label_size = 14, hjust = -0.5,
-  vjust = 1.5, cols = NULL, rows = NULL)
+  axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"), nrow = NULL,
+  ncol = NULL, scale = 1, rel_widths = 1, rel_heights = 1,
+  labels = NULL, label_size = 14, hjust = -0.5, vjust = 1.5,
+  cols = NULL, rows = NULL)
 }
 \arguments{
 \item{...}{List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
@@ -18,6 +19,10 @@ individually as the first n arguments of the function plot_grid (see examples).}
 
 \item{align}{(optional) Specifies whether graphs in the grid should be horizontally ("h") or
 vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".}
+
+\item{axis}{(optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
+margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins).
+Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired.}
 
 \item{nrow}{(optional) Number of rows in the plot grid.}
 
@@ -57,6 +62,7 @@ p1 <- qplot(1:10, 1:10)
 p2 <- qplot(1:10, (1:10)^2)
 p3 <- qplot(1:10, (1:10)^3)
 p4 <- qplot(1:10, (1:10)^4)
+p5 <- ggplot(mpg, aes(as.factor(year), hwy)) + geom_boxplot() + facet_wrap(~class, scales = "free_y")
 # simple grid
 plot_grid(p1, p2, p3, p4)
 # simple grid with labels and aligned plots
@@ -68,5 +74,8 @@ plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
  labels="auto", label_size=12, align="v")
 # making rows and columns of different widths/heights
 plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+# aligning complex plots in a grid
+plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
+# can align top of plotting area as well as bottom
+plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 }
-

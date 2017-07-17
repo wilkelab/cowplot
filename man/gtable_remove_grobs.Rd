@@ -17,4 +17,3 @@ that should be removed}
 \description{
 Remove named elements from gtable
 }
-

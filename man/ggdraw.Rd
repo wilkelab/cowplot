@@ -16,4 +16,3 @@ ggdraw(plot = NULL, xlim = c(0, 1), ylim = c(0, 1))
 \description{
 Set up a drawing layer on top of a ggplot
 }
-
