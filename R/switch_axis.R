@@ -168,7 +168,7 @@ switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none'
   )
 
   # extract gtable
-  gt <- ggplot_to_gtable(plot)
+  gt <- plot_to_gtable(plot)
 
   # extract theme
   theme <- plot_theme(plot)

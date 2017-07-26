@@ -105,7 +105,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   num_plots <- length(plots)
 
   # convert list of plots into list of grobs / gtables
-  grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
+  grobs <- lapply(plots, function(x) {if (!is.null(x)) plot_to_gtable(x) else NULL})
 
 
   #aligning graphs.
@@ -261,6 +261,16 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 #' # can align top of plotting area as well as bottom
 #' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
+#'
+#' # other types of plots
+#' dev.new()
+#' plot(sqrt)
+#' p6 <- recordPlot()
+#' dev.off()
+#' p7 <- function() image(volcano)
+#' p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
+#'
+#' plot_grid(p1, p6, p7, p8)
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
