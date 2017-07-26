@@ -31,6 +31,7 @@
 #' for(i in 1:3){
 #'    plots[[i]]$widths <- aligned_widths[[i]]
 #' }
+#' @export
 
 align_margin <- function(sizes, margin_to_align) {
 
