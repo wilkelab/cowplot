@@ -11,8 +11,8 @@ plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   cols = NULL, rows = NULL)
 }
 \arguments{
-\item{...}{List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
-or arbitrary gtables.}
+\item{...}{List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
+the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},}
 
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
 individually as the first n arguments of the function plot_grid (see examples).}

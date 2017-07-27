@@ -212,8 +212,8 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
-#'              or arbitrary gtables.
+#' @param ... List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
+#'            the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
