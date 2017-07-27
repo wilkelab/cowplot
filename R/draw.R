@@ -4,9 +4,13 @@
 
 
 # ****** Internal functions used by drawing code ******
-ggplot_to_gtable <- function(plot)
-{
-  if (methods::is(plot, "ggplot")){
+plot_to_gtable <- function(plot){
+  if (methods::is(plot, "function") || methods::is(plot, "recordedplot")){
+    tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
+    u <- grid::unit(1, "null")
+    gtable::gtable_col(NULL, list(tree), u, u)
+  }
+  else if (methods::is(plot, "ggplot")){
     # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
     # in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
 
@@ -20,7 +24,10 @@ ggplot_to_gtable <- function(plot)
     plot
   }
   else{
-    stop('Argument needs to be of class "ggplot" or "gtable"' )
+    stop(
+      'Argument needs to be of class "ggplot", "gtable", "recordedplot", ',
+      'or a function that plots to an R graphics device when called, ',
+      'but is a ', class(plot))
   }
 }
 
@@ -203,7 +210,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param height Height of the plot.
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
-  g <- ggplot_to_gtable(plot) # convert to gtable if necessary
+  g <- plot_to_gtable(plot) # convert to gtable if necessary
   plot.grob <- grid::grobTree(g)
   annotation_custom(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height)
 }
@@ -239,7 +246,7 @@ ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
     labs(x=NULL, y=NULL) # and absolutely no axes
 
   if (!is.null(plot)){
-    g <- ggplot_to_gtable(plot) # convert to gtable if necessary
+    g <- plot_to_gtable(plot) # convert to gtable if necessary
     plot.grob <- grid::grobTree(g)
     p <- p + annotation_custom(plot.grob)
   }

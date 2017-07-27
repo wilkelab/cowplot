@@ -30,7 +30,7 @@ p1 <- qplot(1:10, 1:10)
 p2 <- qplot(1:10, (1:10)^2)
 p3 <- qplot(1:10, (1:10)^3)
 plots <- list(p1, p2, p3)
-grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
+grobs <- lapply(plots, ggplot2::ggplotGrob)
 plot_widths <- lapply(grobs, function(x){x$widths})
 # Aligning the Left margins of all plots
 aligned_widths <- align_margin(plot_widths, "first")

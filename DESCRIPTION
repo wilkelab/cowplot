@@ -16,6 +16,7 @@ Depends:
     ggplot2 (>= 2.1.0),
 Imports:
     grid (>= 3.0.0),
+    gridGraphics,
     gtable (>= 0.1.2),
     plyr (>= 1.8.2),
     grDevices,

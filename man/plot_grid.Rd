@@ -11,8 +11,8 @@ plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   cols = NULL, rows = NULL)
 }
 \arguments{
-\item{...}{List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
-or arbitrary gtables.}
+\item{...}{List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
+the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},}
 
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
 individually as the first n arguments of the function plot_grid (see examples).}
@@ -78,4 +78,14 @@ plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
 plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 # can align top of plotting area as well as bottom
 plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
+
+# other types of plots
+dev.new()
+plot(sqrt)
+p6 <- recordPlot()
+dev.off()
+p7 <- function() image(volcano)
+p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
+
+plot_grid(p1, p6, p7, p8)
 }

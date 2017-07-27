@@ -71,6 +71,24 @@ plot_grid(g.iris, g.mpg, labels = "AUTO", ncol = 1)
 
 Notice how now the y axes in plots A and B are located at exactly the same horizontal position.
 
+# Supported plot formats
+
+A few common plot formats are handled, which includes the classes `recordedplot` (returned by `recordPlot()`), `ggplot`, and `gtable`, the latter of which being easy to create from e.g. `grob` and `gTree` objects. 
+
+```{r, message=FALSE, fig.show='hide', collapse=TRUE}
+plot(sqrt)
+recordedplot <- recordPlot()
+```
+
+Since the code to create a `recordedPlot` object would ordinarily create a unwanted plot or file, a function creating a `graphics` based plot (`plot`, `image`, ...) can be passed as well:
+
+```{r, message=FALSE, fig.width=7, fig.height=5}
+plotfunc <- function() image(volcano)
+g_table <- gtable::gtable_col("circle", list(grid::circleGrob()))
+
+plot_grid(g.mpg, recordedplot, plotfunc, g_table)
+```
+
 # Fine-tuning the plot appearance
 
 You can adjust the label size via the `label_size` option. Default is 14, so larger values will make the labels larger and smaller values will make them smaller:

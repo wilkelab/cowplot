@@ -21,7 +21,7 @@
 #' p2 <- qplot(1:10, (1:10)^2)
 #' p3 <- qplot(1:10, (1:10)^3)
 #' plots <- list(p1, p2, p3)
-#' grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
+#' grobs <- lapply(plots, ggplot2::ggplotGrob)
 #' plot_widths <- lapply(grobs, function(x){x$widths})
 #' # Aligning the Left margins of all plots
 #' aligned_widths <- align_margin(plot_widths, "first")
@@ -31,6 +31,7 @@
 #' for(i in 1:3){
 #'    plots[[i]]$widths <- aligned_widths[[i]]
 #' }
+#' @export
 
 align_margin <- function(sizes, margin_to_align) {
 
@@ -104,7 +105,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   num_plots <- length(plots)
 
   # convert list of plots into list of grobs / gtables
-  grobs <- lapply(plots, function(x) {if (!is.null(x)) ggplot_to_gtable(x) else NULL})
+  grobs <- lapply(plots, function(x) {if (!is.null(x)) plot_to_gtable(x) else NULL})
 
 
   #aligning graphs.
@@ -211,8 +212,8 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid. The plots can be either ggplot2 plot objects
-#'              or arbitrary gtables.
+#' @param ... List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
+#'            the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
@@ -260,6 +261,16 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 #' # can align top of plotting area as well as bottom
 #' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
+#'
+#' # other types of plots
+#' dev.new()
+#' plot(sqrt)
+#' p6 <- recordPlot()
+#' dev.off()
+#' p7 <- function() image(volcano)
+#' p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
+#'
+#' plot_grid(p1, p6, p7, p8)
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
