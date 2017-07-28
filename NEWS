@@ -2,7 +2,7 @@ cowplot 0.7.0.9990
 ----------------------------------------------------------------
 - The function plot_grid can now also handle base-R (graphics) plots. Code provided by https://github.com/flying-sheep.
 - More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, https://github.com/sjfox.
-- Plot labels can now be styled. This
+- Plot labels can now be styled. In particular, they follow the theme settings, e.g. if the theme uses a different font than default. This closes issue #37.
 
 
 cowplot 0.7.0

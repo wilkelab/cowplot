@@ -6,9 +6,16 @@
 # ****** Internal functions used by drawing code ******
 plot_to_gtable <- function(plot){
   if (methods::is(plot, "function") || methods::is(plot, "recordedplot")){
-    tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
-    u <- grid::unit(1, "null")
-    gtable::gtable_col(NULL, list(tree), u, u)
+    if (!requireNamespace("gridGraphics", quietly = TRUE)){
+      warning("Package `gridGraphics` is required to handle base-R plots. Substituting empty plot.", call. = FALSE)
+      u <- grid::unit(1, "null")
+      gtable::gtable_col(NULL, list(grid::nullGrob()), u, u)
+    }
+    else {
+      tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
+      u <- grid::unit(1, "null")
+      gtable::gtable_col(NULL, list(tree), u, u)
+    }
   }
   else if (methods::is(plot, "ggplot")){
     # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
