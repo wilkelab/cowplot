@@ -12,7 +12,7 @@ plot_to_gtable <- function(plot){
       gtable::gtable_col(NULL, list(grid::nullGrob()), u, u)
     }
     else {
-      tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
+      tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot), wrap = TRUE)
       u <- grid::unit(1, "null")
       gtable::gtable_col(NULL, list(tree), u, u)
     }

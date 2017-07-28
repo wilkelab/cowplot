@@ -9,7 +9,7 @@ plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   ncol = NULL, rel_widths = 1, rel_heights = 1, labels = NULL,
   label_size = 14, label_fontfamily = NULL, label_fontface = "bold",
   label_colour = NULL, label_x = 0, label_y = 1, hjust = -0.5,
-  vjust = 1.5, cols = NULL, rows = NULL, scale = NULL)
+  vjust = 1.5, scale = 1, cols = NULL, rows = NULL)
 }
 \arguments{
 \item{...}{List of plots to be arranged into the grid. The plots can be objects of one of
@@ -60,11 +60,13 @@ to the right on the plot canvas. Default is -0.5.}
 \item{vjust}{Adjusts the vertical position of each label. More positive values move the label further
 down on the plot canvas. Default is 1.5.}
 
+\item{scale}{Individual number or vector of numbers between 0 and 1. Enables you to down-scale all or
+select plots. Usually it's preferable to set margins instead of using \code{scale}, but \code{scale} can
+have benefits when working with base-R plots.}
+
 \item{cols}{Deprecated. Use \code{ncol}.}
 
 \item{rows}{Deprecated. Use \code{nrow}.}
-
-\item{scale}{Deprecated.}
 }
 \description{
 Arrange multiple plots into a grid.
@@ -107,6 +109,6 @@ dev.off()
 p7 <- function() image(volcano)
 p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
 
-plot_grid(p1, p6, p7, p8)
+plot_grid(p1, p6, p7, p8, scale = c(1, .9, .9, .9))
 }
 }

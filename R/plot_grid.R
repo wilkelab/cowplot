@@ -244,9 +244,11 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #'              to the right on the plot canvas. Default is -0.5.
 #' @param vjust Adjusts the vertical position of each label. More positive values move the label further
 #'              down on the plot canvas. Default is 1.5.
+#' @param scale Individual number or vector of numbers between 0 and 1. Enables you to down-scale all or
+#'   select plots. Usually it's preferable to set margins instead of using `scale`, but `scale` can
+#'   have benefits when working with base-R plots.
 #' @param rows Deprecated. Use \code{nrow}.
 #' @param cols Deprecated. Use \code{ncol}.
-#' @param scale Deprecated.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -285,7 +287,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' p7 <- function() image(volcano)
 #' p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
 #'
-#' plot_grid(p1, p6, p7, p8)
+#' plot_grid(p1, p6, p7, p8, scale = c(1, .9, .9, .9))
 #' }
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
@@ -294,8 +296,8 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       rel_heights = 1, labels = NULL, label_size = 14,
                       label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
                       label_x = 0, label_y = 1,
-                      hjust = -0.5, vjust = 1.5,
-                      cols = NULL, rows = NULL, scale = NULL ) {
+                      hjust = -0.5, vjust = 1.5, scale = 1.,
+                      cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
@@ -309,8 +311,9 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
   }
 
-  if (!is.null(scale)){
-    warning("Argument 'scale' is deprecated. To increase margins between plots, adjust plot theme.")
+  scale <- rep_len(scale, num_plots)
+  if (sum(scale > 1) > 0 | sum(scale < 0) > 1){
+    stop("Argument 'scale' needs to be between 0 and 1.")
   }
 
   # internally, this function operates with variables cols and rows instead of ncol and nrow
@@ -364,13 +367,17 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
     x_delta <- x_deltas[col_count+1]
     y_delta <- y_deltas[row_count]
+    scaled_width <- scale[i]*x_delta
+    scaled_height <- scale[i]*y_delta
+    x_off <- (x_delta - scaled_width)/2
+    y_off <- (y_delta - scaled_height)/2
     x <- xs[col_count+1]
     y <- ys[row_count]
 
     # place the plot
     p_next <- grobs[[i]]
     if (!is.null(p_next)){
-      p <- p + draw_grob(grid::grobTree(p_next), x, y, x_delta, y_delta)
+      p <- p + draw_grob(grid::grobTree(p_next), x + x_off, y + y_off, scaled_width, scaled_height)
     }
     # place a label if we have one
     if (i <= length(labels)){
