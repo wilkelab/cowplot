@@ -15,9 +15,7 @@ theme_nothing(base_size = 14, base_family = "")
 The theme.
 }
 \description{
-The theme created by this function shows nothing but the plot panel. Since ggplot2 now
-provides \code{theme_void}, which serves the same purpose, this function is now just a
-wrapper around \code{theme_void}.
+The theme created by this function shows nothing but the plot panel.
 }
 \examples{
 qplot(1:10, (1:10)^2) + theme_nothing()

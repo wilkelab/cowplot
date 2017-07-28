@@ -1,3 +1,5 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
 ^cran-comments.md$
+^TODO$
+^vignettes/*\.png$

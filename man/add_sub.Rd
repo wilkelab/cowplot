@@ -42,7 +42,9 @@ A gtable object holding the modified plot.
 }
 \description{
 This function can add an arbitrary label or mathematical expression underneath
-the plot, similar to the \code{sub} parameter in base R.
+the plot, similar to the \code{sub} parameter in base R. It is mostly superseded now by the
+\code{caption} argument to \code{\link[ggplot2:labs]{ggplot2::labs()}}, and it is recommended to use \code{caption} instead of
+\code{add_sub()} whenever possible.
 }
 \details{
 The exact location where the
@@ -72,9 +74,9 @@ the plot panel.
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
 ggdraw(add_sub(p1, "This is an annotation.\\nAnnotations can span multiple lines."))
 
-# You can also do this repeatedly. Just be aware that new annotations are added above previous ones:
-p2 <- add_sub(p1, expression(paste(a^2+b^2, " = ", c^2)))
-p3 <- add_sub(p2, "This formula has no relevance here:", y  = 0, vjust = 0)
+# You can also do this repeatedly.
+p2 <- add_sub(p1, "This formula has no relevance here:", y  = 0, vjust = 0)
+p3 <- add_sub(p2, expression(paste(a^2+b^2, " = ", c^2)))
 ggdraw(p3)
 
 #This code also works with faceted plots:

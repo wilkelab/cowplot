@@ -1,7 +1,9 @@
 #' Add annotation underneath a plot
 #'
 #' This function can add an arbitrary label or mathematical expression underneath
-#' the plot, similar to the \code{sub} parameter in base R.
+#' the plot, similar to the \code{sub} parameter in base R. It is mostly superseded now by the
+#' `caption` argument to [ggplot2::labs()], and it is recommended to use `caption` instead of
+#' `add_sub()` whenever possible.
 #'
 #' The exact location where the
 #' label is placed is controlled by the parameters \code{x}, \code{y}, \code{hjust}, and
@@ -46,9 +48,9 @@
 #' p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
 #' ggdraw(add_sub(p1, "This is an annotation.\nAnnotations can span multiple lines."))
 #'
-#' # You can also do this repeatedly. Just be aware that new annotations are added above previous ones:
-#' p2 <- add_sub(p1, expression(paste(a^2+b^2, " = ", c^2)))
-#' p3 <- add_sub(p2, "This formula has no relevance here:", y  = 0, vjust = 0)
+#' # You can also do this repeatedly.
+#' p2 <- add_sub(p1, "This formula has no relevance here:", y  = 0, vjust = 0)
+#' p3 <- add_sub(p2, expression(paste(a^2+b^2, " = ", c^2)))
 #' ggdraw(p3)
 #'
 #' #This code also works with faceted plots:

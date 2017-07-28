@@ -1,11 +1,12 @@
+## ----message=FALSE-------------------------------------------------------
+library(ggplot2)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size = 2.5)
+
 ## ----eval=FALSE----------------------------------------------------------
+#  library(cowplot)
 #  ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 #     geom_point(size = 2.5)
-
-## ----echo=FALSE, message=FALSE-------------------------------------------
-require(ggplot2)
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size = 2.5) + theme_gray()
 
 ## ----echo=FALSE, message=FALSE-------------------------------------------
 require(cowplot)
@@ -15,13 +16,26 @@ plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 plot.mpg
 
 ## ----eval=FALSE----------------------------------------------------------
-#  require(cowplot)
+#  library(cowplot)
 #  plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
 #    geom_point(size=2.5)
 #  # use save_plot() instead of ggsave() when using cowplot
-#  save_plot("mpg.pdf", plot.mpg,
+#  save_plot("mpg.png", plot.mpg,
 #            base_aspect_ratio = 1.3 # make room for figure legend
-#            )
+#  )
+
+## ----echo=FALSE, message=FALSE-------------------------------------------
+theme_set(theme_cowplot()) # switch to default font size for figure generation
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+  geom_point(size=2.5)
+# use save_plot() instead of ggsave() when using cowplot
+save_plot("mpg.png", plot.mpg,
+          base_aspect_ratio = 1.3 # make room for figure legend
+)
+theme_set(theme_cowplot(font_size=12)) # switch back for online figures
+
+## ----echo=FALSE, out.width = "60%"---------------------------------------
+knitr::include_graphics("mpg.png")
 
 ## ----message=FALSE-------------------------------------------------------
 plot.mpg + background_grid(major = "xy", minor = "none")
@@ -53,12 +67,27 @@ plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), nrow = 2, align = "v")
 ## ----eval=FALSE----------------------------------------------------------
 #  plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
 #                        labels=c("A", "B", "C", "D"), ncol = 2)
-#  save_plot("plot2by2.pdf", plot2by2,
+#  save_plot("plot2by2.png", plot2by2,
 #            ncol = 2, # we're saving a grid plot of 2 columns
 #            nrow = 2, # and 2 rows
 #            # each individual subplot should have an aspect ratio of 1.3
 #            base_aspect_ratio = 1.3
 #            )
+
+## ----echo=FALSE, message=FALSE-------------------------------------------
+theme_set(theme_cowplot()) # switch to default font size for figure generation
+plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
+                      labels=c("A", "B", "C", "D"), ncol = 2)
+save_plot("plot2by2.png", plot2by2,
+          ncol = 2, # we're saving a grid plot of 2 columns
+          nrow = 2, # and 2 rows
+          # each individual subplot should have an aspect ratio of 1.3
+          base_aspect_ratio = 1.3
+          )
+theme_set(theme_cowplot(font_size=12)) # switch back for online figures
+
+## ----echo=FALSE, out.width = "100%"--------------------------------------
+knitr::include_graphics("plot2by2.png")
 
 ## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 
@@ -71,10 +100,10 @@ spiral <- data.frame(x = .45+.55*t*cos(t*15), y = .55-.55*t*sin(t*15), t)
 ggdraw(plot.mpg) + 
   geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .4)
 
-## ----message=FALSE, fig.show="hold"--------------------------------------
+## ----message=FALSE, warning=FALSE, fig.show="hold"-----------------------
 boxes <- data.frame(
-  x = sample((0:36)/40, 40, replace = TRUE),
-  y = sample((0:32)/40, 40, replace = TRUE)
+  x = sample((0:33)/40, 40, replace = TRUE),
+  y = sample((0:33)/40, 40, replace = TRUE)
 )
 # plot on top of annotations
 ggdraw() + 
@@ -90,27 +119,12 @@ ggdraw(plot.mpg) +
   draw_label("Plot is underneath the grey boxes", x = 1, y = 1,
             vjust = 1, hjust = 1, size = 10, fontface = 'bold')
 
-## ----message=FALSE, fig.width=7, fig.height=5----------------------------
-plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
-  background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
-  panel_border() # and a border around each panel
+## ----message=FALSE, fig.width=7, fig.height=6----------------------------
 # plot.mpg and plot.diamonds were defined earlier
+library(viridis)
 ggdraw() +
-  draw_plot(plot.iris, 0, .5, 1, .5) +
-  draw_plot(plot.mpg, 0, 0, .5, .5) +
-  draw_plot(plot.diamonds, .5, 0, .5, .5) +
-  draw_plot_label(c("A", "B", "C"), c(0, 0, 0.5), c(1, 0.5, 0.5), size = 15)
-
-## ----eval=FALSE, echo=FALSE, message=FALSE, fig.width=7, fig.height=5----
-#  # Of course, we can also go crazy:
-#  ggdraw() +
-#    #geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
-#    #          colour = "gray60", fill = "red", alpha=.03) +
-#    geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .4) +
-#    draw_plot(plot.diamonds, -.05, -.1, .55, .55) +
-#    draw_plot(plot.diamonds, .65, .4, .5, .5) +
-#    draw_plot(plot.mpg, .3, .3, .4, .4) +
-#    draw_plot(plot.iris, 0, .7, .7, .35 ) +
-#    draw_plot(plot.iris, .45, .0, .6, .3 )
+  draw_plot(plot.diamonds + theme(legend.justification = "bottom"), 0, 0, 1, 1) +
+  draw_plot(plot.mpg + scale_color_viridis(discrete = TRUE) + 
+              theme(legend.justification = "top"), 0.5, 0.52, 0.5, 0.4) +
+  draw_plot_label(c("A", "B"), c(0, 0.5), c(1, 0.92), size = 15)
 

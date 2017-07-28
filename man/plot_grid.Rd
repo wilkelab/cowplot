@@ -74,7 +74,9 @@ p1 <- qplot(1:10, 1:10)
 p2 <- qplot(1:10, (1:10)^2)
 p3 <- qplot(1:10, (1:10)^3)
 p4 <- qplot(1:10, (1:10)^4)
-p5 <- ggplot(mpg, aes(as.factor(year), hwy)) + geom_boxplot() + facet_wrap(~class, scales = "free_y")
+p5 <- ggplot(mpg, aes(as.factor(year), hwy)) +
+        geom_boxplot() +
+        facet_wrap(~class, scales = "free_y")
 # simple grid
 plot_grid(p1, p2, p3, p4)
 
@@ -96,7 +98,7 @@ plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 
 # can align top of plotting area as well as bottom
 plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
-
+\donttest{
 # other types of plots not generated with ggplot
 dev.new()
 plot(sqrt)
@@ -106,4 +108,5 @@ p7 <- function() image(volcano)
 p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
 
 plot_grid(p1, p6, p7, p8)
+}
 }

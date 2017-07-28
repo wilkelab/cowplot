@@ -18,18 +18,20 @@ The **cowplot** source code is available on github: [https://github.com/wilkelab
 
 # Plot design
 
-The default **ggplot2** design is not particularly elegant, in my opinion. In particular, I don't like the gray background grid. I feel it often distracts from the data. For example, see this **ggplot2** visualization of the `mpg` data set:
-```{r eval=FALSE}
+I don't find the default **ggplot2** design particularly elegant. In particular, I don't like the gray background grid. I feel it often distracts from the data. For example, see this **ggplot2** visualization of the `mpg` data set:
+```{r message=FALSE}
+library(ggplot2)
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
    geom_point(size = 2.5)
 ```
-```{r echo=FALSE, message=FALSE}
-require(ggplot2)
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size = 2.5) + theme_gray()
-```
 
 I prefer a clean and sparse layout for publication. I also prefer the approach of building a graph by adding elements rather than taking them away. Therefore, the default design of **cowplot** has no grid at all. It looks similar to **ggplot2**'s `theme_classic()`, but there are a few important but subtle differences, mostly with respect to font sizes.
+
+```{r eval=FALSE}
+library(cowplot)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size = 2.5)
+```
 
 ```{r echo=FALSE, message=FALSE}
 require(cowplot)
@@ -40,14 +42,32 @@ plot.mpg
 ```
 
 In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling:
+
 ```{r eval=FALSE}
-require(cowplot)
+library(cowplot)
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
 # use save_plot() instead of ggsave() when using cowplot
-save_plot("mpg.pdf", plot.mpg,
+save_plot("mpg.png", plot.mpg,
           base_aspect_ratio = 1.3 # make room for figure legend
-          )
+)
+```
+```{r echo=FALSE, message=FALSE}
+theme_set(theme_cowplot()) # switch to default font size for figure generation
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+  geom_point(size=2.5)
+# use save_plot() instead of ggsave() when using cowplot
+save_plot("mpg.png", plot.mpg,
+          base_aspect_ratio = 1.3 # make room for figure legend
+)
+theme_set(theme_cowplot(font_size=12)) # switch back for online figures
+```
+
+
+The resulting figure:
+
+```{r echo=FALSE, out.width = "60%"}
+knitr::include_graphics("mpg.png")
 ```
 
 By default, **cowplot** disables grid lines on the plot. In many cases, this is the cleanest and most elegant way to display the data. However, sometimes gridlines may be useful, and thus **cowplot** provides a simple way of adding gridlines, via the function `background_grid()`:
@@ -57,7 +77,7 @@ plot.mpg + background_grid(major = "xy", minor = "none")
 
 While the same result could be obtained using the function `theme()`, the function `background_grid()` makes the most commonly used option easily accessible. See the reference documentation for details.
 
-Note that if you ever want to use the default **ggplot2** theme while using the **cowplot** package, simply add `theme_gray()` to your plot or call `theme_set(theme_gray())` to set this theme for all subsequent plots.
+Note that if you ever want to use the default **ggplot2** theme while using the **cowplot** package, simply add `theme_gray()` to your plot or call `theme_set(theme_gray())` to set this theme for all subsequent plots:
 ```{r eval=FALSE}
 plot.mpg + theme_gray() # create plot with default ggplot2 theme
 theme_set(theme_gray()) # switch to default ggplot2 theme for good
@@ -66,7 +86,7 @@ theme_set(theme_gray()) # switch to default ggplot2 theme for good
 
 # Arranging graphs into a grid
 
-A major problem with **ggplot2** is that it is not particularly easy to add labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and while it's generally easy to modify one or the other we cannot easily change both. To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. This concept will be discussed in detail in the next section. For now, let's discuss how this capability allows us to make nice compound plots.
+One limitation of **ggplot2** is that it doesn't make it easy to add labels and other annotations to a plot. **ggplot2** strictly separates the *plot panel* (the part inside the axes) from the rest of the plot, and while it's generally straightforward to modify one or the other we cannot easily change both. To solve this issue in a generic way, **cowplot** implements a generic drawing layer on top of **ggplot2**. In this drawing layer, you can add arbitrary graphical elements on top of a graph. This concept will be discussed in detail in the next section. For now, let's discuss how this capability allows us to make nice compound plots.
 
 The need for compound plots arises frequently when writing scientific publications. For example, let's assume we have created the following two plots, and we would like to combine them into a two-part figure with parts A and B. In our case, the plots are the following:
 ```{r message=FALSE}
@@ -87,7 +107,6 @@ By default, the plots are simply placed into the grid as they are, and so the ax
 ```{r message=FALSE, fig.width=7, fig.height=2.5}
 plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), align = "h")
 ```
-Note that it is only possible to align graphs with the same internal structure. What this means is that you cannot align a faceted and a regular plot. You can align two faceted plots, but only if they have the same number of facets in the direction orthogonal to your alignment direction.
 
 The function `plot_grid()` will attempt to achieve a reasonable layout of the plots provided. However, you can precisely manipulate the layout by specifying the number of rows or columns or both:
 ```{r message=FALSE, fig.width=7, fig.height=5}
@@ -103,15 +122,32 @@ about the grid layout. For example, if we want to save a 2-by-2 figure, we might
 ```{r eval=FALSE}
 plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
                       labels=c("A", "B", "C", "D"), ncol = 2)
-save_plot("plot2by2.pdf", plot2by2,
+save_plot("plot2by2.png", plot2by2,
           ncol = 2, # we're saving a grid plot of 2 columns
           nrow = 2, # and 2 rows
           # each individual subplot should have an aspect ratio of 1.3
           base_aspect_ratio = 1.3
           )
 ```
-The advantage of saving figures in this way is that you can first develop the code for individual figures, and once each individual figure looks the way you want it to you can easily combine the figures into a grid. `save_plot()` will make sure to scale the overall figure size such that the individual figures look the way they do when saved individually (as long as they all have the same `base_aspect_ratio`).
+```{r echo=FALSE, message=FALSE}
+theme_set(theme_cowplot()) # switch to default font size for figure generation
+plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
+                      labels=c("A", "B", "C", "D"), ncol = 2)
+save_plot("plot2by2.png", plot2by2,
+          ncol = 2, # we're saving a grid plot of 2 columns
+          nrow = 2, # and 2 rows
+          # each individual subplot should have an aspect ratio of 1.3
+          base_aspect_ratio = 1.3
+          )
+theme_set(theme_cowplot(font_size=12)) # switch back for online figures
+```
 
+The resulting figure:
+```{r echo=FALSE, out.width = "100%"}
+knitr::include_graphics("plot2by2.png")
+```
+
+The advantage of saving figures in this way is that you can first develop the code for individual figures, and once each individual figure looks the way you want it to you can easily combine the figures into a grid. `save_plot()` will make sure to scale the overall figure size such that the individual figures look the way they do when saved individually (as long as they all have the same `base_aspect_ratio`).
 
 
 # Generic plot annotations
@@ -136,10 +172,10 @@ ggdraw(plot.mpg) +
 I don't know if this is useful in any way, but it shows the power of the approach.
 
 Importantly, though, in all cases discussed so far, the main plot was below all other elements. Sometimes, you might want the plot on top. In this case, you can initialize an empty drawing canvas by calling `ggdraw()` without any parameters. You then place the plot by calling `draw_plot()`. Notice the difference in the two plots produced by the following code:
-```{r message=FALSE, fig.show="hold"}
+```{r message=FALSE, warning=FALSE, fig.show="hold"}
 boxes <- data.frame(
-  x = sample((0:36)/40, 40, replace = TRUE),
-  y = sample((0:32)/40, 40, replace = TRUE)
+  x = sample((0:33)/40, 40, replace = TRUE),
+  y = sample((0:33)/40, 40, replace = TRUE)
 )
 # plot on top of annotations
 ggdraw() + 
@@ -158,31 +194,14 @@ ggdraw(plot.mpg) +
 
 Note that placing a plot on top of annotations only makes sense if the plot background is transparent. This is one of the main differences between `theme_cowplot()` and `theme_classic()`. If you tried the same example with `theme_classic()`, the gray boxes underneath the plot would not show.
 
-Finally, the `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with one sub-plot spanning the entire width of the figure and two other figures using up half of the figure width:
-```{r message=FALSE, fig.width=7, fig.height=5}
-plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) + 
-  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
-  background_grid(major = 'y', minor = "none") + # add thin horizontal lines 
-  panel_border() # and a border around each panel
+Finally, the `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with an inset plotted inside a larger graph.
+```{r message=FALSE, fig.width=7, fig.height=6}
 # plot.mpg and plot.diamonds were defined earlier
+library(viridis)
 ggdraw() +
-  draw_plot(plot.iris, 0, .5, 1, .5) +
-  draw_plot(plot.mpg, 0, 0, .5, .5) +
-  draw_plot(plot.diamonds, .5, 0, .5, .5) +
-  draw_plot_label(c("A", "B", "C"), c(0, 0, 0.5), c(1, 0.5, 0.5), size = 15)
+  draw_plot(plot.diamonds + theme(legend.justification = "bottom"), 0, 0, 1, 1) +
+  draw_plot(plot.mpg + scale_color_viridis(discrete = TRUE) + 
+              theme(legend.justification = "top"), 0.5, 0.52, 0.5, 0.4) +
+  draw_plot_label(c("A", "B"), c(0, 0.5), c(1, 0.92), size = 15)
 ```
-The functions `background_grid()` and `panel_border()` are convenience functions defined by **cowplot** to save some typing when manipulating the background grid and panel border. 
 
-
-```{r eval=FALSE, echo=FALSE, message=FALSE, fig.width=7, fig.height=5}
-# Of course, we can also go crazy:
-ggdraw() +
-  #geom_rect(data = boxes, aes(xmin = x, xmax = x + .15, ymin = y, ymax = y + .15),
-  #          colour = "gray60", fill = "red", alpha=.03) +
-  geom_path(data = spiral, aes(x = x, y = y, colour = t), size = 6, alpha = .4) +
-  draw_plot(plot.diamonds, -.05, -.1, .55, .55) +
-  draw_plot(plot.diamonds, .65, .4, .5, .5) +
-  draw_plot(plot.mpg, .3, .3, .4, .4) +
-  draw_plot(plot.iris, 0, .7, .7, .35 ) +
-  draw_plot(plot.iris, .45, .0, .6, .3 )
-```

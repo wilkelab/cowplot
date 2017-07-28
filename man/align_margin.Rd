@@ -16,10 +16,10 @@ If vertically aligning, "first" aligns left margin and "last" aligns right margi
 }
 \description{
 The function aligns the dimensions of multiple plots along a specified axis, and is solely a helper function
-for \code{align_plots()} to reduce redundancy. Each element of the \code{sizes}
+for \code{\link[=align_plots]{align_plots()}} to reduce redundancy. Each element of the \code{sizes}
 list corresponds to the dimensions of a plot being aligned. They should be vectors created from calls to
 \code{grob$heights} or \code{grob$widths} depending on whether you are aligning vertically or horizontally.
-The list of dimensions is generated automatically by the \code{align_plots} function, but see examples.
+The list of dimensions is generated automatically by the \code{\link[=align_plots]{align_plots()}} function, but see examples.
 If the same number of elements exist for all plots for the specified
 margin, the function will align individual elements on the margin. Otherwise, it aligns the plot by adding
 white space to plot margins so that all margins have the same dimensions.

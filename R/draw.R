@@ -193,7 +193,7 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 #' # Labeling an individual plot
 #' ggdraw(p2) + draw_figure_label(label = "Figure 1", position = "bottom.right", size = 10)
 #'
-#' @author Ulrik Stervbo (ulrik.stervbo [AT] gmail.com)
+#' @author Ulrik Stervbo (ulrik.stervbo @ gmail.com)
 #' @export
 draw_figure_label <- function(label, position = c("top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right"), size, fontface, ...){
   # Get the position
@@ -254,8 +254,8 @@ draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1){
 #' Set up a drawing layer on top of a ggplot
 #' @param plot The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary gtable,
 #'   or a recorded base-R plot, as in [plot_grid()].
-#' @param xlim The x-axis limits for the drawing layer (default is [0, 1]).
-#' @param ylim The y-axis limits for the drawing layer (default is [0, 1]).
+#' @param xlim The x-axis limits for the drawing layer.
+#' @param ylim The y-axis limits for the drawing layer.
 #' @export
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
 

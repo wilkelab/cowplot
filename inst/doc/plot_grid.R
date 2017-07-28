@@ -42,8 +42,27 @@ g.mpg$widths[1:3] <- max.widths # assign max widths to mpg gtable
 # plot_grid() can work directly with gtables, so this works
 plot_grid(g.iris, g.mpg, labels = "AUTO", ncol = 1)
 
+## ---- message=FALSE, results="hold", collapse=TRUE-----------------------
+plot(sqrt) # plot the square root function
+recordedplot <- recordPlot() # record the previous plot
+
+## ---- message=FALSE------------------------------------------------------
+plotfunc <- function() image(volcano) # define the function
+plotfunc() # call the function to make the plot
+
+## ---- message=FALSE------------------------------------------------------
+g_table <- gtable::gtable_col("circle", list(grid::circleGrob()))
+ggdraw(g_table)
+
+## ---- message=FALSE, fig.width=7, fig.height=5---------------------------
+plot_grid(plot.mpg, recordedplot, plotfunc, g_table, labels = "AUTO", hjust = 0, vjust = 1)
+
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12)
+
+## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
+plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_fontfamily = "serif",
+          label_fontface = "plain", label_colour = "blue")
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12,
@@ -51,9 +70,6 @@ plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', rel_widths = c(1, 1.3))
-
-## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
-plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', rel_widths = c(1, 1.3), scale = 0.95)
 
 ## ---- message=FALSE, fig.width=7.65, fig.height=5.1----------------------
 bottom_row <- plot_grid(plot.mpg, plot.diamonds, labels = c('B', 'C'), align = 'h', rel_widths = c(1, 1.3))

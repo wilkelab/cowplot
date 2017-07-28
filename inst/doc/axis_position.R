@@ -9,7 +9,7 @@ if (packageVersion("ggplot2")>"2.1.0")
   p1 + theme_gray() + scale_y_continuous(position = "right")
 
 if (packageVersion("ggplot2")>"2.1.0")
-  p1 + theme_bw() + scale_x_continuous(sec.axis = dup_axis(name = waiver()))
+  p1 + theme_bw() + scale_x_continuous(sec.axis = dup_axis())
 
 if (packageVersion("ggplot2")>"2.1.0")
   p1 + scale_x_continuous(sec.axis = dup_axis()) + scale_y_continuous(sec.axis = dup_axis())
@@ -29,7 +29,7 @@ ggplot(mtcars2, aes(x = name, y = mpg, fill = name)) +
   geom_bar(stat = 'identity', position = "identity") + 
   scale_y_reverse() +
   guides(fill = FALSE) +
-  theme(axis.text.x = element_text(angle = 90, vjust=0.5, hjust=0)) +
+  theme(axis.text.x.top = element_text(angle = 90, vjust=0.5, hjust=0)) +
   scale_x_discrete(position = "top")
 }
 
