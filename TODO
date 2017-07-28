@@ -1,6 +1,6 @@
-Things that should be done before the next release
-==================================================
-- write vignette for aligning plots
+Bugs and problems
+=============================
+- reproducing base-R plots in plot_grid or ggdraw still has some issues.
 
 
 Ideas for further development
