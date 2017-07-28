@@ -222,7 +222,8 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'
 #' Places a plot somewhere onto the drawing canvas. By default, coordinates run from
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
-#' @param plot The plot to place. Can be either a ggplot2 plot or an arbitrary gtable.
+#' @param plot The plot to place. Can be a ggplot2 plot, an arbitrary gtable,
+#'   or a recorded base-R plot, as in [plot_grid()].
 #' @param x The x location of the lower left corner of the plot.
 #' @param y The y location of the lower left corner of the plot.
 #' @param width Width of the plot.
@@ -251,7 +252,8 @@ draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1){
 
 
 #' Set up a drawing layer on top of a ggplot
-#' @param plot The plot to use as a starting point. Can be either a ggplot2 plot or an arbitrary gtable.
+#' @param plot The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary gtable,
+#'   or a recorded base-R plot, as in [plot_grid()].
 #' @param xlim The x-axis limits for the drawing layer (default is [0, 1]).
 #' @param ylim The y-axis limits for the drawing layer (default is [0, 1]).
 #' @export

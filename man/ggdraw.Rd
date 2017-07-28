@@ -7,7 +7,8 @@
 ggdraw(plot = NULL, xlim = c(0, 1), ylim = c(0, 1))
 }
 \arguments{
-\item{plot}{The plot to use as a starting point. Can be either a ggplot2 plot or an arbitrary gtable.}
+\item{plot}{The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary gtable,
+or a recorded base-R plot, as in \code{\link[=plot_grid]{plot_grid()}}.}
 
 \item{xlim}{The x-axis limits for the drawing layer (default is \link{0, 1}).}
 

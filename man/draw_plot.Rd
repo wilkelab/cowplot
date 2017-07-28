@@ -7,7 +7,8 @@
 draw_plot(plot, x = 0, y = 0, width = 1, height = 1)
 }
 \arguments{
-\item{plot}{The plot to place. Can be either a ggplot2 plot or an arbitrary gtable.}
+\item{plot}{The plot to place. Can be a ggplot2 plot, an arbitrary gtable,
+or a recorded base-R plot, as in \code{\link[=plot_grid]{plot_grid()}}.}
 
 \item{x}{The x location of the lower left corner of the plot.}
 

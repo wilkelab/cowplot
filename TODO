@@ -1,6 +1,5 @@
 Things that should be done before the next release
 ==================================================
-- permanently fix issue #32, https://github.com/wilkelab/cowplot/issues/32
 - implement workaround for issue #60 and related ones,
 https://github.com/wilkelab/cowplot/issues/60
 - write vignette for aligning plots

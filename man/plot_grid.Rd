@@ -6,13 +6,15 @@
 \usage{
 plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"), nrow = NULL,
-  ncol = NULL, scale = NULL, rel_widths = 1, rel_heights = 1,
-  labels = NULL, label_size = 14, hjust = -0.5, vjust = 1.5,
-  cols = NULL, rows = NULL)
+  ncol = NULL, rel_widths = 1, rel_heights = 1, labels = NULL,
+  label_size = 14, label_fontfamily = NULL, label_fontface = "bold",
+  label_colour = NULL, label_x = 0, label_y = 1, hjust = -0.5,
+  vjust = 1.5, cols = NULL, rows = NULL, scale = NULL)
 }
 \arguments{
-\item{...}{List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
-the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},}
+\item{...}{List of plots to be arranged into the grid. The plots can be objects of one of
+the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}},
+\code{\link[gtable]{gtable}}, or alternative can be a function creating a plot when called (see examples).}
 
 \item{plotlist}{(optional) List of plots to display. Alternatively, the plots can be provided
 individually as the first n arguments of the function plot_grid (see examples).}
@@ -22,13 +24,11 @@ vertically ("v") aligned. Options are "none" (default), "hv" (align in both dire
 
 \item{axis}{(optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
 margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins).
-Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired.}
+Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired. See \code{\link[=align_plots]{align_plots()}} for details.}
 
 \item{nrow}{(optional) Number of rows in the plot grid.}
 
 \item{ncol}{(optional) Number of columns in the plot grid.}
-
-\item{scale}{(optional) Deprecated.}
 
 \item{rel_widths}{(optional) Numerical vector of relative columns widths. For example, in a two-column
 grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
@@ -42,15 +42,29 @@ auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-c
 
 \item{label_size}{(optional) Numerical value indicating the label size. Default is 14.}
 
+\item{label_fontfamily}{(optional) Font family of the plot labels. If not provided, is taken from the current theme.}
+
+\item{label_fontface}{(optional) Font face of the plot labels. Default is "bold".}
+
+\item{label_colour}{(optional) Color of the plot labels. If not provided, is taken from the current theme.}
+
+\item{label_x}{(optional) Vector of x positions for plot labels, relative to each subplot.
+Defaults to 0 for all labels. (Each label is placed all the way to the left of each plot.)}
+
+\item{label_y}{(optional) Vector of y positions for plot labels, relative to each subplot.
+Defaults to 1 for all labels. (Each label is placed all the way to the top of each plot.)}
+
 \item{hjust}{Adjusts the horizontal position of each label. More negative values move the label further
 to the right on the plot canvas. Default is -0.5.}
 
 \item{vjust}{Adjusts the vertical position of each label. More positive values move the label further
 down on the plot canvas. Default is 1.5.}
 
-\item{cols}{Deprecated. Like \code{ncol}.}
+\item{cols}{Deprecated. Use \code{ncol}.}
 
-\item{rows}{Deprecated. Like \code{nrow}.}
+\item{rows}{Deprecated. Use \code{nrow}.}
+
+\item{scale}{Deprecated.}
 }
 \description{
 Arrange multiple plots into a grid.
@@ -63,17 +77,23 @@ p4 <- qplot(1:10, (1:10)^4)
 p5 <- ggplot(mpg, aes(as.factor(year), hwy)) + geom_boxplot() + facet_wrap(~class, scales = "free_y")
 # simple grid
 plot_grid(p1, p2, p3, p4)
+
 # simple grid with labels and aligned plots
 plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
+
 # manually setting the number of rows, auto-generate upper-case labels
 plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
+
 # missing plots in some grid locations, auto-generate lower-case labels
 plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
  labels="auto", label_size=12, align="v")
+
 # making rows and columns of different widths/heights
 plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+
 # aligning complex plots in a grid
 plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
+
 # can align top of plotting area as well as bottom
 plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 

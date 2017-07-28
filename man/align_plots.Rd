@@ -21,11 +21,12 @@ margins. Options are \code{axis="none"} (default), or a string of any combinatio
 (e.g. \code{axis="tblr"} or \code{axis="rlbt"} for aligning all margins)}
 }
 \description{
-Align the plot area of multiple plots. Takes a list of plots and then aligning parameters as inputs.
-Can choose between horizontal and/or vertical alignment. In the simplest case the function will align all
-elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to \code{align_margin()}).
-This function is called by the \code{plot_grid} function if alignment is desired, and is usually not called manually, though manual
-calling of the function is useful if plots with multiple y-axes are desired (see example).
+Align the plot area of multiple plots. Inputs are a list of plots plus alignment parameters.
+Horizontal or vertical alignment or both are possible. In the simplest case the function will align all
+elements of each plot, but it can handle more complex cases as long as the axis parameter is defined. In this case,
+alignment is done through a call to \code{\link[=align_margin]{align_margin()}}. The function \code{align_plots} is called by the \code{\link[=plot_grid]{plot_grid()}} function
+and is usually not called directly, though direct calling of the function is useful if plots with
+multiple y-axes are desired (see example).
 }
 \examples{
 p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +

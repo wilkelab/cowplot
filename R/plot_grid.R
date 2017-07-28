@@ -2,10 +2,10 @@
 #' Align multiple plots along a specified margin
 #'
 #' The function aligns the dimensions of multiple plots along a specified axis, and is solely a helper function
-#' for \code{align_plots()} to reduce redundancy. Each element of the \code{sizes}
+#' for [align_plots()] to reduce redundancy. Each element of the \code{sizes}
 #' list corresponds to the dimensions of a plot being aligned. They should be vectors created from calls to
 #' \code{grob$heights} or \code{grob$widths} depending on whether you are aligning vertically or horizontally.
-#' The list of dimensions is generated automatically by the \code{align_plots} function, but see examples.
+#' The list of dimensions is generated automatically by the [align_plots()] function, but see examples.
 #' If the same number of elements exist for all plots for the specified
 #' margin, the function will align individual elements on the margin. Otherwise, it aligns the plot by adding
 #' white space to plot margins so that all margins have the same dimensions.
@@ -73,11 +73,12 @@ align_margin <- function(sizes, margin_to_align) {
 
 #' Align multiple plots vertically and/or horizontally
 #'
-#' Align the plot area of multiple plots. Takes a list of plots and then aligning parameters as inputs.
-#' Can choose between horizontal and/or vertical alignment. In the simplest case the function will align all
-#' elements of each plot, but can handle more complex cases as long as the axis parameter is defined (done through a call to \code{align_margin()}).
-#' This function is called by the \code{plot_grid} function if alignment is desired, and is usually not called manually, though manual
-#' calling of the function is useful if plots with multiple y-axes are desired (see example).
+#' Align the plot area of multiple plots. Inputs are a list of plots plus alignment parameters.
+#' Horizontal or vertical alignment or both are possible. In the simplest case the function will align all
+#' elements of each plot, but it can handle more complex cases as long as the axis parameter is defined. In this case,
+#' alignment is done through a call to [align_margin()]. The function `align_plots` is called by the [plot_grid()] function
+#' and is usually not called directly, though direct calling of the function is useful if plots with
+#' multiple y-axes are desired (see example).
 #'
 #' @param ... List of plots to be aligned.
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
@@ -212,15 +213,16 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' Arrange multiple plots into a grid
 #'
 #' Arrange multiple plots into a grid.
-#' @param ... List of plots to be arranged into the grid. The plots can be a function creating a plot when called, or objects of one of
-#'            the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}}, \code{\link[gtable]{gtable}},
+#' @param ... List of plots to be arranged into the grid. The plots can be objects of one of
+#'            the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}},
+#'            \code{\link[gtable]{gtable}}, or alternative can be a function creating a plot when called (see examples).
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or
 #'  vertically ("v") aligned. Options are "none" (default), "hv" (align in both directions), "h", and "v".
 #' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
 #'  margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins).
-#'  Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired.
+#'  Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired. See [align_plots()] for details.
 #' @param nrow (optional) Number of rows in the plot grid.
 #' @param ncol (optional) Number of columns in the plot grid.
 #' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
@@ -234,12 +236,16 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' @param label_fontfamily (optional) Font family of the plot labels. If not provided, is taken from the current theme.
 #' @param label_fontface (optional) Font face of the plot labels. Default is "bold".
 #' @param label_colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
+#' @param label_x (optional) Vector of x positions for plot labels, relative to each subplot.
+#'   Defaults to 0 for all labels. (Each label is placed all the way to the left of each plot.)
+#' @param label_y (optional) Vector of y positions for plot labels, relative to each subplot.
+#'   Defaults to 1 for all labels. (Each label is placed all the way to the top of each plot.)
 #' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
 #'              to the right on the plot canvas. Default is -0.5.
 #' @param vjust Adjusts the vertical position of each label. More positive values move the label further
 #'              down on the plot canvas. Default is 1.5.
-#' @param rows Deprecated. Like \code{nrow}.
-#' @param cols Deprecated. Like \code{ncol}.
+#' @param rows Deprecated. Use \code{nrow}.
+#' @param cols Deprecated. Use \code{ncol}.
 #' @param scale Deprecated.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
@@ -249,17 +255,23 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' p5 <- ggplot(mpg, aes(as.factor(year), hwy)) + geom_boxplot() + facet_wrap(~class, scales = "free_y")
 #' # simple grid
 #' plot_grid(p1, p2, p3, p4)
+#'
 #' # simple grid with labels and aligned plots
 #' plot_grid(p1, p2, p3, p4, labels=c('A', 'B', 'C', 'D'), align="hv")
+#'
 #' # manually setting the number of rows, auto-generate upper-case labels
 #' plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
+#'
 #' # missing plots in some grid locations, auto-generate lower-case labels
 #' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
 #'  labels="auto", label_size=12, align="v")
+#'
 #' # making rows and columns of different widths/heights
 #' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
+#'
 #' # aligning complex plots in a grid
 #' plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
+#'
 #' # can align top of plotting area as well as bottom
 #' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 #'
@@ -278,6 +290,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       nrow = NULL, ncol = NULL, rel_widths = 1,
                       rel_heights = 1, labels = NULL, label_size = 14,
                       label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
+                      label_x = 0, label_y = 1,
                       hjust = -0.5, vjust = 1.5,
                       cols = NULL, rows = NULL, scale = NULL ) {
 
@@ -323,12 +336,12 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   else if ("auto" %in% labels)
     labels <- letters[1:num_plots]
 
-  # we also allow for separate hjust and vjust values for each label
-  if (length(hjust)==1)
-    hjust <- rep(hjust, length(labels))
-
-  if (length(vjust)==1)
-    vjust <- rep(vjust, length(labels))
+  # label adjustments can be provided globally for all labels
+  # or individually for each label
+  hjust <- rep_len(hjust, length(labels))
+  vjust <- rep_len(vjust, length(labels))
+  label_x <- rep_len(label_x, length(labels))
+  label_y <- rep_len(label_y, length(labels))
 
   # calculate appropriate vectors of rel. heights and widths
   rel_heights <- rep(rel_heights, length.out = rows)
@@ -348,20 +361,17 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
     x_delta <- x_deltas[col_count+1]
     y_delta <- y_deltas[row_count]
-    # calculate width
-    width <- x_delta
-    height <- y_delta
     x <- xs[col_count+1]
     y <- ys[row_count]
 
     # place the plot
     p_next <- grobs[[i]]
     if (!is.null(p_next)){
-      p <- p + draw_grob(grid::grobTree(p_next), x, y, width, height)
+      p <- p + draw_grob(grid::grobTree(p_next), x, y, x_delta, y_delta)
     }
     # place a label if we have one
     if (i <= length(labels)){
-      p <- p + draw_plot_label(labels[i], x, y + height, size = label_size,
+      p <- p + draw_plot_label(labels[i], x + label_x[i]*x_delta, y + label_y[i]*y_delta, size = label_size,
                                family = label_fontfamily, fontface = label_fontface, colour = label_colour,
                                hjust = hjust[i], vjust = vjust[i])
     }
