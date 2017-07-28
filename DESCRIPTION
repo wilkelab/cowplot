@@ -1,9 +1,8 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 0.7.0
+Version: 0.7.0.9990
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
-    "wilke@austin.utexas.edu"), person("Hadley", "Wickham", role = c("cph"),
-    email = "h.wickham@gmail.com") )
+    "wilke@austin.utexas.edu"), person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to cowplot." ))
 Description: Some helpful extensions and modifications to the 'ggplot2'
     package. In particular, this package makes it easy to combine multiple
     'ggplot2' plots into one and label them with letters, e.g. A, B, C, etc.,
@@ -16,7 +15,6 @@ Depends:
     ggplot2 (>= 2.1.0),
 Imports:
     grid (>= 3.0.0),
-    gridGraphics,
     gtable (>= 0.1.2),
     plyr (>= 1.8.2),
     grDevices,
@@ -25,7 +23,8 @@ Imports:
 License: GPL-2
 LazyData: true
 Suggests:
-    knitr
+    knitr,
+    gridGraphics
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
@@ -40,3 +39,4 @@ Collate:
     'switch_axis.R'
     'themes.R'
 RoxygenNote: 6.0.1
+Roxygen: list(markdown = TRUE)

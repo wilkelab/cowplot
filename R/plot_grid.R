@@ -223,9 +223,6 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #'  Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired.
 #' @param nrow (optional) Number of rows in the plot grid.
 #' @param ncol (optional) Number of columns in the plot grid.
-#' @param scale (optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
-#'              each subplot, by giving a vector of scale values, or at once for all subplots,
-#'              by giving a single value.
 #' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
 #'              grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
 #'              second column.
@@ -234,12 +231,16 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' @param labels (optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to
 #'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
 #' @param label_size (optional) Numerical value indicating the label size. Default is 14.
+#' @param label_fontfamily (optional) Font family of the plot labels. If not provided, is taken from the current theme.
+#' @param label_fontface (optional) Font face of the plot labels. Default is "bold".
+#' @param label_colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
 #' @param hjust Adjusts the horizontal position of each label. More negative values move the label further
 #'              to the right on the plot canvas. Default is -0.5.
 #' @param vjust Adjusts the vertical position of each label. More positive values move the label further
 #'              down on the plot canvas. Default is 1.5.
 #' @param rows Deprecated. Like \code{nrow}.
 #' @param cols Deprecated. Like \code{ncol}.
+#' @param scale Deprecated.
 #' @examples
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -262,7 +263,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' # can align top of plotting area as well as bottom
 #' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 #'
-#' # other types of plots
+#' # other types of plots not generated with ggplot
 #' dev.new()
 #' plot(sqrt)
 #' p6 <- recordPlot()
@@ -274,10 +275,11 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' @export
 plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
-                      nrow = NULL, ncol = NULL, scale = 1, rel_widths = 1,
+                      nrow = NULL, ncol = NULL, rel_widths = 1,
                       rel_heights = 1, labels = NULL, label_size = 14,
+                      label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
                       hjust = -0.5, vjust = 1.5,
-                      cols = NULL, rows = NULL ) {
+                      cols = NULL, rows = NULL, scale = NULL ) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
@@ -291,12 +293,24 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
   }
 
+  if (!is.null(scale)){
+    warning("Argument 'scale' is deprecated. To increase margins between plots, adjust plot theme.")
+  }
+
   # internally, this function operates with variables cols and rows instead of ncol and nrow
   if (!is.null(ncol)){
     cols <- ncol
   }
   if (!is.null(nrow)){
     rows <- nrow
+  }
+
+  if (is.null(label_fontfamily)) {
+    label_fontfamily <- theme_get()$text$family
+  }
+
+  if (is.null(label_colour)) {
+    label_colour <- theme_get()$text$colour
   }
 
   # Align the plots (if specified)
@@ -311,10 +325,6 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # alternatively, we know at least how many rows or how many columns we need
   if (is.null(cols)) cols <- ceiling(num_plots/rows)
   if (is.null(rows)) rows <- ceiling(num_plots/cols)
-
-  # in general, we allow for separate scale values for each graph
-  if (length(scale)==1)
-    scale <- rep(scale, num_plots)
 
   if ("AUTO" %in% labels)
     labels <- LETTERS[1:num_plots]
@@ -346,13 +356,11 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
     x_delta <- x_deltas[col_count+1]
     y_delta <- y_deltas[row_count]
-    # calculate width, offset, etc
-    width <- x_delta * scale[i]
-    height <- y_delta * scale[i]
-    x_off <- (x_delta - width)/2
-    y_off <- (y_delta - height)/2
-    x <- xs[col_count+1] + x_off
-    y <- ys[row_count] + y_off
+    # calculate width
+    width <- x_delta
+    height <- y_delta
+    x <- xs[col_count+1]
+    y <- ys[row_count]
 
     # place the plot
     p_next <- grobs[[i]]
@@ -361,7 +369,8 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     }
     # place a label if we have one
     if (i <= length(labels)){
-      p <- p + draw_plot_label(labels[i], x - x_off, y + height - y_off, size = label_size,
+      p <- p + draw_plot_label(labels[i], x, y + height, size = label_size,
+                               family = label_fontfamily, fontface = label_fontface, colour = label_colour,
                                hjust = hjust[i], vjust = vjust[i])
     }
     # move on to next grid position

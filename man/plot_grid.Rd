@@ -6,7 +6,7 @@
 \usage{
 plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"), nrow = NULL,
-  ncol = NULL, scale = 1, rel_widths = 1, rel_heights = 1,
+  ncol = NULL, scale = NULL, rel_widths = 1, rel_heights = 1,
   labels = NULL, label_size = 14, hjust = -0.5, vjust = 1.5,
   cols = NULL, rows = NULL)
 }
@@ -28,9 +28,7 @@ Must be specified if any of the graphs are complex (e.g. faceted) and alignment 
 
 \item{ncol}{(optional) Number of columns in the plot grid.}
 
-\item{scale}{(optional) Allows to set an overall scaling of each sub-plot. Can be set separately for
-each subplot, by giving a vector of scale values, or at once for all subplots,
-by giving a single value.}
+\item{scale}{(optional) Deprecated.}
 
 \item{rel_widths}{(optional) Numerical vector of relative columns widths. For example, in a two-column
 grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
@@ -79,7 +77,7 @@ plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 # can align top of plotting area as well as bottom
 plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 
-# other types of plots
+# other types of plots not generated with ggplot
 dev.new()
 plot(sqrt)
 p6 <- recordPlot()

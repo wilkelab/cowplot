@@ -1,3 +1,10 @@
+cowplot 0.7.0.9990
+----------------------------------------------------------------
+- The function plot_grid can now also handle base-R (graphics) plots. Code provided by https://github.com/flying-sheep.
+- More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, https://github.com/sjfox.
+- Plot labels can now be styled. This
+
+
 cowplot 0.7.0
 ----------------------------------------------------------------
 - This version of cowplot has been prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been removed. Alternative axes will be natively supported by ggplot2 2.2.0.
