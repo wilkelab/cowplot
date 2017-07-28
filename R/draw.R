@@ -132,10 +132,22 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 #' @param vjust Vertical adjustment.
 #' @param size Font size of the label to be drawn.
 #' @param fontface Font face of the label to be drawn.
+#' @param family (optional) Font family of the plot labels. If not provided, is taken from the current theme.
+#' @param colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
 #' @param ... Other arguments to be handed to \code{draw_text}.
 #' @export
-draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold', ...){
-  draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface, ...)
+draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold',
+                            family = NULL, colour = NULL, ...){
+  if (is.null(family)) {
+    family <- theme_get()$text$family
+  }
+
+  if (is.null(colour)) {
+    colour <- theme_get()$text$colour
+  }
+
+  draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface,
+            family = family, colour = colour, ...)
 }
 
 

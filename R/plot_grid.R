@@ -305,14 +305,6 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     rows <- nrow
   }
 
-  if (is.null(label_fontfamily)) {
-    label_fontfamily <- theme_get()$text$family
-  }
-
-  if (is.null(label_colour)) {
-    label_colour <- theme_get()$text$colour
-  }
-
   # Align the plots (if specified)
   grobs <- align_plots(plotlist = plots, align=align, axis=axis)
 
