@@ -9,19 +9,24 @@ plot_to_gtable <- function(plot){
     if (!requireNamespace("gridGraphics", quietly = TRUE)){
       warning("Package `gridGraphics` is required to handle base-R plots. Substituting empty plot.", call. = FALSE)
       u <- grid::unit(1, "null")
-      gtable::gtable_col(NULL, list(grid::nullGrob()), u, u)
+      gt <- gtable::gtable_col(NULL, list(grid::nullGrob()), u, u)
+      # fix gtable clip setting
+      gt$layout$clip <- "inherit"
+      gt
     }
     else {
       tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
       u <- grid::unit(1, "null")
-      gtable::gtable_col(NULL, list(tree), u, u)
+      gt <- gtable::gtable_col(NULL, list(tree), u, u)
+      # fix gtable clip setting
+      gt$layout$clip <- "inherit"
+      gt
     }
   }
   else if (methods::is(plot, "ggplot")){
     # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
     # in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
 
-    # commenting this out to see if it was the cause of
     grDevices::pdf(NULL)
     plot <- ggplot2::ggplotGrob(plot)
     grDevices::dev.off()
@@ -228,11 +233,12 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param y The y location of the lower left corner of the plot.
 #' @param width Width of the plot.
 #' @param height Height of the plot.
+#' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
+#'   of `scale = 1` indicates no scaling.
 #' @export
-draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "on"){
+draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1){
   g <- plot_to_gtable(plot) # convert to gtable if necessary
-  plot.grob <- grid::grobTree(g)
-  annotation_custom_cowplot(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height, scale, clip)
+  draw_grob(g, x, y, width, height, scale)
 }
 
 #' Draw a grob.
@@ -244,34 +250,39 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1, clip
 #' @param y The y location of the lower left corner of the grob.
 #' @param width Width of the grob.
 #' @param height Height of the grob.
+#' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
+#'   of `scale = 1` indicates no scaling.
+#' @param clip Set to "on" to clip the grob or "inherit" to not clip. Note that clipping doesn't always work as
+#'   expected, due to limitations of the grid graphics system.
 #' @export
-draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "on"){
-  annotation_custom_cowplot(grid::grobTree(grob), xmin = x, xmax = x+width, ymin = y, ymax = y+height, scale, clip)
-}
-
-annotation_custom_cowplot <- function(grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, scale = 1, clip = "on") {
+draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit"){
   layer(
     data = data.frame(x = NA),
     stat = StatIdentity,
     position = PositionIdentity,
-    geom = GeomCustomAnnCowplot,
+    geom = GeomDrawGrob,
     inherit.aes = FALSE,
     params = list(
       grob = grob,
-      xmin = xmin,
-      xmax = xmax,
-      ymin = ymin,
-      ymax = ymax,
+      xmin = x,
+      xmax = x + width,
+      ymin = y,
+      ymax = y + height,
       scale = scale,
       clip = clip
     )
   )
 }
 
-GeomCustomAnnCowplot <- ggproto("GeomCustomAnnCowplot", GeomCustomAnn,
-  draw_panel = function(self, data, panel_params, coord, grob, xmin, xmax, ymin, ymax, scale = 1, clip = "on") {
+#' @rdname draw_grob
+#' @format NULL
+#' @usage NULL
+#' @importFrom ggplot2 ggproto GeomCustomAnn
+#' @export
+GeomDrawGrob <- ggproto("GeomDrawGrob", GeomCustomAnn,
+  draw_panel = function(self, data, panel_params, coord, grob, xmin, xmax, ymin, ymax, scale = 1, clip = "inherit") {
     if (!inherits(coord, "CoordCartesian")) {
-      stop("annotation_custom only works with Cartesian coordinates",
+      stop("draw_grob only works with Cartesian coordinates",
            call. = FALSE)
     }
     corners <- data.frame(x = c(xmin, xmax), y = c(ymin, ymax))
@@ -280,20 +291,20 @@ GeomCustomAnnCowplot <- ggproto("GeomCustomAnnCowplot", GeomCustomAnn,
     x_rng <- range(data$x, na.rm = TRUE)
     y_rng <- range(data$y, na.rm = TRUE)
 
-    vp_outer <- viewport(x = mean(x_rng), y = mean(y_rng),
-                   width = diff(x_rng), height = diff(y_rng),
-                   just = c("center", "center"),
-                   clip = clip)
+    # set up inner and outer viewport for clipping. Unfortunately,
+    # clipping doesn't work properly most of the time, due to
+    # grid limitations
+    vp_outer <- grid::viewport(x = mean(x_rng), y = mean(y_rng),
+                               width = diff(x_rng), height = diff(y_rng),
+                               just = c("center", "center"),
+                               clip = clip)
 
-    vp_inner <- viewport(width = scale, height = scale,
-                         just = c("center", "center"))
-
-    #print(data)
-    #print(str(vp))
+    vp_inner <- grid::viewport(width = scale, height = scale,
+                               just = c("center", "center"))
 
     id <- annotation_id()
-    inner_grob <- editGrob(grob, vp = vp_inner, name = paste(grob$name, id))
-    grobTree(inner_grob, vp = vp_outer, name = paste("CustomAnnCowplot", id))
+    inner_grob <- grid::grobTree(grob, vp = vp_inner, name = paste(grob$name, id))
+    grid::grobTree(inner_grob, vp = vp_outer, name = paste("GeomDrawGrob", id))
   }
 )
 
@@ -311,6 +322,9 @@ annotation_id <- local({
 #'   or a recorded base-R plot, as in [plot_grid()].
 #' @param xlim The x-axis limits for the drawing layer.
 #' @param ylim The y-axis limits for the drawing layer.
+#' @examples
+#' p <- ggplot(mpg, aes(displ, cty)) + geom_point()
+#' ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
 #' @export
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
 
@@ -322,9 +336,7 @@ ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
     labs(x=NULL, y=NULL) # and absolutely no axes
 
   if (!is.null(plot)){
-    g <- plot_to_gtable(plot) # convert to gtable if necessary
-    plot.grob <- grid::grobTree(g)
-    p <- p + annotation_custom(plot.grob)
+    p <- p + draw_plot(plot)
   }
   p # return ggplot drawing layer
 }

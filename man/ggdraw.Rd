@@ -17,3 +17,7 @@ or a recorded base-R plot, as in \code{\link[=plot_grid]{plot_grid()}}.}
 \description{
 Set up a drawing layer on top of a ggplot
 }
+\examples{
+p <- ggplot(mpg, aes(displ, cty)) + geom_point()
+ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
+}
