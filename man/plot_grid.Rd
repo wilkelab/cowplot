@@ -60,9 +60,9 @@ to the right on the plot canvas. Default is -0.5.}
 \item{vjust}{Adjusts the vertical position of each label. More positive values move the label further
 down on the plot canvas. Default is 1.5.}
 
-\item{scale}{Individual number or vector of numbers between 0 and 1. Enables you to down-scale all or
+\item{scale}{Individual number or vector of numbers greater than 0. Enables you to scale the size of all or
 select plots. Usually it's preferable to set margins instead of using \code{scale}, but \code{scale} can
-have benefits when working with base-R plots.}
+sometimes be more powerful.}
 
 \item{cols}{Deprecated. Use \code{ncol}.}
 

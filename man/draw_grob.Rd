@@ -7,7 +7,7 @@
 \title{Draw a grob.}
 \usage{
 draw_grob(grob, x = 0, y = 0, width = 1, height = 1, scale = 1,
-  clip = "on")
+  clip = "inherit")
 }
 \arguments{
 \item{grob}{The grob to place.}
