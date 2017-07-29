@@ -281,6 +281,9 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' \donttest{
 #' # other types of plots not generated with ggplot
 #' dev.new()
+#' par(xpd = NA, # switch off clipping, necessary to always see axis labels
+#'     bg = "transparent", # switch off background to avoid obscuring adjacent plots
+#'     oma = c(2, 2, 0, 0)) # move plot to the right and up
 #' plot(sqrt)
 #' p6 <- recordPlot()
 #' dev.off()

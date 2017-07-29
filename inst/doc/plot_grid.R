@@ -28,6 +28,9 @@ plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1,
           align = 'v', axis = 'l') # aligning vertically along the left axis
 
 ## ---- message=FALSE, results="hold", collapse=TRUE-----------------------
+par(xpd = NA, # switch off clipping, necessary to always see axis labels
+    bg = "transparent", # switch off background to avoid obscuring adjacent plots
+    oma = c(2, 2, 0, 0)) # move plot to the right and up
 plot(sqrt) # plot the square root function
 recordedplot <- recordPlot() # record the previous plot
 

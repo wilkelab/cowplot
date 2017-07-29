@@ -1,7 +1,12 @@
-## ----message=FALSE-------------------------------------------------------
+## ----eval=FALSE----------------------------------------------------------
+#  library(ggplot2)
+#  ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
+#     geom_point(size = 2.5)
+
+## ----echo=FALSE, message=FALSE-------------------------------------------
 library(ggplot2)
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size = 2.5)
+   geom_point(size = 2.5) + theme_gray()
 
 ## ----eval=FALSE----------------------------------------------------------
 #  library(cowplot)
