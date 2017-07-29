@@ -229,10 +229,10 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param width Width of the plot.
 #' @param height Height of the plot.
 #' @export
-draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
+draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "on"){
   g <- plot_to_gtable(plot) # convert to gtable if necessary
   plot.grob <- grid::grobTree(g)
-  annotation_custom(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height)
+  annotation_custom_cowplot(plot.grob, xmin = x, xmax = x+width, ymin = y, ymax = y+height, scale, clip)
 }
 
 #' Draw a grob.
@@ -245,10 +245,65 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1){
 #' @param width Width of the grob.
 #' @param height Height of the grob.
 #' @export
-draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1){
-  annotation_custom(grid::grobTree(grob), xmin = x, xmax = x+width, ymin = y, ymax = y+height)
+draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "on"){
+  annotation_custom_cowplot(grid::grobTree(grob), xmin = x, xmax = x+width, ymin = y, ymax = y+height, scale, clip)
 }
 
+annotation_custom_cowplot <- function(grob, xmin = -Inf, xmax = Inf, ymin = -Inf, ymax = Inf, scale = 1, clip = "on") {
+  layer(
+    data = data.frame(x = NA),
+    stat = StatIdentity,
+    position = PositionIdentity,
+    geom = GeomCustomAnnCowplot,
+    inherit.aes = FALSE,
+    params = list(
+      grob = grob,
+      xmin = xmin,
+      xmax = xmax,
+      ymin = ymin,
+      ymax = ymax,
+      scale = scale,
+      clip = clip
+    )
+  )
+}
+
+GeomCustomAnnCowplot <- ggproto("GeomCustomAnnCowplot", GeomCustomAnn,
+  draw_panel = function(self, data, panel_params, coord, grob, xmin, xmax, ymin, ymax, scale = 1, clip = "on") {
+    if (!inherits(coord, "CoordCartesian")) {
+      stop("annotation_custom only works with Cartesian coordinates",
+           call. = FALSE)
+    }
+    corners <- data.frame(x = c(xmin, xmax), y = c(ymin, ymax))
+    data <- coord$transform(corners, panel_params)
+
+    x_rng <- range(data$x, na.rm = TRUE)
+    y_rng <- range(data$y, na.rm = TRUE)
+
+    vp_outer <- viewport(x = mean(x_rng), y = mean(y_rng),
+                   width = diff(x_rng), height = diff(y_rng),
+                   just = c("center", "center"),
+                   clip = clip)
+
+    vp_inner <- viewport(width = scale, height = scale,
+                         just = c("center", "center"))
+
+    #print(data)
+    #print(str(vp))
+
+    id <- annotation_id()
+    inner_grob <- editGrob(grob, vp = vp_inner, name = paste(grob$name, id))
+    grobTree(inner_grob, vp = vp_outer, name = paste("CustomAnnCowplot", id))
+  }
+)
+
+annotation_id <- local({
+  i <- 1
+  function() {
+    i <<- i + 1
+    i
+  }
+})
 
 
 #' Set up a drawing layer on top of a ggplot
