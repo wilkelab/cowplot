@@ -107,7 +107,7 @@ plot.diamonds &lt;-<span class="st"> </span><span class="kw">ggplot</span>(diamo
 <div id="supported-plot-formats" class="section level1">
 <h1>Supported plot formats</h1>
 <p>The function <code>plot_grid()</code> can handle several different plot formats, including the classes <code>ggplot</code> (created by the <code>ggplot</code> function), <code>gtable</code> (created from <code>ggplot</code> or from other grid graphics objects such as <code>grob</code> and <code>gTree</code> objects) and, if the package <strong>gridGraphics</strong> is installed, <code>recordedplot</code> (returned by <code>recordPlot()</code>). Since the code to create a <code>recordedPlot</code> object would ordinarily create an unwanted plot or file, a function creating a <code>graphics</code> based plot (<code>plot</code>, <code>image</code>, …) can be passed as well.</p>
-<p>For example, the following creates a <code>recordetPlot</code> object by recording a previous plot (<code>plot(sqrt)</code>):</p>
+<p>For example, the following creates a <code>recordedPlot</code> object by recording a previous plot (<code>plot(sqrt)</code>):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">xpd =</span> <span class="ot">NA</span>, <span class="co"># switch off clipping, necessary to always see axis labels</span>
     <span class="dt">bg =</span> <span class="st">&quot;transparent&quot;</span>, <span class="co"># switch off background to avoid obscuring adjacent plots</span>
     <span class="dt">oma =</span> <span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">0</span>)) <span class="co"># move plot to the right and up</span>
