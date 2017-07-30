@@ -1,7 +1,7 @@
-This submission prepares cowplot for the upcoming ggplot2 2.2.0 release.
+This is a major improvement that fixes numerous bugs and adds two substantial new features.
 
 ## Test environments
-* R devel and R 3.3.1 on win-builder [ via devtools::build_win() ]
+* R devel and R 3.4.1 on win-builder [ via devtools::build_win() ]
 * local OS X install x86_64-apple-darwin15.6.0 (64-bit), R 3.4.1
 
 ## R CMD check results
