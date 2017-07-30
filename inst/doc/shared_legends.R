@@ -65,3 +65,30 @@ prow <- plot_grid( p1 + theme(legend.position="none"),
 
 prow + draw_grob(legend, 2/3.3, 0, .3/3.3, 1)
 
+## ----fig.width=7.5, fig.height=5-----------------------------------------
+# plot A
+p1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
+  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  background_grid(major = 'y', minor = "none") + 
+  panel_border() + theme(legend.position = "none")
+
+# plot B
+p2 <- ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_density(alpha = .7) + theme(legend.justification = "top")
+p2a <- p2 + theme(legend.position = "none")
+
+# plot C
+p3 <- ggplot(iris, aes(Sepal.Width, fill = Species)) +
+  geom_density(alpha = .7) + theme(legend.position = "none")
+
+# legend
+legend <- get_legend(p2)
+
+# align all plots vertically
+plots <- align_plots(p1, p2a, p3, align = 'v', axis = 'l')
+
+# put together bottom row and then everything
+bottom_row <- plot_grid(plots[[2]], plots[[3]], legend, labels = c("B", "C"), rel_widths = c(1, 1, .3), nrow = 1)
+plot_grid(plots[[1]], bottom_row, labels = c("A"), ncol = 1)
+
+
