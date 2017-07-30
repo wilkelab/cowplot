@@ -1,4 +1,4 @@
-cowplot 0.7.0.9990
+cowplot 0.8.0
 ----------------------------------------------------------------
 - The function plot_grid can now also handle base-R (graphics) plots. Code provided by https://github.com/flying-sheep.
 - More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, https://github.com/sjfox.
