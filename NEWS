@@ -1,12 +1,14 @@
+cowplot 0.8.0.9000
+----------------------------------------------------------------
+Nothing done yet.
+
 cowplot 0.8.0
 ----------------------------------------------------------------
 - The function plot_grid can now also handle base-R (graphics) plots. Code provided by https://github.com/flying-sheep.
 - More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, https://github.com/sjfox.
 - Plot labels can now be styled. In particular, they follow the theme settings, e.g. if the theme uses a different font than default. This closes issue #37.
-- The positioning of plot labels in `plot_grid` can now controlled with additional position parameters
-  `label_x` and `label_y`. This closes issue #32.
-- Problems with elements from globally set themes leaking into the plot-grid background have been fixed. This
-  closes issues #60, #63, #66.
+- The positioning of plot labels in `plot_grid` can now be controlled with additional position parameters `label_x` and `label_y`. This closes issue #32.
+- Problems with elements from globally set themes leaking into the plot-grid background have been fixed. This closes issues #60, #63, #66.
 
 
 cowplot 0.7.0

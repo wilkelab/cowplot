@@ -1,8 +1,8 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 0.8.0
+Version: 0.8.0.9000
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
-    "wilke@austin.utexas.edu"), person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to cowplot." ))
+    "wilke@austin.utexas.edu"), person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to cowplot" ))
 Description: Some helpful extensions and modifications to the 'ggplot2'
     package. In particular, this package makes it easy to combine multiple
     'ggplot2' plots into one and label them with letters, e.g. A, B, C, etc.,
