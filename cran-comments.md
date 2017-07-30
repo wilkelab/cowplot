@@ -15,12 +15,26 @@ Possibly mis-spelled words in DESCRIPTION:
 Both spellings are correct.
 
 ## Downstream dependencies
-All clear, according to devtools::revdep_check():
+Seem fine, according to devtools::revdep_check().
+The two packages with errors failed at the installation stage,
+not because of cowplot.
 
-Checked IncucyteDRC : 0 errors | 0 warnings | 0 notes
-Checked JWileymisc  : 0 errors | 0 warnings | 0 notes
-Checked poppr       : 0 errors | 0 warnings | 0 notes
-Checked preText     : 0 errors | 0 warnings | 1 note 
-Checked rnrfa       : 0 errors | 0 warnings | 0 notes
-Checked tadaatoolbox: 0 errors | 0 warnings | 1 note 
+Full results available at https://github.com/wilkelab/cowplot/blob/master/revdep/README.md
 
+13 packages
+
+|package      |version | errors| warnings| notes|
+|:------------|:-------|------:|--------:|-----:|
+|deconvolveR  |1.0-3   |      0|        0|     0|
+|DGCA         |1.0.1   |      1|        0|     0|
+|ggjoy        |0.2.0   |      0|        0|     0|
+|ggpubr       |0.1.4   |      0|        0|     0|
+|IncucyteDRC  |0.5.4   |      0|        0|     0|
+|jtools       |0.4.5   |      0|        0|     1|
+|JWileymisc   |0.2.1   |      0|        0|     0|
+|oddsratio    |1.0.0   |      0|        0|     0|
+|poppr        |2.4.1   |      1|        0|     0|
+|preText      |0.6.0   |      0|        0|     0|
+|sicegar      |0.2     |      0|        0|     0|
+|tadaatoolbox |0.13.0  |      0|        0|     1|
+|valr         |0.3.1   |      0|        0|     1|
