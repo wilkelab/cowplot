@@ -105,13 +105,15 @@ plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
 dev.new()
 par(xpd = NA, # switch off clipping, necessary to always see axis labels
     bg = "transparent", # switch off background to avoid obscuring adjacent plots
-    oma = c(2, 2, 0, 0)) # move plot to the right and up
+    oma = c(2, 2, 0, 0), # move plot to the right and up
+    mgp = c(2, 1, 0) # move axis labels closer to axis
+)
 plot(sqrt)
 p6 <- recordPlot()
 dev.off()
 p7 <- function() image(volcano)
 p8 <- gtable::gtable_col("circle", list(grid::circleGrob()))
 
-plot_grid(p1, p6, p7, p8, scale = c(1, .9, .9, .9))
+plot_grid(p1, p6, p7, p8, labels = "AUTO", scale = c(1, 1, .85, .9))
 }
 }

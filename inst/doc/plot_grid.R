@@ -30,7 +30,9 @@ plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1,
 ## ---- message=FALSE, results="hold", collapse=TRUE-----------------------
 par(xpd = NA, # switch off clipping, necessary to always see axis labels
     bg = "transparent", # switch off background to avoid obscuring adjacent plots
-    oma = c(2, 2, 0, 0)) # move plot to the right and up
+    oma = c(2, 2, 0, 0), # move plot to the right and up
+    mgp = c(2, 1, 0) # move axis labels closer to axis
+  ) 
 plot(sqrt) # plot the square root function
 recordedplot <- recordPlot() # record the previous plot
 
@@ -44,7 +46,7 @@ ggdraw(g_table)
 
 ## ---- message=FALSE, fig.width=7, fig.height=5---------------------------
 plot_grid(plot.mpg, recordedplot, plotfunc, g_table, labels = "AUTO", hjust = 0, vjust = 1,
-          scale = c(1., 0.8, 0.9, 0.9))
+          scale = c(1., 1., 0.9, 0.9))
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12)
