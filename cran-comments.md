@@ -2,7 +2,7 @@ This submission prepares cowplot for the upcoming ggplot2 2.2.0 release.
 
 ## Test environments
 * R devel and R 3.3.1 on win-builder [ via devtools::build_win() ]
-* local OS X install x86_64-apple-darwin13.4.0 (64-bit), R 3.3.1
+* local OS X install x86_64-apple-darwin15.6.0 (64-bit), R 3.4.1
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.

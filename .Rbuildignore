@@ -3,3 +3,4 @@
 ^cran-comments.md$
 ^TODO$
 ^vignettes/*\.png$
+^revdep$
