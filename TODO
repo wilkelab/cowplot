@@ -1,8 +1,10 @@
 Bugs and problems
 =============================
-- reproducing base-R plots in plot_grid or ggdraw still has some issues.
+- all draw_* functions need to add `inherit.aes = FALSE` to the geom they call
+- theme_cowplot doesn't draw nice legends anymore, grey boxes are back
 
 
 Ideas for further development
 =============================
 - make a theme for individual plots and one for grouped plots (and one for faceted plots?), make sure that all default settings work well together.
+- add functions to import and draw images
