@@ -25,6 +25,7 @@ LazyData: true
 Suggests:
     knitr,
     gridGraphics,
+    magick,
     viridis
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues

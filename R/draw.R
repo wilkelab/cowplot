@@ -231,6 +231,65 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
   )
 }
 
+#' Draw an image
+#'
+#' Places an image somewhere onto the drawing canvas. By default, coordinates run from
+#' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
+#' @param image The image to place. Can be a file path, a URL, or a raw vector with image data,
+#'  as in [magick::image_read()]. Can also be an image previously created by [magick::image_read()] and
+#'  related functions.
+#' @param x The x location of the lower left corner of the image.
+#' @param y The y location of the lower left corner of the image.
+#' @param width Width of the image.
+#' @param height Height of the image.
+#' @param scale Scales the image relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
+#'   of `scale = 1` indicates no scaling.
+#' @param clip Set to "on" to clip the image relative to the box into which it is draw (useful for `scale > 1`).
+#'   Note that clipping doesn't always work as expected, due to limitations of the grid graphics system.
+#' @param interpolate A logical value indicating whether to linearly interpolate the image
+#'  (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).
+#' @examples
+#' # Use image as plot background
+#' p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+#' ggdraw() +
+#'   draw_image("http://jeroen.github.io/images/tiger.svg") +
+#'   draw_plot(p + theme(legend.box.background = element_rect(color = "white")))
+#'
+#' # Manipulate images and draw in plot coordinates
+#' img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
+#' img <- magick::image_transparent(img, color = "white")
+#' img2 <- magick::image_charcoal(img)
+#' img2 <- magick::image_transparent(img2, color = "white")
+#' ggplot(data.frame(x=1:3, y=1:3), aes(x, y)) +
+#'   geom_point(size = 3) +
+#'   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
+#'   draw_image(img, x=1, y=1, scale = .9) +
+#'   draw_image(img2, x=2, y=2, scale = .9)
+#'
+#' # Make grid with plot and image
+#' p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+#' p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
+#' plot_grid(p, p2, labels = "AUTO")
+#' @export
+draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit", interpolate = TRUE) {
+  if (!requireNamespace("magick", quietly = TRUE)){
+    warning("Package `magick` is required to draw images. Image not drawn.", call. = FALSE)
+    draw_grob(grid::nullGrob(), x, y, width, height)
+  }
+  else {
+    # if we're given an image, we just use it
+    if (methods::is(image, "magick-image")) {
+      image_data <- image
+    }
+    # otherwise we read it in with image_read()
+    else {
+      image_data <- magick::image_read(image)
+    }
+    g <- grid::rasterGrob(image_data, interpolate = interpolate)
+    draw_grob(g, x, y, width, height, scale, clip)
+  }
+}
+
 #' Draw a (sub)plot.
 #'
 #' Places a plot somewhere onto the drawing canvas. By default, coordinates run from
@@ -249,7 +308,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' # draw into the top-right corner of a larger plot area
 #' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
-draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1){
+draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1) {
   g <- plot_to_gtable(plot) # convert to gtable if necessary
   draw_grob(g, x, y, width, height, scale)
 }
@@ -274,7 +333,7 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1){
 #' # place into the middle of the plotting area, at a scale of 50%
 #' ggdraw() + draw_grob(g, scale = 0.5)
 #' @export
-draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit"){
+draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit") {
   layer(
     data = data.frame(x = NA),
     stat = StatIdentity,
