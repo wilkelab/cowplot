@@ -48,17 +48,19 @@ auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-c
 
 \item{label_colour}{(optional) Color of the plot labels. If not provided, is taken from the current theme.}
 
-\item{label_x}{(optional) Vector of x positions for plot labels, relative to each subplot.
+\item{label_x}{(optional) Single value or vector of x positions for plot labels, relative to each subplot.
 Defaults to 0 for all labels. (Each label is placed all the way to the left of each plot.)}
 
-\item{label_y}{(optional) Vector of y positions for plot labels, relative to each subplot.
+\item{label_y}{(optional) Single value or vector of y positions for plot labels, relative to each subplot.
 Defaults to 1 for all labels. (Each label is placed all the way to the top of each plot.)}
 
 \item{hjust}{Adjusts the horizontal position of each label. More negative values move the label further
-to the right on the plot canvas. Default is -0.5.}
+to the right on the plot canvas. Can be a single value (applied to all labels) or a vector of values
+(one for each label). Default is -0.5.}
 
 \item{vjust}{Adjusts the vertical position of each label. More positive values move the label further
-down on the plot canvas. Default is 1.5.}
+down on the plot canvas. Can be a single value (applied to all labels) or a vector of values
+(one for each label). Default is 1.5.}
 
 \item{scale}{Individual number or vector of numbers greater than 0. Enables you to scale the size of all or
 select plots. Usually it's preferable to set margins instead of using \code{scale}, but \code{scale} can
