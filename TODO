@@ -1,8 +1,6 @@
 Bugs and problems
 =============================
-- all draw_* functions need to add `inherit.aes = FALSE` to the geom they call
-- theme_cowplot doesn't draw nice legends anymore, grey boxes are back
-
+?
 
 Ideas for further development
 =============================
