@@ -51,10 +51,15 @@ plot_to_gtable <- function(plot){
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
 #' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.
+#' @examples
+#' ggdraw() + draw_line(c(0.2, 0.7, 0.7, 0.3),
+#'                      c(0.1, 0.3, 0.9, 0.8),
+#'                      color = "blue", size = 2)
 #' @export
 draw_line <- function(x, y, ...){
   geom_path(data = data.frame(x, y),
             aes(x = x, y = y),
+            inherit.aes = FALSE,
             ...)
 }
 
@@ -74,11 +79,14 @@ draw_line <- function(x, y, ...){
 #' @param y Vector of y coordinates.
 #' @param size Font size of the text to be drawn.
 #' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
+#' @examples
+#' ggdraw() + draw_text("Hello World!")
 #' @export
 draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
   geom_text(data = data.frame(text, x, y),
             aes(label = text, x = x, y = y),
             size = size / .pt, # scale font size to match size in theme definition
+            inherit.aes = FALSE,
             ...)
 }
 
@@ -235,6 +243,11 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param height Height of the plot.
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
 #'   of `scale = 1` indicates no scaling.
+#' @examples
+#' # make a plot
+#' p <- qplot(1:10, 1:10)
+#' # draw into the top-right corner of a larger plot area
+#' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1){
   g <- plot_to_gtable(plot) # convert to gtable if necessary
@@ -254,6 +267,12 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1){
 #'   of `scale = 1` indicates no scaling.
 #' @param clip Set to "on" to clip the grob or "inherit" to not clip. Note that clipping doesn't always work as
 #'   expected, due to limitations of the grid graphics system.
+#' @examples
+#' # A grid grob (here a blue circle)
+#' library(grid)
+#' g <- circleGrob(gp = gpar(fill = "blue"))
+#' # place into the middle of the plotting area, at a scale of 50%
+#' ggdraw() + draw_grob(g, scale = 0.5)
 #' @export
 draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit"){
   layer(

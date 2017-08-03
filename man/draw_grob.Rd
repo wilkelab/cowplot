@@ -30,4 +30,11 @@ expected, due to limitations of the grid graphics system.}
 Places an arbitrary grob somewhere onto the drawing canvas. By default, coordinates run from
 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
 }
+\examples{
+# A grid grob (here a blue circle)
+library(grid)
+g <- circleGrob(gp = gpar(fill = "blue"))
+# place into the middle of the plotting area, at a scale of 50\%
+ggdraw() + draw_grob(g, scale = 0.5)
+}
 \keyword{datasets}

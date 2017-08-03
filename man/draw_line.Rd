@@ -16,3 +16,8 @@ draw_line(x, y, ...)
 \description{
 This is a convenience function. It's just a thin wrapper around \code{geom_line}.
 }
+\examples{
+ggdraw() + draw_line(c(0.2, 0.7, 0.7, 0.3),
+                     c(0.1, 0.3, 0.9, 0.8),
+                     color = "blue", size = 2)
+}

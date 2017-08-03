@@ -1,6 +1,7 @@
 cowplot 0.8.0.9000
 ----------------------------------------------------------------
-Nothing done yet.
+- Added `inhert.aes = FALSE` to draw functions where needed
+- Added examples to various draw functions
 
 cowplot 0.8.0
 ----------------------------------------------------------------
