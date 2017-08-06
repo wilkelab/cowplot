@@ -5,4 +5,3 @@ Bugs and problems
 Ideas for further development
 =============================
 - make a theme for individual plots and one for grouped plots (and one for faceted plots?), make sure that all default settings work well together.
-- add functions to import and draw images

@@ -31,14 +31,17 @@ VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
     'add_sub.R'
+    'axis_canvas.R'
     'cowplot.R'
     'draw.R'
     'get_legend.R'
+    'get_panel.R'
     'gtable.R'
     'plot_grid.R'
     'save.R'
     'setup.R'
     'switch_axis.R'
     'themes.R'
+    'utils_ggplot2.R'
 RoxygenNote: 6.0.1
 Roxygen: list(markdown = TRUE)
