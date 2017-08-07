@@ -123,15 +123,15 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' @export
 axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL, ylim = NULL) {
   xlimits = switch(axis,
-                   x = get_scale_limits(layer_scales(pmain)$x),
-                   xy = get_scale_limits(layer_scales(pmain)$x),
-                   yx = get_scale_limits(layer_scales(pmain)$x),
+                   x = get_scale_limits(layer_scales(plot)$x),
+                   xy = get_scale_limits(layer_scales(plot)$x),
+                   yx = get_scale_limits(layer_scales(plot)$x),
                    xlim)
 
   ylimits = switch(axis,
-                   y = get_scale_limits(layer_scales(pmain)$y),
-                   xy = get_scale_limits(layer_scales(pmain)$y),
-                   yx = get_scale_limits(layer_scales(pmain)$y),
+                   y = get_scale_limits(layer_scales(plot)$y),
+                   xy = get_scale_limits(layer_scales(plot)$y),
+                   yx = get_scale_limits(layer_scales(plot)$y),
                    ylim)
 
   ggplot(data = data, mapping = mapping) +
