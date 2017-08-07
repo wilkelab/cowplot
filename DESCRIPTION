@@ -23,9 +23,12 @@ Imports:
 License: GPL-2
 LazyData: true
 Suggests:
-    knitr,
+    ggjoy,
+    ggstance,
     gridGraphics,
+    knitr,
     magick,
+    tidyverse,
     viridis
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues

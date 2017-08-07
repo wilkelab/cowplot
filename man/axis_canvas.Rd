@@ -4,13 +4,36 @@
 \alias{axis_canvas}
 \title{Generates a canvas onto which one can draw axis-like objects.}
 \usage{
-axis_canvas(plot, axis = "y", xlim = NULL, ylim = NULL)
+axis_canvas(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL,
+  ylim = NULL)
+}
+\arguments{
+\item{plot}{The plot defining the x and/or y axis range for the axis canvas.}
+
+\item{axis}{Specifies which axis to copy from \code{plot}. Can be \code{"x"}, \code{"y"}, or \code{"xy"}.}
+
+\item{data}{(optional) Data to be displayed in this layer.}
+
+\item{mapping}{(optional) Aesthetic mapping to be used in this layer.}
+
+\item{xlim}{(optional) Vector of two numbers specifying the limits of the x axis. Ignored
+if the x axis is copied over from \code{plot}.}
+
+\item{ylim}{(optional) Vector of two numbers specifying the limits of the y axis. Ignored
+if the y axis is copied over from \code{plot}.}
 }
 \description{
-Generates a canvas onto which one can draw axis-like objects.
+This function takes an existing \link{ggplot2} plot and copies one or both of the axis into a new plot.
+The main idea is to use this in conjunction with \code{\link[=insert_xaxis_grob]{insert_xaxis_grob()}} or \code{\link[=insert_yaxis_grob]{insert_yaxis_grob()}} to
+draw custom axis-like objects or margin annotations. Importantly, while this function works for
+both continuous and discrete scales, notice that discrete scales are converted into continuous scales
+in the returned axis canvas. The levels of the discrete scale are placed at continuous values of
+1, 2, 3, etc. See Examples for an example of how to convert a discrete scale into a continuous
+scale.
 }
 \examples{
-# continuous case
+# annotate line graphs with labels on the right
+library(tidyverse)
 x <- seq(0, 10, .1)
 d <- data.frame(x,
                 linear = x,
@@ -19,11 +42,41 @@ d <- data.frame(x,
   gather(fun, y, -x)
 
 pmain <- ggplot(d, aes(x, y, group = fun)) + geom_line()  +
-  scale_x_continuous(expand = c(0, 0)) +
-  scale_y_continuous(limits = c(0, 60))
+  scale_x_continuous(expand = c(0, 0))
 
 paxis <- axis_canvas(pmain, axis = "y") +
-  geom_text(data = filter(d, x==max(x)), aes(y = y, label=paste0(" ", fun)),
+  geom_text(data = filter(d, x == max(x)), aes(y = y, label = paste0(" ", fun)),
             x = 0, hjust = 0, vjust = 0.5)
 ggdraw(insert_yaxis_grob(pmain, get_panel(paxis), grid::unit(.25, "null")))
+
+# discrete scale with integrated color legend
+pmain <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_violin(trim = FALSE) + guides(fill = "none") +
+  scale_x_discrete(labels = NULL) +
+  theme_minimal()
+
+label_data <- data.frame(x = 1:nlevels(iris$Species),
+                         Species = levels(iris$Species))
+paxis <- axis_canvas(pmain, axis = "x", data = label_data, mapping = aes(x = x)) +
+  geom_tile(aes(fill = Species, y = 0.5), width = 0.9, height = 0.3) +
+  geom_text(aes(label = Species, y = 0.5), hjust = 0.5, vjust = 0.5, size = 11/.pt)
+ggdraw(insert_xaxis_grob(pmain, get_panel(paxis), grid::unit(.07, "null"),
+                         position = "bottom"))
+
+# add marginal density distributions to plot
+library(ggstance) # for stat_xdensity()
+library(ggjoy) # geom_ridgeline() and geom_vridgeline()
+pmain <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + geom_point()
+
+xdens <- axis_canvas(pmain, axis = "x") +
+  geom_ridgeline(data=iris, aes(x=Sepal.Length, y=0, height=..density.., fill=Species),
+                 stat="xdensity", alpha=0.7, size=.2, trim=FALSE)
+
+ydens <- axis_canvas(pmain, axis = "y") +
+  geom_vridgeline(data=iris, aes(y=Sepal.Width, x=0, width=..density.., fill=Species),
+                  stat="ydensity", alpha=0.7, size=.2, trim=FALSE)
+
+p1 <- insert_xaxis_grob(pmain, get_panel(xdens), grid::unit(.2, "null"), position = "top")
+p2 <- insert_yaxis_grob(p1, get_panel(ydens), grid::unit(.2, "null"), position = "right")
+ggdraw(p2)
 }
