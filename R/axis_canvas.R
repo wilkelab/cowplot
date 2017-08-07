@@ -5,7 +5,9 @@
 #' For usage examples, see [axis_canvas()].
 #' @param plot The plot into which the grob will be inserted.
 #' @param grob The grob to insert. This will generally have been obtained via [get_panel()]
-#'   from a ggplot2 object, in particular one generated with [axis_canvas()].
+#'   from a ggplot2 object, in particular one generated with [axis_canvas()]. If a ggplot2
+#'   plot is provided instead of a grob, then [get_panel()] is called to extract the
+#'   panel grob.
 #' @param width The width of the grob, in grid units. Used by `insert_yaxis_grob()`.
 #' @param height The height of the grob, in grid units. Used by `insert_xaxis_grob()`.
 #' @param position The position of the grob. Can be `"right"` or `"left"` for `insert_yaxis_grob()`
@@ -13,6 +15,11 @@
 #' @export
 insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), position = c("top", "bottom"))
 {
+  # if a plot is provided instead of a grob we extract the panel from that plot
+  if (methods::is(grob, "ggplot")){
+    grob <- get_panel(grob)
+  }
+
   gt <- plot_to_gtable(plot)
 
   pp <- gt$layout[gt$layout$name == "panel",]
@@ -37,6 +44,11 @@ insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), posi
 #' @export
 insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), position = c("right", "left"))
 {
+  # if a plot is provided instead of a grob we extract the panel from that plot
+  if (methods::is(grob, "ggplot")){
+    grob <- get_panel(grob)
+  }
+
   gt <- plot_to_gtable(plot)
 
   pp <- gt$layout[gt$layout$name == "panel",]
@@ -88,7 +100,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' paxis <- axis_canvas(pmain, axis = "y") +
 #'   geom_text(data = filter(d, x == max(x)), aes(y = y, label = paste0(" ", fun)),
 #'             x = 0, hjust = 0, vjust = 0.5)
-#' ggdraw(insert_yaxis_grob(pmain, get_panel(paxis), grid::unit(.25, "null")))
+#' ggdraw(insert_yaxis_grob(pmain, paxis, grid::unit(.25, "null")))
 #'
 #' # discrete scale with integrated color legend
 #' pmain <- ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
@@ -101,7 +113,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' paxis <- axis_canvas(pmain, axis = "x", data = label_data, mapping = aes(x = x)) +
 #'   geom_tile(aes(fill = Species, y = 0.5), width = 0.9, height = 0.3) +
 #'   geom_text(aes(label = Species, y = 0.5), hjust = 0.5, vjust = 0.5, size = 11/.pt)
-#' ggdraw(insert_xaxis_grob(pmain, get_panel(paxis), grid::unit(.07, "null"),
+#' ggdraw(insert_xaxis_grob(pmain, paxis, grid::unit(.07, "null"),
 #'                          position = "bottom"))
 #'
 #' # add marginal density distributions to plot
@@ -117,8 +129,8 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #'   geom_vridgeline(data=iris, aes(y=Sepal.Width, x=0, width=..density.., fill=Species),
 #'                   stat="ydensity", alpha=0.7, size=.2, trim=FALSE)
 #'
-#' p1 <- insert_xaxis_grob(pmain, get_panel(xdens), grid::unit(.2, "null"), position = "top")
-#' p2 <- insert_yaxis_grob(p1, get_panel(ydens), grid::unit(.2, "null"), position = "right")
+#' p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
+#' p2 <- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 #' ggdraw(p2)
 #' @export
 axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL, ylim = NULL) {

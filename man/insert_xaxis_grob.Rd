@@ -15,7 +15,9 @@ insert_yaxis_grob(plot, grob, width = grid::unit(0.2, "null"),
 \item{plot}{The plot into which the grob will be inserted.}
 
 \item{grob}{The grob to insert. This will generally have been obtained via \code{\link[=get_panel]{get_panel()}}
-from a ggplot2 object, in particular one generated with \code{\link[=axis_canvas]{axis_canvas()}}.}
+from a ggplot2 object, in particular one generated with \code{\link[=axis_canvas]{axis_canvas()}}. If a ggplot2
+plot is provided instead of a grob, then \code{\link[=get_panel]{get_panel()}} is called to extract the
+panel grob.}
 
 \item{height}{The height of the grob, in grid units. Used by \code{insert_xaxis_grob()}.}
 
