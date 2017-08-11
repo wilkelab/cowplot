@@ -19,6 +19,7 @@ Imports:
     plyr (>= 1.8.2),
     grDevices,
     methods,
+    scales,
     utils
 License: GPL-2
 LazyData: true
