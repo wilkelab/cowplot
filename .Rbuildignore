@@ -1,5 +1,8 @@
+visual_test
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^\.travis\.yml$
+^\.codecov\.yml$
 ^cran-comments.md$
 ^TODO$
 ^vignettes/*\.png$
