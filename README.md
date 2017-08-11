@@ -1,8 +1,8 @@
 cowplot – An add-on to the ggplot2 plotting package
 ====================================================
 
-[![Build Status](https://travis-ci.org/clauswilke/cowplot.svg?branch=master)](https://travis-ci.org/clauswilke/cowplot)
-[![Coverage Status](https://img.shields.io/codecov/c/github/clauswilke/cowplot/master.svg)](https://codecov.io/github/clauswilke/cowplot?branch=master)
+[![Build Status](https://travis-ci.org/wilkelab/cowplot.svg?branch=master)](https://travis-ci.org/wilkelab/cowplot)
+[![Coverage Status](https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg)](https://codecov.io/github/wilkelab/cowplot?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cowplot)](https://CRAN.R-project.org/package=cowplot)
 [![CRAN\_Downloads\_Badge](http://cranlogs.r-pkg.org/badges/grand-total/cowplot?color=brightgreen)](http://cranlogs.r-pkg.org/downloads/total/last-month/cowplot)
 
