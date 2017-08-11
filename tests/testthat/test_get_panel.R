@@ -5,7 +5,10 @@ test_that("get panel", {
 
   panel <- get_panel(p)
 
-  expect_equal(methods::is(panel), "gTree")
+  expect_s3_class(panel, "gTree")
   expect_match(panel$name, "^panel-1\\.gTree\\.")
+
+  # get_panel() doesn't work for faceted plots
+  expect_error(get_panel(p + facet_wrap(~Species)))
 })
 
