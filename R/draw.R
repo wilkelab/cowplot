@@ -3,46 +3,6 @@
 # *************************************************
 
 
-# ****** Internal functions used by drawing code ******
-plot_to_gtable <- function(plot){
-  if (methods::is(plot, "function") || methods::is(plot, "recordedplot")){
-    if (!requireNamespace("gridGraphics", quietly = TRUE)){
-      warning("Package `gridGraphics` is required to handle base-R plots. Substituting empty plot.", call. = FALSE)
-      u <- grid::unit(1, "null")
-      gt <- gtable::gtable_col(NULL, list(grid::nullGrob()), u, u)
-      # fix gtable clip setting
-      gt$layout$clip <- "inherit"
-      gt
-    }
-    else {
-      tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
-      u <- grid::unit(1, "null")
-      gt <- gtable::gtable_col(NULL, list(tree), u, u)
-      # fix gtable clip setting
-      gt$layout$clip <- "inherit"
-      gt
-    }
-  }
-  else if (methods::is(plot, "ggplot")){
-    # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
-    # in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
-
-    grDevices::pdf(NULL)
-    plot <- ggplot2::ggplotGrob(plot)
-    grDevices::dev.off()
-    plot
-  }
-  else if (methods::is(plot, "gtable")){
-    plot
-  }
-  else{
-    stop(
-      'Argument needs to be of class "ggplot", "gtable", "recordedplot", ',
-      'or a function that plots to an R graphics device when called, ',
-      'but is a ', class(plot))
-  }
-}
-
 
 #' Draw a line.
 #'
@@ -294,8 +254,8 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #'
 #' Places a plot somewhere onto the drawing canvas. By default, coordinates run from
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
-#' @param plot The plot to place. Can be a ggplot2 plot, an arbitrary gtable,
-#'   or a recorded base-R plot, as in [plot_grid()].
+#' @param plot The plot to place. Can be a ggplot2 plot, an arbitrary grob or gtable,
+#'   or a recorded base-R plot, as in [plot_to_gtable()].
 #' @param x The x location of the lower left corner of the plot.
 #' @param y The y location of the lower left corner of the plot.
 #' @param width Width of the plot.
@@ -309,8 +269,9 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1) {
-  g <- plot_to_gtable(plot) # convert to gtable if necessary
-  draw_grob(g, x, y, width, height, scale)
+  if (!methods::is(plot, "grob"))
+    plot <- plot_to_gtable(plot) # convert to gtable if necessary
+  draw_grob(plot, x, y, width, height, scale)
 }
 
 #' Draw a grob.
@@ -396,8 +357,10 @@ annotation_id <- local({
 
 
 #' Set up a drawing layer on top of a ggplot
-#' @param plot The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary gtable,
-#'   or a recorded base-R plot, as in [plot_grid()].
+#'
+#' Set up a drawing layer on top of a ggplot.
+#' @param plot The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary
+#'   grob or gtable, or a recorded base-R plot, as in [plot_to_gtable()].
 #' @param xlim The x-axis limits for the drawing layer.
 #' @param ylim The y-axis limits for the drawing layer.
 #' @examples

@@ -1,5 +1,7 @@
 cowplot 0.8.0.9000
 ----------------------------------------------------------------
+- Now export the `plot_to_gtable` function which converts most
+  anything into a gtable for further use with cowplot.
 - Added `inhert.aes = FALSE` to draw functions where needed
 - Added examples to various draw functions
 - Added draw_image() function to draw images onto plots

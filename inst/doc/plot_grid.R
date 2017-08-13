@@ -41,11 +41,11 @@ plotfunc <- function() image(volcano) # define the function
 plotfunc() # call the function to make the plot
 
 ## ---- message=FALSE------------------------------------------------------
-g_table <- gtable::gtable_col("circle", list(grid::circleGrob()))
-ggdraw(g_table)
+gcircle <- grid::circleGrob()
+ggdraw(gcircle)
 
 ## ---- message=FALSE, fig.width=7, fig.height=5---------------------------
-plot_grid(plot.mpg, recordedplot, plotfunc, g_table, labels = "AUTO", hjust = 0, vjust = 1,
+plot_grid(plot.mpg, recordedplot, plotfunc, gcircle, labels = "AUTO", hjust = 0, vjust = 1,
           scale = c(1., 1., 0.9, 0.9))
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------

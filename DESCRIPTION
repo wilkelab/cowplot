@@ -45,6 +45,7 @@ Collate:
     'get_panel.R'
     'gtable.R'
     'plot_grid.R'
+    'plot_to_gtable.R'
     'save.R'
     'setup.R'
     'switch_axis.R'
