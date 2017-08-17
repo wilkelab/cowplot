@@ -32,9 +32,15 @@ plot_to_gtable <- function(plot){
     # ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
     # in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
 
-    grDevices::pdf(NULL)
+    catchBlank <- identical(names(dev.cur()), 'pdf')  # is the current device `pdf()`
+    if (catchBlank)
+      grDevices::pdf(NULL)
+
     plot <- ggplot2::ggplotGrob(plot)
-    grDevices::dev.off()
+
+    if (catchBlank)
+      grDevices::dev.off()
+
     plot
   }
   else if (methods::is(plot, "gtable")){
