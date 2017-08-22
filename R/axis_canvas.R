@@ -115,7 +115,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #'   geom_text(aes(label = Species, y = 0.5), hjust = 0.5, vjust = 0.5, size = 11/.pt)
 #' ggdraw(insert_xaxis_grob(pmain, paxis, grid::unit(.07, "null"),
 #'                          position = "bottom"))
-#'
+#' \donttest{
 #' # add marginal density distributions to plot
 #' library(ggstance) # for stat_xdensity()
 #' library(ggjoy) # geom_ridgeline() and geom_vridgeline()
@@ -132,6 +132,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
 #' p2 <- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 #' ggdraw(p2)
+#' }
 #' @export
 axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL, ylim = NULL) {
   xlimits = switch(axis,
