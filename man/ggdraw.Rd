@@ -15,7 +15,7 @@ grob or gtable, or a recorded base-R plot, as in \code{\link[=plot_to_gtable]{pl
 \item{ylim}{The y-axis limits for the drawing layer.}
 }
 \description{
-Set up a drawing layer on top of a ggplot
+Set up a drawing layer on top of a ggplot.
 }
 \examples{
 p <- ggplot(mpg, aes(displ, cty)) + geom_point()

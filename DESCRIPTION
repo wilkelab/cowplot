@@ -30,7 +30,8 @@ Suggests:
     gridGraphics,
     knitr,
     magick,
-    tidyverse,
+    dplyr,
+    tidyr,
     testthat,
     vdiffr,
     viridis

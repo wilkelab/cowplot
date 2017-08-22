@@ -33,7 +33,8 @@ scale.
 }
 \examples{
 # annotate line graphs with labels on the right
-library(tidyverse)
+library(dplyr)
+library(tidyr)
 x <- seq(0, 10, .1)
 d <- data.frame(x,
                 linear = x,
@@ -62,7 +63,7 @@ paxis <- axis_canvas(pmain, axis = "x", data = label_data, mapping = aes(x = x))
   geom_text(aes(label = Species, y = 0.5), hjust = 0.5, vjust = 0.5, size = 11/.pt)
 ggdraw(insert_xaxis_grob(pmain, paxis, grid::unit(.07, "null"),
                          position = "bottom"))
-
+\donttest{
 # add marginal density distributions to plot
 library(ggstance) # for stat_xdensity()
 library(ggjoy) # geom_ridgeline() and geom_vridgeline()
@@ -79,4 +80,5 @@ ydens <- axis_canvas(pmain, axis = "y") +
 p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
 p2 <- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 ggdraw(p2)
+}
 }

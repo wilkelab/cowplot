@@ -86,7 +86,8 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' if the y axis is copied over from `plot`.
 #' @examples
 #' # annotate line graphs with labels on the right
-#' library(tidyverse)
+#' library(dplyr)
+#' library(tidyr)
 #' x <- seq(0, 10, .1)
 #' d <- data.frame(x,
 #'                 linear = x,
