@@ -5,7 +5,7 @@
 \title{Generates a canvas onto which one can draw axis-like objects.}
 \usage{
 axis_canvas(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL,
-  ylim = NULL)
+  ylim = NULL, coord_flip = FALSE)
 }
 \arguments{
 \item{plot}{The plot defining the x and/or y axis range for the axis canvas.}
@@ -21,6 +21,9 @@ if the x axis is copied over from \code{plot}.}
 
 \item{ylim}{(optional) Vector of two numbers specifying the limits of the y axis. Ignored
 if the y axis is copied over from \code{plot}.}
+
+\item{coord_flip}{(optional) If \code{true}, flips the coordinate system and applies x limits to
+the y axis and vice versa. Useful in combination with \link{ggplot2}'s \code{\link[=coord_flip]{coord_flip()}} function.}
 }
 \description{
 This function takes an existing \link{ggplot2} plot and copies one or both of the axis into a new plot.
