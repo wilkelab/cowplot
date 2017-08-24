@@ -84,6 +84,8 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' if the x axis is copied over from `plot`.
 #' @param ylim (optional) Vector of two numbers specifying the limits of the y axis. Ignored
 #' if the y axis is copied over from `plot`.
+#' @param coord_flip (optional) If `true`, flips the coordinate system and applies x limits to
+#'   the y axis and vice versa. Useful in combination with [ggplot2]'s [coord_flip()] function.
 #' @examples
 #' # annotate line graphs with labels on the right
 #' library(dplyr)
@@ -135,7 +137,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' ggdraw(p2)
 #' }
 #' @export
-axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL, ylim = NULL) {
+axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = NULL, ylim = NULL, coord_flip = FALSE) {
   xlimits = switch(axis,
                    x = get_scale_limits(layer_scales(plot)$x),
                    xy = get_scale_limits(layer_scales(plot)$x),
@@ -147,6 +149,12 @@ axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = N
                    xy = get_scale_limits(layer_scales(plot)$y),
                    yx = get_scale_limits(layer_scales(plot)$y),
                    ylim)
+
+  if (coord_flip) {
+    temp <- xlimits
+    xlimits <- ylimits
+    ylimits <- xlimits
+  }
 
   ggplot(data = data, mapping = mapping) +
     scale_x_continuous(limits = xlimits, expand = c(0, 0)) +
