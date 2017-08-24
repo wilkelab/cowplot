@@ -153,7 +153,7 @@ axis_canvas <- function(plot, axis = "y", data = NULL, mapping = aes(), xlim = N
   if (coord_flip) {
     temp <- xlimits
     xlimits <- ylimits
-    ylimits <- xlimits
+    ylimits <- temp
   }
 
   ggplot(data = data, mapping = mapping) +
