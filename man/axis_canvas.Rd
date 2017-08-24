@@ -66,22 +66,19 @@ paxis <- axis_canvas(pmain, axis = "x", data = label_data, mapping = aes(x = x))
   geom_text(aes(label = Species, y = 0.5), hjust = 0.5, vjust = 0.5, size = 11/.pt)
 ggdraw(insert_xaxis_grob(pmain, paxis, grid::unit(.07, "null"),
                          position = "bottom"))
-\donttest{
+
 # add marginal density distributions to plot
-library(ggstance) # for stat_xdensity()
-library(ggjoy) # geom_ridgeline() and geom_vridgeline()
 pmain <- ggplot(iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + geom_point()
 
 xdens <- axis_canvas(pmain, axis = "x") +
-  geom_ridgeline(data=iris, aes(x=Sepal.Length, y=0, height=..density.., fill=Species),
-                 stat="xdensity", alpha=0.7, size=.2, trim=FALSE)
+  geom_density(data=iris, aes(x=Sepal.Length, fill=Species), alpha=0.7, size=.2)
 
-ydens <- axis_canvas(pmain, axis = "y") +
-  geom_vridgeline(data=iris, aes(y=Sepal.Width, x=0, width=..density.., fill=Species),
-                  stat="ydensity", alpha=0.7, size=.2, trim=FALSE)
+# need to set `coord_flip = TRUE` if you plan to use `coord_flip()`
+ydens <- axis_canvas(pmain, axis = "y", coord_flip = TRUE) +
+  geom_density(data=iris, aes(x=Sepal.Width, fill=Species), alpha=0.7, size=.2) +
+  coord_flip()
 
 p1 <- insert_xaxis_grob(pmain, xdens, grid::unit(.2, "null"), position = "top")
 p2 <- insert_yaxis_grob(p1, ydens, grid::unit(.2, "null"), position = "right")
 ggdraw(p2)
-}
 }
