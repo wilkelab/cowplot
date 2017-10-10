@@ -26,30 +26,43 @@ draw_line <- function(x, y, ...){
             ...)
 }
 
-#' Draw text.
+#' Draw multiple text-strings in one go.
 #'
 #' This is a convenience function to plot multiple pieces of text at the same time. It cannot
 #' handle mathematical expressions, though. For those, use \code{draw_label}.
 #'
-#' Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in
+#' Note that font sizes are scaled by a factor of 2.85, so sizes agree with those of
 #' the theme. This is different from \code{geom_text} in ggplot2.
 #'
 #' By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
-#' @param text Character or expression vector specifying the text to be written.
+#' 
+#' For a full list of ... options, see  \code{\link{geom_label}}.
+#' 
+#' @param text A vector of strings (not (yet) expressions) specifying the text(s) to be written.
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
+#' @param hjust (default = .5)
+#' @param vjust (default = .5)
 #' @param size Font size of the text to be drawn.
 #' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
+#' @seealso \code{\link{draw_label}}
 #' @examples
-#' ggdraw() + draw_text("Hello World!")
+#' # Draw onto a 1*1 piece of paper
+#' ggdraw() + draw_text("Hello World!", x = .5, y = .5)
+#' #
+#' # Adorn a plot from the famous Anscombe data set of "identical" data.
+#' p = qplot(x= x1, y= y1, geom = c("smooth", "point"), data = anscombe)
+#' p + draw_text(c("Hello World!", "to be or not to be", "over and out"), x = 8:10, y=5:7, hjust= 0)
 #' @export
-draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
+draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = .5, vjust = .5, ...){
   geom_text(data = data.frame(text, x, y),
-            aes(label = text, x = x, y = y),
-            size = size / .pt, # scale font size to match size in theme definition
+            aes(x = x, y = y, label = text),
+            size = (size / .pt), # scale font size to match size in theme definition
             inherit.aes = FALSE,
+			hjust = hjust, 
+			vjust = vjust,
             ...)
 }
 
