@@ -133,14 +133,15 @@ draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 1
 
 #' Add a label to a figure
 #'
-#' This function is similar to \code{draw_plot_label}, just with slightly different arguments and defaults. The main purpose of this
-#' function is to add labels specifying extra information about the figure, such as "Figure 1", which is sometimes useful.
+#' The main purpose of this function is to add labels specifying extra information about
+#' the figure, such as "Figure 1", or "A" - often useful in cowplots with more than
+#' one pane. The function is similar to \code{draw_plot_label}.
 #' @param label Label to be drawn
 #' @param position Position of the label, can be one of "top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right". Default is "top.left"
 #' @param size (optional) Size of the label to be drawn. Default is the text size of the current theme
 #' @param fontface (optional) Font face of the label to be drawn. Default is the font face of the current theme
 #' @param ... other arguments passed to \code{draw_plot_label}
-#'
+#' @seealso \code{\link{draw_plot_label}}
 #' @examples
 #'
 #' p1 <- qplot(1:10, 1:10)
