@@ -61,10 +61,10 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
 #' @param label String or plotmath expression to be drawn.
-#' @param x The x location of the label.
-#' @param y The y location of the label.
-#' @param hjust Horizontal justification
-#' @param vjust Vertical justification
+#' @param x The x location (origin) of the label.
+#' @param y The y location (origin) of the label.
+#' @param hjust Horizontal justification. Default = .5 (centred on x). 0 = flush-left at x, 1 = flush-right.
+#' @param vjust Vertical justification. Default = .5 (centred on y). 0 = baseline at y, 1= ascender at y.
 #' @param fontfamily The font family
 #' @param fontface The font face ("plain", "bold", etc.)
 #' @param colour Text color
@@ -72,15 +72,34 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, ...){
 #' @param angle Angle at which text is drawn
 #' @param lineheight Line height of text
 #' @param alpha The alpha value of the text
+#' @seealso \code{\link{ggdraw}}
 #' @examples
+#' # setup plot and a label (regression description)
 #' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
 #' c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
 #' label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
 #'                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
-#' # adding label via ggdraw, in the ggdraw coordinates
-#' ggdraw(p) + draw_label(label, .7, .9)
-#' # adding label directly to plot, in the data coordinates
-#' p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
+#' 
+#' # Add label to plot, centered on {x,y} (in data coordinates)
+#' p + draw_label(label, x = 20, y = 400)
+#' # Add label to plot in data coordinates, flush-left at x, baseline at y.
+#' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 0)
+#'
+#' # Add label to plot. Data coordinates, drawing rightward 
+#' # from x, with ascenders of text touching y.
+#' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 1)
+#' 
+#' 
+# ===================================================
+# = Add labels via ggdraw. Uses ggdraw coordinates. =
+# ===================================================
+#' # ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).
+#' ggdraw(p) + draw_label("Centred on 70% of x, 90% of y height", x = .7, y = .9)
+#' labstr = "bottom left at {0%, 0%} of the SHEET, not the plot!"
+#' p = ggdraw(p) + draw_label(labstr, x = 0, y = 0, hjust = 0, vjust=0)
+#' p = p + draw_label("top right at {1,1}", x = 1, y = 1, hjust = 1, vjust=1)
+#' p = p + draw_label("bottom left at {.4,.4}", x = .4, y = .4, hjust = 0, vjust=0)
+#' p + draw_label("centred on at {.5,.5}", x = .5, y = .5, hjust = .5, vjust=.5)
 #' @export
 draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
                     fontfamily = "", fontface = "plain", colour = "black", size = 14,
