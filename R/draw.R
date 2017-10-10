@@ -40,7 +40,7 @@ draw_line <- function(x, y, ...){
 #' 
 #' For a full list of ... options, see  \code{\link{geom_label}}.
 #' 
-#' @param text A vector of strings (not (yet) expressions) specifying the text(s) to be written.
+#' @param text A vector of Character (not expressions) specifying the string(s) to be written.
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
 #' @param hjust (default = 0.5)
@@ -52,7 +52,7 @@ draw_line <- function(x, y, ...){
 #' # Draw onto a 1*1 drawing surface
 #' ggdraw() + draw_text("Hello World!", x = 0.5, y = 0.5)
 #' #
-#' # Adorn a plot from the famous Anscombe data set of "identical" data.
+#' # Adorn a plot from the Anscombe data set of "identical" data.
 #' p = qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
 #' threeStrings = c("Hello World!", "to be or not to be", "over and out")
 #' p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
