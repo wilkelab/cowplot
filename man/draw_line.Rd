@@ -2,7 +2,7 @@
 % Please edit documentation in R/draw.R
 \name{draw_line}
 \alias{draw_line}
-\title{Draw a line.}
+\title{Draw a line from connected points}
 \usage{
 draw_line(x, y, ...)
 }
@@ -11,13 +11,19 @@ draw_line(x, y, ...)
 
 \item{y}{Vector of y coordinates.}
 
-\item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.}
+\item{...}{geom_path parameters such as \code{colour}, \code{alpha}, \code{size}, etc.}
 }
 \description{
-This is a convenience function. It's just a thin wrapper around \code{geom_line}.
+Provide a sequence of x values and accompanying y values to draw a line on a plot.
+}
+\details{
+This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
 }
 \examples{
-ggdraw() + draw_line(c(0.2, 0.7, 0.7, 0.3),
-                     c(0.1, 0.3, 0.9, 0.8),
+ggdraw() + draw_line(x = c(0.2, 0.7, 0.7, 0.3),
+                     y = c(0.1, 0.3, 0.9, 0.8),
                      color = "blue", size = 2)
+}
+\seealso{
+\code{\link{geom_path}}, \code{\link{ggdraw}}
 }

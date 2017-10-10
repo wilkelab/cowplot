@@ -2,18 +2,23 @@
 % Please edit documentation in R/draw.R
 \name{draw_text}
 \alias{draw_text}
-\title{Draw text.}
+\title{Draw multiple text-strings in one go.}
 \usage{
-draw_text(text, x = 0.5, y = 0.5, size = 14, ...)
+draw_text(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5,
+  ...)
 }
 \arguments{
-\item{text}{Character or expression vector specifying the text to be written.}
+\item{text}{A vector of strings (not (yet) expressions) specifying the text(s) to be written.}
 
 \item{x}{Vector of x coordinates.}
 
 \item{y}{Vector of y coordinates.}
 
 \item{size}{Font size of the text to be drawn.}
+
+\item{hjust}{(default = .5)}
+
+\item{vjust}{(default = .5)}
 
 \item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
@@ -22,13 +27,19 @@ This is a convenience function to plot multiple pieces of text at the same time.
 handle mathematical expressions, though. For those, use \code{draw_label}.
 }
 \details{
-Note that font sizes get scaled by a factor of 2.85, so sizes given here agree with font sizes used in
+Note that font sizes are scaled by a factor of 2.85, so sizes agree with those of
 the theme. This is different from \code{geom_text} in ggplot2.
 
 By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 specify.
+
+For a full list of ... options, see  \code{\link{geom_label}}.
 }
 \examples{
-ggdraw() + draw_text("Hello World!")
+ggdraw() + draw_text(c("Hello World!", "to be or not to be", "over and out"), x = 1:3, y=1:3)
+ggdraw() + draw_text("Hello World!", x = 1, y = 2)
+}
+\seealso{
+\code{\link{draw_label}}
 }
