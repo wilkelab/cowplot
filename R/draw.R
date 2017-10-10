@@ -43,20 +43,21 @@ draw_line <- function(x, y, ...){
 #' @param text A vector of strings (not (yet) expressions) specifying the text(s) to be written.
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
-#' @param hjust (default = .5)
-#' @param vjust (default = .5)
+#' @param hjust (default = 0.5)
+#' @param vjust (default = 0.5)
 #' @param size Font size of the text to be drawn.
 #' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.
 #' @seealso \code{\link{draw_label}}
 #' @examples
-#' # Draw onto a 1*1 piece of paper
-#' ggdraw() + draw_text("Hello World!", x = .5, y = .5)
+#' # Draw onto a 1*1 drawing surface
+#' ggdraw() + draw_text("Hello World!", x = 0.5, y = 0.5)
 #' #
 #' # Adorn a plot from the famous Anscombe data set of "identical" data.
-#' p = qplot(x= x1, y= y1, geom = c("smooth", "point"), data = anscombe)
-#' p + draw_text(c("Hello World!", "to be or not to be", "over and out"), x = 8:10, y=5:7, hjust= 0)
+#' p = qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
+#' threeStrings = c("Hello World!", "to be or not to be", "over and out")
+#' p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
 #' @export
-draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = .5, vjust = .5, ...){
+draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5, ...){
   geom_text(data = data.frame(text, x, y),
             aes(x = x, y = y, label = text),
             size = (size / .pt), # scale font size to match size in theme definition
@@ -79,8 +80,8 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = .5, vjust = .5,
 #' @param label String or plotmath expression to be drawn.
 #' @param x The x location (origin) of the label.
 #' @param y The y location (origin) of the label.
-#' @param hjust Horizontal justification. Default = .5 (centred on x). 0 = flush-left at x, 1 = flush-right.
-#' @param vjust Vertical justification. Default = .5 (centred on y). 0 = baseline at y, 1= ascender at y.
+#' @param hjust Horizontal justification. Default = 0.5 (centered on x). 0 = flush-left at x, 1 = flush-right.
+#' @param vjust Vertical justification. Default = 0.5 (centered on y). 0 = baseline at y, 1 = ascender at y.
 #' @param fontfamily The font family
 #' @param fontface The font face ("plain", "bold", etc.)
 #' @param colour Text color
@@ -91,8 +92,8 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = .5, vjust = .5,
 #' @seealso \code{\link{ggdraw}}
 #' @examples
 #' # setup plot and a label (regression description)
-#' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
-#' c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
+#' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(color = "blue") + background_grid(minor = 'none')
+#' c <- cor.test(mtcars$mpg, mtcars$disp, method = 'sp')
 #' label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
 #'                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
 #' 
@@ -105,17 +106,14 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = .5, vjust = .5,
 #' # from x, with ascenders of text touching y.
 #' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 1)
 #' 
-#' 
-# ===================================================
-# = Add labels via ggdraw. Uses ggdraw coordinates. =
-# ===================================================
+#' # Add labels via ggdraw. Uses ggdraw coordinates.
 #' # ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).
-#' ggdraw(p) + draw_label("Centred on 70% of x, 90% of y height", x = .7, y = .9)
+#' ggdraw(p) + draw_label("centered on 70% of x, 90% of y height", x = 0.7, y = 0.9)
 #' labstr = "bottom left at {0%, 0%} of the SHEET, not the plot!"
-#' p = ggdraw(p) + draw_label(labstr, x = 0, y = 0, hjust = 0, vjust=0)
-#' p = p + draw_label("top right at {1,1}", x = 1, y = 1, hjust = 1, vjust=1)
-#' p = p + draw_label("bottom left at {.4,.4}", x = .4, y = .4, hjust = 0, vjust=0)
-#' p + draw_label("centred on at {.5,.5}", x = .5, y = .5, hjust = .5, vjust=.5)
+#' p = ggdraw(p) + draw_label(labstr, x = 0, y = 0, hjust = 0, vjust = 0)
+#' p = p + draw_label("top right at {1,1}", x = 1, y = 1, hjust = 1, vjust = 1)
+#' p = p + draw_label("bottom left at {.4,.4}", x = 0.4, y = 0.4, hjust = 0, vjust = 0)
+#' p + draw_label("centered on at {.5,.5}", x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5)
 #' @export
 draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
                     fontfamily = "", fontface = "plain", colour = "black", size = 14,
@@ -151,7 +149,7 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 #' @param colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
 #' @param ... Other arguments to be handed to \code{draw_text}.
 #' @export
-draw_plot_label <- function(label, x=0, y=1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold',
+draw_plot_label <- function(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold',
                             family = NULL, colour = NULL, ...){
   if (is.null(family)) {
     family <- theme_get()$text$family
@@ -246,7 +244,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'  (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).
 #' @examples
 #' # Use image as plot background
-#' p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+#' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
 #' ggdraw() +
 #'   draw_image("http://jeroen.github.io/images/tiger.svg") +
 #'   draw_plot(p + theme(legend.box.background = element_rect(color = "white")))
@@ -256,14 +254,15 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' img <- magick::image_transparent(img, color = "white")
 #' img2 <- magick::image_charcoal(img)
 #' img2 <- magick::image_transparent(img2, color = "white")
-#' ggplot(data.frame(x=1:3, y=1:3), aes(x, y)) +
+#' ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
 #'   geom_point(size = 3) +
 #'   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
-#'   draw_image(img, x=1, y=1, scale = .9) +
-#'   draw_image(img2, x=2, y=2, scale = .9)
+#'   draw_image(img , x = 1, y = 1, scale = .9) +
+#'   draw_image(img2, x = 2, y = 2, scale = .9)
 #'
 #' # Make grid with plot and image
-#' p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+#' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+#'   geom_density(alpha = 0.7)
 #' p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
 #' plot_grid(p, p2, labels = "AUTO")
 #' @export
@@ -404,13 +403,12 @@ annotation_id <- local({
 #' ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
 #' @export
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
-
-  d <- data.frame(x=0:1, y=0:1) # dummy data
-  p <- ggplot(d, aes_string(x="x", y="y")) + # empty plot
+  d <- data.frame(x = 0:1, y = 0:1) # dummy data
+  p <- ggplot(d, aes_string(x = "x", y = "y")) + # empty plot
     scale_x_continuous(limits = xlim, expand = c(0, 0)) +
     scale_y_continuous(limits = ylim, expand = c(0, 0)) +
     theme_nothing() + # with empty theme
-    labs(x=NULL, y=NULL) # and absolutely no axes
+    labs(x = NULL, y = NULL) # and absolutely no axes
 
   if (!is.null(plot)){
     p <- p + draw_plot(plot)
