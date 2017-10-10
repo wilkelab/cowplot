@@ -4,16 +4,19 @@
 
 
 
-#' Draw a line.
+#' Draw a line from connected points
 #'
-#' This is a convenience function. It's just a thin wrapper around \code{geom_line}.
+#' Provide a sequence of x values and accompanying y values to draw a line on a plot.
+#' 
+#' This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
 #'
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
-#' @param ... Style parameters, such as \code{colour}, \code{alpha}, \code{size}, etc.
+#' @param ... geom_path parameters such as \code{colour}, \code{alpha}, \code{size}, etc.
+#' @seealso \code{\link{geom_path}}, \code{\link{ggdraw}}
 #' @examples
-#' ggdraw() + draw_line(c(0.2, 0.7, 0.7, 0.3),
-#'                      c(0.1, 0.3, 0.9, 0.8),
+#' ggdraw() + draw_line(x = c(0.2, 0.7, 0.7, 0.3),
+#'                      y = c(0.1, 0.3, 0.9, 0.8),
 #'                      color = "blue", size = 2)
 #' @export
 draw_line <- function(x, y, ...){
