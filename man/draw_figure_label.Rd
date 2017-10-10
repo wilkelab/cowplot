@@ -50,7 +50,7 @@ ggdraw(p2) + draw_figure_label(label = "Figure 1", position = "bottom.right", si
 
 }
 \seealso{
-draw_plot_label
+\code{\link{draw_plot_label}}
 }
 \author{
 Ulrik Stervbo (ulrik.stervbo @ gmail.com)
