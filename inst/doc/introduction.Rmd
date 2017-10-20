@@ -200,7 +200,7 @@ ggdraw(plot.mpg) +
 
 Note that placing a plot on top of annotations only makes sense if the plot background is transparent. This is one of the main differences between `theme_cowplot()` and `theme_classic()`. If you tried the same example with `theme_classic()`, the gray boxes underneath the plot would not show.
 
-Finally, the `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with an inset plotted inside a larger graph.
+The `draw_plot()` function also allows us to place graphs at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with an inset plotted inside a larger graph.
 ```{r message=FALSE, fig.width=7, fig.height=6}
 # plot.mpg and plot.diamonds were defined earlier
 library(viridis)
@@ -211,3 +211,37 @@ ggdraw() +
   draw_plot_label(c("A", "B"), c(0, 0.5), c(1, 0.92), size = 15)
 ```
 
+We can also combine plots and images, using the function `draw_image()`. This function, which requires the **magick** package to be installed, can take images in many different formats and combine them with **ggplot2** plots. For example, we can use an image as a plot background:
+
+
+```{r message=FALSE}
+p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+ggdraw() +
+  draw_image("http://jeroen.github.io/images/tiger.svg") +
+  draw_plot(p)
+```
+
+Or we can manipulate images and draw them in plot coordinates:
+
+```{r message=FALSE, results="hide"}
+img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
+img <- magick::image_transparent(img, color = "white")
+img2 <- magick::image_charcoal(img)
+img2 <- magick::image_transparent(img2, color = "white")
+```
+
+```{r message=FALSE}
+ggplot(data.frame(x=1:3, y=1:3), aes(x, y)) +
+  geom_point(size = 3) +
+  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
+  draw_image(img, x=1, y=1, scale = .9) +
+  draw_image(img2, x=2, y=2, scale = .9)
+```
+
+We can also make a plot grid with a regular plot and an image:
+
+```{r message=FALSE, fig.width=7, fig.height=2.5}
+p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
+p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
+plot_grid(p, p2, labels = "AUTO")
+```
