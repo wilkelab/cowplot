@@ -154,9 +154,9 @@ theme_nothing <- function(base_size = 14, base_family = ""){
     )
 }
 
-#' Create a completely empty theme
+#' Create a theme for map plotting
 #'
-#' The theme created by this function is useful for plotting maps with cowplot defaults. Differs from `theme_nothing()` by preserving legends and facetting ability.
+#' The theme created by this function is useful for plotting maps with cowplot default sizing.
 #' @param base_size Overall font size. Default is 14.
 #' @param base_family Base font family.
 #' @return The theme.
