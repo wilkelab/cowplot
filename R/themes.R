@@ -154,6 +154,25 @@ theme_nothing <- function(base_size = 14, base_family = ""){
     )
 }
 
+#' Create a completely empty theme
+#'
+#' The theme created by this function is useful for plotting maps with cowplot defaults. Differs from `theme_nothing()` by preserving legends and facetting ability.
+#' @param base_size Overall font size. Default is 14.
+#' @param base_family Base font family.
+#' @return The theme.
+#' @examples
+#' usa_data = map_data("usa")
+#' ggplot(usa_data, aes(long,lat,group=region)) + geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long,lat, fill = region)) + geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long,lat, fill = region)) + facet_wrap(~region, scales = "free") + geom_polygon() + theme_map()
+#' @export
+theme_map <- function(base_size = 14, base_family = ""){
+  # work based off of theme_void
+  theme_void(base_size = base_size, base_family = base_family)
+}
+
+
+
 #' Add/modify/remove the background grid in a ggplot2 plot
 #'
 #' This function provides a simple way to modify the background grid in ggplot2. It
