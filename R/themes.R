@@ -162,9 +162,9 @@ theme_nothing <- function(base_size = 14, base_family = ""){
 #' @return The theme.
 #' @examples
 #' usa_data = map_data("usa")
-#' ggplot(usa_data, aes(long,lat,group=region)) + geom_polygon() + theme_map()
-#' ggplot(usa_data, aes(long,lat, fill = region)) + geom_polygon() + theme_map()
-#' ggplot(usa_data, aes(long,lat, fill = region)) + facet_wrap(~region, scales = "free") + geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long, lat, group=region)) + geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long, lat, fill = region)) + geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long, lat, fill = region)) + facet_wrap(~region, scales = "free") + geom_polygon() + theme_map()
 #' @export
 theme_map <- function(base_size = 14, base_family = ""){
   # work based off of theme_void
