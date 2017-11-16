@@ -1,18 +1,25 @@
-This is a major improvement that fixes numerous bugs and adds two substantial new features.
+The package version I submitted yesterday did not build successfully when the magick package wasn't installed: https://cran.r-project.org/web/checks/check_results_cowplot.html This submission fixes that issue.
+
+I have also fixed the problem (noted yesterday) of examples that take longer than 10s to run. No other changes were made.
 
 ## Test environments
-* R devel and R 3.4.2 on win-builder [ via devtools::build_win() ]
+* R devel on win-builder [ via devtools::build_win() ]
 * local OS X install x86_64-apple-darwin15.6.0 (64-bit), R 3.4.2
 
 ## R CMD check results
 There were no ERRORs or WARNINGs.
 
-There is one NOTE, about spelling:
-Possibly mis-spelled words in DESCRIPTION:
-  Wilke (11:55)
-  Wilke's (12:45)
+There was one NOTE:
+Days since last update: 0
 
-Both spellings are correct.
+I'm resubmitting so quickly because I received a request to do so by Brian Ripley:
+
+"You have added Suggests: magick but not used it conditionally as required in §1.1.3.1 of the manual.
+
+ImageMagick is a large install; moreover the C++ interface which 'magick' unnecessarily requires is not normally installed.
+
+Please correct ASAP once all the results are in."
+
 
 ## Downstream dependencies
 Seem fine, according to devtools::revdep_check().

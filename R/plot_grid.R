@@ -267,19 +267,21 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' # manually setting the number of rows, auto-generate upper-case labels
 #' plot_grid(p1, p2, p3, nrow=3, labels="AUTO", label_size=12, align="v")
 #'
-#' # missing plots in some grid locations, auto-generate lower-case labels
-#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
-#'  labels="auto", label_size=12, align="v")
-#'
 #' # making rows and columns of different widths/heights
 #' plot_grid(p1, p2, p3, p4, align='hv', rel_heights=c(2,1), rel_widths=c(1,2))
 #'
 #' # aligning complex plots in a grid
 #' plot_grid(p1, p5, align="h", axis="b", nrow = 1, rel_widths = c(1,2))
 #'
+#' # more examples
+#' \donttest{
+#' #' # missing plots in some grid locations, auto-generate lower-case labels
+#' plot_grid(p1, NULL, NULL, p2, p3, NULL, ncol=2,
+#'  labels="auto", label_size=12, align="v")
+#'
 #' # can align top of plotting area as well as bottom
 #' plot_grid(p1, p5, align="h", axis="tb", nrow = 1, rel_widths = c(1,2))
-#' \donttest{
+#'
 #' # other types of plots not generated with ggplot
 #' dev.new()
 #' par(xpd = NA, # switch off clipping, necessary to always see axis labels

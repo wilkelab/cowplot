@@ -9,7 +9,7 @@ draw_image(image, x = 0, y = 0, width = 1, height = 1, scale = 1,
 }
 \arguments{
 \item{image}{The image to place. Can be a file path, a URL, or a raw vector with image data,
-as in \code{\link[magick:image_read]{magick::image_read()}}. Can also be an image previously created by \code{\link[magick:image_read]{magick::image_read()}} and
+as in \code{magick::image_read()}. Can also be an image previously created by \code{magick::image_read()} and
 related functions.}
 
 \item{x}{The x location of the lower left corner of the image.}
@@ -31,7 +31,8 @@ Note that clipping doesn't always work as expected, due to limitations of the gr
 }
 \description{
 Places an image somewhere onto the drawing canvas. By default, coordinates run from
-0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
+0 to 1, and the point (0, 0) is in the lower left corner of the canvas. Requires the \code{magick}
+package to work, and fails gracefully if that package is not installed.
 }
 \examples{
 # Use image as plot background
@@ -40,19 +41,21 @@ ggdraw() +
   draw_image("http://jeroen.github.io/images/tiger.svg") +
   draw_plot(p + theme(legend.box.background = element_rect(color = "white")))
 
-# Manipulate images and draw in plot coordinates
-img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
-img <- magick::image_transparent(img, color = "white")
-img2 <- magick::image_negate(img)
-ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
-  geom_point(size = 3) +
-  geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
-  draw_image(img , x = 1, y = 1, scale = .9) +
-  draw_image(img2, x = 2, y = 2, scale = .9)
-
 # Make grid with plot and image
 p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
   geom_density(alpha = 0.7)
 p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
 plot_grid(p, p2, labels = "AUTO")
+
+# Manipulate images and draw in plot coordinates
+if (requireNamespace("magick", quietly = TRUE)){
+  img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
+  img <- magick::image_transparent(img, color = "white")
+  img2 <- magick::image_negate(img)
+  ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
+    geom_point(size = 3) +
+    geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
+    draw_image(img , x = 1, y = 1, scale = .9) +
+    draw_image(img2, x = 2, y = 2, scale = .9)
+}
 }
