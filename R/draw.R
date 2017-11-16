@@ -7,7 +7,7 @@
 #' Draw a line from connected points
 #'
 #' Provide a sequence of x values and accompanying y values to draw a line on a plot.
-#' 
+#'
 #' This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
 #'
 #' @param x Vector of x coordinates.
@@ -37,9 +37,9 @@ draw_line <- function(x, y, ...){
 #' By default, the x and y coordinates specify the center of the text box. Set \code{hjust = 0, vjust = 0} to specify
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
-#' 
+#'
 #' For a full list of ... options, see  \code{\link{geom_label}}.
-#' 
+#'
 #' @param text A vector of Character (not expressions) specifying the string(s) to be written.
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
@@ -62,7 +62,7 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
             aes(x = x, y = y, label = text),
             size = (size / .pt), # scale font size to match size in theme definition
             inherit.aes = FALSE,
-			hjust = hjust, 
+			hjust = hjust,
 			vjust = vjust,
             ...)
 }
@@ -96,16 +96,16 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
 #' c <- cor.test(mtcars$mpg, mtcars$disp, method = 'sp')
 #' label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
 #'                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
-#' 
+#'
 #' # Add label to plot, centered on {x,y} (in data coordinates)
 #' p + draw_label(label, x = 20, y = 400)
 #' # Add label to plot in data coordinates, flush-left at x, baseline at y.
 #' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 0)
 #'
-#' # Add label to plot. Data coordinates, drawing rightward 
+#' # Add label to plot. Data coordinates, drawing rightward
 #' # from x, with ascenders of text touching y.
 #' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 1)
-#' 
+#'
 #' # Add labels via ggdraw. Uses ggdraw coordinates.
 #' # ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).
 #' ggdraw(p) + draw_label("centered on 70% of x, 90% of y height", x = 0.7, y = 0.9)
@@ -252,8 +252,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' # Manipulate images and draw in plot coordinates
 #' img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
 #' img <- magick::image_transparent(img, color = "white")
-#' img2 <- magick::image_charcoal(img)
-#' img2 <- magick::image_transparent(img2, color = "white")
+#' img2 <- magick::image_negate(img)
 #' ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
 #'   geom_point(size = 3) +
 #'   geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +

@@ -8,7 +8,7 @@ draw_text(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5,
   ...)
 }
 \arguments{
-\item{text}{A vector of strings (not (yet) expressions) specifying the text(s) to be written.}
+\item{text}{A vector of Character (not expressions) specifying the string(s) to be written.}
 
 \item{x}{Vector of x coordinates.}
 
@@ -16,9 +16,9 @@ draw_text(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5,
 
 \item{size}{Font size of the text to be drawn.}
 
-\item{hjust}{(default = .5)}
+\item{hjust}{(default = 0.5)}
 
-\item{vjust}{(default = .5)}
+\item{vjust}{(default = 0.5)}
 
 \item{...}{Style parameters, such as \code{colour}, \code{alpha}, \code{angle}, \code{size}, etc.}
 }
@@ -37,8 +37,13 @@ specify.
 For a full list of ... options, see  \code{\link{geom_label}}.
 }
 \examples{
-ggdraw() + draw_text(c("Hello World!", "to be or not to be", "over and out"), x = 1:3, y=1:3)
-ggdraw() + draw_text("Hello World!", x = 1, y = 2)
+# Draw onto a 1*1 drawing surface
+ggdraw() + draw_text("Hello World!", x = 0.5, y = 0.5)
+#
+# Adorn a plot from the Anscombe data set of "identical" data.
+p = qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
+threeStrings = c("Hello World!", "to be or not to be", "over and out")
+p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
 }
 \seealso{
 \code{\link{draw_label}}

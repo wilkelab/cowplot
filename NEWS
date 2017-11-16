@@ -1,5 +1,6 @@
-cowplot 0.8.0.9000
+cowplot 0.9.0
 ----------------------------------------------------------------
+- Added a theme for maps, `theme_map()`. Code provided by Spencer Fox, https://github.com/sjfox.
 - Added `axis_canvas()` function and related functions to make
   marginal plots and plot annotations simpler
 - Now export the `plot_to_gtable` function which converts most

@@ -226,8 +226,7 @@ Or we can manipulate images and draw them in plot coordinates:
 ```{r message=FALSE, results="hide"}
 img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
 img <- magick::image_transparent(img, color = "white")
-img2 <- magick::image_charcoal(img)
-img2 <- magick::image_transparent(img2, color = "white")
+img2 <- magick::image_negate(img)
 ```
 
 ```{r message=FALSE}

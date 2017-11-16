@@ -4,7 +4,7 @@ cowplot – An add-on to the ggplot2 plotting package
 [![Build Status](https://travis-ci.org/wilkelab/cowplot.svg?branch=master)](https://travis-ci.org/wilkelab/cowplot)
 [![Coverage Status](https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg)](https://codecov.io/github/wilkelab/cowplot?branch=master)
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/cowplot)](https://CRAN.R-project.org/package=cowplot)
-[![CRAN\_Downloads\_Badge](http://cranlogs.r-pkg.org/badges/grand-total/cowplot?color=brightgreen)](http://cranlogs.r-pkg.org/downloads/total/last-month/cowplot)
+[![CRAN\_Downloads\_Badge](http://cranlogs.r-pkg.org/badges/cowplot)](http://cranlogs.r-pkg.org/downloads/total/last-month/cowplot)
 
 The cowplot package is meant to provide a publication-ready theme for ggplot2, one that requires a minimum amount of fiddling with sizes of axis labels, plot backgrounds, etc. It meets my personal needs; you may or may not like my style.
 
