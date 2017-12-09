@@ -38,5 +38,5 @@ specifying dimensions in pixels.}
 This function should behave just like \code{ggsave} from ggplot2,
 with the main difference being that by default it doesn't use the Dingbats
 font for pdf output. If you ever have trouble with this function, you can
-try using \code{ggplot2::ggsave()} instead.
+use \code{ggplot2::ggsave()} instead.
 }

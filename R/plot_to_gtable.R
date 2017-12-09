@@ -22,9 +22,9 @@ plot_to_gtable <- function(plot){
     else {
       # we convert the captured plot or output plot into a grob
       # to be safe, we have to save and restore the current graphics device
-      cur_dev <- dev.cur()
+      cur_dev <- grDevices::dev.cur()
       tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
-      dev.set(cur_dev)
+      grDevices::dev.set(cur_dev)
 
       u <- grid::unit(1, "null")
       gt <- gtable::gtable_col(NULL, list(tree), u, u)
@@ -40,7 +40,7 @@ plot_to_gtable <- function(plot){
     ## so to be absolutely sure, we also save the previous device and then restore it.
 
     # save currently active device
-    cur_dev <- dev.cur()
+    cur_dev <- grDevices::dev.cur()
     # open NULL pdf device
     grDevices::pdf(NULL)
     # convert plot to grob
@@ -48,7 +48,7 @@ plot_to_gtable <- function(plot){
     # close pdf device
     grDevices::dev.off()
     # restore previously active device
-    dev.set(cur_dev)
+    grDevices::dev.set(cur_dev)
 
     plot
   }

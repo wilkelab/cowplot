@@ -28,7 +28,7 @@ ggsave <- function(filename, plot = ggplot2::last_plot(), device = NULL, path = 
   # match ggsave_args to args provided
   args <- as.list(match.call())
   args[[1]] <- NULL # remove the function call
-  args <- args[na.omit(match(ggsave_args, names(args)))] # remove other args
+  args <- args[stats::na.omit(match(ggsave_args, names(args)))] # remove other args
 
   args_dotdotdot <- list(...)
 
