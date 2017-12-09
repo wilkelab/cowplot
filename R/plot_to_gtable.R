@@ -20,7 +20,12 @@ plot_to_gtable <- function(plot){
       gt
     }
     else {
+      # we convert the captured plot or output plot into a grob
+      # to be safe, we have to save and restore the current graphics device
+      cur_dev <- dev.cur()
       tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot))
+      dev.set(cur_dev)
+
       u <- grid::unit(1, "null")
       gt <- gtable::gtable_col(NULL, list(tree), u, u)
       # fix gtable clip setting
@@ -29,23 +34,21 @@ plot_to_gtable <- function(plot){
     }
   }
   else if (methods::is(plot, "ggplot")){
-    ## ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open this will save a blank page
-    ## in order to avoid saving this blank page to the final target device a NULL device is opened and closed here to *absorb* the blank plot
+    ## ggplotGrob must open a device and when a multiple page capable device (e.g. PDF) is open it will
+    ## save a blank page. To avoid this blank page, we open a NULL pdf device that will *absorb* the
+    ## blank plot. However, as part of this procedure, the wrong device can end up being the current one,
+    ## so to be absolutely sure, we also save the previous device and then restore it.
 
-    # catch_blank <- identical(names(grDevices::dev.cur()), 'pdf')  # is the current device `pdf()`
-
-    ## this problem arises even when the current device is not pdf, e.g. in R studio notebooks. Let's try to set
-    ## catch_blank to TRUE always and see if this causes other issues.
-
-    catch_blank <- TRUE
-
-    if (catch_blank)
-      grDevices::pdf(NULL)
-
+    # save currently active device
+    cur_dev <- dev.cur()
+    # open NULL pdf device
+    grDevices::pdf(NULL)
+    # convert plot to grob
     plot <- ggplot2::ggplotGrob(plot)
-
-    if (catch_blank)
-      grDevices::dev.off()
+    # close pdf device
+    grDevices::dev.off()
+    # restore previously active device
+    dev.set(cur_dev)
 
     plot
   }

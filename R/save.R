@@ -1,16 +1,9 @@
-# Much of the code in this file was copied verbatim from the ggplot2 source. Ugly, but
-# necessary to fix the dingbats issue.
-
-# *************************************************
-#                     Output
-# *************************************************
-
 #' Cowplot reimplementation of ggsave.
 #'
 #' This function should behave just like \code{ggsave} from ggplot2,
 #' with the main difference being that by default it doesn't use the Dingbats
 #' font for pdf output. If you ever have trouble with this function, you can
-#' try using \code{ggplot2::ggsave()} instead.
+#' use \code{ggplot2::ggsave()} instead.
 #' @param filename Filename of plot
 #' @param plot Plot to save, defaults to last plot displayed.
 #' @param device Device to use, automatically extract from file name extension.
@@ -26,7 +19,47 @@
 #'   specifying dimensions in pixels.
 #' @param ... Other arguments to be handed to the plot device.
 #' @export
-ggsave <- function(filename, plot = ggplot2::last_plot(),
+ggsave <- function(filename, plot = ggplot2::last_plot(), device = NULL, path = NULL, scale = 1,
+                        width = NA, height = NA, units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...) {
+
+  # arguments we want to hand off to ggplot2::ggsave only if explicitly provided
+  ggsave_args <- c("plot", "path", "scale", "width", "height", "units", "dpi", "limitsize")
+
+  # match ggsave_args to args provided
+  args <- as.list(match.call())
+  args[[1]] <- NULL # remove the function call
+  args <- args[na.omit(match(ggsave_args, names(args)))] # remove other args
+
+  args_dotdotdot <- list(...)
+
+  # if device isn't provided, try to infer from filename
+  if (is.null(device)) {
+    device <- tolower(tools::file_ext(filename))
+  }
+
+  if (identical(device, "pdf") || identical(device, grDevices::pdf)) {
+    # pdf device specified either by filename extension or by character string
+    # set useDingbats option unless provided
+
+    if (!"useDingbats" %in% names(args_dotdotdot))
+      args_dotdotdot <- append(args_dotdotdot, list(useDingbats = FALSE))
+
+  }
+
+  # combine all the args
+  args <- c(list(filename = filename), args, device = device, args_dotdotdot)
+
+  # call ggplot2::ggsave while saving and afterwards restoring the current graphics device
+  cur_dev <- grDevices::dev.cur()
+  x <- do.call(ggplot2::ggsave, args, envir = parent.frame())
+  grDevices::dev.set(cur_dev)
+  invisible(x)
+}
+
+
+# This was the previous implementation copying much of the ggplot2::ggsave
+# code over. This seems unnecessary.
+ggsave_old <- function(filename, plot = ggplot2::last_plot(),
                    device = NULL, path = NULL, scale = 1,
                    width = NA, height = NA, units = c("in", "cm", "mm"),
                    dpi = 300, limitsize = TRUE, ...) {
@@ -200,6 +233,7 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
     base_width <- base_height * base_aspect_ratio
   }
 
-  ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows, ...)
+  # make clear we're using the cowplot function, not the ggplot2 one
+  cowplot::ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows, ...)
 }
 
