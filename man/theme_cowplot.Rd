@@ -2,16 +2,19 @@
 % Please edit documentation in R/themes.R
 \name{theme_cowplot}
 \alias{theme_cowplot}
+\alias{theme_half_open}
 \title{Create the default cowplot theme}
 \usage{
 theme_cowplot(font_size = 14, font_family = "", line_size = 0.5)
+
+theme_half_open(font_size = 14, font_family = "", line_size = 0.5)
 }
 \arguments{
-\item{font_size}{Overall font size. Default is 14.}
+\item{font_size}{Overall font size.}
 
-\item{font_family}{Default font family.}
+\item{font_family}{Font family for plot title, axis titles and labels, legend texts, etc.}
 
-\item{line_size}{Default line size.}
+\item{line_size}{Line size for axis lines.}
 }
 \value{
 The theme.
@@ -19,6 +22,9 @@ The theme.
 \description{
 After loading the cowplot package, this theme will be the default
 for all graphs made with ggplot2.
+}
+\details{
+Both \code{theme_cowplot()} and \code{theme_half_open()} provide exactly the same styling.
 }
 \examples{
 qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)

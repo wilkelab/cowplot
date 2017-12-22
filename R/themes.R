@@ -7,9 +7,11 @@
 #' After loading the cowplot package, this theme will be the default
 #' for all graphs made with ggplot2.
 #'
-#' @param font_size Overall font size. Default is 14.
-#' @param font_family Default font family.
-#' @param line_size Default line size.
+#' Both `theme_cowplot()` and `theme_half_open()` provide exactly the same styling.
+#'
+#' @param font_size Overall font size.
+#' @param font_family Font family for plot title, axis titles and labels, legend texts, etc.
+#' @param line_size Line size for axis lines.
 #' @return The theme.
 #' @examples
 #' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
@@ -64,6 +66,92 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
     )
 }
 
+
+#' @rdname theme_cowplot
+#' @export
+theme_half_open <- theme_cowplot
+
+#' Minimalistic themes with grids
+#'
+#' Three minimalistic themes that provide either a full grid,
+#' a horizontal grid, or a vertical grid. Similar to [`theme_minimal()`], but with some
+#' stylistic differences. Most importantly, these themes do not draw minor grid lines.
+#' Also, font sizes are coordinated with [`theme_half_open()`] and with the defaults
+#' in the [`save_plot()`] function.
+#'
+#' `theme_minimal_grid()` provides a minimal grid theme. `theme_minimal_hgrid()` strips down
+#' this theme even further and draws only horizontal lines, and `theme_minimal_vgrid()`
+#' does the same for vertical lines.
+#'
+#' @param font_size Overall font size.
+#' @param font_family Font family for plot title, axis titles and labels, legend texts, etc.
+#' @param line_size Line size for grid lines.
+#' @param color Color of grid lines.
+#' @examples
+#'
+#' library(ggplot2)
+#'
+#' # theme_minimal_grid()
+#' ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) +
+#'   geom_point() + theme_minimal_grid()
+#'
+#' # theme_minimal_hgrid()
+#' ggplot(mtcars, aes(x = carb)) +
+#'   geom_bar(fill = "lightblue") +
+#'   scale_y_continuous(limits = c(0, 11.5), expand = c(0, 0)) +
+#'   theme_minimal_hgrid()
+#'
+#' # theme_minimal_vgrid()
+#' ggplot(mtcars, aes(x = carb)) +
+#'   geom_bar(fill = "lightblue") +
+#'   scale_y_continuous(limits = c(0, 11.5), expand = c(0, 0)) +
+#'   coord_flip() +
+#'   theme_minimal_vgrid()
+#' @export
+theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+  # Starts with theme_cowplot and then modifies some parts
+  theme_cowplot(font_size = font_size, font_family = font_family, line_size) %+replace%
+    theme(
+      # make grid lines
+      panel.grid.major   = element_line(colour = color,
+                                        size = line_size),
+
+      # adjust axis tickmarks
+      axis.ticks        = element_line(colour = color, size = line_size),
+
+      # no x or y axis lines
+      axis.line.x       = element_blank(),
+      axis.line.y       = element_blank()
+    )
+}
+
+#' @rdname theme_minimal_grid
+#' @export
+theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+  # Starts with theme_grid and then modifies some parts
+  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size, color) %+replace%
+    theme (
+      # no horizontal grid lines
+      panel.grid.major.y = element_blank(),
+
+      # add a y axis line
+      axis.line.y       = element_line(colour = color, size = line_size)
+    )
+}
+
+#' @rdname theme_minimal_grid
+#' @export
+theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+  # Starts with theme_grid and then modifies some parts
+  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size, color) %+replace%
+    theme (
+      # no vertical grid lines
+      panel.grid.major.x = element_blank(),
+
+      # add a x axis line
+      axis.line.x       = element_line(colour = color, size = line_size)
+    )
+}
 
 #' Create a completely empty theme
 #'

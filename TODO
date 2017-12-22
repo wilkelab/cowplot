@@ -1,6 +1,9 @@
 Things to fix or improve
 =============================
 - more regression tests are needed.
+- write vignette on themes
+- don't change theme on package loading, also requires adding a startup message and
+  changing the `theme_cowplot()` documentation.
 
 Ideas for further development
 =============================
