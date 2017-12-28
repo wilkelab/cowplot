@@ -33,13 +33,9 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
       #axis.title        = element_text(face = "bold"),
       axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
       axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
-      axis.title.x      = element_text(
-        margin = margin(t = small_size / 2, b = small_size / 4)
-      ),
-      axis.title.y      = element_text(
-        angle = 90,
-        margin = margin(r = small_size / 2, l = small_size / 4),
-      ),
+      axis.title.x      = element_text(margin = margin(t = small_size / 2, b = small_size / 4)),
+      axis.title.y      = element_text(angle = 90,
+                                       margin = margin(r = small_size / 2, l = small_size / 4)),
       axis.ticks        = element_line(colour = "black", size = line_size),
       axis.line         = element_line(colour = "black", size = line_size, lineend = "square"),
       # the following two lines are not needed for ggplot2 2.2.0 or later
@@ -55,12 +51,22 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
       panel.border      = element_blank(),
       panel.grid.major  = element_blank(),
       panel.grid.minor  = element_blank(),
-      strip.text        = element_text(size = rel(small_rel)),
-      strip.background  = element_rect(fill = "grey80", colour = "grey50", size = 0),
+      panel.spacing     = unit(half_line, "pt"),
+      strip.text        = element_text(size = rel(small_rel),
+                                       margin = margin(half_line, half_line, half_line, half_line)),
+      strip.background  = element_rect(fill = "grey80", colour = "grey50"),
       plot.background   = element_blank(),
       plot.title        = element_text(face = "bold",
                                        size = font_size,
+                                       hjust = 0, vjust = 1,
                                        margin = margin(b = half_line)),
+      plot.subtitle     = element_text(size = rel(small_rel),
+                                       hjust = 0, vjust = 1,
+                                       margin = margin(b = half_line * small_rel)),
+      plot.caption      = element_text(size = rel(small_rel),
+                                       hjust = 1, vjust = 1,
+                                       margin = margin(t = half_line * small_rel)),
+      plot.margin =        margin(half_line, half_line, half_line, half_line),
 
       complete = TRUE
     )
@@ -121,7 +127,9 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
 
       # no x or y axis lines
       axis.line.x       = element_blank(),
-      axis.line.y       = element_blank()
+      axis.line.y       = element_blank(),
+
+      complete = TRUE
     )
 }
 
@@ -135,7 +143,9 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
       panel.grid.major.y = element_blank(),
 
       # add a y axis line
-      axis.line.y       = element_line(colour = color, size = line_size)
+      axis.line.y       = element_line(colour = color, size = line_size),
+
+      complete = TRUE
     )
 }
 
@@ -149,30 +159,32 @@ theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5
       panel.grid.major.x = element_blank(),
 
       # add a x axis line
-      axis.line.x       = element_line(colour = color, size = line_size)
+      axis.line.x       = element_line(colour = color, size = line_size),
+
+      complete = TRUE
     )
 }
 
 #' Create a completely empty theme
 #'
 #' The theme created by this function shows nothing but the plot panel.
-#' @param base_size Overall font size. Default is 14.
-#' @param base_family Base font family.
+#' @param font_size Overall font size. Default is 14.
+#' @param font_family Base font family.
 #' @return The theme.
 #' @examples
 #' qplot(1:10, (1:10)^2) + theme_nothing()
 #' @export
-theme_nothing <- function(base_size = 14, base_family = ""){
+theme_nothing <- function(font_size = 14, font_family = ""){
   # work based off of theme_void just in case we forget anything or something
   # changes in underlying ggplot2 code
-  theme_void(base_size = base_size, base_family = base_family) %+replace%
+  theme_void(base_size = font_size, base_family = font_family) %+replace%
     theme(
       # Elements in this first block aren't used directly, but are inherited
       line = element_blank(),
       rect = element_blank(),
       text = element_text(
-        family = base_family, face = "plain",
-        colour = "black", size = base_size,
+        family = font_family, face = "plain",
+        colour = "black", size = font_size,
         lineheight = 0.9, hjust = 0.5, vjust = 0.5, angle = 0,
         margin = margin(), debug = FALSE
       ),
@@ -245,8 +257,8 @@ theme_nothing <- function(base_size = 14, base_family = ""){
 #' Create a theme for map plotting
 #'
 #' The theme created by this function is useful for plotting maps with cowplot default sizing.
-#' @param base_size Overall font size. Default is 14.
-#' @param base_family Base font family.
+#' @param font_size Overall font size. Default is 14.
+#' @param font_family Base font family.
 #' @return The theme.
 #' @examples
 #' usa_data = map_data("usa")
@@ -255,9 +267,30 @@ theme_nothing <- function(base_size = 14, base_family = ""){
 #' ggplot(usa_data, aes(long, lat, fill = region)) + facet_wrap(~region, scales = "free") +
 #'   geom_polygon() + theme_map()
 #' @export
-theme_map <- function(base_size = 14, base_family = ""){
-  # work based off of theme_void
-  theme_void(base_size = base_size, base_family = base_family)
+theme_map <- function(font_size = 14, font_family = ""){
+  # work based off of theme_cowplot to get font sizing right
+  theme_cowplot(font_size = font_size, font_family = font_family) %+replace%
+    theme(
+      line = element_blank(),
+      rect = element_blank(),
+
+      axis.line =          element_blank(),
+      axis.line.x =        NULL,
+      axis.line.y =        NULL,
+      axis.text =          element_blank(),
+      axis.text.x =        element_blank(),
+      axis.text.x.top =    element_blank(),
+      axis.text.y =        element_blank(),
+      axis.text.y.right =  element_blank(),
+      axis.ticks =         element_blank(),
+      axis.ticks.length =  unit(0, "pt"),
+      axis.title.x =       element_blank(),
+      axis.title.x.top =   element_blank(),
+      axis.title.y =       element_blank(),
+      axis.title.y.right = element_blank(),
+
+      complete = TRUE
+    )
 }
 
 
