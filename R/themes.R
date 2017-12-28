@@ -129,6 +129,9 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
       axis.line.x       = element_blank(),
       axis.line.y       = element_blank(),
 
+      # no filled background for facted plots
+      strip.background = element_blank(),
+
       complete = TRUE
     )
 }
