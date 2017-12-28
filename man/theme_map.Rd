@@ -4,12 +4,12 @@
 \alias{theme_map}
 \title{Create a theme for map plotting}
 \usage{
-theme_map(base_size = 14, base_family = "")
+theme_map(font_size = 14, font_family = "")
 }
 \arguments{
-\item{base_size}{Overall font size. Default is 14.}
+\item{font_size}{Overall font size. Default is 14.}
 
-\item{base_family}{Base font family.}
+\item{font_family}{Base font family.}
 }
 \value{
 The theme.
