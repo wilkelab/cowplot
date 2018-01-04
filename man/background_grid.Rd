@@ -5,8 +5,8 @@
 \title{Add/modify/remove the background grid in a ggplot2 plot}
 \usage{
 background_grid(major = c("xy", "x", "y", "only_minor", "none"),
-  minor = c("xy", "x", "y", "none"), size.major = 0.2, size.minor = 0.5,
-  colour.major = "grey90", colour.minor = "grey98")
+  minor = c("none", "xy", "x", "y"), size.major = 0.5, size.minor = 0.2,
+  colour.major = "grey90", colour.minor = "grey90")
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
@@ -27,4 +27,10 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 This function provides a simple way to modify the background grid in ggplot2. It
 doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
 creation of the most commonly needed variations.
+}
+\examples{
+ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+ geom_point() +
+ theme_half_open() +
+ background_grid()
 }
