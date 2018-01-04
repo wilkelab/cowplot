@@ -311,11 +311,16 @@ theme_map <- function(font_size = 14, font_family = ""){
 #' @param size.minor Size of the minor grid lines.
 #' @param colour.major Color of the major grid lines.
 #' @param colour.minor Color of the minor grid lines.
+#' @examples
+#' ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
+#'  geom_point() +
+#'  theme_half_open() +
+#'  background_grid()
 #' @export
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
-                            minor = c("xy", "x", "y", "none"),
-                            size.major = 0.2, size.minor = 0.5,
-                            colour.major = "grey90", colour.minor = "grey98"){
+                            minor = c("none", "xy", "x", "y"),
+                            size.major = 0.5, size.minor = 0.2,
+                            colour.major = "grey90", colour.minor = "grey90"){
 
   if (major[1] == "none") return(theme(panel.grid = element_blank()))
 
