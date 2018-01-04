@@ -1,5 +1,7 @@
 cowplot 0.9.2.9900
 ----------------------------------------------------------------
+- Change `background_grid()` defaults so they match the
+  new grid themes.
 - Added several new themes, including `theme_minimal_grid()`,
   `theme_minimal_hgrid()`, and `theme_minimal_vgrid()`. Also,
   `theme_cowplot()` is now also available as `theme_half_open()`.
