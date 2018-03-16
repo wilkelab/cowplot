@@ -41,8 +41,13 @@ plot_to_gtable <- function(plot){
 
     # save currently active device
     cur_dev <- grDevices::dev.cur()
-    # open NULL pdf device
-    grDevices::pdf(NULL)
+
+    # open NULL pdf device or (if available) Cairo raster device
+    if (requireNamespace("Cairo", quietly = TRUE)) {
+      Cairo::Cairo(type = "raster")
+    } else {
+      grDevices::pdf(NULL)
+    }
     # convert plot to grob
     plot <- ggplot2::ggplotGrob(plot)
     # close pdf device

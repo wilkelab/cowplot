@@ -24,6 +24,7 @@ Imports:
 License: GPL-2
 LazyData: true
 Suggests:
+    Cairo,
     covr,
     gridGraphics,
     knitr,
