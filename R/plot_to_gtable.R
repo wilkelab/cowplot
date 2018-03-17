@@ -4,6 +4,9 @@
 #' It is primarily meant to convert ggplot plots into gtables, but it will also take any grid
 #' object (grob), a recorded R base plot, or a function that generates an R base plot.
 #'
+#' To convert ggplot plots, the function needs to use a null graphics device. This can be set
+#' with [set_null_device()].
+#'
 #' @param plot The plot or other graphics object to convert into a gtable. Here, `plot` can be an
 #'   object of the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}},
 #'   \code{\link[grid]{grob}}, or \code{\link[gtable]{gtable}}. Alternatively, `plot` can be
@@ -41,16 +44,11 @@ plot_to_gtable <- function(plot){
 
     # save currently active device
     cur_dev <- grDevices::dev.cur()
-
-    # open NULL pdf device or (if available) Cairo raster device
-    if (requireNamespace("Cairo", quietly = TRUE)) {
-      Cairo::Cairo(type = "raster")
-    } else {
-      grDevices::pdf(NULL)
-    }
+    # open NULL device
+    null_dev_env$current()
     # convert plot to grob
     plot <- ggplot2::ggplotGrob(plot)
-    # close pdf device
+    # close null device
     grDevices::dev.off()
     # restore previously active device
     grDevices::dev.set(cur_dev)

@@ -1,5 +1,8 @@
 cowplot 0.9.2.9900
 ----------------------------------------------------------------
+- Added a function `set_null_device()` to customize the null graphics
+  device that is used in `ggdraw()`, `plot_grid()`, etc. There is no
+  one null device that always works, so customization is needed.
 - Minor tweaks to various legend layout parameters so that legends look
   better as the underlying theme font size is changed.
 - Change `background_grid()` defaults so they match the

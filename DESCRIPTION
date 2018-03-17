@@ -48,6 +48,7 @@ Collate:
     'plot_grid.R'
     'plot_to_gtable.R'
     'save.R'
+    'set_null_device.R'
     'setup.R'
     'switch_axis.R'
     'themes.R'

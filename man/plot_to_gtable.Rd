@@ -17,3 +17,7 @@ This function does it's best attempt to take whatever you provide it and turn it
 It is primarily meant to convert ggplot plots into gtables, but it will also take any grid
 object (grob), a recorded R base plot, or a function that generates an R base plot.
 }
+\details{
+To convert ggplot plots, the function needs to use a null graphics device. This can be set
+with \code{\link[=set_null_device]{set_null_device()}}.
+}
