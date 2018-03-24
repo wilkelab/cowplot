@@ -35,6 +35,7 @@ Suggests:
     testthat,
     vdiffr,
     viridis
+Remotes: pmur002/gridgraphics
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
