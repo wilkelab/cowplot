@@ -24,13 +24,11 @@ plot_to_gtable <- function(plot){
     }
     else {
       # we convert the captured plot or output plot into a grob
-      # to be safe, we have to save and restore the current graphics device
-      cur_dev <- grDevices::dev.cur()
-      tree <- grid::grid.grabExpr(gridGraphics::grid.echo(plot)) # capture plot
-      grDevices::dev.set(cur_dev)
+      grob <- plot_to_grob(plot) # capture plot
 
+      # now wrap into a gtable
       u <- grid::unit(1, "null")
-      gt <- gtable::gtable_col(NULL, list(tree), u, u)
+      gt <- gtable::gtable_col(NULL, list(grob), u, u)
       # fix gtable clip setting
       gt$layout$clip <- "inherit"
       gt
@@ -50,7 +48,7 @@ plot_to_gtable <- function(plot){
     # `Cairo(type = "raster")` works well on Windows but font-handling is broken on OS X.)
 
     cur_dev <- grDevices::dev.cur()    # store current device
-    null_dev_env$current()             # open null device
+    null_dev_env$current(width = 6, height = 6)             # open null device
     null_dev <- grDevices::dev.cur()   # store null device
     plot <- ggplot2::ggplotGrob(plot)  # convert plot to grob
     grDevices::dev.off(null_dev)       # close null device
@@ -76,5 +74,16 @@ plot_to_gtable <- function(plot){
       '"recordedplot", or a function that plots to an R graphics',
       'device when called, but is a ', class(plot))
   }
+}
+
+# function that reliably captures a base plot and turns it into a grob
+plot_to_grob <- function(plot) {
+  device <- null_dev_env$current
+  grid::recordGrob(
+    tryCatch(
+      gridGraphics::grid.echo(plot, newpage=FALSE, device = device),
+      error = function(e) {}
+    ),
+    list(plot = plot, device = device))
 }
 

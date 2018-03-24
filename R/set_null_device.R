@@ -17,9 +17,13 @@
 #' @examples
 #' set_null_device("png") # set the png null device
 #'
-#' # create a jpg null device
-#' jpg_null_device <- function() {jpeg(filename = "jpeg_null_plot.jpg")}
-#' set_null_device(jpg_null_device)
+#' # create a jpeg null device
+#' jpeg_null_device <- function(width, height) {
+#'   jpeg(filename = "jpeg_null_plot.jpg",
+#'        width = width, height = height, units = "in", res = 96)
+#'   dev.control("enable")
+#'}
+#' set_null_device(jpeg_null_device)
 #' @export
 set_null_device <- function(null_device) {
   old <- null_dev_env$current
@@ -33,7 +37,7 @@ set_null_device <- function(null_device) {
       cairo = cairo_null_device,
       Cairo = cairo_null_device,
       {
-        warning("Null device ", null_device, " not recognized. Substituting grDevices::pdf(NULL).", call. = FALSE);
+        warning("Null device ", null_device, " not recognized. Substituting grDevices::pdf().", call. = FALSE);
         pdf_null_device
       }
     )
@@ -42,20 +46,25 @@ set_null_device <- function(null_device) {
   invisible(old)
 }
 
-png_null_device <- function() {
-  grDevices::png(filename = "cowplot_null_plot.png")
+png_null_device <- function(width, height) {
+  grDevices::png(filename = "cowplot_null_plot.png", width = width, height = height,
+                 units = "in", res = 96)
+  dev.control("enable")
 }
 
-pdf_null_device <- function() {
-  grDevices::pdf(NULL)
+pdf_null_device <- function(width, height) {
+  grDevices::pdf(NULL, width = width, height = height)
+  dev.control("enable")
 }
 
-cairo_null_device <- function() {
+cairo_null_device <- function(width, height) {
   if (requireNamespace("Cairo", quietly = TRUE)) {
-    Cairo::Cairo(type = "raster")
+    Cairo::Cairo(type = "raster", width = width, height = height,
+                 units = "in")
+    dev.control("enable")
   } else {
     warning("Package `Cairo` is required to use the Cairo null device. Substituting grDevices::pdf(NULL).", call. = FALSE)
-    grDevices::pdf(NULL)
+    pdf_null_device(width, height)
   }
 }
 
@@ -63,6 +72,4 @@ cairo_null_device <- function() {
 # default upon start up is pdf null device
 null_dev_env <- new.env(parent = emptyenv())
 null_dev_env$current <- pdf_null_device
-
-
 

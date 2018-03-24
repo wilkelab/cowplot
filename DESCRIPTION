@@ -11,12 +11,12 @@ Description: Some helpful extensions and modifications to the 'ggplot2'
     package name, which stands for Claus O. Wilke's plot package.
 URL: https://github.com/wilkelab/cowplot
 Depends:
-    R (>= 3.3.0),
+    R (>= 3.5.0),
     ggplot2 (>= 2.1.0),
 Imports:
-    grid (>= 3.0.0),
-    gtable (>= 0.1.2),
-    plyr (>= 1.8.2),
+    grid,
+    gtable,
+    plyr,
     grDevices,
     methods,
     scales,
@@ -26,7 +26,7 @@ LazyData: true
 Suggests:
     Cairo,
     covr,
-    gridGraphics,
+    gridGraphics (>= 0.2-2),
     knitr,
     magick,
     maps,
