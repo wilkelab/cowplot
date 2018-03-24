@@ -26,7 +26,11 @@ system. The png device can use all fonts, but it will create empty plots called 
 \examples{
 set_null_device("png") # set the png null device
 
-# create a jpg null device
-jpg_null_device <- function() {jpeg(filename = "jpeg_null_plot.jpg")}
-set_null_device(jpg_null_device)
+# create a jpeg null device
+jpeg_null_device <- function(width, height) {
+  jpeg(filename = "jpeg_null_plot.jpg",
+       width = width, height = height, units = "in", res = 96)
+  dev.control("enable")
+}
+set_null_device(jpeg_null_device)
 }
