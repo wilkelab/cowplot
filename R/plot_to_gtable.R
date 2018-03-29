@@ -82,7 +82,7 @@ as_grob.function <- function(plot, device = NULL) {
 as_grob.formula <- function(plot, device = NULL) {
   expr <- plot[[2]]
   env <- parent.frame()
-  f <- function() {eval(f, envir = env)}
+  f <- function() {eval(expr, envir = env)}
 
   # functions are handled just like recorded plots:
   as_grob.recordedplot(f, device)
