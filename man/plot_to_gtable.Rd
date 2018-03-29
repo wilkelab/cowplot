@@ -13,7 +13,7 @@ object of the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDe
 a function creating a plot when called (see examples for \code{\link[=plot_grid]{plot_grid()}}).}
 }
 \description{
-This function does it's best attempt to take whatever you provide it and turn it into a gtable.
+This function does its best attempt to take whatever you provide it and turn it into a gtable.
 It is primarily meant to convert ggplot plots into gtables, but it will also take any grid
 object (grob), a recorded R base plot, or a function that generates an R base plot.
 }

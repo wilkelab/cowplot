@@ -1,6 +1,6 @@
 #' Convert plot or other graphics object into a gtable
 #'
-#' This function does it's best attempt to take whatever you provide it and turn it into a gtable.
+#' This function does its best attempt to take whatever you provide it and turn it into a gtable.
 #' It is primarily meant to convert ggplot plots into gtables, but it will also take any grid
 #' object (grob), a recorded R base plot, or a function that generates an R base plot.
 #'
@@ -45,7 +45,25 @@ plot_to_gtable.default <- function(plot) {
   plot_to_gtable.grob(grob)
 }
 
-# function that reliably captures a base plot and turns it into a grob
+#' Convert a base plot or a ggplot2 plot into a grob
+#'
+#' This function does its best attempt to take whatever you provide it and turn it into a grob.
+#' It is primarily meant to convert ggplot plots into grobs, but it will also take any grid
+#' object (grob), a recorded base R plot, a formula specifying a base R plot, or a function that
+#' generates a base R plot.
+#'
+#' @param plot The plot to convert
+#' @param device A function that creates an appropriate null device. See [`set_null_device()`]
+#'   for details. If set to `NULL`, will use the cowplot-wide default.
+#'
+#' @examples
+#' library(grid)
+#' x <- 1:10
+#' y <- (1:10)^2
+#'
+#' p <- ~plot(x, y)
+#' grid.newpage()
+#' grid.draw(as_grob(p))
 #' @export
 as_grob <- function(plot, device = NULL) {
   UseMethod("as_grob")
