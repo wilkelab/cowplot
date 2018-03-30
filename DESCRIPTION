@@ -27,6 +27,7 @@ Suggests:
     Cairo,
     covr,
     gridGraphics (>= 0.2-2),
+    patchwork,
     knitr,
     magick,
     maps,
@@ -35,7 +36,8 @@ Suggests:
     testthat,
     vdiffr,
     viridis
-Remotes: pmur002/gridgraphics
+Remotes: pmur002/gridgraphics,
+         thomasp85/patchwork
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
