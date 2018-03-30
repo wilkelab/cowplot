@@ -49,19 +49,19 @@ set_null_device <- function(null_device) {
 png_null_device <- function(width, height) {
   grDevices::png(filename = "cowplot_null_plot.png", width = width, height = height,
                  units = "in", res = 96)
-  dev.control("enable")
+  grDevices::dev.control("enable")
 }
 
 pdf_null_device <- function(width, height) {
   grDevices::pdf(NULL, width = width, height = height)
-  dev.control("enable")
+  grDevices::dev.control("enable")
 }
 
 cairo_null_device <- function(width, height) {
   if (requireNamespace("Cairo", quietly = TRUE)) {
     Cairo::Cairo(type = "raster", width = width, height = height,
                  units = "in")
-    dev.control("enable")
+    grDevices::dev.control("enable")
   } else {
     warning("Package `Cairo` is required to use the Cairo null device. Substituting grDevices::pdf(NULL).", call. = FALSE)
     pdf_null_device(width, height)
