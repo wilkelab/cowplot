@@ -17,12 +17,6 @@ plot_to_gtable <- function(plot) {
 }
 
 #' @export
-plot_to_gtable.ggplot <- function(plot) {
-  as_grob(plot)
-}
-
-
-#' @export
 plot_to_gtable.gtable <- function(plot) {
   # gtables don't have to be converted
   plot
@@ -42,7 +36,7 @@ plot_to_gtable.grob <- function(plot) {
 plot_to_gtable.default <- function(plot) {
   # hope that as_grob() function can produce a grob
   grob <- as_grob(plot)
-  plot_to_gtable.grob(grob)
+  plot_to_gtable(grob)
 }
 
 #' Convert a base plot or a ggplot2 plot into a grob
@@ -176,6 +170,7 @@ as_grob.ggassemble <- function(plot, device = NULL) {
 
 #' @export
 as_grob.default <- function(plot, device = NULL) {
-  warning("Cannot convert object of class ", class(plot), "into a grob.")
+  warning("Cannot convert object of class ", class(plot), " into a grob.")
+  grid::nullGrob()
 }
 
