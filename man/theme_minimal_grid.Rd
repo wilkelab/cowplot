@@ -7,12 +7,15 @@
 \title{Minimalistic themes with grids}
 \usage{
 theme_minimal_grid(font_size = 14, font_family = "", line_size = 0.5,
+  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
   color = "grey90")
 
 theme_minimal_vgrid(font_size = 14, font_family = "", line_size = 0.5,
+  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
   color = "grey90")
 
 theme_minimal_hgrid(font_size = 14, font_family = "", line_size = 0.5,
+  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
   color = "grey90")
 }
 \arguments{
@@ -21,6 +24,12 @@ theme_minimal_hgrid(font_size = 14, font_family = "", line_size = 0.5,
 \item{font_family}{Font family for plot title, axis titles and labels, legend texts, etc.}
 
 \item{line_size}{Line size for grid lines.}
+
+\item{rel_small}{Relative size of small text (e.g., axis tick labels)}
+
+\item{rel_tiny}{Relative size of tiny text (e.g., caption)}
+
+\item{rel_large}{Relative size of large text (e.g., title)}
 
 \item{color}{Color of grid lines.}
 }

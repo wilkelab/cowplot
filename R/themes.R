@@ -12,16 +12,19 @@
 #' @param font_size Overall font size.
 #' @param font_family Font family for plot title, axis titles and labels, legend texts, etc.
 #' @param line_size Line size for axis lines.
+#' @param rel_small Relative size of small text (e.g., axis tick labels)
+#' @param rel_tiny Relative size of tiny text (e.g., caption)
+#' @param rel_large Relative size of large text (e.g., title)
 #' @return The theme.
 #' @examples
 #' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 #' @importFrom ggplot2 margin
 #' @importFrom grid unit
 #' @export
-theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
+theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
+                          rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14) {
   half_line <- font_size / 2
-  small_rel <- 0.857
-  small_size <- small_rel * font_size
+  small_size <- rel_small * font_size
 
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
@@ -47,27 +50,27 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5) {
       legend.spacing    = unit(font_size, "pt"),
       legend.box.spacing = unit(font_size, "pt"),
       legend.margin     = margin(0, 0, 0, 0),
-      legend.text       = element_text(size = rel(small_rel)),
+      legend.text       = element_text(size = rel(rel_small)),
       legend.justification = c("left", "center"),
       panel.background  = element_blank(),
       panel.border      = element_blank(),
       panel.grid.major  = element_blank(),
       panel.grid.minor  = element_blank(),
       panel.spacing     = unit(half_line, "pt"),
-      strip.text        = element_text(size = rel(small_rel),
+      strip.text        = element_text(size = rel(rel_small),
                                        margin = margin(half_line, half_line, half_line, half_line)),
       strip.background  = element_rect(fill = "grey80", colour = "grey50"),
       plot.background   = element_blank(),
       plot.title        = element_text(face = "bold",
-                                       size = font_size,
+                                       size = rel(rel_large),
                                        hjust = 0, vjust = 1,
                                        margin = margin(b = half_line)),
-      plot.subtitle     = element_text(size = rel(small_rel),
+      plot.subtitle     = element_text(size = rel(rel_small),
                                        hjust = 0, vjust = 1,
-                                       margin = margin(b = half_line * small_rel)),
-      plot.caption      = element_text(size = rel(small_rel),
+                                       margin = margin(b = half_line)),
+      plot.caption      = element_text(size = rel(rel_tiny),
                                        hjust = 1, vjust = 1,
-                                       margin = margin(t = half_line * small_rel)),
+                                       margin = margin(t = half_line)),
       plot.margin =        margin(half_line, half_line, half_line, half_line),
 
       complete = TRUE
@@ -94,6 +97,9 @@ theme_half_open <- theme_cowplot
 #' @param font_size Overall font size.
 #' @param font_family Font family for plot title, axis titles and labels, legend texts, etc.
 #' @param line_size Line size for grid lines.
+#' @param rel_small Relative size of small text (e.g., axis tick labels)
+#' @param rel_tiny Relative size of tiny text (e.g., caption)
+#' @param rel_large Relative size of large text (e.g., title)
 #' @param color Color of grid lines.
 #' @examples
 #'
@@ -116,9 +122,12 @@ theme_half_open <- theme_cowplot
 #'   coord_flip() +
 #'   theme_minimal_vgrid()
 #' @export
-theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
+                               rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
+                               color = "grey90") {
   # Starts with theme_cowplot and then modifies some parts
-  theme_cowplot(font_size = font_size, font_family = font_family, line_size) %+replace%
+  theme_cowplot(font_size = font_size, font_family = font_family, line_size,
+                rel_small, rel_tiny, rel_large) %+replace%
     theme(
       # make grid lines
       panel.grid.major   = element_line(colour = color,
@@ -140,9 +149,12 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
 
 #' @rdname theme_minimal_grid
 #' @export
-theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5,
+                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
+                                color = "grey90") {
   # Starts with theme_grid and then modifies some parts
-  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size, color) %+replace%
+  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size,
+                     rel_small, rel_tiny, rel_large, color) %+replace%
     theme (
       # no horizontal grid lines
       panel.grid.major.y = element_blank(),
@@ -156,9 +168,11 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
 
 #' @rdname theme_minimal_grid
 #' @export
-theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5, color = "grey90") {
+theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5,
+                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, color = "grey90") {
   # Starts with theme_grid and then modifies some parts
-  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size, color) %+replace%
+  theme_minimal_grid(font_size = font_size, font_family = font_family, line_size,
+                     rel_small, rel_tiny, rel_large, color) %+replace%
     theme (
       # no vertical grid lines
       panel.grid.major.x = element_blank(),
@@ -175,11 +189,12 @@ theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' The theme created by this function shows nothing but the plot panel.
 #' @param font_size Overall font size. Default is 14.
 #' @param font_family Base font family.
+#' @param rel_small Relative size of small text
 #' @return The theme.
 #' @examples
 #' qplot(1:10, (1:10)^2) + theme_nothing()
 #' @export
-theme_nothing <- function(font_size = 14, font_family = ""){
+theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
   # work based off of theme_void just in case we forget anything or something
   # changes in underlying ggplot2 code
   theme_void(base_size = font_size, base_family = font_family) %+replace%
@@ -218,7 +233,7 @@ theme_nothing <- function(font_size = 14, font_family = ""){
       legend.key.size =    unit(1.2, "lines"),
       legend.key.height =  NULL,
       legend.key.width =   NULL,
-      legend.text =        element_text(size = rel(0.8)),
+      legend.text =        element_text(size = rel(rel_small)),
       legend.text.align =  NULL,
       legend.title =       element_text(hjust = 0),
       legend.title.align = NULL,
@@ -264,6 +279,9 @@ theme_nothing <- function(font_size = 14, font_family = ""){
 #' The theme created by this function is useful for plotting maps with cowplot default sizing.
 #' @param font_size Overall font size. Default is 14.
 #' @param font_family Base font family.
+#' @param rel_small Relative size of small text (e.g., axis tick labels)
+#' @param rel_tiny Relative size of tiny text (e.g., caption)
+#' @param rel_large Relative size of large text (e.g., title)
 #' @return The theme.
 #' @examples
 #' usa_data = map_data("usa")
@@ -272,9 +290,11 @@ theme_nothing <- function(font_size = 14, font_family = ""){
 #' ggplot(usa_data, aes(long, lat, fill = region)) + facet_wrap(~region, scales = "free") +
 #'   geom_polygon() + theme_map()
 #' @export
-theme_map <- function(font_size = 14, font_family = ""){
+theme_map <- function(font_size = 14, font_family = "",
+                      rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14){
   # work based off of theme_cowplot to get font sizing right
-  theme_cowplot(font_size = font_size, font_family = font_family) %+replace%
+  theme_cowplot(font_size = font_size, font_family = font_family,
+                rel_small, rel_tiny, rel_large) %+replace%
     theme(
       line = element_blank(),
       rect = element_blank(),

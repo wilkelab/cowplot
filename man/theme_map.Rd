@@ -4,12 +4,19 @@
 \alias{theme_map}
 \title{Create a theme for map plotting}
 \usage{
-theme_map(font_size = 14, font_family = "")
+theme_map(font_size = 14, font_family = "", rel_small = 12/14,
+  rel_tiny = 11/14, rel_large = 16/14)
 }
 \arguments{
 \item{font_size}{Overall font size. Default is 14.}
 
 \item{font_family}{Base font family.}
+
+\item{rel_small}{Relative size of small text (e.g., axis tick labels)}
+
+\item{rel_tiny}{Relative size of tiny text (e.g., caption)}
+
+\item{rel_large}{Relative size of large text (e.g., title)}
 }
 \value{
 The theme.
