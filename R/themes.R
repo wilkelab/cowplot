@@ -4,8 +4,9 @@
 
 #' Create the default cowplot theme
 #'
-#' After loading the cowplot package, this theme will be the default
-#' for all graphs made with ggplot2.
+#' The default cowplot theme, with a simple half-open frame and no grid. This theme
+#' used to be set by default after loading the cowplot package, but this is no longer
+#' the case.
 #'
 #' Both `theme_cowplot()` and `theme_half_open()` provide exactly the same styling.
 #'
@@ -36,9 +37,9 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
       #axis.title        = element_text(face = "bold"),
       axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
       axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
-      axis.title.x      = element_text(margin = margin(t = small_size / 2, b = small_size / 4)),
+      axis.title.x      = element_text(margin = margin(t = small_size / 2)),
       axis.title.y      = element_text(angle = 90,
-                                       margin = margin(r = small_size / 2, l = small_size / 4)),
+                                       margin = margin(r = small_size / 2)),
       axis.ticks        = element_line(colour = "black", size = line_size),
       axis.line         = element_line(colour = "black", size = line_size, lineend = "square"),
       # the following two lines are not needed for ggplot2 2.2.0 or later
