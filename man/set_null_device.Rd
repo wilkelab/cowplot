@@ -34,3 +34,6 @@ jpeg_null_device <- function(width, height) {
 }
 set_null_device(jpeg_null_device)
 }
+\seealso{
+Available null devices are: \code{\link[=pdf_null_device]{pdf_null_device()}}, \code{\link[=png_null_device]{png_null_device()}}, \code{\link[=cairo_null_device]{cairo_null_device()}}
+}

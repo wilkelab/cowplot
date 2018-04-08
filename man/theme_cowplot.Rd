@@ -28,8 +28,9 @@ theme_half_open(font_size = 14, font_family = "", line_size = 0.5,
 The theme.
 }
 \description{
-After loading the cowplot package, this theme will be the default
-for all graphs made with ggplot2.
+The default cowplot theme, with a simple half-open frame and no grid. This theme
+used to be set by default after loading the cowplot package, but this is no longer
+the case.
 }
 \details{
 Both \code{theme_cowplot()} and \code{theme_half_open()} provide exactly the same styling.

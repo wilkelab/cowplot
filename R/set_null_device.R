@@ -24,6 +24,8 @@
 #'   dev.control("enable")
 #'}
 #' set_null_device(jpeg_null_device)
+#' @seealso
+#' Available null devices are: [`pdf_null_device()`], [`png_null_device()`], [`cairo_null_device()`]
 #' @export
 set_null_device <- function(null_device) {
   old <- null_dev_env$current
@@ -46,17 +48,30 @@ set_null_device <- function(null_device) {
   invisible(old)
 }
 
+
+#' Null devices
+#'
+#' Null devices to be used when rendering graphics in the background. See
+#' [`set_null_device()`] for details.
+#'
+#' @param width Device width in inch
+#' @param height Device height in inch
+#' @export
 png_null_device <- function(width, height) {
   grDevices::png(filename = "cowplot_null_plot.png", width = width, height = height,
                  units = "in", res = 96)
   grDevices::dev.control("enable")
 }
 
+#' @rdname png_null_device
+#' @export
 pdf_null_device <- function(width, height) {
   grDevices::pdf(NULL, width = width, height = height)
   grDevices::dev.control("enable")
 }
 
+#' @rdname png_null_device
+#' @export
 cairo_null_device <- function(width, height) {
   if (requireNamespace("Cairo", quietly = TRUE)) {
     Cairo::Cairo(type = "raster", width = width, height = height,
