@@ -106,7 +106,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   num_plots <- length(plots)
 
   # convert list of plots into list of grobs / gtables
-  grobs <- lapply(plots, function(x) {if (!is.null(x)) plot_to_gtable(x) else NULL})
+  grobs <- lapply(plots, function(x) {if (!is.null(x)) as_gtable(x) else NULL})
 
 
   #aligning graphs.
@@ -214,7 +214,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #'
 #' Arrange multiple plots into a grid.
 #' @param ... List of plots to be arranged into the grid. The plots can be any objects that
-#'   the function [plot_to_gtable()] can handle (see also examples).
+#'   the function [as_gtable()] can handle (see also examples).
 #' @param plotlist (optional) List of plots to display. Alternatively, the plots can be provided
 #' individually as the first n arguments of the function plot_grid (see examples).
 #' @param align (optional) Specifies whether graphs in the grid should be horizontally ("h") or

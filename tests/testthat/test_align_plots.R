@@ -36,7 +36,8 @@ test_that("complex alignments, h, v, hv", {
   expect_warning(align_plots(p1, p3, align = "h"))
 
   plots <- align_plots(p1, p3, align = "h", axis = "bt")
-  expect_equal(plots[[1]]$heights[7:10], plots[[2]]$heights[18:21])
+  expect_equal(grid::convertUnit(plots[[1]]$heights[7:10] - plots[[2]]$heights[18:21], "cm"),
+               grid::unit(c(0, 0, 0, 0), "cm"))
 
   # these units are only equal after we've added everything up
   expect_equal(grid::convertUnit(plots[[1]]$heights[1] +
@@ -50,5 +51,6 @@ test_that("complex alignments, h, v, hv", {
                                  plots[[2]]$heights[3] +
                                  plots[[2]]$heights[4] +
                                  plots[[2]]$heights[5] +
-                                 plots[[2]]$heights[6], "cm"))
+                                 plots[[2]]$heights[6] +
+                                 plots[[2]]$heights[7], "cm"))
 })

@@ -2,8 +2,7 @@
 #'
 #' This function should behave just like \code{ggsave} from ggplot2,
 #' with the main difference being that by default it doesn't use the Dingbats
-#' font for pdf output. If you ever have trouble with this function, you can
-#' use \code{ggplot2::ggsave()} instead.
+#' font for pdf output.
 #' @param filename Filename of plot
 #' @param plot Plot to save, defaults to last plot displayed.
 #' @param device Device to use, automatically extract from file name extension.
@@ -19,7 +18,7 @@
 #'   specifying dimensions in pixels.
 #' @param ... Other arguments to be handed to the plot device.
 #' @export
-ggsave <- function(filename, plot = ggplot2::last_plot(), device = NULL, path = NULL, scale = 1,
+ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path = NULL, scale = 1,
                         width = NA, height = NA, units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...) {
 
   # arguments we want to hand off to ggplot2::ggsave only if explicitly provided
@@ -56,104 +55,6 @@ ggsave <- function(filename, plot = ggplot2::last_plot(), device = NULL, path = 
   invisible(x)
 }
 
-
-# This was the previous implementation copying much of the ggplot2::ggsave
-# code over. This seems unnecessary.
-ggsave_old <- function(filename, plot = ggplot2::last_plot(),
-                   device = NULL, path = NULL, scale = 1,
-                   width = NA, height = NA, units = c("in", "cm", "mm"),
-                   dpi = 300, limitsize = TRUE, ...) {
-
-  dev <- plot_dev(device, filename, dpi = dpi)
-  dim <- plot_dim(c(width, height), scale = scale, units = units,
-                  limitsize = limitsize)
-
-  if (!is.null(path)) {
-    filename <- file.path(path, filename)
-  }
-  dev(file = filename, width = dim[1], height = dim[2], ...)
-  on.exit(utils::capture.output(grDevices::dev.off()))
-  grid::grid.draw(plot)
-
-  invisible()
-}
-
-## from ggplot2 source code
-plot_dim <- function(dim = c(NA, NA), scale = 1, units = c("in", "cm", "mm"),
-                     limitsize = TRUE) {
-
-  units <- match.arg(units)
-  to_inches <- function(x) x / c(`in` = 1, cm = 2.54, mm = 2.54 * 10)[units]
-  from_inches <- function(x) x * c(`in` = 1, cm = 2.54, mm = 2.54 * 10)[units]
-
-  dim <- to_inches(dim) * scale
-
-  if (any(is.na(dim))) {
-    if (length(grDevices::dev.list()) == 0) {
-      default_dim <- c(7, 7)
-    } else {
-      default_dim <- grDevices::dev.size() * scale
-    }
-    dim[is.na(dim)] <- default_dim[is.na(dim)]
-    dim_f <- prettyNum(from_inches(dim), digits = 3)
-
-    message("Saving ", dim_f[1], " x ", dim_f[2], " ", units, " image")
-  }
-
-  if (limitsize && any(dim >= 50)) {
-    stop("Dimensions exceed 50 inches (height and width are specified in '",
-         units, "' not pixels). If you're sure you a plot that big, use ",
-         "`limitsize = FALSE`.", call. = FALSE)
-  }
-
-  dim
-}
-
-## from ggplot2 source code
-plot_dev <- function(device, filename, dpi = 300) {
-  if (is.function(device))
-    return(device)
-
-  eps <- function(...) {
-    grDevices::postscript(..., onefile = FALSE, horizontal = FALSE,
-                          paper = "special")
-  }
-  devices <- list(
-    eps =  eps,
-    ps =   eps,
-    tex =  function(...) grDevices::pictex(...),
-    pdf =  function(..., version = "1.4")
-    { # modification relative to original ggplot2 code
-      if ("useDingbats" %in% names(list(...)))
-        grDevices::pdf(..., version=version)
-      else
-        grDevices::pdf(..., useDingbats = FALSE, version=version)
-    },
-    # grDevices::pdf(..., version = version), # original ggplot2 code at this location
-    svg =  function(...) grDevices::svg(...),
-    emf =  function(...) grDevices::win.metafile(...),
-    wmf =  function(...) grDevices::win.metafile(...),
-    png =  function(...) grDevices::png(..., res = dpi, units = "in"),
-    jpg =  function(...) grDevices::jpeg(..., res = dpi, units = "in"),
-    jpeg = function(...) grDevices::jpeg(..., res = dpi, units = "in"),
-    bmp =  function(...) grDevices::bmp(..., res = dpi, units = "in"),
-    tiff = function(...) grDevices::tiff(..., res = dpi, units = "in")
-  )
-
-  if (is.null(device)) {
-    device <- tolower(tools::file_ext(filename))
-  }
-
-  if (!is.character(device) || length(device) != 1) {
-    stop("`device` must be NULL, a string or a function.", call. = FALSE)
-  }
-
-  dev <- devices[[device]]
-  if (is.null(dev)) {
-    stop("Unknown graphics device '", device, "'", call. = FALSE)
-  }
-  dev
-}
 
 #' Alternative to ggsave, with better support for multi-figure plots.
 #'
@@ -234,6 +135,6 @@ save_plot <- function(filename, plot, ncol = 1, nrow = 1,
   }
 
   # make clear we're using the cowplot function, not the ggplot2 one
-  cowplot::ggsave(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows, ...)
+  cowplot::ggsave2(filename = filename, plot = plot, width = base_width*cols, height = base_height*rows, ...)
 }
 

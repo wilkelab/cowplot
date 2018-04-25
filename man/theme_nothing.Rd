@@ -4,12 +4,14 @@
 \alias{theme_nothing}
 \title{Create a completely empty theme}
 \usage{
-theme_nothing(font_size = 14, font_family = "")
+theme_nothing(font_size = 14, font_family = "", rel_small = 12/14)
 }
 \arguments{
 \item{font_size}{Overall font size. Default is 14.}
 
 \item{font_family}{Base font family.}
+
+\item{rel_small}{Relative size of small text}
 }
 \value{
 The theme.

@@ -5,9 +5,11 @@
 \alias{theme_half_open}
 \title{Create the default cowplot theme}
 \usage{
-theme_cowplot(font_size = 14, font_family = "", line_size = 0.5)
+theme_cowplot(font_size = 14, font_family = "", line_size = 0.5,
+  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14)
 
-theme_half_open(font_size = 14, font_family = "", line_size = 0.5)
+theme_half_open(font_size = 14, font_family = "", line_size = 0.5,
+  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14)
 }
 \arguments{
 \item{font_size}{Overall font size.}
@@ -15,13 +17,20 @@ theme_half_open(font_size = 14, font_family = "", line_size = 0.5)
 \item{font_family}{Font family for plot title, axis titles and labels, legend texts, etc.}
 
 \item{line_size}{Line size for axis lines.}
+
+\item{rel_small}{Relative size of small text (e.g., axis tick labels)}
+
+\item{rel_tiny}{Relative size of tiny text (e.g., caption)}
+
+\item{rel_large}{Relative size of large text (e.g., title)}
 }
 \value{
 The theme.
 }
 \description{
-After loading the cowplot package, this theme will be the default
-for all graphs made with ggplot2.
+The default cowplot theme, with a simple half-open frame and no grid. This theme
+used to be set by default after loading the cowplot package, but this is no longer
+the case.
 }
 \details{
 Both \code{theme_cowplot()} and \code{theme_half_open()} provide exactly the same styling.

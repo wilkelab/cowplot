@@ -78,7 +78,7 @@ add_sub <- function(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, vpa
   ann.grob <- grid::textGrob(label, x = grid::unit(x, "npc"), y = grid::unit(y, "npc"),
                              hjust = hjust, vjust = vjust, rot = angle, gp = text_par)
 
-  gt <- plot_to_gtable(plot)
+  gt <- as_gtable(plot)
 
   # locate xlab
   xi <- gt$layout[gt$layout$name == "xlab",]

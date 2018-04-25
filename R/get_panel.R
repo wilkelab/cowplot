@@ -8,7 +8,7 @@
 #' @export
 get_panel <- function(plot)
 {
-  gt <- plot_to_gtable(plot)
+  gt <- as_gtable(plot)
   panelIndex <- which(gt$layout$name == "panel")
   if (length(panelIndex) == 1){
     panel <- gt$grobs[[panelIndex]]
