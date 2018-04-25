@@ -15,8 +15,8 @@ for details. If set to \code{NULL}, will use the cowplot-wide default.}
 \description{
 This function does its best attempt to take whatever you provide it and turn it into a grob.
 It is primarily meant to convert ggplot plots into grobs, but it will also take any grid
-object (grob), a recorded base R plot, a formula specifying a base R plot, or a function that
-generates a base R plot.
+object (grob), a recorded base R plot, a formula specifying a base R plot, a function that
+generates a base R plot, or a trellis object.
 }
 \examples{
 library(grid)

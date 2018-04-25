@@ -7,10 +7,8 @@
 #' To convert ggplot plots, the function needs to use a null graphics device. This can be set
 #' with [set_null_device()].
 #'
-#' @param plot The plot or other graphics object to convert into a gtable. Here, `plot` can be an
-#'   object of the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}},
-#'   \code{\link[grid]{grob}}, or \code{\link[gtable]{gtable}}. Alternatively, `plot` can be
-#'   a function creating a plot when called (see examples for [plot_grid()]).
+#' @param plot The plot or other graphics object to convert into a gtable. Here, `plot` can be
+#'   any object handled by [`as_grob()`].
 #' @export
 as_gtable <- function(plot) {
   UseMethod("as_gtable")
@@ -51,8 +49,8 @@ plot_to_gtable <- function(plot) {
 #'
 #' This function does its best attempt to take whatever you provide it and turn it into a grob.
 #' It is primarily meant to convert ggplot plots into grobs, but it will also take any grid
-#' object (grob), a recorded base R plot, a formula specifying a base R plot, or a function that
-#' generates a base R plot.
+#' object (grob), a recorded base R plot, a formula specifying a base R plot, a function that
+#' generates a base R plot, or a trellis object.
 #'
 #' @param plot The plot to convert
 #' @param device A function that creates an appropriate null device. See [`set_null_device()`]

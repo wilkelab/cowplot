@@ -10,10 +10,8 @@ as_gtable(plot)
 plot_to_gtable(plot)
 }
 \arguments{
-\item{plot}{The plot or other graphics object to convert into a gtable. Here, \code{plot} can be an
-object of the following classes: \code{\link[ggplot2]{ggplot}}, \code{\link[grDevices:recordPlot]{recordedplot}},
-\code{\link[grid]{grob}}, or \code{\link[gtable]{gtable}}. Alternatively, \code{plot} can be
-a function creating a plot when called (see examples for \code{\link[=plot_grid]{plot_grid()}}).}
+\item{plot}{The plot or other graphics object to convert into a gtable. Here, \code{plot} can be
+any object handled by \code{\link[=as_grob]{as_grob()}}.}
 }
 \description{
 This function does its best attempt to take whatever you provide it and turn it into a gtable.
