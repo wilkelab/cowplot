@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 0.9.2.9900
+Version: 0.9.99
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
     "wilke@austin.utexas.edu"), person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to cowplot" ))
 Description: Some helpful extensions and modifications to the 'ggplot2'
