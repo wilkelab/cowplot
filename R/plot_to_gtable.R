@@ -85,6 +85,20 @@ as_grob.recordedplot <- function(plot, device = NULL) {
 }
 
 #' @export
+as_grob.trellis <- function(plot, device = NULL) {
+  if (is.null(device)) {
+    device <- null_dev_env$current
+  }
+  grid::recordGrob(
+    tryCatch(
+      print(plot, newpage=FALSE),
+      error = function(e) {
+        grid::grid.text(e$message)
+      }
+    ), list(plot = plot, device = device))
+}
+
+#' @export
 as_grob.function <- function(plot, device = NULL) {
   # functions are handled just like recorded plots:
   as_grob.recordedplot(plot, device)
