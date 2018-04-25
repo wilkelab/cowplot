@@ -19,7 +19,7 @@
 #' @export
 get_legend <- function(plot)
 {
-    grobs <- plot_to_gtable(plot)$grobs
+    grobs <- as_gtable(plot)$grobs
     legendIndex <- which(sapply(grobs, function(x) x$name) == "guide-box")
     ## make sure this plot has a legend to be extracted
     ## note that multiple legends show up as one grob so this still works for multiple legend plots (i.e. color and shape)

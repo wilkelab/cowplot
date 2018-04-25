@@ -12,18 +12,18 @@
 #'   \code{\link[grid]{grob}}, or \code{\link[gtable]{gtable}}. Alternatively, `plot` can be
 #'   a function creating a plot when called (see examples for [plot_grid()]).
 #' @export
-plot_to_gtable <- function(plot) {
-  UseMethod("plot_to_gtable")
+as_gtable <- function(plot) {
+  UseMethod("as_gtable")
 }
 
 #' @export
-plot_to_gtable.gtable <- function(plot) {
+as_gtable.gtable <- function(plot) {
   # gtables don't have to be converted
   plot
 }
 
 #' @export
-plot_to_gtable.grob <- function(plot) {
+as_gtable.grob <- function(plot) {
   # we can handle basic grobs of any kind by wrapping them into a gtable
   u <- grid::unit(1, "null")
   gt <- gtable::gtable_col(NULL, list(plot), u, u)
@@ -33,11 +33,19 @@ plot_to_gtable.grob <- function(plot) {
 }
 
 #' @export
-plot_to_gtable.default <- function(plot) {
+as_gtable.default <- function(plot) {
   # hope that as_grob() function can produce a grob
   grob <- as_grob(plot)
-  plot_to_gtable(grob)
+  as_gtable(grob)
 }
+
+#' @rdname as_gtable
+#' @export
+plot_to_gtable <- function(plot) {
+  # this version is deprecated
+  UseMethod("as_gtable")
+}
+
 
 #' Convert a base plot or a ggplot2 plot into a grob
 #'

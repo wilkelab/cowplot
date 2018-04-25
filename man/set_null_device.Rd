@@ -11,7 +11,7 @@ set_null_device(null_device)
 that returns a new graphics device.}
 }
 \description{
-The function \code{\link[=plot_to_gtable]{plot_to_gtable()}} needs to open a graphics device to render ggplot objects into
+The function \code{\link[=as_grob]{as_grob()}} needs to open a graphics device to render ggplot objects into
 grid graphics objects. Unfortunately, there is no universally reliable graphics device available
 in R that always works. Therefore, this function allows you to switch out the null device.
 }

@@ -1,6 +1,6 @@
 #' Sets the null graphics device
 #'
-#' The function [plot_to_gtable()] needs to open a graphics device to render ggplot objects into
+#' The function [as_grob()] needs to open a graphics device to render ggplot objects into
 #' grid graphics objects. Unfortunately, there is no universally reliable graphics device available
 #' in R that always works. Therefore, this function allows you to switch out the null device.
 #'

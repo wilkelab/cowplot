@@ -42,6 +42,7 @@ VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
     'add_sub.R'
+    'as_gtable.R'
     'axis_canvas.R'
     'cowplot.R'
     'draw.R'
@@ -49,7 +50,6 @@ Collate:
     'get_panel.R'
     'gtable.R'
     'plot_grid.R'
-    'plot_to_gtable.R'
     'save.R'
     'set_null_device.R'
     'setup.R'
