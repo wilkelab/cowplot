@@ -1,7 +1,7 @@
-cowplot 0.9.2.9900
+cowplot 0.9.99
 ----------------------------------------------------------------
-- Rename `cowplot::ggsave()` to `cowplot::ggsave2()`.
-- Switched off the setting of the theme upon loading.
+- Renamed `cowplot::ggsave()` to `cowplot::ggsave2()`.
+- Disabled modification of the default ggplot2 theme upon loading.
 - Added a function `as_grob()` that can convert both base plots and
   ggplot2 plots into grobs that can then be drawn using standard
   grid approaches.
