@@ -73,6 +73,9 @@ sometimes be more powerful.}
 Arrange multiple plots into a grid.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
+
 p1 <- qplot(1:10, 1:10)
 p2 <- qplot(1:10, (1:10)^2)
 p3 <- qplot(1:10, (1:10)^3)

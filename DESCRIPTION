@@ -11,12 +11,11 @@ Description: Some helpful extensions and modifications to the 'ggplot2'
     package name, which stands for Claus O. Wilke's plot package.
 URL: https://github.com/wilkelab/cowplot
 Depends:
-    R (>= 3.5.0),
-    ggplot2 (> 2.2.1),
+    R (>= 3.5.0)
 Imports:
+    ggplot2 (> 2.2.1),
     grid,
     gtable,
-    plyr,
     grDevices,
     methods,
     scales,
@@ -55,7 +54,6 @@ Collate:
     'save.R'
     'set_null_device.R'
     'setup.R'
-    'switch_axis.R'
     'themes.R'
     'utils_ggplot2.R'
 RoxygenNote: 6.0.1.9000

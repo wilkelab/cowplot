@@ -16,6 +16,9 @@
 #'  If vertically aligning, "first" aligns left margin and "last" aligns right margin. If horizontally aligning
 #'  "first" aligns top margin and "last" aligns bottom margin
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #' # Example for how to utilize, though align_plots() does this internally and automatically
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -89,6 +92,9 @@ align_margin <- function(sizes, margin_to_align) {
 #'  margins. Options are \code{axis="none"} (default), or a string of any combination of "l", "r", "t", and/or "b" in any order
 #'  (e.g. \code{axis="tblr"} or \code{axis="rlbt"} for aligning all margins)
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #'p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
 #'          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
 #'p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +
@@ -251,6 +257,9 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' @param rows Deprecated. Use \code{nrow}.
 #' @param cols Deprecated. Use \code{ncol}.
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
 #' p3 <- qplot(1:10, (1:10)^3)

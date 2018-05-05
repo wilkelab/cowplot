@@ -35,6 +35,9 @@ Places an image somewhere onto the drawing canvas. By default, coordinates run f
 package to work, and fails gracefully if that package is not installed.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
+
 # Use image as plot background
 p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
 ggdraw() +

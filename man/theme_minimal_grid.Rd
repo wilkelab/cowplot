@@ -46,7 +46,6 @@ this theme even further and draws only horizontal lines, and \code{theme_minimal
 does the same for vertical lines.
 }
 \examples{
-
 library(ggplot2)
 
 # theme_minimal_grid()

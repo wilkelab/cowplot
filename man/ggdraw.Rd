@@ -18,6 +18,8 @@ grob or gtable, or a recorded base-R plot, as in \code{\link[=as_grob]{as_grob()
 Set up a drawing layer on top of a ggplot.
 }
 \examples{
+library(ggplot2)
+
 p <- ggplot(mpg, aes(displ, cty)) + geom_point()
 ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
 }

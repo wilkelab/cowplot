@@ -88,6 +88,9 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' @param cols Deprecated. Like \code{ncol}.
 #' @param ... Other arguments to be handed to \code{ggsave}.
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #' # save a single plot without legend
 #' x <- (1:100)/10
 #' p1 <- qplot(x, 2*x+5, geom='line')

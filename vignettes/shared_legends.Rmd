@@ -11,7 +11,8 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-```{r echo=FALSE, message=FALSE}
+```{r message=FALSE}
+library(ggplot2)
 library(cowplot)
 library(grid) # for "unit"
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing

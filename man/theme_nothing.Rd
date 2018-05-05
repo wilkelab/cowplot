@@ -20,5 +20,7 @@ The theme.
 The theme created by this function shows nothing but the plot panel.
 }
 \examples{
+library(ggplot2)
+
 qplot(1:10, (1:10)^2) + theme_nothing()
 }

@@ -53,8 +53,10 @@ draw_line <- function(x, y, ...){
 #' ggdraw() + draw_text("Hello World!", x = 0.5, y = 0.5)
 #' #
 #' # Adorn a plot from the Anscombe data set of "identical" data.
-#' p = qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
-#' threeStrings = c("Hello World!", "to be or not to be", "over and out")
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#' p <- qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
+#' threeStrings <- c("Hello World!", "to be or not to be", "over and out")
 #' p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
 #' @export
 draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5, ...){
@@ -91,6 +93,8 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
 #' @param alpha The alpha value of the text
 #' @seealso \code{\link{ggdraw}}
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
 #' # setup plot and a label (regression description)
 #' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(color = "blue") + background_grid(minor = 'none')
 #' c <- cor.test(mtcars$mpg, mtcars$disp, method = 'sp')
@@ -176,6 +180,8 @@ draw_plot_label <- function(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5, size
 #' @param ... other arguments passed to \code{draw_plot_label}
 #' @seealso \code{\link{draw_plot_label}}
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
 #'
 #' p1 <- qplot(1:10, 1:10)
 #' p2 <- qplot(1:10, (1:10)^2)
@@ -244,6 +250,9 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param interpolate A logical value indicating whether to linearly interpolate the image
 #'  (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #' # Use image as plot background
 #' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
 #' ggdraw() +
@@ -300,6 +309,9 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
 #'   of `scale = 1` indicates no scaling.
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
+#'
 #' # make a plot
 #' p <- qplot(1:10, 1:10)
 #' # draw into the top-right corner of a larger plot area
@@ -400,16 +412,15 @@ annotation_id <- local({
 #' @param xlim The x-axis limits for the drawing layer.
 #' @param ylim The y-axis limits for the drawing layer.
 #' @examples
+#' library(ggplot2)
+#'
 #' p <- ggplot(mpg, aes(displ, cty)) + geom_point()
 #' ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
 #' @export
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
-  d <- data.frame(x = 0:1, y = 0:1) # dummy data
-  p <- ggplot(d, aes_string(x = "x", y = "y")) + # empty plot
-    scale_x_continuous(limits = xlim, expand = c(0, 0)) +
-    scale_y_continuous(limits = ylim, expand = c(0, 0)) +
-    theme_nothing() + # with empty theme
-    labs(x = NULL, y = NULL) # and absolutely no axes
+  p <- ggplot() + # empty plot
+    coord_cartesian(xlim = xlim, ylim = ylim, expand = FALSE, clip = "off") +
+    theme_nothing() # with empty theme
 
   if (!is.null(plot)){
     p <- p + draw_plot(plot)

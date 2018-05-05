@@ -19,32 +19,19 @@ The **cowplot** source code is available on github: [https://github.com/wilkelab
 # Plot design
 
 I don't find the default **ggplot2** design particularly elegant. In particular, I don't like the gray background grid. I feel it often distracts from the data. For example, see this **ggplot2** visualization of the `mpg` data set:
-```{r eval=FALSE}
+```{r}
 library(ggplot2)
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
    geom_point(size = 2.5)
-```
-
-```{r echo=FALSE, message=FALSE}
-library(ggplot2)
-ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size = 2.5) + theme_gray()
 ```
 
 I prefer a clean and sparse layout for publication. I also prefer the approach of building a graph by adding elements rather than taking them away. Therefore, the default design of **cowplot** has no grid at all. It looks similar to **ggplot2**'s `theme_classic()`, but there are a few important but subtle differences, mostly with respect to font sizes.
 
-```{r eval=FALSE}
+```{r message = FALSE}
 library(cowplot)
+theme_set(theme_cowplot(font_size = 12)) # default fontsize doesn't work well for online viewing
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
    geom_point(size = 2.5)
-```
-
-```{r echo=FALSE, message=FALSE}
-require(cowplot)
-theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
-plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size = 2.5)
-plot.mpg
 ```
 
 In particular, the **cowplot** default theme works nicely in conjunction with the `save_plot()` function the package provides, such that the output pdfs are nicely formatted and scaled and don't require any additional parameter fiddling:
@@ -82,12 +69,6 @@ plot.mpg + background_grid(major = "xy", minor = "none")
 ```
 
 While the same result could be obtained using the function `theme()`, the function `background_grid()` makes the most commonly used option easily accessible. See the reference documentation for details.
-
-Note that if you ever want to use the default **ggplot2** theme while using the **cowplot** package, simply add `theme_gray()` to your plot or call `theme_set(theme_gray())` to set this theme for all subsequent plots:
-```{r eval=FALSE}
-plot.mpg + theme_gray() # create plot with default ggplot2 theme
-theme_set(theme_gray()) # switch to default ggplot2 theme for good
-```
 
 
 # Arranging graphs into a grid

@@ -18,6 +18,7 @@
 #' @param rel_large Relative size of large text (e.g., title)
 #' @return The theme.
 #' @examples
+#' library(ggplot2)
 #' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
 #' @importFrom ggplot2 margin
 #' @importFrom grid unit
@@ -103,7 +104,6 @@ theme_half_open <- theme_cowplot
 #' @param rel_large Relative size of large text (e.g., title)
 #' @param color Color of grid lines.
 #' @examples
-#'
 #' library(ggplot2)
 #'
 #' # theme_minimal_grid()
@@ -195,6 +195,8 @@ theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' @param rel_small Relative size of small text
 #' @return The theme.
 #' @examples
+#' library(ggplot2)
+#'
 #' qplot(1:10, (1:10)^2) + theme_nothing()
 #' @export
 theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
@@ -288,6 +290,9 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
 #' @param rel_large Relative size of large text (e.g., title)
 #' @return The theme.
 #' @examples
+#' library(ggplot2)
+#' library(maps)
+#'
 #' usa_data = map_data("usa")
 #' ggplot(usa_data, aes(long, lat, group=region)) + geom_polygon() + theme_map()
 #' ggplot(usa_data, aes(long, lat, fill = region)) + geom_polygon() + theme_map()
@@ -338,6 +343,8 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 #' @param colour.major Color of the major grid lines.
 #' @param colour.minor Color of the minor grid lines.
 #' @examples
+#' library(ggplot2)
+#'
 #' ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
 #'  geom_point() +
 #'  theme_half_open() +

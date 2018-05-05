@@ -24,6 +24,8 @@ the figure, such as "Figure 1", or "A" - often useful in cowplots with more than
 one pane. The function is similar to \code{draw_plot_label}.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
 
 p1 <- qplot(1:10, 1:10)
 p2 <- qplot(1:10, (1:10)^2)

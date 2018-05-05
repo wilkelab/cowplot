@@ -27,6 +27,9 @@ The theme.
 The theme created by this function is useful for plotting maps with cowplot default sizing.
 }
 \examples{
+library(ggplot2)
+library(maps)
+
 usa_data = map_data("usa")
 ggplot(usa_data, aes(long, lat, group=region)) + geom_polygon() + theme_map()
 ggplot(usa_data, aes(long, lat, fill = region)) + geom_polygon() + theme_map()

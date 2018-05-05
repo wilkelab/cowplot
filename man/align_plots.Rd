@@ -29,6 +29,9 @@ and is usually not called directly, though direct calling of the function is use
 multiple y-axes are desired (see example).
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
+
 p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
          theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
 p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +

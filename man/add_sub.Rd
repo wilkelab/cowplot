@@ -71,6 +71,8 @@ for sufficiently large values of \code{y}, the label will eventually be located 
 the plot panel.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
 ggdraw(add_sub(p1, "This is an annotation.\\nAnnotations can span multiple lines."))
 

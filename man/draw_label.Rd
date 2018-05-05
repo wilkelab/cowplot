@@ -44,6 +44,8 @@ the lower left corner, and other values of \code{hjust} and \code{vjust} for any
 specify.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
 # setup plot and a label (regression description)
 p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(color = "blue") + background_grid(minor = 'none')
 c <- cor.test(mtcars$mpg, mtcars$disp, method = 'sp')

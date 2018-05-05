@@ -15,7 +15,8 @@ vignette: >
 
 The `plot_grid()` function provides a simple interface for arranging plots into a grid and adding labels to them:
 ```{r, message=FALSE, fig.width=6.8, fig.height=2.55}
-require(cowplot)
+library(ggplot2)
+library(cowplot)
 theme_set(theme_cowplot(font_size=12)) # reduce default font size
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)

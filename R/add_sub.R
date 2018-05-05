@@ -45,6 +45,8 @@
 #' @param lineheight Line height of text
 #' @return A gtable object holding the modified plot.
 #' @examples
+#' library(ggplot2)
+#' theme_set(theme_half_open())
 #' p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
 #' ggdraw(add_sub(p1, "This is an annotation.\nAnnotations can span multiple lines."))
 #'

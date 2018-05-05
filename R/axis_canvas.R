@@ -90,6 +90,8 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 #' # annotate line graphs with labels on the right
 #' library(dplyr)
 #' library(tidyr)
+#' library(ggplot2)
+#' theme_set(theme_half_open())
 #' x <- seq(0, 10, .1)
 #' d <- data.frame(x,
 #'                 linear = x,

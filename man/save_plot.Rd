@@ -52,6 +52,9 @@ if we have code that can save a single figure, it is trivial to adapt this code 
 of multiple comparable figures. See examples for details.
 }
 \examples{
+library(ggplot2)
+theme_set(theme_half_open())
+
 # save a single plot without legend
 x <- (1:100)/10
 p1 <- qplot(x, 2*x+5, geom='line')

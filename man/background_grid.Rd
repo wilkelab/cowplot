@@ -29,6 +29,8 @@ doesn't do anything that can't be done just the same with \code{theme()}. Howeve
 creation of the most commonly needed variations.
 }
 \examples{
+library(ggplot2)
+
 ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
  geom_point() +
  theme_half_open() +
