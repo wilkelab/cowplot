@@ -187,6 +187,9 @@ switch_axis_position <- function(plot, axis = c('y', 'x', 'xy'), keep = c('none'
 # @param p The plot
 # @export
 plot_theme <- function(p) {
-  plyr::defaults(p$theme, ggplot2::theme_get())
+  x <- p$theme
+  y <- ggplot2::theme_get()
+  res <- c(x, y[setdiff(names(y), names(x))])
+  return(res)
 }
 
