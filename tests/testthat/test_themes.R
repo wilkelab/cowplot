@@ -12,3 +12,29 @@ test_that("background grids match across themes", {
                theme_minimal_grid()$panel.grid.minor)
 })
 
+
+
+# ------------------------------------
+# visual tests
+
+test_that("themes look right", {
+  df <- data.frame(x = c(1, 2, 3))
+  p <- ggplot(df, aes(x, x)) + geom_point()
+
+  expect_doppelganger("theme_half_open()",
+    p + theme_half_open()
+  )
+
+  expect_doppelganger("theme_minimal_grid()",
+    p + theme_minimal_grid()
+  )
+
+  expect_doppelganger("theme_minimal_hgrid()",
+    p + theme_minimal_hgrid()
+  )
+
+  expect_doppelganger("theme_minimal_vgrid()",
+    p + theme_minimal_vgrid()
+  )
+
+})
