@@ -21,19 +21,19 @@ test_that("themes look right", {
   df <- data.frame(x = c(1, 2, 3))
   p <- ggplot(df, aes(x, x)) + geom_point()
 
-  expect_doppelganger("theme_half_open()",
+  expect_doppelganger("theme half open",
     p + theme_half_open()
   )
 
-  expect_doppelganger("theme_minimal_grid()",
+  expect_doppelganger("theme minimal grid",
     p + theme_minimal_grid()
   )
 
-  expect_doppelganger("theme_minimal_hgrid()",
+  expect_doppelganger("theme minimal hgrid",
     p + theme_minimal_hgrid()
   )
 
-  expect_doppelganger("theme_minimal_vgrid()",
+  expect_doppelganger("theme minimal vgrid",
     p + theme_minimal_vgrid()
   )
 
