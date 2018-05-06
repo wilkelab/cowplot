@@ -37,5 +37,5 @@ Both \code{theme_cowplot()} and \code{theme_half_open()} provide exactly the sam
 }
 \examples{
 library(ggplot2)
-qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 15)
+qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 12)
 }

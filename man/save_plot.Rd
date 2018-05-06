@@ -48,7 +48,7 @@ the cowplot theme, so that frequently a plot size does not have to be explicitly
 acknowledges that one often first develops individual plots and then combines them into
 multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
 this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
-frequently necessary to accommodate the figure legend.
+frequently necessary to accommodate plots with or without figure legend.
 }
 \details{
 The key idea for this function is that plots are often grids, with sup-plots at the individual

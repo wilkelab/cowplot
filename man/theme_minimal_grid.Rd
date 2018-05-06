@@ -8,15 +8,15 @@
 \usage{
 theme_minimal_grid(font_size = 14, font_family = "", line_size = 0.5,
   rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-  color = "grey90")
+  colour = "grey90")
 
 theme_minimal_vgrid(font_size = 14, font_family = "", line_size = 0.5,
   rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-  color = "grey90")
+  colour = "grey90")
 
 theme_minimal_hgrid(font_size = 14, font_family = "", line_size = 0.5,
   rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-  color = "grey90")
+  colour = "grey90")
 }
 \arguments{
 \item{font_size}{Overall font size.}
@@ -31,7 +31,7 @@ theme_minimal_hgrid(font_size = 14, font_family = "", line_size = 0.5,
 
 \item{rel_large}{Relative size of large text (e.g., title)}
 
-\item{color}{Color of grid lines.}
+\item{colour}{Color of grid lines.}
 }
 \description{
 Three minimalistic themes that provide either a full grid,
