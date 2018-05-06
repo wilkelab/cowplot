@@ -64,7 +64,7 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' acknowledges that one often first develops individual plots and then combines them into
 #' multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
 #' this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
-#' frequently necessary to accommodate the figure legend.
+#' frequently necessary to accommodate plots with or without figure legend.
 #'
 #' The key idea for this function is that plots are often grids, with sup-plots at the individual
 #' grid locations. Therefore, for this function we specify a base width and aspect ratio that apply
@@ -75,58 +75,69 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' @param plot Plot to save.
 #' @param nrow Number of subplot rows.
 #' @param ncol Number of subplot columns.
-#' @param base_height The height (in inches) of the plot or of one sub-plot if \code{nrow}
-#' or \code{ncol} > 1. Default is 4.
-#' @param base_width The width (in inches) of the plot or of one sub-plot if \code{nrow}
-#' or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calculated from
-#' \code{height} and \code{base_aspect_ratio}.
-#' @param base_aspect_ratio The aspect ratio of the plot or of one sub-plot if \code{nrow}
-#' or \code{ncol} > 1. This argument is used if \code{base_width = NULL} or if \code{base_height = NULL};
-#' if width or height is missing the aspect ratio will be used calculate the \code{NULL} value.
-#' The default is 1.1, which works well for figures without a legend.
-#' @param rows Deprecated. Like \code{nrow}.
-#' @param cols Deprecated. Like \code{ncol}.
-#' @param ... Other arguments to be handed to \code{ggsave}.
+#' @param base_height The height (in inches) of the plot or of one sub-plot if `nrow`
+#' or `ncol` > 1. Default is 3.71.
+#' @param base_width The width (in inches) of the plot or of one sub-plot if `nrow`
+#' or `ncol` > 1. Default is `NULL`, which means that the width is calculated from
+#' `base_height` and `base_aspect_ratio`.
+#' @param base_asp The aspect ratio (width/height) of the plot or of one sub-plot if `nrow`
+#' or `ncol` > 1. This argument is used if `base_width = NULL` or if `base_height = NULL`;
+#' if both width and height are provided then the aspect ratio is ignored.
+#' The default is 1.618 (the golden ratio), which works well for figures with a legend.
+#' @param base_aspect_ratio Deprecated. Like `base_asp`.
+#' @param rows Deprecated. Like `nrow`.
+#' @param cols Deprecated. Like `ncol`.
+#' @param width Deprecated. Don't use.
+#' @param height Deprecated. Don't use.
+#' @param ... Other arguments to be handed to [`ggsave2`].
 #' @examples
 #' library(ggplot2)
 #' theme_set(theme_half_open())
 #'
-#' # save a single plot without legend
+#' # save a single plot with legend
+#' p1 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
+#'   geom_point(size = 2)
+#' save_plot("p1.png", p1)
+#' # same as p1 but determine base_width given base_height
+#' save_plot("p2.png", p1, base_height = NULL, base_width = 6)
+#'
+#' # save a single plot without legend, adjust aspect ratio
 #' x <- (1:100)/10
-#' p1 <- qplot(x, 2*x+5, geom='line')
-#' save_plot("p1.pdf", p1)
+#' p3 <- qplot(x, 2*x+5, geom='line')
+#' save_plot("p3.pdf", p3, base_asp = 1.1)
+#'
 #' # now combine with a second plot and save
-#' p2B <- qplot(x, -x^2+10*x-3, geom='line')
-#' p2 <- plot_grid(p1, p2B, labels=c("A", "B"))
-#' save_plot("p2.pdf", p2, ncol = 2)
-#' # save a single plot with legend, changing the aspect ratio to make room for the legend
-#' p3 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
-#' save_plot("p3.png", p3, base_aspect_ratio = 1.3)
-#' # same as p3 but determine base_height given base_aspect_ratio and base_width
-#' p4 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
-#' save_plot("p4.png", p4, base_height = NULL, base_aspect_ratio = 1.618, base_width = 6)
-#' # same as p4 but determine base_width given base_aspect_ratio and base_height
-#' p5 <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + geom_point(size=2.5)
-#' save_plot("p5.png", p5, base_height = 6, base_aspect_ratio = 1.618, base_width = NULL)
+#' p3b <- qplot(x, -x^2+10*x-3, geom = 'line')
+#' p4 <- plot_grid(p3, p3b, labels = "AUTO")
+#' save_plot("p4.pdf", p4, ncol = 2, base_asp = 1.1)
 #' @export
 save_plot <- function(filename, plot, ncol = 1, nrow = 1,
-                      base_height = 4, base_aspect_ratio = 1.1, base_width = NULL, ...,
-                      cols = NULL, rows = NULL ){
+                      base_height = 3.71, base_asp = 1.618, base_width = NULL, ...,
+                      cols, rows, base_aspect_ratio, width, height){
 
-  if (!is.null(cols)){
+  # internally, this function operates with variables cols, rows, and base_aspect_ratio
+  if (missing(cols)) {
+    cols <- ncol
+  } else {
     warning("Argument 'cols' is deprecated. Use 'ncol' instead.")
   }
 
-  if (!is.null(rows)){
+  if (missing(rows)) {
+    rows <- nrow
+  } else {
     warning("Argument 'rows' is deprecated. Use 'nrow' instead.")
   }
 
-  # internally, this function operates with variables cols and rows instead of ncol and nrow
-  if (!is.null(ncol)){
-    cols <- ncol
+  if (missing(base_aspect_ratio)) {
+    base_aspect_ratio <- base_asp
   }
-  if (!is.null(nrow)){
-    rows <- nrow
+
+  if (!missing(width)) {
+    stop("Cannot use argument 'width' here. Did you mean 'base_width'?")
+  }
+
+  if (!missing(height)) {
+    stop("Cannot use argument 'height' here. Did you mean 'base_height'?")
   }
 
   if (is.null(base_height) & !is.null(base_width)) {

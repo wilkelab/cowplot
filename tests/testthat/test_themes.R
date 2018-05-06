@@ -18,8 +18,8 @@ test_that("background grids match across themes", {
 # visual tests
 
 test_that("themes look right", {
-  df <- data.frame(x = c(1, 2, 3))
-  p <- ggplot(df, aes(x, x)) + geom_point()
+  p <- ggplot(mtcars, aes(hp, disp, color = mpg, shape = factor(cyl))) +
+    geom_point(size = 2)
 
   expect_doppelganger("theme half open",
     p + theme_half_open()
@@ -35,6 +35,38 @@ test_that("themes look right", {
 
   expect_doppelganger("theme minimal vgrid",
     p + theme_minimal_vgrid()
+  )
+
+  expect_doppelganger("theme half open tiny",
+                      p + theme_half_open(7)
+  )
+
+  expect_doppelganger("theme minimal grid tiny",
+                      p + theme_minimal_grid(7)
+  )
+
+  expect_doppelganger("theme minimal hgrid tiny",
+                      p + theme_minimal_hgrid(7)
+  )
+
+  expect_doppelganger("theme minimal vgrid tiny",
+                      p + theme_minimal_vgrid(7)
+  )
+
+  expect_doppelganger("theme half open huge",
+                      p + theme_half_open(22)
+  )
+
+  expect_doppelganger("theme minimal grid huge",
+                      p + theme_minimal_grid(22)
+  )
+
+  expect_doppelganger("theme minimal hgrid huge",
+                      p + theme_minimal_hgrid(22)
+  )
+
+  expect_doppelganger("theme minimal vgrid huge",
+                      p + theme_minimal_vgrid(22)
   )
 
 })
