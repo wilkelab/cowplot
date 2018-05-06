@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 720.00 576.00'>
+<defs>
+  <style type='text/css'><![CDATA[
+    line, polyline, polygon, path, rect, circle {
+      fill: none;
+      stroke: #000000;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-miterlimit: 10.00;
+    }
+  ]]></style>
+</defs>
+<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<defs>
+  <clipPath id='cpNi45N3wxODMuNDl8NTY5LjAzfDI3LjQ1'>
+    <rect x='6.97' y='27.45' width='176.51' height='541.58' />
+  </clipPath>
+</defs>
+<rect x='6.97' y='27.45' width='176.51' height='541.58' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #FF0000;' clip-path='url(#cpNi45N3wxODMuNDl8NTY5LjAzfDI3LjQ1)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<defs>
+  <clipPath id='cpMTIuNDV8MTc4LjAxfDU2My41NXwzMi45Mw=='>
+    <rect x='12.45' y='32.93' width='165.55' height='530.62' />
+  </clipPath>
+</defs>
+<rect x='12.45' y='32.93' width='165.55' height='530.62' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' clip-path='url(#cpMTIuNDV8MTc4LjAxfDU2My41NXwzMi45Mw==)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<defs>
+  <clipPath id='cpMTgzLjQ5fDM2MC4wMHw1NjkuMDN8MjcuNDU='>
+    <rect x='183.49' y='27.45' width='176.51' height='541.58' />
+  </clipPath>
+</defs>
+<rect x='183.49' y='27.45' width='176.51' height='541.58' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #00FF00;' clip-path='url(#cpMTgzLjQ5fDM2MC4wMHw1NjkuMDN8MjcuNDU=)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<defs>
+  <clipPath id='cpMTg4Ljk3fDM1NC41Mnw1NjMuNTV8MzIuOTM='>
+    <rect x='188.97' y='32.93' width='165.55' height='530.62' />
+  </clipPath>
+</defs>
+<rect x='188.97' y='32.93' width='165.55' height='530.62' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' clip-path='url(#cpMTg4Ljk3fDM1NC41Mnw1NjMuNTV8MzIuOTM=)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<defs>
+  <clipPath id='cpMzYwLjAwfDcxMy4wM3w1NjkuMDN8MjcuNDU='>
+    <rect x='360.00' y='27.45' width='353.03' height='541.58' />
+  </clipPath>
+</defs>
+<rect x='360.00' y='27.45' width='353.03' height='541.58' style='stroke-width: 1.07; stroke: #FFFFFF; fill: #0000FF;' clip-path='url(#cpMzYwLjAwfDcxMy4wM3w1NjkuMDN8MjcuNDU=)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<defs>
+  <clipPath id='cpMzY1LjQ4fDcwNy41NXw1NjMuNTV8MzIuOTM='>
+    <rect x='365.48' y='32.93' width='342.07' height='530.62' />
+  </clipPath>
+</defs>
+<rect x='365.48' y='32.93' width='342.07' height='530.62' style='stroke-width: 1.07; stroke: none; fill: #EBEBEB;' clip-path='url(#cpMzY1LjQ4fDcwNy41NXw1NjMuNTV8MzIuOTM=)' />
+<defs>
+  <clipPath id='cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA='>
+    <rect x='0.00' y='0.00' width='720.00' height='576.00' />
+  </clipPath>
+</defs>
+<g clip-path='url(#cpMC4wMHw3MjAuMDB8NTc2LjAwfDAuMDA=)'><text x='6.97' y='17.99' style='font-size: 16.00px; font-weight: bold; font-family: Liberation Sans;' textLength='153.92px' lengthAdjust='spacingAndGlyphs'>setting widths, 1:1:2</text></g>
+</svg>

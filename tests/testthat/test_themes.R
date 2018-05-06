@@ -1,15 +1,49 @@
 context("themes")
 
 test_that("background grids match across themes", {
-  # background_grid() vs. theme_minimal_grid() major grid lines
-  bg_major <- (theme_half_open() + background_grid())$panel.grid.major
-  min_grid_major <- theme_minimal_grid()$panel.grid.major
-  bg_major$inherit.blank <- min_grid_major$inherit.blank # these never match
-  expect_equal(bg_major, min_grid_major)
+  # background_grid() vs. theme_minimal_grid() grid lines
+  e1 <- calc_element("panel.grid.major.x", theme_half_open() + background_grid())
+  e2 <- calc_element("panel.grid.major.x", theme_minimal_grid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
 
-  # background_grid() vs. theme_minimal_grid() minor grid lines
-  expect_equal((theme_half_open() + background_grid())$panel.grid.minor,
-               theme_minimal_grid()$panel.grid.minor)
+  e1 <- calc_element("panel.grid.major.y", theme_half_open() + background_grid())
+  e2 <- calc_element("panel.grid.major.y", theme_minimal_grid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  e1 <- calc_element("panel.grid.minor.x", theme_half_open() + background_grid())
+  e2 <- calc_element("panel.grid.minor.x", theme_minimal_grid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  e1 <- calc_element("panel.grid.minor.y", theme_half_open() + background_grid())
+  e2 <- calc_element("panel.grid.minor.y", theme_minimal_grid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  # background_grid() vs. theme_minimal_vgrid() major grid lines
+  e1 <- calc_element("panel.grid.major.x", theme_half_open() + background_grid(major = "x"))
+  e2 <- calc_element("panel.grid.major.x", theme_minimal_vgrid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  e1 <- calc_element("panel.grid.major.y", theme_half_open() + background_grid(major = "x"))
+  e2 <- calc_element("panel.grid.major.y", theme_minimal_vgrid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  # background_grid() vs. theme_minimal_hgrid() major grid lines
+  e1 <- calc_element("panel.grid.major.x", theme_half_open() + background_grid(major = "y"))
+  e2 <- calc_element("panel.grid.major.x", theme_minimal_hgrid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
+  e1 <- calc_element("panel.grid.major.y", theme_half_open() + background_grid(major = "y"))
+  e2 <- calc_element("panel.grid.major.y", theme_minimal_hgrid())
+  e1$inherit.blank <- e2$inherit.blank # these never match
+  expect_equal(e1, e2)
+
 })
 
 

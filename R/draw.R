@@ -420,6 +420,8 @@ annotation_id <- local({
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
   p <- ggplot() + # empty plot
     coord_cartesian(xlim = xlim, ylim = ylim, expand = FALSE, clip = "off") +
+    scale_x_continuous(name = NULL) +
+    scale_y_continuous(name = NULL) +
     theme_nothing() # with empty theme
 
   if (!is.null(plot)){

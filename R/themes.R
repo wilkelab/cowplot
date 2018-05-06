@@ -32,7 +32,7 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
       line              = element_line(colour = "black", size = line_size, linetype = 1, lineend = "butt"),
-      rect              = element_rect(fill = NA, colour = NA, size = line_size, linetype = 0),
+      rect              = element_rect(fill = NA, colour = NA, size = line_size, linetype = 1),
       text              = element_text(family = font_family, face = "plain", colour = "black",
                                        size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
                                        margin = margin(), debug = FALSE),
@@ -73,7 +73,7 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
       legend.spacing.y  = NULL,
       legend.margin     = margin(0, 0, 0, 0),
       legend.key        = element_blank(),
-      legend.key.size   = unit(1.1*font_size, "pt"),
+      legend.key.size   = unit(1.1 * font_size, "pt"),
       legend.key.height = NULL,
       legend.key.width  = NULL,
       legend.text       = element_text(size = rel(rel_small)),
@@ -93,6 +93,10 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
       panel.grid        = element_blank(),
       panel.grid.major  = NULL,
       panel.grid.minor  = NULL,
+      panel.grid.major.x = NULL,
+      panel.grid.major.y = NULL,
+      panel.grid.minor.x = NULL,
+      panel.grid.minor.y = NULL,
       panel.spacing     = unit(half_line, "pt"),
       panel.spacing.x   = NULL,
       panel.spacing.y   = NULL,
@@ -158,7 +162,7 @@ theme_half_open <- theme_cowplot
 #' @param rel_small Relative size of small text (e.g., axis tick labels)
 #' @param rel_tiny Relative size of tiny text (e.g., caption)
 #' @param rel_large Relative size of large text (e.g., title)
-#' @param color Color of grid lines.
+#' @param colour Color of grid lines.
 #' @examples
 #' library(ggplot2)
 #'
@@ -181,17 +185,18 @@ theme_half_open <- theme_cowplot
 #' @export
 theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                               color = "grey90") {
+                               colour = "grey90") {
   # Starts with theme_cowplot and then modifies some parts
   theme_cowplot(font_size = font_size, font_family = font_family, line_size = line_size,
                 rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large) %+replace%
     theme(
       # make grid lines
-      panel.grid.major   = element_line(colour = color,
-                                        size = line_size),
+      panel.grid        = element_line(colour = colour,
+                                       size = line_size),
+      panel.grid.minor  = element_blank(),
 
       # adjust axis tickmarks
-      axis.ticks        = element_line(colour = color, size = line_size),
+      axis.ticks        = element_line(colour = colour, size = line_size),
 
       # no x or y axis lines
       axis.line.x       = element_blank(),
@@ -208,17 +213,17 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
 #' @export
 theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5,
                                 rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                                color = "grey90") {
+                                colour = "grey90") {
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
-                     color = color) %+replace%
+                     colour = colour) %+replace%
     theme (
       # no horizontal grid lines
       panel.grid.major.y = element_blank(),
 
       # add a y axis line
-      axis.line.y       = element_line(colour = color, size = line_size),
+      axis.line.y        = element_line(colour = colour, size = line_size),
 
       complete = TRUE
     )
@@ -227,17 +232,17 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' @rdname theme_minimal_grid
 #' @export
 theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5,
-                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, color = "grey90") {
+                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, colour = "grey90") {
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
-                     color = color) %+replace%
+                     colour = colour) %+replace%
     theme (
       # no vertical grid lines
       panel.grid.major.x = element_blank(),
 
       # add a x axis line
-      axis.line.x       = element_line(colour = color, size = line_size),
+      axis.line.x       = element_line(colour = colour, size = line_size),
 
       complete = TRUE
     )
@@ -274,24 +279,25 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
       axis.line.x =        NULL,
       axis.line.y =        NULL,
       axis.text =          element_blank(),
-      axis.text.x =        element_blank(),
-      axis.text.x.top =    element_blank(),
-      axis.text.y =        element_blank(),
-      axis.text.y.right =  element_blank(),
+      axis.text.x =        NULL,
+      axis.text.x.top =    NULL,
+      axis.text.y =        NULL,
+      axis.text.y.right =  NULL,
       axis.ticks =         element_blank(),
       axis.ticks.length =  unit(0, "pt"),
-      axis.title.x =       element_blank(),
-      axis.title.x.top =   element_blank(),
-      axis.title.y =       element_blank(),
-      axis.title.y.right = element_blank(),
+      axis.title =         element_blank(),
+      axis.title.x =       NULL,
+      axis.title.x.top =   NULL,
+      axis.title.y =       NULL,
+      axis.title.y.right = NULL,
 
       legend.background =  element_blank(),
-      legend.spacing =     unit(0.4, "cm"),
+      legend.spacing =     unit(font_size, "pt"),
       legend.spacing.x =   NULL,
       legend.spacing.y =   NULL,
-      legend.margin =      margin(0.2, 0.2, 0.2, 0.2, "cm"),
+      legend.margin =      margin(0, 0, 0, 0),
       legend.key =         element_blank(),
-      legend.key.size =    unit(1.2, "lines"),
+      legend.key.size =    unit(1.1*font_size, "pt"),
       legend.key.height =  NULL,
       legend.key.width =   NULL,
       legend.text =        element_text(size = rel(rel_small)),
@@ -302,23 +308,24 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
       legend.direction =   NULL,
       legend.justification = "center",
       legend.box =         NULL,
-      legend.box.margin =  margin(0, 0, 0, 0, "cm"),
+      legend.box.margin =  margin(0, 0, 0, 0),
       legend.box.background = element_blank(),
-      legend.box.spacing = unit(0.4, "cm"),
+      legend.box.spacing = unit(font_size, "pt"),
 
       panel.background =   element_blank(),
       panel.border =       element_blank(),
-      panel.grid.major =   element_blank(),
-      panel.grid.minor =   element_blank(),
-      panel.spacing =      unit(0, "pt"),
+      panel.grid =         element_blank(),
+      panel.grid.major =   NULL,
+      panel.grid.minor =   NULL,
+      panel.spacing =      unit(font_size / 2, "pt"),
       panel.spacing.x =    NULL,
       panel.spacing.y =    NULL,
       panel.ontop    =     FALSE,
 
       strip.background =   element_blank(),
       strip.text =         element_blank(),
-      strip.text.x =       element_blank(),
-      strip.text.y =       element_blank(),
+      strip.text.x =       NULL,
+      strip.text.y =       NULL,
       strip.placement =    "inside",
       strip.placement.x =  NULL,
       strip.placement.y =  NULL,
@@ -368,16 +375,16 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
       axis.line.x =        NULL,
       axis.line.y =        NULL,
       axis.text =          element_blank(),
-      axis.text.x =        element_blank(),
-      axis.text.x.top =    element_blank(),
-      axis.text.y =        element_blank(),
-      axis.text.y.right =  element_blank(),
+      axis.text.x =        NULL,
+      axis.text.x.top =    NULL,
+      axis.text.y =        NULL,
+      axis.text.y.right =  NULL,
       axis.ticks =         element_blank(),
       axis.ticks.length =  unit(0, "pt"),
-      axis.title.x =       element_blank(),
-      axis.title.x.top =   element_blank(),
-      axis.title.y =       element_blank(),
-      axis.title.y.right = element_blank(),
+      axis.title.x =       NULL,
+      axis.title.x.top =   NULL,
+      axis.title.y =       NULL,
+      axis.title.y.right = NULL,
 
       complete = TRUE
     )
@@ -415,28 +422,44 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 
   t <- switch( major[1],
                x = theme(panel.grid.major   = element_line(colour = colour.major,
-                                                           size = size.major),
+                                                           size = size.major,
+                                                           linetype = 1,
+                                                           lineend = "butt"),
                          panel.grid.major.y = element_blank()),
                y = theme(panel.grid.major   = element_line(colour = colour.major,
-                                                           size = size.major),
+                                                           size = size.major,
+                                                           linetype = 1,
+                                                           lineend = "butt"),
                          panel.grid.major.x = element_blank()),
                xy = theme(panel.grid.major = element_line(colour = colour.major,
-                                                          size = size.major)),
+                                                          size = size.major,
+                                                          linetype = 1,
+                                                          lineend = "butt")),
                yx = theme(panel.grid.major = element_line(colour = colour.major,
-                                                          size = size.major)),
+                                                          size = size.major,
+                                                          linetype = 1,
+                                                          lineend = "butt")),
                theme(panel.grid.major = element_blank()))
 
   t + switch( minor[1],
               x = theme(panel.grid.minor   = element_line(colour = colour.minor,
-                                                          size = size.minor),
+                                                          size = size.minor,
+                                                          linetype = 1,
+                                                          lineend = "butt"),
                         panel.grid.minor.y = element_blank()),
               y = theme(panel.grid.minor   = element_line(colour = colour.minor,
-                                                          size = size.minor),
+                                                          size = size.minor,
+                                                          linetype = 1,
+                                                          lineend = "butt"),
                         panel.grid.minor.x = element_blank()),
               xy = theme(panel.grid.minor = element_line(colour = colour.minor,
-                                                         size = size.minor)),
+                                                         size = size.minor,
+                                                         linetype = 1,
+                                                         lineend = "butt")),
               yx = theme(panel.grid.minor = element_line(colour = colour.minor,
-                                                         size = size.minor)),
+                                                         size = size.minor,
+                                                         linetype = 1,
+                                                         lineend = "butt")),
               theme(panel.grid.minor = element_blank()))
 }
 
@@ -447,11 +470,12 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' doesn't do anything that can't be done just the same with \code{theme()}. However, it
 #' saves some typing.
 #' @param colour The color of the border.
-#' @param size Size.
+#' @param size Size. Needs to be twice as large as desired outcome when panel clipping
+#'   is on (the default).
 #' @param linetype Line type.
 #' @param remove If \code{TRUE}, removes the current panel border.
 #' @export
-panel_border <- function(colour = 'gray80', size = 0.5, linetype = 1, remove = FALSE){
+panel_border <- function(colour = 'grey80', size = 1, linetype = 1, remove = FALSE){
   if (remove){
     return(theme(panel.border = element_blank()))
   }
