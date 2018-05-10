@@ -133,6 +133,11 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
                             hjust = 1, vjust = 1,
                             margin = margin(t = half_line)
                           ),
+      plot.tag           = element_text(
+                             face = "bold",
+                             hjust = 0, vjust = 0.7
+                           ),
+      plot.tag.position = c(0, 1),
       plot.margin       = margin(half_line, half_line, half_line, half_line),
 
       complete = TRUE
@@ -336,6 +341,12 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
       plot.title =         element_blank(),
       plot.subtitle =      element_blank(),
       plot.caption =       element_blank(),
+      plot.tag           = element_text(
+                            face = "bold",
+                            hjust = 0, vjust = 0.7
+                           ),
+      plot.tag.position = c(0, 1),
+
       plot.margin =        margin(0, 0, 0, 0),
 
       complete = TRUE
