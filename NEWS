@@ -19,8 +19,8 @@ Other breaking changes:
   adjustment if you have code depending on it.
 
 ## New features
-- Added a function `as_grob()` that can convert both base plots and
-  ggplot2 plots into grobs that can then be drawn using standard
+- Added a function `as_grob()` that can convert base plots, lattice plots,
+  and ggplot2 plots into grobs that can then be drawn using standard
   grid approaches.
 - Much improved handling of base R plots, thanks to improvements in
   grid and gridGraphics. Requires R >= 3.5.0 and gridGraphics >= 0.3.
