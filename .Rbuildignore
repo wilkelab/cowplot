@@ -1,9 +1,12 @@
 visual_test
 ^.*\.Rproj$
+^.*\.png$
+^.*\.pdf$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^\.codecov\.yml$
-^cran-comments.md$
+^cran-comments\.md$
 ^TODO$
+^ISSUE_TEMPLATE\.md$
 ^vignettes/*\.png$
 ^revdep$
