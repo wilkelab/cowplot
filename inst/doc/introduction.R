@@ -1,98 +1,65 @@
-## ----eval=FALSE----------------------------------------------------------
-#  library(ggplot2)
-#  ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
-#     geom_point(size = 2.5)
-
-## ----echo=FALSE, message=FALSE-------------------------------------------
+## ------------------------------------------------------------------------
 library(ggplot2)
 ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-   geom_point(size = 2.5) + theme_gray()
+   geom_point(size = 2.5)
 
-## ----eval=FALSE----------------------------------------------------------
-#  library(cowplot)
-#  ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
-#     geom_point(size = 2.5)
+## ----message = FALSE-----------------------------------------------------
+library(cowplot)
+ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
+   geom_point(size = 2.5) + theme_cowplot()
 
-## ----echo=FALSE, message=FALSE-------------------------------------------
-require(cowplot)
-theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
+## ------------------------------------------------------------------------
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size = 2.5)
-plot.mpg
+  geom_point(size=2.5) + theme_cowplot()
+# use save_plot() instead of ggsave() when using cowplot for improved defaults
+save_plot("mpg.png", plot.mpg)
 
-## ----eval=FALSE----------------------------------------------------------
-#  library(cowplot)
-#  plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +
-#    geom_point(size=2.5)
-#  # use save_plot() instead of ggsave() when using cowplot
-#  save_plot("mpg.png", plot.mpg,
-#            base_aspect_ratio = 1.3 # make room for figure legend
-#  )
-
-## ----echo=FALSE, message=FALSE-------------------------------------------
-theme_set(theme_cowplot()) # switch to default font size for figure generation
-plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size=2.5)
-# use save_plot() instead of ggsave() when using cowplot
-save_plot("mpg.png", plot.mpg,
-          base_aspect_ratio = 1.3 # make room for figure legend
-)
-theme_set(theme_cowplot(font_size=12)) # switch back for online figures
-
-## ----echo=FALSE, out.width = "60%"---------------------------------------
-knitr::include_graphics("mpg.png")
+## ----echo=FALSE----------------------------------------------------------
+ggdraw() + draw_image("mpg.png")
 
 ## ----message=FALSE-------------------------------------------------------
 plot.mpg + background_grid(major = "xy", minor = "none")
 
-## ----eval=FALSE----------------------------------------------------------
-#  plot.mpg + theme_gray() # create plot with default ggplot2 theme
-#  theme_set(theme_gray()) # switch to default ggplot2 theme for good
+## ----fig.width = 8.5, fig.height = 8.5/1.7-------------------------------
+plot_grid(
+  plot.mpg + theme_minimal_grid(12) + ggtitle("theme_minimal_grid()"),
+  plot.mpg + theme_minimal_hgrid(12) + ggtitle("theme_minimal_hgrid()"),
+  plot.mpg + theme_minimal_vgrid(12) + ggtitle("theme_minimal_vgrid()"),
+  plot.mpg + theme_map(12) + ggtitle("theme_map()"), align = "hv"
+)
 
-## ----message=FALSE-------------------------------------------------------
+## ----message=FALSE, fig.width=5------------------------------------------
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size=2.5)
+  geom_point(size=2.5) + theme_cowplot()
 plot.mpg
 plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+   theme_cowplot() + theme(axis.text.x = element_text(angle=70, vjust=0.5, hjust = 0.9))
 plot.diamonds
 
-## ----message=FALSE, fig.width=7, fig.height=2.5--------------------------
+## ----message=FALSE, fig.width=8, fig.height=8/(2*1.35)-------------------
 plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"))
 
-## ----message=FALSE, fig.width=7, fig.height=2.5--------------------------
+## ----message=FALSE, fig.width=8, fig.height=8/(2*1.35)-------------------
 plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), align = "h")
 
-## ----message=FALSE, fig.width=7, fig.height=5----------------------------
+## ----message=FALSE, fig.width=8, fig.height=8/1.35-----------------------
 plot_grid(plot.mpg, NULL, NULL, plot.diamonds, labels = c("A", "B", "C", "D"), ncol = 2)
 
-## ----message=FALSE, fig.width=4, fig.height=5----------------------------
+## ----message=FALSE, fig.width=8/2, fig.height=8/1.35---------------------
 plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), nrow = 2, align = "v")
 
-## ----eval=FALSE----------------------------------------------------------
-#  plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
-#                        labels=c("A", "B", "C", "D"), ncol = 2)
-#  save_plot("plot2by2.png", plot2by2,
-#            ncol = 2, # we're saving a grid plot of 2 columns
-#            nrow = 2, # and 2 rows
-#            # each individual subplot should have an aspect ratio of 1.3
-#            base_aspect_ratio = 1.3
-#            )
-
-## ----echo=FALSE, message=FALSE-------------------------------------------
-theme_set(theme_cowplot()) # switch to default font size for figure generation
+## ------------------------------------------------------------------------
 plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
                       labels=c("A", "B", "C", "D"), ncol = 2)
-save_plot("plot2by2.png", plot2by2,
-          ncol = 2, # we're saving a grid plot of 2 columns
-          nrow = 2, # and 2 rows
-          # each individual subplot should have an aspect ratio of 1.3
-          base_aspect_ratio = 1.3
-          )
-theme_set(theme_cowplot(font_size=12)) # switch back for online figures
+save_plot(
+  "plot2by2.png", plot2by2,
+  ncol = 2, # we're saving a grid plot of 2 columns
+  nrow = 2, # and 2 rows
+  base_asp = 1.35 # aspect ratio of 1.35 for individual figures in the grid 
+)
 
-## ----echo=FALSE, out.width = "100%"--------------------------------------
-knitr::include_graphics("plot2by2.png")
+## ----echo=FALSE, fig.width=6, fig.height=6/1.35--------------------------
+ggdraw() + draw_image("plot2by2.png")
 
 ## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 
@@ -126,21 +93,33 @@ ggdraw(plot.mpg) +
 
 ## ----message=FALSE, fig.width=7, fig.height=6----------------------------
 # plot.mpg and plot.diamonds were defined earlier
-library(viridis)
 ggdraw() +
-  draw_plot(plot.diamonds + theme(legend.justification = "bottom"), 0, 0, 1, 1) +
-  draw_plot(plot.mpg + scale_color_viridis(discrete = TRUE) + 
-              theme(legend.justification = "top"), 0.5, 0.52, 0.5, 0.4) +
-  draw_plot_label(c("A", "B"), c(0, 0.5), c(1, 0.92), size = 15)
+  draw_plot(
+    plot.diamonds + theme(legend.justification = "bottom"),
+    0, 0, 1, 1
+  ) +
+  draw_plot(
+    plot.mpg + scale_color_viridis_d() + 
+      theme(legend.justification = "top", plot.background = element_rect(fill = "white")),
+    0.5, 0.54, 0.5, 0.4
+  ) +
+  draw_plot_label(
+    c("A", "B"),
+    c(0, 0.5),
+    c(1, 0.94),
+    size = 15
+  )
 
 ## ----message=FALSE-------------------------------------------------------
-p <- ggplot(iris, aes(x=Sepal.Length, fill=Species)) + geom_density(alpha = 0.7)
+p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + 
+  geom_density(alpha = 0.7) +
+  scale_y_continuous(expand = c(0, 0)) + 
+  theme_cowplot()
 ggdraw() +
   draw_image("http://jeroen.github.io/images/tiger.svg") +
   draw_plot(p)
 
 ## ----message=FALSE, fig.width=7, fig.height=2.5--------------------------
-p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
 p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
 plot_grid(p, p2, labels = "AUTO")
 

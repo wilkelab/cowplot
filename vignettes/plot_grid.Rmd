@@ -21,7 +21,7 @@ theme_set(theme_cowplot(font_size=12)) # reduce default font size
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
 plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+  theme(axis.text.x = element_text(angle=70, vjust=0.5, hjust = 0.9))
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'))
 ```
 
@@ -56,7 +56,7 @@ plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1,
 
 # Supported plot formats
 
-The function `plot_grid()` can handle several different plot formats, including the classes `ggplot` (created by the `ggplot` function), `gtable` (created from `ggplot` or from other grid graphics objects such as `grob` and `gTree` objects) and, if the package **gridGraphics** is installed, `recordedplot` (returned by `recordPlot()`).  Since the code to create a `recordedPlot` object would ordinarily create an unwanted plot or file, a function creating a `graphics` based plot (`plot`, `image`, ...) can be passed as well.
+The function `plot_grid()` can handle several different plot formats, including the classes `ggplot` (created by the `ggplot` function), `gtable` (created from `ggplot` or from other grid graphics objects such as `grob` and `gTree` objects) and, if the package gridGraphics is installed, `recordedplot` (returned by `recordPlot()`).  Since the code to create a `recordedPlot` object would ordinarily create an unwanted plot or file, a function creating a `graphics` based plot (`plot`, `image`, ...) can be passed as well.
 
 For example, the following creates a `recordedPlot` object by recording a previous plot (`plot(sqrt)`):
 ```{r, message=FALSE, results="hold", collapse=TRUE}

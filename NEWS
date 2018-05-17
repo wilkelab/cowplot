@@ -15,7 +15,7 @@ breaking changes were introduced:
   version of ggsave() is no longer masked by the cowplot version.
 
 Other breaking changes:
-- The defaults for `save_plot()` were changed substantially. This may require
+- The defaults for `save_plot()` were changed somewhat. This may require
   adjustment if you have code depending on it.
 
 ## New features

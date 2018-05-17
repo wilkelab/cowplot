@@ -1,10 +1,11 @@
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
-require(cowplot)
+library(ggplot2)
+library(cowplot)
 theme_set(theme_cowplot(font_size=12)) # reduce default font size
 plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
   geom_point(size=2.5)
 plot.diamonds <- ggplot(diamonds, aes(clarity, fill = cut)) + geom_bar() +
-  theme(axis.text.x = element_text(angle=70, vjust=0.5))
+  theme(axis.text.x = element_text(angle=70, vjust=0.5, hjust = 0.9))
 plot_grid(plot.mpg, plot.diamonds, labels = c('A', 'B'))
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
@@ -28,16 +29,22 @@ plot_grid(plot.iris, plot.mpg, labels = "AUTO", ncol = 1,
           align = 'v', axis = 'l') # aligning vertically along the left axis
 
 ## ---- message=FALSE, results="hold", collapse=TRUE-----------------------
-par(xpd = NA, # switch off clipping, necessary to always see axis labels
-    bg = "transparent", # switch off background to avoid obscuring adjacent plots
-    oma = c(2, 2, 0, 0), # move plot to the right and up
+par(bg = "transparent", # switch off background to avoid obscuring adjacent plots
+    mar = c(3, 3, 1, 1) + .1, # reduce margins
     mgp = c(2, 1, 0) # move axis labels closer to axis
-  ) 
+   ) 
 plot(sqrt) # plot the square root function
 recordedplot <- recordPlot() # record the previous plot
 
 ## ---- message=FALSE------------------------------------------------------
-plotfunc <- function() image(volcano) # define the function
+ # define the function
+plotfunc <- function() {
+  par(bg = "transparent", # switch off background to avoid obscuring adjacent plots
+      mar = c(3, 3, 1, 1) + .1, # reduce margins
+      mgp = c(2, 1, 0) # move axis labels closer to axis
+   ) 
+  image(volcano)
+}
 plotfunc() # call the function to make the plot
 
 ## ---- message=FALSE------------------------------------------------------
@@ -46,7 +53,7 @@ ggdraw(gcircle)
 
 ## ---- message=FALSE, fig.width=7, fig.height=5---------------------------
 plot_grid(plot.mpg, recordedplot, plotfunc, gcircle, labels = "AUTO", hjust = 0, vjust = 1,
-          scale = c(1., 1., 0.9, 0.9))
+          scale = c(1., 1., 1., 0.9))
 
 ## ---- message=FALSE, fig.width=6.8, fig.height=2.55----------------------
 plot_grid(plot.mpg, plot.diamonds, labels = "AUTO", align = 'h', label_size = 12)

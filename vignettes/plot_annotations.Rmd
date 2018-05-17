@@ -15,7 +15,7 @@ library(ggplot2)
 library(cowplot)
 ```
 
-The **cowplot** package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots. Note that as **ggplot2** gains more of this functionality natively (e.g. as of version 2.2.0), we recommend to use the **ggplot2** methods rather than the **cowplot** methods. Any functionality that is duplicated between **ggplot2** and **cowplot** may be removed from future versions of **cowplot**.
+The cowplot package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots. Note that as ggplot2 gains more of this functionality natively (e.g. as of version 2.2.0), we recommend to use the ggplot2 methods rather than the cowplot methods. Any functionality that is duplicated between ggplot2 and cowplot may be removed from future versions of cowplot.
 
 
 ## Annotations with mathematical expressions
@@ -42,7 +42,7 @@ p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
 
 ## Joint plot titles
 
-When we combine plots with `plot_grid()`, we may want to add a title that spans the entire combined figure. While there is no specific function in **cowplot** to achieve this effect, it can be simulated easily with a few lines of code:
+When we combine plots with `plot_grid()`, we may want to add a title that spans the entire combined figure. While there is no specific function in cowplot to achieve this effect, it can be simulated easily with a few lines of code:
 ```{r fig.width=8, fig.height=4}
 # make a plot grid consisting of two panels
 p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) + 
@@ -62,7 +62,7 @@ In the final `plot_grid` line, the values of `rel_heights` need to be chosen app
 
 ## Annotations underneath plots
 
-The function `add_sub()` can be used to add annotation text underneath a plot. This functionality is now mostly superseded by the `caption` argument to the `labs` function in base **ggplot2**, but `add_sub()` is retained in **cowplot** for backwards compatibility. For new plots, I suggest you try `caption` first and use `add_sub()` only when `caption` doesn't provide the desired result.
+The function `add_sub()` can be used to add annotation text underneath a plot. This functionality is now mostly superseded by the `caption` argument to the `labs` function in base ggplot2, but `add_sub()` is retained in cowplot for backwards compatibility. For new plots, I suggest you try `caption` first and use `add_sub()` only when `caption` doesn't provide the desired result.
 
 To demonstrate how `add_sub()` is used, we first make a plot: 
 ```{r fig.width=5, fig.height=5}

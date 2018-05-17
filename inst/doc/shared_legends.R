@@ -1,4 +1,5 @@
-## ----echo=FALSE, message=FALSE-------------------------------------------
+## ----message=FALSE-------------------------------------------------------
+library(ggplot2)
 library(cowplot)
 library(grid) # for "unit"
 theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
@@ -11,21 +12,22 @@ dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 # We set left and right margins to 0 to remove unnecessary spacing in the
 # final plot arrangement.
 p1 <- qplot(carat, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6,0,6,0), "pt"))
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt"))
 p2 <- qplot(depth, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6,0,6,0), "pt")) + ylab("")
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
 p3 <- qplot(color, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6,0,6,0), "pt")) + ylab("")
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
 
 # arrange the three plots in a single row
-prow <- plot_grid( p1 + theme(legend.position="none"),
-           p2 + theme(legend.position="none"),
-           p3 + theme(legend.position="none"),
-           align = 'vh',
-           labels = c("A", "B", "C"),
-           hjust = -1,
-           nrow = 1
-           )
+prow <- plot_grid(
+  p1 + theme(legend.position="none"),
+  p2 + theme(legend.position="none"),
+  p3 + theme(legend.position="none"),
+  align = 'vh',
+  labels = c("A", "B", "C"),
+  hjust = -1,
+  nrow = 1
+)
 prow
 
 ## ----fig.width=10, fig.height=3------------------------------------------
@@ -74,12 +76,16 @@ p1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 
 # plot B
 p2 <- ggplot(iris, aes(Sepal.Length, fill = Species)) +
-  geom_density(alpha = .7) + theme(legend.justification = "top")
+  geom_density(alpha = .7) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(legend.justification = "top")
 p2a <- p2 + theme(legend.position = "none")
 
 # plot C
 p3 <- ggplot(iris, aes(Sepal.Width, fill = Species)) +
-  geom_density(alpha = .7) + theme(legend.position = "none")
+  geom_density(alpha = .7) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(legend.position = "none")
 
 # legend
 legend <- get_legend(p2)

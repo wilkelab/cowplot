@@ -11,10 +11,11 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 ```{r echo=FALSE, message=FALSE}
+library(ggplot2)
 library(cowplot)
 ```
 
-The **cowplot** package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots. Note that as **ggplot2** gains more of this functionality natively (e.g. as of version 2.2.0), we recommend to use the **ggplot2** methods rather than the **cowplot** methods. Any functionality that is duplicated between **ggplot2** and **cowplot** may be removed from future versions of **cowplot**.
+The cowplot package provides a variety of functions to annotate plots, including annotations underneath the plot, mathematical expressions inside plots, and joint titles for combined plots. Note that as ggplot2 gains more of this functionality natively (e.g. as of version 2.2.0), we recommend to use the ggplot2 methods rather than the cowplot methods. Any functionality that is duplicated between ggplot2 and cowplot may be removed from future versions of cowplot.
 
 
 ## Annotations with mathematical expressions
@@ -23,41 +24,51 @@ We commonly want to annotate plots with mathematical expressions, for example wh
 
 Depending on the application, we may want to specify the location of the label either in absolute coordinates (independently of the data plotted) or in coordinates relative to the data shown. Both uses are supported by `draw_label()`. For the former, we use `draw_label()` in conjunction with `ggdraw()`:
 ```{r fig.width=5, fig.height=5, warning=FALSE}
+p <- ggplot(mtcars, aes(mpg, disp)) + 
+  geom_line(colour = "blue") + theme_half_open()
 c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
 label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
 # adding label via ggdraw, in the ggdraw coordinates
-ggdraw(p1) + draw_label(label, .7, .9)
+ggdraw(p) + draw_label(label, .7, .9)
 ```
 
 For the latter, we add `draw_label()` directly to the plot:
 ```{r fig.width=5, fig.height=5}
 # adding label directly to plot, in the data coordinates
-p1 + draw_label(label, 20, 400, hjust = 0, vjust = 0)
+p + draw_label(label, 20, 400, hjust = 0, vjust = 0)
 ```
 
 
 ## Joint plot titles
 
-When we combine plots with `plot_grid()`, we may want to add a title that spans the entire combined figure. While there is no specific function in **cowplot** to achieve this effect, it can be simulated easily with a few lines of code:
+When we combine plots with `plot_grid()`, we may want to add a title that spans the entire combined figure. While there is no specific function in cowplot to achieve this effect, it can be simulated easily with a few lines of code:
 ```{r fig.width=8, fig.height=4}
 # make a plot grid consisting of two panels
-p1 <- ggplot(mtcars, aes(x=disp, y=mpg)) + geom_point(colour = "blue") + background_grid(minor='none')
-p2 <- ggplot(mtcars, aes(x=hp, y=mpg)) + geom_point(colour = "green") + background_grid(minor='none')
+p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) + 
+  geom_point(colour = "blue") + 
+  theme_half_open() + background_grid(minor = 'none')
+p2 <- ggplot(mtcars, aes(x = hp, y = mpg)) + 
+  geom_point(colour = "green") + 
+  theme_half_open() + background_grid(minor = 'none')
 p <- plot_grid(p1, p2, labels=c('A', 'B'))
 # now add the title
-title <- ggdraw() + draw_label("MPG declines with displacement and horsepower", fontface='bold')
-plot_grid(title, p, ncol=1, rel_heights=c(0.1, 1)) # rel_heights values control title margins
+title <- ggdraw() + 
+  draw_label("MPG declines with displacement and horsepower",
+             fontface = 'bold')
+plot_grid(title, p, ncol = 1, rel_heights = c(0.1, 1)) # rel_heights values control title margins
 ```
 In the final `plot_grid` line, the values of `rel_heights` need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.
 
 ## Annotations underneath plots
 
-The function `add_sub()` can be used to add annotation text underneath a plot. This functionality is now mostly superseded by the `caption` argument to the `labs` function in base **ggplot2**, but `add_sub()` is retained in **cowplot** for backwards compatibility. For new plots, I suggest you try `caption` first and use `add_sub()` only when `caption` doesn't provide the desired result.
+The function `add_sub()` can be used to add annotation text underneath a plot. This functionality is now mostly superseded by the `caption` argument to the `labs` function in base ggplot2, but `add_sub()` is retained in cowplot for backwards compatibility. For new plots, I suggest you try `caption` first and use `add_sub()` only when `caption` doesn't provide the desired result.
 
 To demonstrate how `add_sub()` is used, we first make a plot: 
 ```{r fig.width=5, fig.height=5}
-p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
+p1 <- ggplot(mtcars, aes(mpg, disp)) + 
+  geom_line(colour = "blue") + 
+  theme_half_open() + background_grid(minor='none')
 p1
 ```
 
@@ -72,7 +83,7 @@ Note that `p2` is not a ggplot object but a gtable. It needs to be drawn with `g
 We can also do this repeatedly, and we can use mathematical expressions instead of plain text.
 ```{r fig.width=5, fig.height=5}
 p2 <- add_sub(p1, "This formula has no relevance here:", y  = 0, vjust = 0)
-p3 <- add_sub(p2, expression(paste(a^2+b^2, " = ", c^2)), size=12)
+p3 <- add_sub(p2, expression(paste(a^2+b^2, " = ", c^2)), size = 12)
 ggdraw(p3)
 ```
 
@@ -80,6 +91,7 @@ This code also works with faceted plots:
 ```{r fig.width=7, fig.height=5}
 plot.iris <- ggplot(iris, aes(Sepal.Length, Sepal.Width)) +
   geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  theme_half_open() + 
   background_grid(major = 'y', minor = "none") + # add thin horizontal lines
   panel_border() # and a border around each panel
 p2 <- add_sub(plot.iris, "Annotation underneath a faceted plot, left justified.", x = 0, hjust = 0)
