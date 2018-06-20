@@ -3,7 +3,7 @@
 #' This function extracts just the legend from a ggplot
 #'
 #' @param plot A ggplot or gtable from which to retrieve the legend
-#' @return A gtable object holding just the lengend
+#' @return A gtable object holding just the legend or \code{NULL} if there is no legend.
 #' @examples
 #' library(ggplot2)
 #' theme_set(theme_half_open())
@@ -30,6 +30,6 @@ get_legend <- function(plot)
     if (length(legendIndex) == 1){
         legend <- grobs[[legendIndex]]
     } else {
-        stop('Plot must contain a legend')
+        legend <- NULL
     }
 }

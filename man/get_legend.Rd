@@ -10,7 +10,7 @@ get_legend(plot)
 \item{plot}{A ggplot or gtable from which to retrieve the legend}
 }
 \value{
-A gtable object holding just the lengend
+A gtable object holding just the legend or \code{NULL} if there is no legend.
 }
 \description{
 This function extracts just the legend from a ggplot
