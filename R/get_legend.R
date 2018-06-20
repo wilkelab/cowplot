@@ -3,6 +3,7 @@
 #' This function extracts just the legend from a ggplot
 #'
 #' @param plot A ggplot or gtable from which to retrieve the legend
+#' @param allow_null_legend Return \code{NULL} if there is no legend?
 #' @return A gtable object holding just the lengend
 #' @examples
 #' library(ggplot2)
@@ -20,7 +21,7 @@
 #'                  plot_grid(NULL, legend, ncol=1),
 #'                  rel_widths=c(1, 0.2)))
 #' @export
-get_legend <- function(plot)
+get_legend <- function(plot, allow_null_legend=FALSE)
 {
     grobs <- as_gtable(plot)$grobs
     legendIndex <- which(sapply(grobs, function(x) x$name) == "guide-box")
@@ -29,6 +30,8 @@ get_legend <- function(plot)
     ## not sure if it is possible to create a plot with multiple legend grobs, but also not sure how this function should handle those situations so this seems to be the best check to provide a useful message
     if (length(legendIndex) == 1){
         legend <- grobs[[legendIndex]]
+    } else if (allow_null_legend) {
+        legend <- NULL
     } else {
         stop('Plot must contain a legend')
     }

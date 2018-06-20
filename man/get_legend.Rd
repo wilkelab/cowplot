@@ -4,10 +4,12 @@
 \alias{get_legend}
 \title{Retrieve the legend of a plot}
 \usage{
-get_legend(plot)
+get_legend(plot, allow_null_legend = FALSE)
 }
 \arguments{
 \item{plot}{A ggplot or gtable from which to retrieve the legend}
+
+\item{allow_null_legend}{Return \code{NULL} if there is no legend?}
 }
 \value{
 A gtable object holding just the lengend
