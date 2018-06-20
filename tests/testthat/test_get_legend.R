@@ -8,10 +8,7 @@ test_that("get legend", {
   expect_s3_class(l, "gtable")
   expect_equal(l$name, "guide-box")
 
-  # cannot extract a legend when none exists
-  expect_error(get_legend(p + theme(legend.position = "none")))
-  # return a null legend if allowed
-  expect_null(get_legend(p + theme(legend.position = "none"),
-                         allow_null_legend=TRUE))
+  # return null legend if no legend
+  expect_null(get_legend(p + theme(legend.position = "none")))
 })
 

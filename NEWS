@@ -17,6 +17,8 @@ breaking changes were introduced:
 Other breaking changes:
 - The defaults for `save_plot()` were changed somewhat. This may require
   adjustment if you have code depending on it.
+- `get_legend()` now returns NULL if there is no legend instead of raising
+  an error.
 
 ## New features
 - Added a function `as_grob()` that can convert base plots, lattice plots,
