@@ -235,7 +235,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 #' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
 #'              grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
 #'              second column.
-#' @param rel_heights (optional) Numerical vector of relative columns heights. Works just as
+#' @param rel_heights (optional) Numerical vector of relative rows heights. Works just as
 #'              \code{rel_widths} does, but for rows rather than columns.
 #' @param labels (optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to
 #'              auto-generate upper-case labels or \code{labels="auto"} to auto-generate lower-case labels.
