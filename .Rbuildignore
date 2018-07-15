@@ -7,3 +7,4 @@ visual_test
 ^TODO$
 ^vignettes/*\.png$
 ^revdep$
+^.github$
