@@ -1,6 +1,7 @@
 #' Insert an axis-like grob on either side of a plot panel in a [ggplot2] plot.
 #'
 #' The function `insert_xaxis_grob()` inserts a grob at the top or bottom of the plot panel in a [ggplot2] plot.
+#' The function `insert_yaxis_grob()` inserts a grob to the right or left of the plot panel in a [ggplot2] plot.
 #'
 #' For usage examples, see [axis_canvas()].
 #' @param plot The plot into which the grob will be inserted.
@@ -38,8 +39,6 @@ insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), posi
   }
 }
 
-#' The function `insert_yaxis_grob()` inserts a grob to the right or left of the plot panel in a [ggplot2] plot.
-#'
 #' @rdname insert_xaxis_grob
 #' @export
 insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), position = c("right", "left"))

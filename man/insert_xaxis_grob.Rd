@@ -28,6 +28,7 @@ and \code{"top"} or \code{"botton"} for \code{insert_xaxis_grob()}.}
 }
 \description{
 The function \code{insert_xaxis_grob()} inserts a grob at the top or bottom of the plot panel in a \link{ggplot2} plot.
+The function \code{insert_yaxis_grob()} inserts a grob to the right or left of the plot panel in a \link{ggplot2} plot.
 }
 \details{
 For usage examples, see \code{\link[=axis_canvas]{axis_canvas()}}.
