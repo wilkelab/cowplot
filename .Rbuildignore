@@ -5,6 +5,7 @@ visual_test
 ^\.codecov\.yml$
 ^cran-comments.md$
 ^TODO$
+^*\.png$
 ^vignettes/*\.png$
 ^revdep$
 ^.github$
