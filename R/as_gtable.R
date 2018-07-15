@@ -149,7 +149,10 @@ as_grob.ggplot <- function(plot, device = NULL) {
   null_dev <- grDevices::dev.cur()  # store null device
 
   # make sure we always clean up properly, even if something causes an error
-  on.exit({grDevices::dev.off(null_dev); grDevices::dev.set(cur_dev)})
+  on.exit({
+    grDevices::dev.off(null_dev)
+    if (cur_dev > 1) grDevices::dev.set(cur_dev) # only set cur device if not null device
+  })
 
   ggplot2::ggplotGrob(plot)  # convert plot to grob
 }
@@ -182,7 +185,10 @@ as_grob.ggassemble <- function(plot, device = NULL) {
   null_dev <- grDevices::dev.cur()  # store null device
 
   # make sure we always clean up properly, even if something causes an error
-  on.exit({grDevices::dev.off(null_dev); grDevices::dev.set(cur_dev)})
+  on.exit({
+    grDevices::dev.off(null_dev)
+    if (cur_dev > 1) grDevices::dev.set(cur_dev) # only set cur device if not null device
+  })
 
   patchwork::patchworkGrob(plot)    # convert plot to grob
 }
