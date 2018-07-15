@@ -1,10 +1,5 @@
 Before 1.0 release:
 - Fix axis_canvas()
-- Make sure background_grid() function works as expected
-  (can't be used to modify the minimal grid themes; major = "only_minor" doesn't work
-  reliably; only reliably approach is to always set all panel.grid theme elements to
-  the required values. Add warning if major = "none" and minor not set to "none"?
-  Alternatively, eliminate "only_minor" option.)
 - Add as_grob() function for gList.
 
 Things to fix or improve

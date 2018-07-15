@@ -10,7 +10,7 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
-"y", "only_minor" (disables major grid lines but allows you to switch on minor grid lines), "none".}
+"y", "none".}
 
 \item{minor}{Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
 "y", "none".}
@@ -24,9 +24,13 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 \item{colour.minor}{Color of the minor grid lines.}
 }
 \description{
-This function provides a simple way to modify the background grid in ggplot2. It
-doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
+This function provides a simple way to set the background grid in ggplot2. It
+doesn't do anything that can't be done just the same with \code{\link[=theme]{theme()}}. However, it simplifies
 creation of the most commonly needed variations.
+}
+\details{
+Note: This function completely overwrites all background grid settings of the current theme. If that
+is not what you want, you may be better off using \code{\link[=theme]{theme()}} directly.
 }
 \examples{
 library(ggplot2)

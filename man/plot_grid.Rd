@@ -33,7 +33,7 @@ Must be specified if any of the graphs are complex (e.g. faceted) and alignment 
 grid, \code{rel_widths = c(2, 1)} would make the first column twice as wide as the
 second column.}
 
-\item{rel_heights}{(optional) Numerical vector of relative columns heights. Works just as
+\item{rel_heights}{(optional) Numerical vector of relative rows heights. Works just as
 \code{rel_widths} does, but for rows rather than columns.}
 
 \item{labels}{(optional) List of labels to be added to the plots. You can also set \code{labels="AUTO"} to

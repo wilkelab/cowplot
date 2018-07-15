@@ -406,11 +406,14 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 
 #' Add/modify/remove the background grid in a ggplot2 plot
 #'
-#' This function provides a simple way to modify the background grid in ggplot2. It
-#' doesn't do anything that can't be done just the same with \code{theme()}. However, it simplifies
+#' This function provides a simple way to set the background grid in ggplot2. It
+#' doesn't do anything that can't be done just the same with [`theme()`]. However, it simplifies
 #' creation of the most commonly needed variations.
+#'
+#' Note: This function completely overwrites all background grid settings of the current theme. If that
+#' is not what you want, you may be better off using [`theme()`] directly.
 #' @param major Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
-#'  "y", "only_minor" (disables major grid lines but allows you to switch on minor grid lines), "none".
+#'  "y", "none".
 #' @param minor Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
 #'  "y", "none".
 #' @param size.major Size of the major grid lines.
@@ -430,49 +433,48 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             size.major = 0.5, size.minor = 0.2,
                             colour.major = "grey90", colour.minor = "grey90"){
 
-  if (major[1] == "none") return(theme(panel.grid = element_blank()))
+  # start with a defined theme that corresponds to the default settings
+  t <- theme(
+    panel.grid = element_line(
+      colour = colour.major,
+      size = size.major,
+      linetype = 1,
+      lineend = "butt"
+    ),
+    panel.grid.major = NULL,
+    panel.grid.major.x = NULL,
+    panel.grid.major.y = NULL,
+    panel.grid.minor = element_line(
+      colour = colour.minor,
+      size = size.minor,
+      linetype = 1,
+      lineend = "butt"
+    ),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.minor.y = element_blank()
+  )
 
-  t <- switch( major[1],
-               x = theme(panel.grid.major   = element_line(colour = colour.major,
-                                                           size = size.major,
-                                                           linetype = 1,
-                                                           lineend = "butt"),
-                         panel.grid.major.y = element_blank()),
-               y = theme(panel.grid.major   = element_line(colour = colour.major,
-                                                           size = size.major,
-                                                           linetype = 1,
-                                                           lineend = "butt"),
-                         panel.grid.major.x = element_blank()),
-               xy = theme(panel.grid.major = element_line(colour = colour.major,
-                                                          size = size.major,
-                                                          linetype = 1,
-                                                          lineend = "butt")),
-               yx = theme(panel.grid.major = element_line(colour = colour.major,
-                                                          size = size.major,
-                                                          linetype = 1,
-                                                          lineend = "butt")),
-               theme(panel.grid.major = element_blank()))
+  t <- switch(major[1],
+    x = t + theme(panel.grid.major.y = element_blank()),
+    y = t + theme(panel.grid.major.x = element_blank()),
+    xy = t,
+    yx = t,
+    t + theme(panel.grid.major = element_blank())
+  )
 
-  t + switch( minor[1],
-              x = theme(panel.grid.minor   = element_line(colour = colour.minor,
-                                                          size = size.minor,
-                                                          linetype = 1,
-                                                          lineend = "butt"),
-                        panel.grid.minor.y = element_blank()),
-              y = theme(panel.grid.minor   = element_line(colour = colour.minor,
-                                                          size = size.minor,
-                                                          linetype = 1,
-                                                          lineend = "butt"),
-                        panel.grid.minor.x = element_blank()),
-              xy = theme(panel.grid.minor = element_line(colour = colour.minor,
-                                                         size = size.minor,
-                                                         linetype = 1,
-                                                         lineend = "butt")),
-              yx = theme(panel.grid.minor = element_line(colour = colour.minor,
-                                                         size = size.minor,
-                                                         linetype = 1,
-                                                         lineend = "butt")),
-              theme(panel.grid.minor = element_blank()))
+  t <- switch(minor[1],
+    x = t + theme(panel.grid.minor.x = NULL),
+    y = t + theme(panel.grid.minor.y = NULL),
+    xy = t + theme(
+      panel.grid.minor.x = NULL,
+      panel.grid.minor.y = NULL),
+    yx = t + theme(
+      panel.grid.minor.x = NULL,
+      panel.grid.minor.y = NULL),
+    t
+  )
+
+  t
 }
 
 
