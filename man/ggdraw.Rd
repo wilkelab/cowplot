@@ -4,7 +4,7 @@
 \alias{ggdraw}
 \title{Set up a drawing layer on top of a ggplot}
 \usage{
-ggdraw(plot = NULL, xlim = c(0, 1), ylim = c(0, 1))
+ggdraw(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), clip = "off")
 }
 \arguments{
 \item{plot}{The plot to use as a starting point. Can be a ggplot2 plot, an arbitrary
@@ -13,6 +13,8 @@ grob or gtable, or a recorded base-R plot, as in \code{\link[=as_grob]{as_grob()
 \item{xlim}{The x-axis limits for the drawing layer.}
 
 \item{ylim}{The y-axis limits for the drawing layer.}
+
+\item{clip}{Should drawing be clipped to the set limits? The default is no ("off").}
 }
 \description{
 Set up a drawing layer on top of a ggplot.

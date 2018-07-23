@@ -411,15 +411,16 @@ annotation_id <- local({
 #'   grob or gtable, or a recorded base-R plot, as in [as_grob()].
 #' @param xlim The x-axis limits for the drawing layer.
 #' @param ylim The y-axis limits for the drawing layer.
+#' @param clip Should drawing be clipped to the set limits? The default is no ("off").
 #' @examples
 #' library(ggplot2)
 #'
 #' p <- ggplot(mpg, aes(displ, cty)) + geom_point()
 #' ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
 #' @export
-ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1)) {
+ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), clip = "off") {
   p <- ggplot() + # empty plot
-    coord_cartesian(xlim = xlim, ylim = ylim, expand = FALSE, clip = "off") +
+    coord_cartesian(xlim = xlim, ylim = ylim, expand = FALSE, clip = clip) +
     scale_x_continuous(name = NULL) +
     scale_y_continuous(name = NULL) +
     theme_nothing() # with empty theme
