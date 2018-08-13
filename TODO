@@ -1,6 +1,7 @@
 Before 1.0 release:
 - Fix axis_canvas()
-- Add as_grob() function for gList.
+- Add as_grob() function for gList
+- null devices should make temporary files and clean up after exit - may not be technically possible
 
 Things to fix or improve
 =============================
