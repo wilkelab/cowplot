@@ -36,7 +36,6 @@ Suggests:
     vdiffr (>= 0.2.3.9000)
 Remotes:
     thomasp85/patchwork,
-    tidyverse/ggplot2,
     lionel-/vdiffr
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
