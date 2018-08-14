@@ -5,7 +5,8 @@ r:
 cache: packages
 
 env:
-  - _R_CHECK_FORCE_SUGGESTS_=false
+#  - _R_CHECK_FORCE_SUGGESTS_=false
+  - _R_CHECK_FORCE_SUGGESTS_=true
 
 # needed to install the magick package
 addons:
