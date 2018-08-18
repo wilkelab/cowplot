@@ -5,11 +5,12 @@
 \title{Arrange multiple plots into a grid}
 \usage{
 plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
-  axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"), nrow = NULL,
-  ncol = NULL, rel_widths = 1, rel_heights = 1, labels = NULL,
-  label_size = 14, label_fontfamily = NULL, label_fontface = "bold",
-  label_colour = NULL, label_x = 0, label_y = 1, hjust = -0.5,
-  vjust = 1.5, scale = 1, cols = NULL, rows = NULL)
+  axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
+  nrow = NULL, ncol = NULL, rel_widths = 1, rel_heights = 1,
+  labels = NULL, label_size = 14, label_fontfamily = NULL,
+  label_fontface = "bold", label_colour = NULL, label_x = 0,
+  label_y = 1, hjust = -0.5, vjust = 1.5, scale = 1, cols = NULL,
+  rows = NULL)
 }
 \arguments{
 \item{...}{List of plots to be arranged into the grid. The plots can be any objects that

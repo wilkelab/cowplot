@@ -5,8 +5,8 @@
 \title{Alternative to ggsave, with better support for multi-figure plots.}
 \usage{
 save_plot(filename, plot, ncol = 1, nrow = 1, base_height = 3.71,
-  base_asp = 1.618, base_width = NULL, ..., cols, rows, base_aspect_ratio,
-  width, height)
+  base_asp = 1.618, base_width = NULL, ..., cols, rows,
+  base_aspect_ratio, width, height)
 }
 \arguments{
 \item{filename}{Name of the plot file to generate.}

@@ -10,13 +10,13 @@ theme_minimal_grid(font_size = 14, font_family = "", line_size = 0.5,
   rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
   colour = "grey90")
 
-theme_minimal_vgrid(font_size = 14, font_family = "", line_size = 0.5,
-  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-  colour = "grey90")
+theme_minimal_vgrid(font_size = 14, font_family = "",
+  line_size = 0.5, rel_small = 12/14, rel_tiny = 11/14,
+  rel_large = 16/14, colour = "grey90")
 
-theme_minimal_hgrid(font_size = 14, font_family = "", line_size = 0.5,
-  rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-  colour = "grey90")
+theme_minimal_hgrid(font_size = 14, font_family = "",
+  line_size = 0.5, rel_small = 12/14, rel_tiny = 11/14,
+  rel_large = 16/14, colour = "grey90")
 }
 \arguments{
 \item{font_size}{Overall font size.}

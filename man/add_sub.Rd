@@ -5,8 +5,9 @@
 \title{Add annotation underneath a plot}
 \usage{
 add_sub(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
-  vpadding = grid::unit(1, "lines"), fontfamily = "", fontface = "plain",
-  colour = "black", size = 14, angle = 0, lineheight = 0.9)
+  vpadding = grid::unit(1, "lines"), fontfamily = "",
+  fontface = "plain", colour = "black", size = 14, angle = 0,
+  lineheight = 0.9)
 }
 \arguments{
 \item{plot}{A ggplot object or gtable object derived from a ggplot object.}
