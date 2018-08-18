@@ -12,10 +12,8 @@ expect_doppelganger <- function(title, fig,
     return(invisible(NULL))
   }
 
-  stop("calling vdiffr function")
-
   vdiffr::expect_doppelganger(title, fig,
-                              path = path,
+                              path = "abc",
                               ...,
                               user_fonts = user_fonts,
                               verbose = verbose
