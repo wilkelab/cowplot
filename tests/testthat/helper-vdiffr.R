@@ -12,8 +12,11 @@ expect_doppelganger <- function(title, fig,
     return(invisible(NULL))
   }
 
+  ver <- gdtools::version_freetype()
+  if (ver < "2.6.0") stop("lib freetype too old:", ver)
+
   vdiffr::expect_doppelganger(title, fig,
-                              path = "abc",
+                              path = path,
                               ...,
                               user_fonts = user_fonts,
                               verbose = verbose

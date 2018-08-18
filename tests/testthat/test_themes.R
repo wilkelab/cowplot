@@ -100,7 +100,7 @@ test_that("themes look right", {
   )
 
   expect_doppelganger("theme minimal vgrid huge",
-                      p + theme_minimal_vgrid(21)
+                      p + theme_minimal_vgrid(22)
   )
 
 })
