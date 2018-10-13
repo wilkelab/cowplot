@@ -2,12 +2,19 @@
 % Please edit documentation in R/get_panel.R
 \name{get_panel}
 \alias{get_panel}
+\alias{get_panel_component}
 \title{Retrieve the panel of a plot}
 \usage{
-get_panel(plot)
+get_panel(plot, panel = NULL)
+
+get_panel_component(panel, pattern)
 }
 \arguments{
 \item{plot}{A ggplot or gtable from which to retrieve the panel}
+
+\item{panel}{An integer indicating which panel to pull}
+
+\item{pattern}{the name of the component}
 }
 \value{
 A gtable object holding just the panel
