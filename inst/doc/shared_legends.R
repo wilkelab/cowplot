@@ -1,0 +1,100 @@
+## ----message=FALSE-------------------------------------------------------
+library(ggplot2)
+library(cowplot)
+library(grid) # for "unit"
+theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
+
+## ----fig.width=9, fig.height=3-------------------------------------------
+# down-sampled diamonds data set
+dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
+
+# Make three plots.
+# We set left and right margins to 0 to remove unnecessary spacing in the
+# final plot arrangement.
+p1 <- qplot(carat, price, data=dsamp, colour=clarity) +
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt"))
+p2 <- qplot(depth, price, data=dsamp, colour=clarity) +
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
+p3 <- qplot(color, price, data=dsamp, colour=clarity) +
+  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
+
+# arrange the three plots in a single row
+prow <- plot_grid(
+  p1 + theme(legend.position="none"),
+  p2 + theme(legend.position="none"),
+  p3 + theme(legend.position="none"),
+  align = 'vh',
+  labels = c("A", "B", "C"),
+  hjust = -1,
+  nrow = 1
+)
+prow
+
+## ----fig.width=10, fig.height=3------------------------------------------
+# extract the legend from one of the plots
+# (clearly the whole thing only makes sense if all plots
+# have the same legend, so we can arbitrarily pick one.)
+legend <- get_legend(p1)
+
+# add the legend to the row we made earlier. Give it one-third of the width
+# of one plot (via rel_widths).
+p <- plot_grid( prow, legend, rel_widths = c(3, .3))
+p
+
+## ----fig.width=9, fig.height=3.3-----------------------------------------
+# extract the legend from one of the plots
+# (clearly the whole thing only makes sense if all plots
+# have the same legend, so we can arbitrarily pick one.)
+legend_b <- get_legend(p1 + theme(legend.position="bottom"))
+
+# add the legend underneath the row we made earlier. Give it 10% of the height
+# of one plot (via rel_heights).
+p <- plot_grid( prow, legend_b, ncol = 1, rel_heights = c(1, .2))
+p
+
+## ----fig.width=10, fig.height=3------------------------------------------
+# arrange the three plots in a single row, leaving space between plot B and C
+prow <- plot_grid( p1 + theme(legend.position="none"),
+           p2 + theme(legend.position="none"),
+           NULL,
+           p3 + theme(legend.position="none"),
+           align = 'vh',
+           labels = c("A", "B", "", "C"),
+           hjust = -1,
+           nrow = 1,
+           rel_widths = c(1, 1, .3, 1)
+           )
+
+prow + draw_grob(legend, 2/3.3, 0, .3/3.3, 1)
+
+## ----fig.width=7.5, fig.height=5-----------------------------------------
+# plot A
+p1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
+  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  background_grid(major = 'y', minor = "none") + 
+  panel_border() + theme(legend.position = "none")
+
+# plot B
+p2 <- ggplot(iris, aes(Sepal.Length, fill = Species)) +
+  geom_density(alpha = .7) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(legend.justification = "top")
+p2a <- p2 + theme(legend.position = "none")
+
+# plot C
+p3 <- ggplot(iris, aes(Sepal.Width, fill = Species)) +
+  geom_density(alpha = .7) + 
+  scale_y_continuous(expand = c(0, 0)) +
+  theme(legend.position = "none")
+
+# legend
+legend <- get_legend(p2)
+
+# align all plots vertically
+plots <- align_plots(p1, p2a, p3, align = 'v', axis = 'l')
+
+# put together bottom row and then everything
+bottom_row <- plot_grid(plots[[2]], plots[[3]], legend, labels = c("B", "C"), rel_widths = c(1, 1, .3), nrow = 1)
+plot_grid(plots[[1]], bottom_row, labels = c("A"), ncol = 1)
+
+
