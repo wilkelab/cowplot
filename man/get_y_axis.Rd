@@ -3,17 +3,28 @@
 \name{get_y_axis}
 \alias{get_y_axis}
 \alias{get_x_axis}
-\title{Get plot axes}
+\title{Get plot Axes}
 \usage{
 get_y_axis(plot, side = c("l", "r"))
 
 get_x_axis(plot, side = c("b", "t"))
 }
 \arguments{
-\item{plot}{a ggplot or gtable}
+\item{plot}{A ggplot or gtable.}
 
-\item{side}{which side of the plot?}
+\item{side}{Which side of the plot is the axis on?}
 }
 \description{
-Get plot axes
+These functions extract just the axes from a ggplot. \code{get_y_axis()} pulls
+the y-axis, while \code{get_x_axis()} pulls the x-axis.
+}
+\examples{
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, cty)) +
+  geom_point()
+
+ggdraw(get_y_axis(p))
+ggdraw(get_x_axis(p + scale_x_continuous(position = "top"), side = "t"))
+
 }

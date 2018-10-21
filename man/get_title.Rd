@@ -10,8 +10,22 @@ get_title(plot)
 get_subtitle(plot)
 }
 \arguments{
-\item{plot}{a ggplot or gtable}
+\item{plot}{A ggplot or gtable.}
 }
 \description{
-Get plot titles
+These functions extract just the titles from a ggplot. \code{get_title()} pulls
+the title, while \code{get_subtitle()} pulls the subtitle.
+}
+\examples{
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, cty)) +
+  geom_point() +
+  labs(
+    title = "Plot title",
+    subtitle = "Plot subtitle"
+  )
+ggdraw(get_title(p))
+ggdraw(get_subtitle(p))
+
 }

@@ -5,21 +5,36 @@
 \alias{get_panel_component}
 \title{Retrieve the panel of a plot}
 \usage{
-get_panel(plot, panel = NULL)
+get_panel(plot, panel = NULL, return_all = FALSE)
 
 get_panel_component(panel, pattern)
 }
 \arguments{
 \item{plot}{A ggplot or gtable from which to retrieve the panel}
 
-\item{panel}{An integer indicating which panel to pull}
+\item{panel}{An integer indicating which panel to pull. ggplot orders panels
+column-wise, so this is in order from the top left down.}
+
+\item{return_all}{If there is more than one panel, should all be returned
+as a list? Default is \code{FALSE}.}
 
 \item{pattern}{the name of the component}
 }
 \value{
-A gtable object holding just the panel
+A gtable object holding the panel(s) or a grob of the component
 }
 \description{
-This function extracts just the main panel from a ggplot. It only works for plots with exactly
-one panel (i.e., plots that are not faceted).
+\code{get_panel()} extracts just the main panel from a ggplot or a specified panel
+in a facetted plot. \code{get_panel_component()} extracts components from the
+panel, such as geoms.
+}
+\examples{
+library(ggplot2)
+
+p <- ggplot(mpg, aes(displ, cty)) + geom_point()
+plot_panel <- get_panel(p)
+ggdraw(plot_panel)
+
+ggdraw(get_panel_component(plot_panel, "geom_point"))
+
 }
