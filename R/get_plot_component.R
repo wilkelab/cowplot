@@ -27,12 +27,12 @@ get_plot_component <- function(plot, pattern, return_all = FALSE) {
   grobIndex <- which(grepl(pattern, grob_names))
 
   if (length(grobIndex) != 0) {
-    if (length(grobIndex) > 1 & !return_all) {
+    if (length(grobIndex) > 1 && !return_all) {
       # If there's more than one grob, return just the first one
       warning("Multiple components found; returning the first one. To return all, use `return_all = TRUE`.")
       grobIndex <- grobIndex[1]
       matched_grobs <- grobs[[grobIndex]]
-    } else if (length(grobIndex) > 1 & return_all) {
+    } else if (length(grobIndex) > 1 && return_all) {
       # If there's more than one grob, return all as a list
       matched_grobs <- grobs[grobIndex]
     } else {

@@ -1,4 +1,4 @@
-#' Retrieve the panel of a plot
+#' Retrieve the panel or part of a panel of a plot
 #'
 #' `get_panel()` extracts just the main panel from a ggplot or a specified panel
 #' in a facetted plot. `get_panel_component()` extracts components from the
@@ -25,7 +25,7 @@ get_panel <- function(plot, panel = NULL, return_all = FALSE) {
   plot <- as_gtable(plot)
   panel_locs <- grepl("panel", plot_component_names(plot))
   panels <- plot_components(plot)[panel_locs]
-  if (length(panels) > 1 & is.null(panel) & !return_all)
+  if (length(panels) > 1 && is.null(panel) && !return_all)
     warning("Multiple panels found; returning the first one. Select a panel with `panel` or return all with `return_all = TRUE`.")
 
   if (!is.null(panel)) {

@@ -3,7 +3,7 @@
 \name{get_panel}
 \alias{get_panel}
 \alias{get_panel_component}
-\title{Retrieve the panel of a plot}
+\title{Retrieve the panel or part of a panel of a plot}
 \usage{
 get_panel(plot, panel = NULL, return_all = FALSE)
 

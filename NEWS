@@ -35,7 +35,7 @@ Other breaking changes:
 - Expanded functions for extracting plot components from ggplots via
   `get_plot_component()` and several wrapper functions for getting
   titles, axes, panels, and so on. This also lets `get_panel()`
-  extract from plots with more than one panel. `get_panel_componets()`
+  extract from plots with more than one panel. `get_panel_component()`
   allows you to further extract components like geoms from the
   plot panel (@malcolmbarrett, #111).
 

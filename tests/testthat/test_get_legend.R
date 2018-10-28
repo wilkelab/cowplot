@@ -1,7 +1,8 @@
 context("get_legend")
 
 test_that("get legend", {
-  p <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color=Species)) + geom_point()
+  df <- data.frame(x = 1:3, y = 1:3, z = factor(c("a", "b", "c")))
+  p <- ggplot(df, aes(x, y, color = z)) + geom_point()
 
   l <- get_legend(p)
 
