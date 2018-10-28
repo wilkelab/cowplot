@@ -6,10 +6,10 @@ test_that("get x and y axes", {
 
   expect_s3_class(get_x_axis(p), "gTree")
   expect_s3_class(get_y_axis(p), "gTree")
-  expect_s3_class(get_x_axis(p, side = "top"), "zeroGrob")
-  expect_s3_class(get_y_axis(p, side = "right"), "zeroGrob")
-  expect_s3_class(get_y_axis(p + scale_y_continuous(position = "right"), side = "right"), "gTree")
-  expect_s3_class(get_x_axis(p + scale_x_continuous(position = "top"), side = "top"), "gTree")
+  expect_s3_class(get_x_axis(p, position = "top"), "zeroGrob")
+  expect_s3_class(get_y_axis(p, position = "right"), "zeroGrob")
+  expect_s3_class(get_y_axis(p + scale_y_continuous(position = "right"), position = "right"), "gTree")
+  expect_s3_class(get_x_axis(p + scale_x_continuous(position = "top"), position = "top"), "gTree")
 
 })
 

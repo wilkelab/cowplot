@@ -5,15 +5,15 @@
 \alias{get_x_axis}
 \title{Get plot axes}
 \usage{
-get_y_axis(plot, side = c("left", "right"))
+get_y_axis(plot, position = c("left", "right"))
 
-get_x_axis(plot, side = c("bottom", "top"))
+get_x_axis(plot, position = c("bottom", "top"))
 }
 \arguments{
 \item{plot}{A ggplot or gtable.}
 
-\item{side}{Which side of the plot is the axis on? For the x-axis, this can
-be "top" or "bottom", and for the y-axis, it can be "left" or "right".}
+\item{position}{Which side of the plot is the axis on? For the x-axis, this
+can be "top" or "bottom", and for the y-axis, it can be "left" or "right".}
 }
 \description{
 These functions extract just the axes from a ggplot. \code{get_y_axis()} pulls
@@ -26,6 +26,7 @@ p <- ggplot(mpg, aes(displ, cty)) +
   geom_point()
 
 ggdraw(get_y_axis(p))
-ggdraw(get_x_axis(p + scale_x_continuous(position = "top"), side = "top"))
+p <- p + scale_x_continuous(position = "top")
+ggdraw(get_x_axis(p, position = "top"))
 
 }
