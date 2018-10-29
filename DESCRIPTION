@@ -26,17 +26,13 @@ Suggests:
     Cairo,
     covr,
     gridGraphics (>= 0.3-0),
-    patchwork,
     knitr,
     magick,
     maps,
     dplyr,
     tidyr,
     testthat (>= 1.0.0),
-    vdiffr (>= 0.2.3.9000)
-Remotes:
-    thomasp85/patchwork,
-    lionel-/vdiffr
+    vdiffr
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
