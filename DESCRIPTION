@@ -26,6 +26,8 @@ Suggests:
     Cairo,
     covr,
     gridGraphics (>= 0.3-0),
+    grConvert,
+    grImport2,
     knitr,
     magick,
     maps,
@@ -53,5 +55,5 @@ Collate:
     'setup.R'
     'themes.R'
     'utils_ggplot2.R'
-RoxygenNote: 6.1.0
+RoxygenNote: 6.1.1
 Roxygen: list(markdown = TRUE)
