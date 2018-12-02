@@ -30,6 +30,8 @@ Places a vector image somewhere onto the drawing canvas. By default, coordinates
 package to work, and fails gracefully if that package is not installed.
 }
 \examples{
+library(ggplot2)
+library(cowplot)
 cairoFile <- system.file("SVG", "lwd-rsvg.svg", package="grImport2")
 otherFile <- system.file("SVG", "lwd.svg", package="grImport2")
 
