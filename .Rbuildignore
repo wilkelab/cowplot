@@ -1,3 +1,5 @@
+^_pkgdown\.yml$
+^docs$
 visual_test
 ^.*\.Rproj$
 ^.*\.png$
