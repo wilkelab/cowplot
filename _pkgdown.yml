@@ -1,0 +1,41 @@
+destination: docs
+
+reference:
+- title: Drawing
+  desc: Place elements on the canvas
+  contents:
+  - starts_with("draw_")
+  - ggdraw
+  - add_sub
+  - align_margin
+  - align_plots
+  - background_grid
+  - plot_grid
+  - insert_xaxis_grob
+  - axis_canvas
+  - panel_border
+
+- title: Themes
+  desc: Set default themes
+  contents:
+  - starts_with("theme_")
+
+- title: Get methods
+  desc: Retrieve elements of a plot
+  contents:
+  - starts_with("get_")
+
+- title: Gtable
+  desc: Manipulate gtable elements
+  contents:
+  - starts_with("gtable_")
+  - starts_with("as_")
+
+- title: Output
+  desc: Render figures to an output
+  contents:
+  - ggsave2
+  - save_plot
+  - png_null_device
+  - set_null_device
+  - cowplot
