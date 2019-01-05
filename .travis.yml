@@ -1,4 +1,7 @@
 language: r
+r:
+  - devel
+
 cache: packages
 
 # needed to install the magick package

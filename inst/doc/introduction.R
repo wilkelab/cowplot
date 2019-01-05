@@ -29,19 +29,6 @@ plot.mpg
 #            base_aspect_ratio = 1.3 # make room for figure legend
 #  )
 
-## ----echo=FALSE, message=FALSE-------------------------------------------
-theme_set(theme_cowplot()) # switch to default font size for figure generation
-plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) + 
-  geom_point(size=2.5)
-# use save_plot() instead of ggsave() when using cowplot
-save_plot("mpg.png", plot.mpg,
-          base_aspect_ratio = 1.3 # make room for figure legend
-)
-theme_set(theme_cowplot(font_size=12)) # switch back for online figures
-
-## ----echo=FALSE, out.width = "60%"---------------------------------------
-knitr::include_graphics("mpg.png")
-
 ## ----message=FALSE-------------------------------------------------------
 plot.mpg + background_grid(major = "xy", minor = "none")
 
@@ -78,21 +65,6 @@ plot_grid(plot.mpg, plot.diamonds, labels = c("A", "B"), nrow = 2, align = "v")
 #            # each individual subplot should have an aspect ratio of 1.3
 #            base_aspect_ratio = 1.3
 #            )
-
-## ----echo=FALSE, message=FALSE-------------------------------------------
-theme_set(theme_cowplot()) # switch to default font size for figure generation
-plot2by2 <- plot_grid(plot.mpg, NULL, NULL, plot.diamonds,
-                      labels=c("A", "B", "C", "D"), ncol = 2)
-save_plot("plot2by2.png", plot2by2,
-          ncol = 2, # we're saving a grid plot of 2 columns
-          nrow = 2, # and 2 rows
-          # each individual subplot should have an aspect ratio of 1.3
-          base_aspect_ratio = 1.3
-          )
-theme_set(theme_cowplot(font_size=12)) # switch back for online figures
-
-## ----echo=FALSE, out.width = "100%"--------------------------------------
-knitr::include_graphics("plot2by2.png")
 
 ## ----message=FALSE-------------------------------------------------------
 ggdraw(plot.mpg) + 

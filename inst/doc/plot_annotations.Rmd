@@ -11,6 +11,7 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 ```{r echo=FALSE, message=FALSE}
+library(ggplot2)
 library(cowplot)
 ```
 
@@ -19,21 +20,23 @@ The **cowplot** package provides a variety of functions to annotate plots, inclu
 
 ## Annotations with mathematical expressions
 
-We commonly want to annotate plots with mathematical expressions, for example when we want to show the result from a statistical test inside the plot. For this purpose, cowplot defines the function `draw_label()`, which can add arbitrary test or mathematical expressions to a plot.
+We commonly want to annotate plots with mathematical expressions, for example when we want to show the result from a statistical test inside the plot. For this purpose, cowplot defines the function `draw_label()`, which can add arbitrary text or mathematical expressions to a plot.
 
 Depending on the application, we may want to specify the location of the label either in absolute coordinates (independently of the data plotted) or in coordinates relative to the data shown. Both uses are supported by `draw_label()`. For the former, we use `draw_label()` in conjunction with `ggdraw()`:
 ```{r fig.width=5, fig.height=5, warning=FALSE}
+p <- ggplot(mtcars, aes(x=disp, y=mpg)) + geom_point(colour = "blue")
+
 c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
 label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
 # adding label via ggdraw, in the ggdraw coordinates
-ggdraw(p1) + draw_label(label, .7, .9)
+ggdraw(p) + draw_label(label, .7, .9)
 ```
 
 For the latter, we add `draw_label()` directly to the plot:
 ```{r fig.width=5, fig.height=5}
 # adding label directly to plot, in the data coordinates
-p1 + draw_label(label, 20, 400, hjust = 0, vjust = 0)
+p + draw_label(label, 200, 32.5, hjust = 0, vjust = 0)
 ```
 
 

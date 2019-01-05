@@ -1,16 +1,19 @@
 ## ----echo=FALSE, message=FALSE-------------------------------------------
+library(ggplot2)
 library(cowplot)
 
 ## ----fig.width=5, fig.height=5, warning=FALSE----------------------------
+p <- ggplot(mtcars, aes(x=disp, y=mpg)) + geom_point(colour = "blue")
+
 c <- cor.test(mtcars$mpg, mtcars$disp, method='sp')
 label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
 # adding label via ggdraw, in the ggdraw coordinates
-ggdraw(p1) + draw_label(label, .7, .9)
+ggdraw(p) + draw_label(label, .7, .9)
 
 ## ----fig.width=5, fig.height=5-------------------------------------------
 # adding label directly to plot, in the data coordinates
-p1 + draw_label(label, 20, 400, hjust = 0, vjust = 0)
+p + draw_label(label, 200, 32.5, hjust = 0, vjust = 0)
 
 ## ----fig.width=8, fig.height=4-------------------------------------------
 # make a plot grid consisting of two panels
