@@ -20,7 +20,7 @@ The **cowplot** package provides a variety of functions to annotate plots, inclu
 
 ## Annotations with mathematical expressions
 
-We commonly want to annotate plots with mathematical expressions, for example when we want to show the result from a statistical test inside the plot. For this purpose, cowplot defines the function `draw_label()`, which can add arbitrary test or mathematical expressions to a plot.
+We commonly want to annotate plots with mathematical expressions, for example when we want to show the result from a statistical test inside the plot. For this purpose, cowplot defines the function `draw_label()`, which can add arbitrary text or mathematical expressions to a plot.
 
 Depending on the application, we may want to specify the location of the label either in absolute coordinates (independently of the data plotted) or in coordinates relative to the data shown. Both uses are supported by `draw_label()`. For the former, we use `draw_label()` in conjunction with `ggdraw()`:
 ```{r fig.width=5, fig.height=5, warning=FALSE}

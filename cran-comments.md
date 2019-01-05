@@ -1,7 +1,7 @@
 This release fixes the errors currently shown on
 https://cran.r-project.org/web/checks/check_results_cowplot.html
 
-The errors are due to regression tests that break for ggplot2 3.0.0. These regression tests have been fixed. No other changes have been made to the package.
+The errors are due to a missing declared dependency of rmarkdown and a bug in one of the vignettes. No other changes have been made to the package.
 
 ## Test environments
 * R devel on win-builder [ via devtools::build_win() ]
@@ -11,4 +11,4 @@ The errors are due to regression tests that break for ggplot2 3.0.0. These regre
 There were no ERRORs, WARNINGs, or NOTEs.
 
 ## Downstream dependencies
-Downstream dependencies are not affected, because changes were made only in the regression tests.
+Downstream dependencies are not affected, because changes were made only in the vignettes.

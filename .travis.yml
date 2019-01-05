@@ -1,5 +1,14 @@
 language: r
 cache: packages
 
+# needed to install the magick package
+addons:
+  apt:
+    update: true
+    sources:
+      - sourceline: 'ppa:opencpu/imagemagick'
+    packages:
+      - libmagick++-dev
+
 after_success:
   - Rscript -e 'covr::codecov()'
