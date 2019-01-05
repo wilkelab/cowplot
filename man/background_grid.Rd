@@ -5,8 +5,8 @@
 \title{Add/modify/remove the background grid in a ggplot2 plot}
 \usage{
 background_grid(major = c("xy", "x", "y", "only_minor", "none"),
-  minor = c("xy", "x", "y", "none"), size.major = 0.2, size.minor = 0.5,
-  colour.major = "grey90", colour.minor = "grey98")
+  minor = c("xy", "x", "y", "none"), size.major = 0.2,
+  size.minor = 0.5, colour.major = "grey90", colour.minor = "grey98")
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",

@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 0.9.3
+Version: 0.9.4
 Authors@R: c( person("Claus O.", "Wilke", role = c("aut", "cre"), email =
     "wilke@austin.utexas.edu"), person("RStudio", role = c("cph"), comment = "Copyright for ggplot2 code copied to cowplot" ))
 Description: Some helpful extensions and modifications to the 'ggplot2'
@@ -27,6 +27,7 @@ Suggests:
     covr,
     gridGraphics,
     knitr,
+    rmarkdown,
     magick,
     maps,
     dplyr,
@@ -51,5 +52,5 @@ Collate:
     'switch_axis.R'
     'themes.R'
     'utils_ggplot2.R'
-RoxygenNote: 6.0.1.9000
+RoxygenNote: 6.1.0
 Roxygen: list(markdown = TRUE)

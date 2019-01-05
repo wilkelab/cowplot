@@ -4,8 +4,8 @@
 \alias{draw_text}
 \title{Draw multiple text-strings in one go.}
 \usage{
-draw_text(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5,
-  ...)
+draw_text(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5,
+  vjust = 0.5, ...)
 }
 \arguments{
 \item{text}{A vector of Character (not expressions) specifying the string(s) to be written.}
