@@ -4,7 +4,8 @@ https://cran.r-project.org/web/checks/check_results_cowplot.html
 The errors are due to a missing declared dependency of rmarkdown and a bug in one of the vignettes. No other changes have been made to the package.
 
 ## Test environments
-* R devel on win-builder [ via devtools::build_win() ]
+* R devel on x86_64-pc-linux-gnu
+* R 3.5.2 and R devel on win-builder [ via devtools::build_win() ]
 * local OS X install x86_64-apple-darwin15.6.0 (64-bit), R 3.5.0
 
 ## R CMD check results
