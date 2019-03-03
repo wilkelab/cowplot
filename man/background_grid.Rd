@@ -6,7 +6,7 @@
 \usage{
 background_grid(major = c("xy", "x", "y", "only_minor", "none"),
   minor = c("none", "xy", "x", "y"), size.major = 0.5,
-  size.minor = 0.2, colour.major = "grey90", colour.minor = "grey90")
+  size.minor = 0.2, colour.major = "grey85", colour.minor = "grey85")
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",

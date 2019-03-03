@@ -190,7 +190,7 @@ theme_half_open <- theme_cowplot
 #' @export
 theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                               colour = "grey90") {
+                               colour = "grey85") {
   # Starts with theme_cowplot and then modifies some parts
   theme_cowplot(font_size = font_size, font_family = font_family, line_size = line_size,
                 rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large) %+replace%
@@ -218,7 +218,7 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
 #' @export
 theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5,
                                 rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                                colour = "grey90") {
+                                colour = "grey85") {
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
@@ -237,7 +237,7 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' @rdname theme_minimal_grid
 #' @export
 theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5,
-                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, colour = "grey90") {
+                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, colour = "grey85") {
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
@@ -431,7 +431,7 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             minor = c("none", "xy", "x", "y"),
                             size.major = 0.5, size.minor = 0.2,
-                            colour.major = "grey90", colour.minor = "grey90"){
+                            colour.major = "grey85", colour.minor = "grey85"){
 
   # start with a defined theme that corresponds to the default settings
   t <- theme(
@@ -489,7 +489,7 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' @param linetype Line type.
 #' @param remove If \code{TRUE}, removes the current panel border.
 #' @export
-panel_border <- function(colour = 'grey80', size = 1, linetype = 1, remove = FALSE){
+panel_border <- function(colour = 'grey85', size = 1, linetype = 1, remove = FALSE){
   if (remove){
     return(theme(panel.border = element_blank()))
   }
