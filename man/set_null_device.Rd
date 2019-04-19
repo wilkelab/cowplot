@@ -18,18 +18,20 @@ in R that always works. Therefore, this function allows you to switch out the nu
 \details{
 You need to be aware that some graphics devices cause side effects when used as null devices.
 If you use an interactive device as null device, you may see an empty plot window pop up. Similarly,
-if you use a graphics device that writes a file, then you may find empty plot files in your working
-directory. The default null device, \code{pdf(NULL)}, does not cause these side effects. However, it has
-has other limitations. On OS X, for example, it cannot use all the fonts that are available on the
-system. The png device can use all fonts, but it will create empty plots called \code{"cowplot_null_plot.png"}.
+if you use a graphics device that writes a file, then you may find temporary files associated
+with the device. The default null device, \code{pdf(NULL)}, does not cause these side effects. However, it has
+has other limitations. For example, on OS X, it cannot use all the fonts that are available on the
+system. The png device can use all fonts, but it will create temporary files.
 }
 \examples{
 set_null_device("png") # set the png null device
 
 # create a jpeg null device
 jpeg_null_device <- function(width, height) {
-  jpeg(filename = "jpeg_null_plot.jpg",
-       width = width, height = height, units = "in", res = 96)
+  jpeg(
+    filename = tempfile(pattern = "jpeg_null_plot", fileext = ".jpg"),
+    width = width, height = height, units = "in", res = 96
+   )
   dev.control("enable")
 }
 set_null_device(jpeg_null_device)
