@@ -67,4 +67,10 @@ test_that("alignment", {
   expect_doppelganger("vertical alignment, right axis",
     plot_grid(p4, p5, ncol = 1, align = "v", axis = "r") + theme_map()
   )
+  expect_doppelganger("h/v alignment, right and top axes",
+    plot_grid(
+      p4, p5 + theme(strip.text = element_text(size = 80)),
+      ncol = 1, align = "hv", axis = "rt"
+    ) + theme_map()
+  )
 })

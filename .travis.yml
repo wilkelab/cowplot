@@ -1,8 +1,10 @@
 language: r
-r:
-  - devel
-
 cache: packages
+
+matrix:
+  include:
+  - r: devel
+  - r: release
 
 env:
 #  - _R_CHECK_FORCE_SUGGESTS_=false
