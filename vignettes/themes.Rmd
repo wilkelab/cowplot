@@ -1,0 +1,107 @@
+---
+title: "Themes"
+author: "Claus O. Wilke"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_width: 4
+vignette: >
+  %\VignetteIndexEntry{Themes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+The cowplot package provides a coherent set of plot themes. These themes are used throughout the book [*Fundamentals of Data Visualization,*](https://serialmentor.com/dataviz) and you can peruse the book for many practical use cases of these themes.
+
+```{r message = FALSE}
+library(ggplot2)
+library(cowplot)
+
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point() +
+  theme_half_open() # identical to theme_cowplot()
+```
+
+
+```{r}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point() +
+  theme_minimal_grid()
+```
+
+```{r}
+ggplot(mtcars, aes(disp, mpg)) +
+  geom_point() +
+  theme_minimal_grid(
+    font_size = 12,
+    colour = "grey70"
+  )
+```
+
+```{r}
+ggplot(mtcars, aes(factor(cyl))) +
+  geom_bar(fill = "#56B4E9") +
+  theme_half_open()
+```
+
+
+
+
+
+```{r}
+ggplot(mtcars, aes(factor(cyl))) +
+  geom_bar(fill = "#56B4E9") +
+  scale_y_continuous(
+    # don't expand y scale at the lower end
+    expand = expand_scale(mult = c(0, 0.05))
+  ) +
+  theme_half_open()
+```
+
+
+```{r}
+ggplot(mtcars, aes(factor(cyl))) +
+  geom_bar(fill = "#56B4E9", alpha = 0.8) +
+  scale_y_continuous(
+    # don't expand y scale at the lower end
+    expand = expand_scale(mult = c(0, 0.05))
+  ) +
+  theme_minimal_hgrid()
+```
+
+```{r}
+ggplot(mtcars, aes(factor(cyl))) +
+  geom_bar(fill = "#56B4E9", alpha = 0.8) +
+  scale_y_continuous(
+    # don't expand y scale at the lower end
+    # (turns into x scale after flipping coords)
+    expand = expand_scale(mult = c(0, 0.05))
+  ) +
+  coord_flip() +
+  theme_minimal_vgrid()
+```
+
+
+```{r fig.width = 6.5}
+ggplot(mtcars, aes(disp, mpg)) +
+  facet_wrap(~factor(cyl)) +
+  geom_point() +
+  theme_half_open(12)
+```
+
+```{r fig.width = 6.5}
+ggplot(mtcars, aes(disp, mpg)) +
+  facet_wrap(~factor(cyl)) +
+  geom_point() +
+  theme_half_open(12) +
+  panel_border()
+```
+
+```{r fig.width = 6.5}
+ggplot(mtcars, aes(disp, mpg)) +
+  facet_wrap(~factor(cyl)) +
+  geom_point() +
+  theme_half_open(12) +
+  panel_border() +
+  background_grid()
+```
