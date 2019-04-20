@@ -72,19 +72,19 @@ test_that("themes look right", {
   )
 
   expect_doppelganger("theme half open tiny",
-                      p + theme_half_open(7)
+    p + theme_half_open(7)
   )
 
   expect_doppelganger("theme minimal grid tiny",
-                      p + theme_minimal_grid(7)
+    p + theme_minimal_grid(7)
   )
 
   expect_doppelganger("theme minimal hgrid tiny",
-                      p + theme_minimal_hgrid(7)
+    p + theme_minimal_hgrid(7)
   )
 
   expect_doppelganger("theme minimal vgrid tiny",
-                      p + theme_minimal_vgrid(7)
+    p + theme_minimal_vgrid(7)
   )
 
   expect_doppelganger("theme half open huge",

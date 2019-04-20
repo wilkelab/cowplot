@@ -32,7 +32,7 @@ Suggests:
     dplyr,
     tidyr,
     testthat (>= 1.0.0),
-    vdiffr
+    vdiffr (>= 0.3.0)
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
