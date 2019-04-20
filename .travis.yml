@@ -7,6 +7,7 @@ matrix:
   - r: release
 
 env:
+  global:
 #  - _R_CHECK_FORCE_SUGGESTS_=false
   - _R_CHECK_FORCE_SUGGESTS_=true
 
