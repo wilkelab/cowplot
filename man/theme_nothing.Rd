@@ -22,7 +22,7 @@ The theme created by this function shows nothing but the plot panel.
 \examples{
 library(ggplot2)
 
-ggplot(mtcars, aes(disp, mpg)) +
+ggplot(mtcars, aes(disp, mpg, color = cyl)) +
   geom_point() +
   theme_nothing()
 }

@@ -20,7 +20,7 @@
 #' @examples
 #' library(ggplot2)
 #'
-#' ggplot(mpg, aes(disp, mpg)) +
+#' ggplot(mtcars, aes(disp, mpg)) +
 #'   geom_point() +
 #'   theme_cowplot(font_size = 12)
 #' @importFrom ggplot2 margin
