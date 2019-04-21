@@ -29,10 +29,10 @@ stamp <- function(p, label, color = "black", alpha = 1, vjust = 1.1, hjust = 1,
   ggdraw(p, clip = clip) +
     draw_text(
       paste0(label, "  "),
-      x = 1, y = 1, vjust = 1.1, hjust = 1, size = 14, angle = 0,
+      x = 1, y = 1, vjust = vjust, hjust = hjust, size = size, angle = 0,
       color = color, alpha = alpha, family = family, fontface = fontface
     ) +
-    draw_line(c(1, 1), c(0, 1), size = 0.2*size, color = color, alpha = alpha)
+    draw_line(c(.9999999999, .9999999999), c(0, 1), size = 0.2*size, color = color, alpha = alpha)
 }
 
 #' @rdname stamp

@@ -39,9 +39,11 @@ ggplot(mtcars, aes(disp, mpg)) +
 ```
 
 ```{r}
-ggplot(mtcars, aes(factor(cyl))) +
+p <- ggplot(mtcars, aes(factor(cyl))) +
   geom_bar(fill = "#56B4E9") +
   theme_half_open()
+
+stamp_ugly(p)
 ```
 
 
@@ -83,10 +85,12 @@ ggplot(mtcars, aes(factor(cyl))) +
 
 
 ```{r fig.width = 6.5}
-ggplot(mtcars, aes(disp, mpg)) +
+p <- ggplot(mtcars, aes(disp, mpg)) +
   facet_wrap(~factor(cyl)) +
   geom_point() +
   theme_half_open(12)
+
+stamp_ugly(p)
 ```
 
 ```{r fig.width = 6.5}

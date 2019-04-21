@@ -6,7 +6,8 @@
 \usage{
 background_grid(major = c("xy", "x", "y", "only_minor", "none"),
   minor = c("none", "xy", "x", "y"), size.major = 0.5,
-  size.minor = 0.2, colour.major = "grey85", colour.minor = "grey85")
+  size.minor = 0.2, color.major = "grey85", color.minor = "grey85",
+  colour.major, colour.minor)
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
@@ -19,9 +20,9 @@ background_grid(major = c("xy", "x", "y", "only_minor", "none"),
 
 \item{size.minor}{Size of the minor grid lines.}
 
-\item{colour.major}{Color of the major grid lines.}
+\item{color.major, colour.major}{Color of the major grid lines.}
 
-\item{colour.minor}{Color of the minor grid lines.}
+\item{color.minor, colour.minor}{Color of the minor grid lines.}
 }
 \description{
 This function provides a simple way to set the background grid in ggplot2. It

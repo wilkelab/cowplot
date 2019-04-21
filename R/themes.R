@@ -19,7 +19,10 @@
 #' @return The theme.
 #' @examples
 #' library(ggplot2)
-#' qplot(1:10, (1:10)^2) + theme_cowplot(font_size = 12)
+#'
+#' ggplot(mpg, aes(disp, mpg)) +
+#'   geom_point() +
+#'   theme_cowplot(font_size = 12)
 #' @importFrom ggplot2 margin
 #' @importFrom grid unit
 #' @export
@@ -31,21 +34,21 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
   # work off of theme_grey just in case some new theme element comes along
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
-      line              = element_line(colour = "black", size = line_size, linetype = 1, lineend = "butt"),
-      rect              = element_rect(fill = NA, colour = NA, size = line_size, linetype = 1),
-      text              = element_text(family = font_family, face = "plain", colour = "black",
+      line              = element_line(color = "black", size = line_size, linetype = 1, lineend = "butt"),
+      rect              = element_rect(fill = NA, color = NA, size = line_size, linetype = 1),
+      text              = element_text(family = font_family, face = "plain", color = "black",
                                        size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
                                        margin = margin(), debug = FALSE),
 
-      axis.line         = element_line(colour = "black", size = line_size, lineend = "square"),
+      axis.line         = element_line(color = "black", size = line_size, lineend = "square"),
       axis.line.x       = NULL,
       axis.line.y       = NULL,
-      axis.text         = element_text(colour = "black", size = small_size),
+      axis.text         = element_text(color = "black", size = small_size),
       axis.text.x       = element_text(margin = margin(t = small_size / 4), vjust = 1),
       axis.text.x.top   = element_text(margin = margin(b = small_size / 4), vjust = 0),
       axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
       axis.text.y.right = element_text(margin = margin(l = small_size / 4), hjust = 0),
-      axis.ticks        = element_line(colour = "black", size = line_size),
+      axis.ticks        = element_line(color = "black", size = line_size),
       axis.ticks.length = unit(half_line / 2, "pt"),
       axis.title.x      = element_text(
                             margin = margin(t = half_line / 2),
@@ -167,7 +170,7 @@ theme_half_open <- theme_cowplot
 #' @param rel_small Relative size of small text (e.g., axis tick labels)
 #' @param rel_tiny Relative size of tiny text (e.g., caption)
 #' @param rel_large Relative size of large text (e.g., title)
-#' @param colour Color of grid lines.
+#' @param color,colour Color of grid lines.
 #' @examples
 #' library(ggplot2)
 #'
@@ -190,18 +193,22 @@ theme_half_open <- theme_cowplot
 #' @export
 theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                               colour = "grey85") {
+                               color = "grey85", colour) {
+  if (!missing(colour)) {
+    color <- colour
+  }
+
   # Starts with theme_cowplot and then modifies some parts
   theme_cowplot(font_size = font_size, font_family = font_family, line_size = line_size,
                 rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large) %+replace%
     theme(
       # make grid lines
-      panel.grid        = element_line(colour = colour,
+      panel.grid        = element_line(color = color,
                                        size = line_size),
       panel.grid.minor  = element_blank(),
 
       # adjust axis tickmarks
-      axis.ticks        = element_line(colour = colour, size = line_size),
+      axis.ticks        = element_line(color = color, size = line_size),
 
       # no x or y axis lines
       axis.line.x       = element_blank(),
@@ -218,17 +225,21 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
 #' @export
 theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5,
                                 rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
-                                colour = "grey85") {
+                                color = "grey85", colour) {
+  if (!missing(colour)) {
+    color <- colour
+  }
+
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
-                     colour = colour) %+replace%
+                     color = color) %+replace%
     theme (
       # no horizontal grid lines
       panel.grid.major.y = element_blank(),
 
       # add a y axis line
-      axis.line.y        = element_line(colour = colour, size = line_size),
+      axis.line.y        = element_line(color = color, size = line_size),
 
       complete = TRUE
     )
@@ -237,17 +248,22 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' @rdname theme_minimal_grid
 #' @export
 theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5,
-                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14, colour = "grey85") {
+                                rel_small = 12/14, rel_tiny = 11/14, rel_large = 16/14,
+                                color = "grey85", colour) {
+  if (!missing(colour)) {
+    color <- colour
+  }
+
   # Starts with theme_grid and then modifies some parts
   theme_minimal_grid(font_size = font_size, font_family = font_family, line_size = line_size,
                      rel_small = rel_small, rel_tiny = rel_tiny, rel_large = rel_large,
-                     colour = colour) %+replace%
+                     color = color) %+replace%
     theme (
       # no vertical grid lines
       panel.grid.major.x = element_blank(),
 
       # add a x axis line
-      axis.line.x       = element_line(colour = colour, size = line_size),
+      axis.line.x       = element_line(color = color, size = line_size),
 
       complete = TRUE
     )
@@ -263,7 +279,9 @@ theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5
 #' @examples
 #' library(ggplot2)
 #'
-#' qplot(1:10, (1:10)^2) + theme_nothing()
+#' ggplot(mtcars, aes(disp, mpg, color = cyl)) +
+#'   geom_point() +
+#'   theme_nothing()
 #' @export
 theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
   # work based off of theme_void just in case we forget anything or something
@@ -275,7 +293,7 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
       rect = element_blank(),
       text = element_text(
         family = font_family, face = "plain",
-        colour = "black", size = font_size,
+        color = "black", size = font_size,
         lineheight = 0.9, hjust = 0.5, vjust = 0.5, angle = 0,
         margin = margin(), debug = FALSE
       ),
@@ -368,9 +386,10 @@ theme_nothing <- function(font_size = 14, font_family = "", rel_small = 12/14){
 #' library(maps)
 #'
 #' usa_data = map_data("usa")
-#' ggplot(usa_data, aes(long, lat, group=region)) + geom_polygon() + theme_map()
-#' ggplot(usa_data, aes(long, lat, fill = region)) + geom_polygon() + theme_map()
-#' ggplot(usa_data, aes(long, lat, fill = region)) + facet_wrap(~region, scales = "free") +
+#' ggplot(usa_data, aes(long, lat, fill = region)) +
+#'   geom_polygon() + theme_map()
+#' ggplot(usa_data, aes(long, lat, fill = region)) +
+#'   facet_wrap(~region, scales = "free") +
 #'   geom_polygon() + theme_map()
 #' @export
 theme_map <- function(font_size = 14, font_family = "", line_size = .5,
@@ -418,8 +437,8 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 #'  "y", "none".
 #' @param size.major Size of the major grid lines.
 #' @param size.minor Size of the minor grid lines.
-#' @param colour.major Color of the major grid lines.
-#' @param colour.minor Color of the minor grid lines.
+#' @param color.major,colour.major Color of the major grid lines.
+#' @param color.minor,colour.minor Color of the minor grid lines.
 #' @examples
 #' library(ggplot2)
 #'
@@ -431,12 +450,21 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
                             minor = c("none", "xy", "x", "y"),
                             size.major = 0.5, size.minor = 0.2,
-                            colour.major = "grey85", colour.minor = "grey85"){
+                            color.major = "grey85", color.minor = "grey85",
+                            colour.major, colour.minor){
+  if (!missing(colour.major)) {
+    color.major <- colour.major
+  }
+
+  if (!missing(colour.minor)) {
+    color.minor <- colour.minor
+  }
+
 
   # start with a defined theme that corresponds to the default settings
   t <- theme(
     panel.grid = element_line(
-      colour = colour.major,
+      color = color.major,
       size = size.major,
       linetype = 1,
       lineend = "butt"
@@ -445,7 +473,7 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
     panel.grid.major.x = NULL,
     panel.grid.major.y = NULL,
     panel.grid.minor = element_line(
-      colour = colour.minor,
+      color = color.minor,
       size = size.minor,
       linetype = 1,
       lineend = "butt"
@@ -483,16 +511,20 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' This function provides a simple way to modify the panel border in ggplot2. It
 #' doesn't do anything that can't be done just the same with \code{theme()}. However, it
 #' saves some typing.
-#' @param colour The color of the border.
+#' @param color,colour The color of the border.
 #' @param size Size. Needs to be twice as large as desired outcome when panel clipping
 #'   is on (the default).
 #' @param linetype Line type.
 #' @param remove If \code{TRUE}, removes the current panel border.
 #' @export
-panel_border <- function(colour = 'grey85', size = 1, linetype = 1, remove = FALSE){
+panel_border <- function(color = 'grey85', size = 1, linetype = 1, remove = FALSE, colour){
+  if (!missing(colour)) {
+    color <- colour
+  }
+
   if (remove){
     return(theme(panel.border = element_blank()))
   }
-  theme(panel.border = element_rect(colour = colour, fill=NA, linetype = linetype, size = size))
+  theme(panel.border = element_rect(color = color, fill=NA, linetype = linetype, size = size))
 }
 

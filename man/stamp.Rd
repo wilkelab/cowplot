@@ -37,6 +37,8 @@ stamp_ugly(p, ...)
 \item{fontface}{Font face}
 
 \item{clip}{Should figure be clipped (default is "on")}
+
+\item{...}{Arguments handed off to \code{stamp()}.}
 }
 \description{
 Stamp plots with a label, such as good, bad, or ugly.
