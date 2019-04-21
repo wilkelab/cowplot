@@ -38,7 +38,7 @@ Both \code{theme_cowplot()} and \code{theme_half_open()} provide exactly the sam
 \examples{
 library(ggplot2)
 
-ggplot(mpg, aes(disp, mpg)) +
+ggplot(mtcars, aes(disp, mpg)) +
   geom_point() +
   theme_cowplot(font_size = 12)
 }
