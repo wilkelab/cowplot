@@ -51,6 +51,7 @@ Collate:
     'save.R'
     'set_null_device.R'
     'setup.R'
+    'stamp.R'
     'themes.R'
     'utils_ggplot2.R'
 RoxygenNote: 6.1.1
