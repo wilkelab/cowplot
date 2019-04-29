@@ -30,6 +30,7 @@ Suggests:
     magick,
     maps,
     dplyr,
+    forcats,
     tidyr,
     testthat (>= 1.0.0),
     vdiffr (>= 0.3.0)
