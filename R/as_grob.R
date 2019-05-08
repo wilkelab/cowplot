@@ -32,14 +32,7 @@ as_grob.recordedplot <- function(plot, device = NULL) {
     if (is.null(device)) {
       device <- null_dev_env$current
     }
-    grid::recordGrob(
-      tryCatch(
-        gridGraphics::grid.echo(plot, newpage=FALSE, device = device),
-        error = function(e) {
-          grid::grid.text(e$message)
-        }
-      ),
-      list(plot = plot, device = device))
+    gridGraphics::echoGrob(plot, device = device)
   }
 }
 

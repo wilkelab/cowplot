@@ -86,7 +86,13 @@ plot_grid(p_sqrt, p_volcano, labels = "auto")
 ```{r}
 library(VennDiagram)
 
-p_venn <- draw.pairwise.venn(100, 70, 30, c("First", "Second"), fill = c("light blue", "pink"), alpha = c(0.7, 0.7), ind = FALSE)
+p_venn <- draw.pairwise.venn(
+  100, 70, 30,
+  c("First", "Second"),
+  fill = c("light blue", "pink"),
+  alpha = c(0.7, 0.7),
+  ind = FALSE
+)
 
 ggdraw(p_venn)
 ```
