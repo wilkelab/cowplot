@@ -1,0 +1,92 @@
+---
+title: "Mixing different plotting frameworks"
+author: "Claus O. Wilke"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_width: 4
+vignette: >
+  %\VignetteIndexEntry{ixing different plotting frameworks}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+Any cowplot functions that take plot objects as input (`ggdraw()`, `draw_plot()`, `plot_grid()`) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics.
+
+```{r message = FALSE, warning = FALSE}
+library(ggplot2)
+library(cowplot)
+
+# define function that emits desired plot
+p1 <- function() {boxplot(mpg ~ cyl, xlab = "cyl", ylab = "mpg", data = mtcars)}
+
+ggdraw(p1) +
+  theme(plot.background = element_rect(fill = "cornsilk"))
+
+ggdraw() +
+  draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9) +
+  draw_plot(p1)
+
+p2 <- ggplot(data = mtcars, aes(factor(cyl), mpg)) + geom_boxplot()
+plot_grid(p1, p2)
+```
+
+Base R plots can be stored in the form of functions that emit the desired plots, as recorded plots, or using a convenient formula interface.
+
+```{r}
+# create base R plot
+boxplot(mpg ~ cyl, xlab = "cyl", ylab = "mpg", data = mtcars)
+# record previous base R plot and then draw through ggdraw()
+p1_recorded <- recordPlot()
+ggdraw(p1_recorded)
+```
+
+```{r}
+# store base R plot as formula
+p1_formula <- ~boxplot(mpg ~ cyl, xlab = "cyl", ylab = "mpg", data = mtcars)
+ggdraw(p1_formula)
+```
+
+
+```{r message = FALSE, fig.width = 8, fig.height = 6}
+library(ggplot2)
+library(lattice)
+library(cowplot)
+
+# base R (note formula format for base graphics)
+# package "gridGraphics" needs to be installed for this to work
+p1 <- ~{
+  par(cex = .8)
+  boxplot(mpg ~ cyl, xlab = "cyl", ylab = "mpg", data = mtcars)
+}
+
+# lattice
+p2 <- bwplot(~mpg | cyl, data = mtcars)
+
+# ggplot2
+p3 <- ggplot(data = mtcars, aes(factor(cyl), mpg)) + geom_boxplot()
+
+# combine all into one plot
+plot_grid(p1, p2, p3, rel_heights = c(1, .6), labels = "auto")
+```
+
+```{r}
+ggdraw(p1)
+```
+
+
+```{r fig.with = 8}
+p_sqrt <- ~plot(sqrt)
+p_volcano <- ~image(volcano)
+
+plot_grid(p_sqrt, p_volcano, labels = "auto")
+```
+
+
+```{r}
+library(VennDiagram)
+
+p_venn <- draw.pairwise.venn(100, 70, 30, c("First", "Second"), fill = c("light blue", "pink"), alpha = c(0.7, 0.7), ind = FALSE)
+
+ggdraw(p_venn)
+```

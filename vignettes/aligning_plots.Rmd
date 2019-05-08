@@ -60,3 +60,35 @@ p2
 aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")
 ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 ```
+
+
+## Complex alignments
+
+```{r fig.width = 7}
+p1 <- ggplot(mtcars, aes(disp, mpg)) + 
+  geom_point() +
+  theme_minimal_grid(14) + 
+  panel_border(color = "black")
+
+p2 <- ggplot(mtcars, aes(factor(vs))) + 
+  geom_bar() + 
+  facet_wrap(~am) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  theme_minimal_hgrid(12) +
+  panel_border(color = "black") +
+  theme(strip.background = element_rect(fill = "gray80"))
+
+plot_grid(p1, p2, rel_widths = c(1, 1.3))
+```
+
+Because we have used to themes with different base sizes (14 points and 12 points), the two plots are not aligned. If we try to align them horizontally, we receive a warning that the plots cannot be aligned.
+
+```{r fig.width = 7}
+plot_grid(p1, p2, align = "h", rel_widths = c(1, 1.3))
+```
+
+
+```{r fig.width = 7}
+plot_grid(p1, p2, align = "h", axis = "b", rel_widths = c(1, 1.3))
+plot_grid(p1, p2, align = "h", axis = "tb", rel_widths = c(1, 1.3))
+```

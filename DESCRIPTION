@@ -25,7 +25,7 @@ LazyData: true
 Suggests:
     Cairo,
     covr,
-    gridGraphics (>= 0.3-0),
+    gridGraphics (>= 0.4-0),
     knitr,
     magick,
     maps,
@@ -33,11 +33,13 @@ Suggests:
     forcats,
     tidyr,
     testthat (>= 1.0.0),
-    vdiffr (>= 0.3.0)
+    vdiffr (>= 0.3.0),
+    VennDiagram
 VignetteBuilder: knitr
 BugReports: https://github.com/wilkelab/cowplot/issues
 Collate:
     'add_sub.R'
+    'as_grob.R'
     'as_gtable.R'
     'axis_canvas.R'
     'cowplot.R'

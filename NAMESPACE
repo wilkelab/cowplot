@@ -3,6 +3,7 @@
 S3method(as_grob,"function")
 S3method(as_grob,default)
 S3method(as_grob,formula)
+S3method(as_grob,gList)
 S3method(as_grob,ggplot)
 S3method(as_grob,grob)
 S3method(as_grob,recordedplot)
