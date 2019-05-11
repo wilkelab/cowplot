@@ -11,9 +11,35 @@ vignette: >
   %\usepackage[utf8]{inputenc}
 ---
 
-```{r message = FALSE, fig.width = 5.5}
+There are several packages that can be used to align plots. The most widely used ones beside cowplot are egg and patchwork. All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
+
+Most importantly, while egg and patchwork align and arrange plots at the same time, cowplot aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.
+
+We'll start with a very simple example. Let's consider these two plots.
+
+```{r message = FALSE}
 library(ggplot2)
 library(cowplot)
+
+p1 <- ggplot(mtcars, aes(disp, mpg)) + 
+  geom_point()
+p2 <- ggplot(mtcars, aes(disp, hp)) + 
+  geom_point()
+p1
+p2
+```
+
+Both plots have the same x axis, but the width of the plot area is slightly larger in the first than in the second, because the y axis ticks have different lengths. These differences in plot width could be distracting in a document where both plots are shown near each other. We can fix this problem by vertically aligning the two plots and then drawing them individually.
+
+```{r}
+aligned <- align_plots(p1, p2, align = "v")
+ggdraw(aligned[[1]])
+ggdraw(aligned[[2]])
+```
+
+Vertical alignment (`align = "v"`) means that any vertical reference lines, such as the right and left y axis lines, are aligned in the plots. By contrast, horizontal alignment (`align = "h"`) aligns horizontal reference lines.
+
+```{r message = FALSE, fig.width = 5.5}
 library(dplyr)
 library(forcats)
 
