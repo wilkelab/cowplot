@@ -159,7 +159,10 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       # or for which explicit axis alignment is requested
       vcomplex_align = TRUE
       if(axis[1] == "none") {
-        warning("Complex graphs cannot be vertically aligned unless axis parameter is set properly. Placing graphs unaligned.")
+        warning(
+          "Graphs cannot be vertically aligned unless the axis parameter is set. Placing graphs unaligned.",
+          call. = FALSE
+        )
         valign <- FALSE
       }
 
@@ -185,7 +188,10 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       # or for which explicit axis alignment is requested
       hcomplex_align = TRUE
       if (axis[1] == "none"){
-        warning("Graphs cannot be horizontally aligned, unless axis parameter set. Placing graphs unaligned.")
+        warning(
+          "Graphs cannot be horizontally aligned unless the axis parameter is set. Placing graphs unaligned.",
+          call. = FALSE
+        )
         halign <- FALSE
       }
 

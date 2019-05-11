@@ -39,6 +39,8 @@ ggdraw(aligned[[2]])
 
 Vertical alignment (`align = "v"`) means that any vertical reference lines, such as the right and left y axis lines, are aligned in the plots. By contrast, horizontal alignment (`align = "h"`) aligns horizontal reference lines.
 
+As a second example, we'll make two separate plots and then draw them on top of each other. First, we draw a bar plot of the number of cars in different classes in the `mpg` dataset.
+
 ```{r message = FALSE, fig.width = 5.5}
 library(dplyr)
 library(forcats)
@@ -70,7 +72,11 @@ p1 <- ggplot(city_mpg, aes(class, count)) +
     axis.title.y = element_text(color = "#6297E7")
   )
 p1
+```
 
+Now we plot mean city mpg versus car class, as a scatter plot.
+
+```{r message = FALSE, fig.width = 5.5}
 p2 <- ggplot(city_mpg, aes(class, `city mpg`)) + 
   geom_point(size = 3, color = "#D5442D") + 
   scale_y_continuous(limits = c(10, 21)) +
@@ -82,13 +88,19 @@ p2 <- ggplot(city_mpg, aes(class, `city mpg`)) +
     axis.line.y = element_line(color = "#BB2D05")
   )
 p2
+```
 
+Now we align the two plots and then overlay them. The resulting plot has dual axes, and making such plots is usually discouraged. I present this example here only to show the types of effects we can achieve when plot alignment and plot placement are separated.
+
+```{r message = FALSE, fig.width = 5.5}
 aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")
 ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 ```
 
 
-## Complex alignments
+## Aligning by axis
+
+*Some intro text here.*
 
 ```{r fig.width = 7}
 p1 <- ggplot(mtcars, aes(disp, mpg)) + 
@@ -103,8 +115,6 @@ p2 <- ggplot(mtcars, aes(factor(vs))) +
   theme_minimal_hgrid(12) +
   panel_border(color = "black") +
   theme(strip.background = element_rect(fill = "gray80"))
-
-plot_grid(p1, p2, rel_widths = c(1, 1.3))
 ```
 
 Because we have used to themes with different base sizes (14 points and 12 points), the two plots are not aligned. If we try to align them horizontally, we receive a warning that the plots cannot be aligned.
@@ -113,8 +123,14 @@ Because we have used to themes with different base sizes (14 points and 12 point
 plot_grid(p1, p2, align = "h", rel_widths = c(1, 1.3))
 ```
 
+This warning indicates that cowplot doesn't know how these plots should be aligned. There are two alternatives, and both can be meaningful. First, we can align only the bottom axis (`axis = "b"`).
 
 ```{r fig.width = 7}
 plot_grid(p1, p2, align = "h", axis = "b", rel_widths = c(1, 1.3))
-plot_grid(p1, p2, align = "h", axis = "tb", rel_widths = c(1, 1.3))
+```
+
+Second, we can align both the bottom and the top axis (`axis = "bt"`).
+
+```{r fig.width = 7}
+plot_grid(p1, p2, align = "h", axis = "bt", rel_widths = c(1, 1.3))
 ```
