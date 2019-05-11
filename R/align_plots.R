@@ -13,7 +13,7 @@
 #'  obtained by a call to \code{grob$heights} or \code{grob$widths} (see example).
 #' @param margin_to_align string either "first" or "last" for which part of plot area should be aligned.
 #'  If vertically aligning, "first" aligns left margin and "last" aligns right margin. If horizontally aligning
-#'  "first" aligns top margin and "last" aligns bottom margin
+#'  "first" aligns top margin and "last" aligns bottom margin.
 #' @examples
 #' library(ggplot2)
 #' theme_set(theme_half_open())
@@ -24,24 +24,25 @@
 #' p3 <- qplot(1:10, (1:10)^3)
 #' plots <- list(p1, p2, p3)
 #' grobs <- lapply(plots, ggplot2::ggplotGrob)
-#' plot_widths <- lapply(grobs, function(x){x$widths})
-#' # Aligning the Left margins of all plots
+#' plot_widths <- lapply(grobs, function(x) {x$widths})
+#' # Aligning the left margins of all plots
 #' aligned_widths <- align_margin(plot_widths, "first")
 #' # Aligning the right margins of all plots as well
 #' aligned_widths <- align_margin(plot_widths, "last")
 #' # Setting the dimensions of plots to the aligned dimensions
-#' for(i in 1:3){
-#'    plots[[i]]$widths <- aligned_widths[[i]]
+#' for (i in 1:3) {
+#'   plots[[i]]$widths <- aligned_widths[[i]]
 #' }
 #' @keywords internal
 #' @export
 align_margin <- function(sizes, margin_to_align) {
 
   # finds the indices being aligned for each of the plots
+  # "first" aligns all lengths up to but excluding the first "null"; "last" aligns all lengths past the first "null"
   list_indices <- switch(
     margin_to_align,
-    first = lapply(sizes, function(x) 1:(grep("null", x)[1]-1)),
-    last = lapply(sizes, function(x) (grep("null", x)[length(grep("null", x))]+1):length(x)),
+    first = lapply(sizes, function(x) 1:(grep("null", x)[1] - 1)),
+    last = lapply(sizes, function(x) (grep("null", x)[length(grep("null", x))] + 1):length(x)),
     stop("Invalid margin input, should be either 'first' or 'last'")
   )
 
@@ -57,7 +58,7 @@ align_margin <- function(sizes, margin_to_align) {
   num[num == 0] <- NULL # remove entry for missing graphs
 
   # Align if different number of items in margin
-  if(length(num) > 1){
+  if (length(num) > 1) {
     margins <- lapply(grob_seq, function(x) {sum(sizes[[x]][list_indices[[x]]])})
     largest_margin <- max(do.call(grid::unit.c, margins))
     # For each grob, make the width of the first one equal to
@@ -68,7 +69,7 @@ align_margin <- function(sizes, margin_to_align) {
     # Align if left margin has same number of items
   } else{
     # If margins have same number of items, then make all the same length
-    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]] ))
+    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]]))
     lapply(grob_seq, function(x){
       sizes[[x]][list_indices[[x]]] <- max_margins
       sizes[[x]]
@@ -149,13 +150,13 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
         valign=FALSE
       }
 
-      max_widths <- lapply(grobs, function(x){x$widths})
+      max_widths <- lapply(grobs, function(x) {x$widths})
       #
       # Aligning the Left margins
-      if(length(grep("l", axis[1])) > 0) {
+      if (length(grep("l", axis[1])) > 0) {
         max_widths <- align_margin(max_widths, "first")
       }
-      if(length(grep("r", axis[1])) > 0) {
+      if (length(grep("r", axis[1])) > 0) {
         max_widths <- align_margin(max_widths, "last")
       }
     } else {
@@ -164,7 +165,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   }
 
   if (halign) {
-    num_heights <- unique(lapply(grobs, function(x){length(x$heights)})) # count number of unique lengths
+    num_heights <- unique(lapply(grobs, function(x) {length(x$heights)})) # count number of unique lengths
     num_heights[num_heights==0] <- NULL # remove entry for missing graphs
     if (length(num_heights) > 1) {
       # Complex aligns are ones that don't have the same number of elements that have sizes
@@ -174,12 +175,12 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
         halign=FALSE
       }
 
-      max_heights <- lapply(grobs, function(x){x$heights})
+      max_heights <- lapply(grobs, function(x) {x$heights})
 
-      if(length(grep("t", axis[1])) > 0) {
+      if (length(grep("t", axis[1])) > 0) {
         max_heights <- align_margin(max_heights, "first")
       }
-      if(length(grep("b", axis[1])) > 0) {
+      if (length(grep("b", axis[1])) > 0) {
         max_heights <- align_margin(max_heights, "last")
       }
 
