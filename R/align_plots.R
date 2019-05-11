@@ -14,6 +14,9 @@
 #' @param margin_to_align string either "first" or "last" for which part of plot area should be aligned.
 #'  If vertically aligning, "first" aligns left margin and "last" aligns right margin. If horizontally aligning
 #'  "first" aligns top margin and "last" aligns bottom margin.
+#' @param greedy if `TRUE`, alignment is always achieved by adjusting the most extreme
+#'   margin; if `FALSE`, and the number of dimensions for each plot are the same, then
+#'   all dimensions are jointly adjusted.
 #' @examples
 #' library(ggplot2)
 #' theme_set(theme_half_open())
@@ -35,7 +38,7 @@
 #' }
 #' @keywords internal
 #' @export
-align_margin <- function(sizes, margin_to_align) {
+align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
 
   # finds the indices being aligned for each of the plots
   # "first" aligns all lengths up to but excluding the first "null"; "last" aligns all lengths past the first "null"
@@ -57,23 +60,27 @@ align_margin <- function(sizes, margin_to_align) {
   num <- unique(unlist(lapply(list_indices, function(x) length(x))))
   num[num == 0] <- NULL # remove entry for missing graphs
 
-  # Align if different number of items in margin
-  if (length(num) > 1) {
-    margins <- lapply(grob_seq, function(x) {sum(sizes[[x]][list_indices[[x]]])})
+  if (greedy || length(num) > 1) { # Align if different number of items in margin
+    margins <- lapply(grob_seq, function(x) {sum(sizes[[x]][list_indices[[x]] ])})
     largest_margin <- max(do.call(grid::unit.c, margins))
-    # For each grob, make the width of the first one equal to
-    lapply(grob_seq, function(x) {
-      sizes[[x]][extreme_margin[[x]]] <- largest_margin - sum(sizes[[x]][list_indices[[x]][which(list_indices[[x]] != extreme_margin[[x]])] ])
-      sizes[[x]]
-    })
-    # Align if left margin has same number of items
-  } else{
-    # If margins have same number of items, then make all the same length
-    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]]]))
-    lapply(grob_seq, function(x){
-      sizes[[x]][list_indices[[x]]] <- max_margins
-      sizes[[x]]
-    })
+    # For each grob, make the size of the extreme margin equal to the largest margin minus the sum of the remaining margins
+    lapply(
+      grob_seq,
+      function(x) {
+        sizes[[x]][extreme_margin[[x]] ] <-
+          largest_margin - sum(sizes[[x]][list_indices[[x]][which(list_indices[[x]] != extreme_margin[[x]])] ])
+        sizes[[x]]
+      }
+    )
+  } else{ # If margins have same number of items, then make all the same length
+    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]] ]))
+    lapply(
+      grob_seq,
+      function(x) {
+        sizes[[x]][list_indices[[x]] ] <- max_margins
+        sizes[[x]]
+      }
+    )
   }
 }
 
@@ -95,12 +102,15 @@ align_margin <- function(sizes, margin_to_align) {
 #' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
 #'  margins. Options are \code{axis="none"} (default), or a string of any combination of "l", "r", "t", and/or "b" in any order
 #'  (e.g. \code{axis="tblr"} or \code{axis="rlbt"} for aligning all margins)
+#' @param greedy (optional) Defines the alignment policy when alignment axes are specified via the
+#'  `axis` option. `greedy = TRUE` tries to always align by adjusting the outmost margin. `greedy = FALSE`
+#'  aligns all columns/rows in the gtable if possible.
 #' @examples
 #' library(ggplot2)
 #'
 #'p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
-#'        theme_half_open() +
-#'        theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
+#'  theme_half_open() +
+#'  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
 #'p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +
 #'  scale_y_continuous(position = "right") +
 #'  theme_half_open() + theme(axis.text.x = element_blank())
@@ -112,7 +122,9 @@ align_margin <- function(sizes, margin_to_align) {
 #' # illustrates how one could accomplish it.
 #'ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 #' @export
-align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"), axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr")){
+align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
+                        axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
+                        greedy = TRUE){
   # browser()
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
@@ -141,23 +153,24 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # they can be aligned if necessary
   if (valign) {
     num_widths <- unique(lapply(grobs, function(x) {length(x$widths)})) # count number of unique lengths
-    num_widths[num_widths==0] <- NULL # remove entry for missing graphs
-    if (length(num_widths) > 1) {
+    num_widths[num_widths == 0] <- NULL # remove entry for missing graphs
+    if (length(num_widths) > 1 || length(grep("l|r", axis[1])) > 0) {
       # Complex aligns are ones that don't have the same number of elements that have sizes
+      # or for which explicit axis alignment is requested
       vcomplex_align = TRUE
       if(axis[1] == "none") {
         warning("Complex graphs cannot be vertically aligned unless axis parameter is set properly. Placing graphs unaligned.")
-        valign=FALSE
+        valign <- FALSE
       }
 
       max_widths <- lapply(grobs, function(x) {x$widths})
       #
       # Aligning the Left margins
       if (length(grep("l", axis[1])) > 0) {
-        max_widths <- align_margin(max_widths, "first")
+        max_widths <- align_margin(max_widths, "first", greedy = greedy)
       }
       if (length(grep("r", axis[1])) > 0) {
-        max_widths <- align_margin(max_widths, "last")
+        max_widths <- align_margin(max_widths, "last", greedy = greedy)
       }
     } else {
       max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$widths})))
@@ -166,22 +179,23 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
   if (halign) {
     num_heights <- unique(lapply(grobs, function(x) {length(x$heights)})) # count number of unique lengths
-    num_heights[num_heights==0] <- NULL # remove entry for missing graphs
-    if (length(num_heights) > 1) {
+    num_heights[num_heights == 0] <- NULL # remove entry for missing graphs
+    if (length(num_heights) > 1 || length(grep("t|b", axis[1])) > 0) {
       # Complex aligns are ones that don't have the same number of elements that have sizes
+      # or for which explicit axis alignment is requested
       hcomplex_align = TRUE
-      if(axis[1] == "none"){
+      if (axis[1] == "none"){
         warning("Graphs cannot be horizontally aligned, unless axis parameter set. Placing graphs unaligned.")
-        halign=FALSE
+        halign <- FALSE
       }
 
       max_heights <- lapply(grobs, function(x) {x$heights})
 
       if (length(grep("t", axis[1])) > 0) {
-        max_heights <- align_margin(max_heights, "first")
+        max_heights <- align_margin(max_heights, "first", greedy = greedy)
       }
       if (length(grep("b", axis[1])) > 0) {
-        max_heights <- align_margin(max_heights, "last")
+        max_heights <- align_margin(max_heights, "last", greedy = greedy)
       }
 
     } else {

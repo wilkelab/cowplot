@@ -73,4 +73,24 @@ test_that("alignment", {
       ncol = 1, align = "hv", axis = "rt"
     ) + theme_map()
   )
+
+  # aligning facets with unequal widths
+  df <- data.frame(
+    type = c("a", "b", "c"),
+    xstart = c(1, 1, 1),
+    xend = c(2, 5, 3),
+    xend2 = c(3, 2, 5)
+  )
+
+  p1 <- ggplot(df, aes(x = xstart, xend = xend, y = 0, yend = 1)) +
+    geom_segment() +
+    facet_grid(~type, scales = "free_x", space = "free_x")
+
+  p2 <- ggplot(df, aes(x = xstart, xend = xend2, y = 0, yend = 1000)) +
+    geom_segment() +
+    facet_grid(~type, scales = "free_x", space = "free_x")
+
+  expect_doppelganger("aligning faceted plots w/ unequal widths",
+    plot_grid(p1, p2, ncol = 1, align = 'v', axis = "rl") + theme_map()
+  )
 })

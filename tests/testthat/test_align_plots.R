@@ -36,8 +36,16 @@ test_that("complex alignments, h, v, hv", {
   # these plots cannot be aligned unless axes are specified
   expect_warning(align_plots(p1, p2, align = "v"))
 
-  plots <- align_plots(p1, p2, align = "v", axis = "l")
-  expect_equal(plots[[1]]$widths[1:3], plots[[2]]$widths[1:3])
+  # with greedy = FALSE, all widths are equal
+  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = FALSE)
+  expect_equal(plots[[1]]$widths[1:4], plots[[2]]$widths[1:4])
+
+  # with greedy = TRUE, only the sums of the widths are equal
+  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = TRUE)
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[1:4]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[1:4]), "in")
+  )
 
   p3 <- ggplot(df, aes(short, x)) +
     geom_point() + facet_wrap(~long, ncol = 1)
@@ -45,7 +53,7 @@ test_that("complex alignments, h, v, hv", {
   # these plots cannot be aligned unless axes are specified
   expect_warning(align_plots(p1, p3, align = "h"))
 
-  plots <- align_plots(p1, p3, align = "h", axis = "bt")
+  plots <- align_plots(p1, p3, align = "h", axis = "bt", greedy = FALSE)
   expect_equal(
     grid::convertUnit(plots[[1]]$heights[7:10] - plots[[2]]$heights[18:21], "cm"),
     grid::unit(c(0, 0, 0, 0), "cm")
@@ -53,24 +61,7 @@ test_that("complex alignments, h, v, hv", {
 
   # these units are only equal after we've added everything up
   expect_equal(
-    grid::convertUnit(
-      plots[[1]]$heights[1] +
-      plots[[1]]$heights[2] +
-      plots[[1]]$heights[3] +
-      plots[[1]]$heights[4] +
-      plots[[1]]$heights[5] +
-      plots[[1]]$heights[6],
-      "cm"
-    ),
-      grid::convertUnit(
-        plots[[2]]$heights[1] +
-        plots[[2]]$heights[2] +
-        plots[[2]]$heights[3] +
-        plots[[2]]$heights[4] +
-        plots[[2]]$heights[5] +
-        plots[[2]]$heights[6] +
-        plots[[2]]$heights[7],
-      "cm"
-    )
+    grid::convertUnit(sum(plots[[1]]$heights[1:6]), "cm"),
+    grid::convertUnit(sum(plots[[2]]$heights[1:7]), "cm")
   )
 })

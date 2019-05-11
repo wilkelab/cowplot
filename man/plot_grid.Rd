@@ -9,8 +9,8 @@ plot_grid(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   nrow = NULL, ncol = NULL, rel_widths = 1, rel_heights = 1,
   labels = NULL, label_size = 14, label_fontfamily = NULL,
   label_fontface = "bold", label_colour = NULL, label_x = 0,
-  label_y = 1, hjust = -0.5, vjust = 1.5, scale = 1, cols = NULL,
-  rows = NULL)
+  label_y = 1, hjust = -0.5, vjust = 1.5, scale = 1,
+  greedy = TRUE, cols = NULL, rows = NULL)
 }
 \arguments{
 \item{...}{List of plots to be arranged into the grid. The plots can be any objects that
@@ -65,6 +65,8 @@ down on the plot canvas. Can be a single value (applied to all labels) or a vect
 \item{scale}{Individual number or vector of numbers greater than 0. Enables you to scale the size of all or
 select plots. Usually it's preferable to set margins instead of using \code{scale}, but \code{scale} can
 sometimes be more powerful.}
+
+\item{greedy}{(optional) How should margins be adjusted during alignment. See \code{\link[=align_plots]{align_plots()}} for details.}
 
 \item{cols}{Deprecated. Use \code{ncol}.}
 

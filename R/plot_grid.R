@@ -10,6 +10,7 @@
 #' @param axis (optional) Specifies whether graphs should be aligned by the left ("l"), right ("r"), top ("t"), or bottom ("b")
 #'  margins. Options are "none" (default), or a string of any combination of l, r, t, and b in any order (e.g. "tblr" or "rlbt" for aligning all margins).
 #'  Must be specified if any of the graphs are complex (e.g. faceted) and alignment is specified and desired. See [align_plots()] for details.
+#' @param greedy (optional) How should margins be adjusted during alignment. See [align_plots()] for details.
 #' @param nrow (optional) Number of rows in the plot grid.
 #' @param ncol (optional) Number of columns in the plot grid.
 #' @param rel_widths (optional) Numerical vector of relative columns widths. For example, in a two-column
@@ -95,7 +96,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       rel_heights = 1, labels = NULL, label_size = 14,
                       label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
                       label_x = 0, label_y = 1,
-                      hjust = -0.5, vjust = 1.5, scale = 1.,
+                      hjust = -0.5, vjust = 1.5, scale = 1., greedy = TRUE,
                       cols = NULL, rows = NULL ) {
 
   # Make a list from the ... arguments and plotlist
@@ -124,7 +125,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   }
 
   # Align the plots (if specified)
-  grobs <- align_plots(plotlist = plots, align=align, axis=axis)
+  grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
 
   # calculate grid dimensions
   if (is.null(cols) && is.null(rows)){
