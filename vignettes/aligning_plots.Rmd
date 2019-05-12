@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 output:
   rmarkdown::html_vignette:
     fig_width: 4
+    fig_height: 3
 vignette: >
   %\VignetteIndexEntry{Aligning plots}
   %\VignetteEngine{knitr::rmarkdown}
@@ -29,7 +30,7 @@ p1
 p2
 ```
 
-Both plots have the same x axis, but the width of the plot area is slightly larger in the first than in the second, because the y axis ticks have different lengths. These differences in plot width could be distracting in a document where both plots are shown near each other. We can fix this problem by vertically aligning the two plots and then drawing them individually.
+Both plots have the same x axis, but the width of the plot area is slightly larger in the first than in the second, because the y axis labels have different lengths. These differences in plot width could be distracting in a document where both plots are shown near each other. We can fix this problem by vertically aligning the two plots and then drawing them individually.
 
 ```{r}
 aligned <- align_plots(p1, p2, align = "v")
@@ -37,11 +38,52 @@ ggdraw(aligned[[1]])
 ggdraw(aligned[[2]])
 ```
 
-Vertical alignment (`align = "v"`) means that any vertical reference lines, such as the right and left y axis lines, are aligned in the plots. By contrast, horizontal alignment (`align = "h"`) aligns horizontal reference lines.
+Vertical alignment (`align = "v"`) means that any vertical reference lines, such as the right and left y axis lines, are aligned in the plots. By contrast, horizontal alignment (`align = "h"`) aligns horizontal reference lines. Both types of alignment can be used separately (`align = "v"` or `align = "h"`) or in combination (`align = "vh"` or `align = "hv"`).
 
-As a second example, we'll make two separate plots and then draw them on top of each other. First, we draw a bar plot of the number of cars in different classes in the `mpg` dataset.
+If we want to align and then arrange plots, we can call `plot_grid()` and provide it with an `align` argument. The `plot_grid()` function calls `align_plots()` to align the plots and then arranges them.
 
-```{r message = FALSE, fig.width = 5.5}
+```{r fig.height = 6}
+plot_grid(p1, p2, ncol = 1, align = "v")
+```
+
+## Aligning by axis
+
+The vertical and horizontal alignment as described above tries to align every vertical or horizontal element in all plots. In other words, the axis titles are aligned to each other, the axis ticks are aligned to each other, the plot panels are aligned to each other, and so on. This method of alignment only works if all plots have exactly the same elements. Therefore, it fails, for example, if we try to align a plot that is faceted with one that is not.
+
+```{r fig.width = 7}
+p1 <- ggplot(mtcars, aes(disp, mpg)) + 
+  geom_point() +
+  theme_minimal_grid(14) + 
+  panel_border(color = "black")
+
+p2 <- ggplot(mtcars, aes(factor(vs))) + 
+  geom_bar() + 
+  facet_wrap(~am) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
+  theme_minimal_hgrid(12) +
+  panel_border(color = "black") +
+  theme(strip.background = element_rect(fill = "gray80"))
+
+plot_grid(p1, p2, align = "h", rel_widths = c(1, 1.3))
+```
+
+We receive a warning that the plots cannot be aligned, and the plots are drawn without alignment. To align these plots, we need to tell the `align_plots()` function which parts of the plots should be aligned. There are two alternatives, and both can be meaningful. First, we can align only the bottom axis (`axis = "b"`).
+
+```{r fig.width = 7}
+plot_grid(p1, p2, align = "h", axis = "b", rel_widths = c(1, 1.3))
+```
+
+Second, we can align both the bottom and the top axis (`axis = "bt"`).
+
+```{r fig.width = 7}
+plot_grid(p1, p2, align = "h", axis = "bt", rel_widths = c(1, 1.3))
+```
+
+In general, the `axis` argument tells the `align_plots()` function to only align specific axes. It understands the values `"t"` (top), `"r"` (right), `"b"` (bottom), and `"l"` (left), in any combination.
+
+As a second example, I will show how aligning by axis can be useful even if the plots contain the same number of elements. Consider this vertical arrangement of two plots, showing first the number of cars in different classes in the `mpg` dataset and second a scatter plot of the mean city mpg for each class versus the number of cars in the class. 
+
+```{r message = FALSE, fig.width = 6, fig.height = 4.5}
 library(dplyr)
 library(forcats)
 
@@ -49,10 +91,35 @@ city_mpg <- mpg %>%
   mutate(class = fct_lump(class, 4, other_level = "other")) %>%
   group_by(class) %>%
   summarize(
-    `city mpg` = mean(cty),
+    mean_mpg = mean(cty),
     count = n()
-  ) %>% 
-  mutate(class = fct_reorder(class, -`city mpg`))
+  ) %>% mutate(
+    class = fct_reorder(class, count)
+  )
+
+
+p1 <- ggplot(city_mpg, aes(class, count)) + 
+  geom_col() + 
+  ylim(0, 65) + 
+  coord_flip()
+
+p2 <- ggplot(city_mpg, aes(mean_mpg, count)) + 
+  geom_point()
+
+plot_grid(p1, p2, ncol = 1, align = 'v')
+```
+
+Because the y axis labels of the first plot are very long, the y axis title of the second plot is located far removed from the axis labels. This looks strange. It would be better to move the axis title closer to the labels. We can do this by aligning by axis. I'm aligning here only the left axis. Aligning the left and the right axis would have produced the same result.
+
+```{r fig.width = 6, fig.height = 4.5}
+plot_grid(p1, p2, ncol = 1, align = 'v', axis = 'l')
+```
+
+Finally, I'll make two separate plots and then draw them on top of each other. First, let's again draw a bar plot of the number of cars in different classes in the `mpg` dataset.
+
+```{r fig.width = 5.5}
+city_mpg <- city_mpg %>%
+  mutate(class = fct_reorder(class, -mean_mpg))
 
 p1 <- ggplot(city_mpg, aes(class, count)) +
   geom_col(fill = "#6297E770") + 
@@ -74,10 +141,10 @@ p1 <- ggplot(city_mpg, aes(class, count)) +
 p1
 ```
 
-Now we plot mean city mpg versus car class, as a scatter plot.
+Now let's plot mean city mpg versus car class, as a scatter plot.
 
 ```{r message = FALSE, fig.width = 5.5}
-p2 <- ggplot(city_mpg, aes(class, `city mpg`)) + 
+p2 <- ggplot(city_mpg, aes(class, mean_mpg)) + 
   geom_point(size = 3, color = "#D5442D") + 
   scale_y_continuous(limits = c(10, 21)) +
   theme_half_open(11, rel_small = 1) +
@@ -92,45 +159,8 @@ p2
 
 Now we align the two plots and then overlay them. The resulting plot has dual axes, and making such plots is usually discouraged. I present this example here only to show the types of effects we can achieve when plot alignment and plot placement are separated.
 
-```{r message = FALSE, fig.width = 5.5}
+```{r fig.width = 5.5}
 aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")
 ggdraw(aligned_plots[[1]]) + draw_plot(aligned_plots[[2]])
 ```
 
-
-## Aligning by axis
-
-*Some intro text here.*
-
-```{r fig.width = 7}
-p1 <- ggplot(mtcars, aes(disp, mpg)) + 
-  geom_point() +
-  theme_minimal_grid(14) + 
-  panel_border(color = "black")
-
-p2 <- ggplot(mtcars, aes(factor(vs))) + 
-  geom_bar() + 
-  facet_wrap(~am) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.1))) +
-  theme_minimal_hgrid(12) +
-  panel_border(color = "black") +
-  theme(strip.background = element_rect(fill = "gray80"))
-```
-
-Because we have used to themes with different base sizes (14 points and 12 points), the two plots are not aligned. If we try to align them horizontally, we receive a warning that the plots cannot be aligned.
-
-```{r fig.width = 7}
-plot_grid(p1, p2, align = "h", rel_widths = c(1, 1.3))
-```
-
-This warning indicates that cowplot doesn't know how these plots should be aligned. There are two alternatives, and both can be meaningful. First, we can align only the bottom axis (`axis = "b"`).
-
-```{r fig.width = 7}
-plot_grid(p1, p2, align = "h", axis = "b", rel_widths = c(1, 1.3))
-```
-
-Second, we can align both the bottom and the top axis (`axis = "bt"`).
-
-```{r fig.width = 7}
-plot_grid(p1, p2, align = "h", axis = "bt", rel_widths = c(1, 1.3))
-```
