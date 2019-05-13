@@ -22,3 +22,29 @@ test_that("draw_grob() can align grobs", {
   )
 })
 
+test_that("draw_plot_label() works", {
+  theme_old <- theme_set(
+    theme_cowplot() +
+    theme(text = element_text(color = "red"))
+  )
+
+  expect_doppelganger("Label color taken from theme",
+    ggdraw() +
+      draw_plot_label(label = "red label", x = .5, y = .5, hjust = .5, vjust = .5) +
+      theme_map()
+  )
+  expect_doppelganger("Label color specified w/ US spelling",
+    ggdraw() +
+      draw_plot_label(label = "blue label", color = "blue", x = .5, y = .5, hjust = .5, vjust = .5) +
+      theme_map()
+  )
+  expect_doppelganger("Label color specified w/ UK spelling",
+    ggdraw() +
+      draw_plot_label(label = "blue label", colour = "blue", x = .5, y = .5, hjust = .5, vjust = .5) +
+      theme_map()
+  )
+
+  theme_set(theme_old)
+  }
+)
+

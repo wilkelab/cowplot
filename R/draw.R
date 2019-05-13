@@ -86,7 +86,7 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
 #' @param vjust Vertical justification. Default = 0.5 (centered on y). 0 = baseline at y, 1 = ascender at y.
 #' @param fontfamily The font family
 #' @param fontface The font face ("plain", "bold", etc.)
-#' @param colour Text color
+#' @param color,colour Text color
 #' @param size Point size of text
 #' @param angle Angle at which text is drawn
 #' @param lineheight Line height of text
@@ -120,10 +120,14 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
 #' p + draw_label("centered on at {.5,.5}", x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5)
 #' @export
 draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
-                    fontfamily = "", fontface = "plain", colour = "black", size = 14,
-                    angle = 0, lineheight = 0.9, alpha = 1)
+                    fontfamily = "", fontface = "plain", color = "black", size = 14,
+                    angle = 0, lineheight = 0.9, alpha = 1, colour)
 {
-  text_par <- grid::gpar(col = colour,
+  if (!missing(colour)) {
+    color <- colour
+  }
+
+  text_par <- grid::gpar(col = color,
                          fontsize = size,
                          fontfamily = fontfamily,
                          fontface = fontface,
@@ -150,21 +154,25 @@ draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 #' @param size Font size of the label to be drawn.
 #' @param fontface Font face of the label to be drawn.
 #' @param family (optional) Font family of the plot labels. If not provided, is taken from the current theme.
-#' @param colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
+#' @param color,colour (optional) Color of the plot labels. If not provided, is taken from the current theme.
 #' @param ... Other arguments to be handed to \code{draw_text}.
 #' @export
 draw_plot_label <- function(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5, size = 16, fontface = 'bold',
-                            family = NULL, colour = NULL, ...){
+                            family = NULL, color = NULL, colour, ...){
   if (is.null(family)) {
     family <- theme_get()$text$family
   }
 
-  if (is.null(colour)) {
-    colour <- theme_get()$text$colour
+  if (!missing(colour)) {
+    color <- colour
+  }
+
+  if (is.null(color)) {
+    color <- theme_get()$text$colour
   }
 
   draw_text(text = label, x = x, y = y, hjust = hjust, vjust = vjust, size = size, fontface = fontface,
-            family = family, colour = colour, ...)
+            family = family, color = color, ...)
 }
 
 
