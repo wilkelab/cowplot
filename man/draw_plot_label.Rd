@@ -5,7 +5,8 @@
 \title{Add a label to a plot}
 \usage{
 draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
-  size = 16, fontface = "bold", family = NULL, colour = NULL, ...)
+  size = 16, fontface = "bold", family = NULL, color = NULL,
+  colour, ...)
 }
 \arguments{
 \item{label}{String (or vector of strings) to be drawn as the label.}
@@ -24,7 +25,7 @@ draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
 
 \item{family}{(optional) Font family of the plot labels. If not provided, is taken from the current theme.}
 
-\item{colour}{(optional) Color of the plot labels. If not provided, is taken from the current theme.}
+\item{color, colour}{(optional) Color of the plot labels. If not provided, is taken from the current theme.}
 
 \item{...}{Other arguments to be handed to \code{draw_text}.}
 }

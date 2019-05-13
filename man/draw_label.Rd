@@ -5,8 +5,8 @@
 \title{Draw a text label or mathematical expression.}
 \usage{
 draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
-  fontfamily = "", fontface = "plain", colour = "black", size = 14,
-  angle = 0, lineheight = 0.9, alpha = 1)
+  fontfamily = "", fontface = "plain", color = "black", size = 14,
+  angle = 0, lineheight = 0.9, alpha = 1, colour)
 }
 \arguments{
 \item{label}{String or plotmath expression to be drawn.}
@@ -23,7 +23,7 @@ draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
 
 \item{fontface}{The font face ("plain", "bold", etc.)}
 
-\item{colour}{Text color}
+\item{color, colour}{Text color}
 
 \item{size}{Point size of text}
 

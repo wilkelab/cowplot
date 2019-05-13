@@ -5,16 +5,16 @@
 \title{Draw an image}
 \usage{
 draw_image(image, x = 0, y = 0, width = 1, height = 1, scale = 1,
-  clip = "inherit", interpolate = TRUE)
+  clip = "inherit", interpolate = TRUE, hjust = 0, vjust = 0)
 }
 \arguments{
 \item{image}{The image to place. Can be a file path, a URL, or a raw vector with image data,
 as in \code{magick::image_read()}. Can also be an image previously created by \code{magick::image_read()} and
 related functions.}
 
-\item{x}{The x location of the lower left corner of the image.}
+\item{x}{The x location of the image. (Left side if \code{hjust = 0}.)}
 
-\item{y}{The y location of the lower left corner of the image.}
+\item{y}{The y location of the image. (Bottom side if \code{vjust = 0}.)}
 
 \item{width}{Width of the image.}
 
@@ -28,6 +28,10 @@ Note that clipping doesn't always work as expected, due to limitations of the gr
 
 \item{interpolate}{A logical value indicating whether to linearly interpolate the image
 (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).}
+
+\item{hjust}{Horizontal justification relative to x.}
+
+\item{vjust}{Vertical justification relative to y.}
 }
 \description{
 Places an image somewhere onto the drawing canvas. By default, coordinates run from
