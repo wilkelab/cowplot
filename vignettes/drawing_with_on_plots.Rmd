@@ -41,7 +41,7 @@ ggdraw() +
 
 
 ```{r fig.width = 5.7, fig.height = 3.8}
-img <- system.file("extdata", "cowplot-logo.png", package = "cowplot") %>%
+img <- system.file("extdata", "logo.png", package = "cowplot") %>%
   image_read()
 
 ggdraw() + 

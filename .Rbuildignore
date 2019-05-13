@@ -1,9 +1,6 @@
 ^_pkgdown\.yml$
-^docs$
-visual_test
+^doc$
 ^.*\.Rproj$
-^.*\.png$
-^.*\.pdf$
 ^\.Rproj\.user$
 ^\.travis\.yml$
 ^\.codecov\.yml$
@@ -12,3 +9,4 @@ visual_test
 ^ISSUE_TEMPLATE\.md$
 ^vignettes/*\.png$
 ^revdep$
+^Meta$

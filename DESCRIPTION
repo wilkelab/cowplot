@@ -25,16 +25,17 @@ LazyData: true
 Suggests:
     Cairo,
     covr,
+    dplyr,
+    forcats,
     gridGraphics (>= 0.4-0),
     knitr,
+    lattice,
     magick,
     maps,
     PASWR,
-    dplyr,
-    forcats,
-    tidyr,
     rmarkdown,
     testthat (>= 1.0.0),
+    tidyr,
     vdiffr (>= 0.3.0),
     VennDiagram
 VignetteBuilder: knitr
