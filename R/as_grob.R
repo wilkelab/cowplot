@@ -75,7 +75,7 @@ as_grob.grob <- function(plot, device = NULL) {
 #' @export
 as_grob.gList <- function(plot, device = NULL) {
   # gLists need to be wrapped in a grob tree
-  grobTree(plot)
+  grid::grobTree(plot)
 }
 
 #' @export

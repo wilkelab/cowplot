@@ -33,6 +33,7 @@ Suggests:
     dplyr,
     forcats,
     tidyr,
+    rmarkdown,
     testthat (>= 1.0.0),
     vdiffr (>= 0.3.0),
     VennDiagram
