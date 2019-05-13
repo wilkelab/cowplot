@@ -29,6 +29,7 @@ Suggests:
     knitr,
     magick,
     maps,
+    PASWR,
     dplyr,
     forcats,
     tidyr,

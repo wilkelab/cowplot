@@ -239,8 +239,10 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' @param image The image to place. Can be a file path, a URL, or a raw vector with image data,
 #'  as in `magick::image_read()`. Can also be an image previously created by `magick::image_read()` and
 #'  related functions.
-#' @param x The x location of the lower left corner of the image.
-#' @param y The y location of the lower left corner of the image.
+#' @param x The x location of the image. (Left side if `hjust = 0`.)
+#' @param y The y location of the image. (Bottom side if `vjust = 0`.)
+#' @param hjust Horizontal justification relative to x.
+#' @param vjust Vertical justification relative to y.
 #' @param width Width of the image.
 #' @param height Height of the image.
 #' @param scale Scales the image relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -277,7 +279,8 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'     draw_image(img2, x = 2, y = 2, scale = .9)
 #' }
 #' @export
-draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit", interpolate = TRUE) {
+draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit",
+                       interpolate = TRUE, hjust = 0, vjust = 0) {
   if (!requireNamespace("magick", quietly = TRUE)){
     warning("Package `magick` is required to draw images. Image not drawn.", call. = FALSE)
     draw_grob(grid::nullGrob(), x, y, width, height)
@@ -292,7 +295,11 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
       image_data <- magick::image_read(image)
     }
     g <- grid::rasterGrob(image_data, interpolate = interpolate)
-    draw_grob(g, x, y, width, height, scale, clip)
+    draw_grob(
+      g, x = x, y = y, width = width, height = height,
+      hjust = hjust, vjust = vjust, scale = scale,
+      clip = clip
+    )
   }
 }
 
@@ -302,8 +309,10 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
 #' @param plot The plot to place. Can be a ggplot2 plot, an arbitrary grob or gtable,
 #'   or a recorded base-R plot, as in [as_grob()].
-#' @param x The x location of the lower left corner of the plot.
-#' @param y The y location of the lower left corner of the plot.
+#' @param x The x location of the plot. (Left side if `hjust = 0`.)
+#' @param y The y location of the plot. (Bottom side if `vjust = 0`.)
+#' @param hjust Horizontal justification relative to x.
+#' @param vjust Vertical justification relative to y.
 #' @param width Width of the plot.
 #' @param height Height of the plot.
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -317,9 +326,13 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #' # draw into the top-right corner of a larger plot area
 #' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
-draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1) {
+draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
+                      hjust = 0, vjust = 0) {
   plot <- as_grob(plot) # convert to grob if necessary
-  draw_grob(plot, x, y, width, height, scale)
+  draw_grob(
+    plot, x = x, y = y, width = width, height = height,
+    scale = scale, hjust = hjust, vjust = vjust
+  )
 }
 
 #' Draw a grob.
@@ -327,8 +340,10 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1) {
 #' Places an arbitrary grob somewhere onto the drawing canvas. By default, coordinates run from
 #' 0 to 1, and the point (0, 0) is in the lower left corner of the canvas.
 #' @param grob The grob to place.
-#' @param x The x location of the lower left corner of the grob.
-#' @param y The y location of the lower left corner of the grob.
+#' @param x The x location of the grob. (Left side if `hjust = 0`.)
+#' @param y The y location of the grob. (Bottom side if `vjust = 0`.)
+#' @param hjust Horizontal justification relative to x.
+#' @param vjust Vertical justification relative to y.
 #' @param width Width of the grob.
 #' @param height Height of the grob.
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -342,7 +357,8 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1) {
 #' # place into the middle of the plotting area, at a scale of 50%
 #' ggdraw() + draw_grob(g, scale = 0.5)
 #' @export
-draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit") {
+draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit",
+                      hjust = 0, vjust = 0) {
   layer(
     data = data.frame(x = NA),
     stat = StatIdentity,
@@ -351,10 +367,10 @@ draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip
     inherit.aes = FALSE,
     params = list(
       grob = grob,
-      xmin = x,
-      xmax = x + width,
-      ymin = y,
-      ymax = y + height,
+      xmin = x - hjust*width,
+      xmax = x + (1-hjust)*width,
+      ymin = y - vjust*height,
+      ymax = y + (1-vjust)*height,
       scale = scale,
       clip = clip
     )

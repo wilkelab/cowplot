@@ -1,0 +1,50 @@
+---
+title: "Drawing with and on plots"
+author: "Claus O. Wilke"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    fig_width: 4
+    fig_height: 3
+vignette: >
+  %\VignetteIndexEntry{Drawing with and on plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\usepackage[utf8]{inputenc}
+---
+
+
+```{r message = FALSE, fig.width = 5.7, fig.height = 3.8}
+library(ggplot2)
+library(cowplot)
+library(magick)
+library(dplyr)
+library(forcats)
+
+img <- system.file("extdata", "cow.jpg", package = "cowplot") %>%
+  image_read() %>%
+  image_resize("570x380") %>%
+  image_colorize(35, "white")
+
+p <- PASWR::Cows %>%
+  filter(breed != "Canadian") %>%
+  mutate(breed = fct_reorder(breed, butterfat)) %>%
+  ggplot(aes(butterfat, fill = breed)) +
+  geom_density(alpha = 0.7) +
+  scale_fill_grey() +
+  coord_cartesian(expand = FALSE) +
+  theme_minimal_hgrid(11, color = "grey30")
+
+ggdraw() + 
+  draw_image(img) + 
+  draw_plot(p)
+```
+
+
+```{r fig.width = 5.7, fig.height = 3.8}
+img <- system.file("extdata", "cowplot-logo.png", package = "cowplot") %>%
+  image_read()
+
+ggdraw() + 
+  draw_plot(p) +
+  draw_image(img, x = 1, hjust = 1, width = 0.13, height = 0.2)
+```
