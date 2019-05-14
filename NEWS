@@ -2,6 +2,7 @@ cowplot 0.9.99
 ----------------------------------------------------------------
 
 ## Breaking changes
+
 In many ways, cowplot now behaves more appropriately and plays nicer with
 the R environment and other R packages. However, this means that several
 breaking changes were introduced:
@@ -27,7 +28,7 @@ Other breaking changes:
   and ggplot2 plots into grobs that can then be drawn using standard
   grid approaches.
 - Much improved handling of base R plots, thanks to improvements in
-  grid and gridGraphics. Requires R >= 3.5.0 and gridGraphics >= 0.3.
+  grid and gridGraphics. Requires R >= 3.6.0 and gridGraphics >= 0.4.
 - Added a function `set_null_device()` to customize the null graphics
   device that is used in `ggdraw()`, `plot_grid()`, etc. There is no
   one null device that always works, so customization is needed.
@@ -47,7 +48,8 @@ Other breaking changes:
 - Various minor fixes to `theme_cowplot()` and derived themes.
 - Change `background_grid()` defaults so they match the
   new grid themes.
-- Renamed `plot_to_gtable()` into `as_gtable()`.
+- Renamed `plot_to_gtable()` to `as_gtable()`.
+- All functions now understand both spellings of color/colour.
 
 cowplot 0.9.2
 ----------------------------------------------------------------
