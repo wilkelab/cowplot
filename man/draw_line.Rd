@@ -20,9 +20,12 @@ Provide a sequence of x values and accompanying y values to draw a line on a plo
 This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
 }
 \examples{
-ggdraw() + draw_line(x = c(0.2, 0.7, 0.7, 0.3),
-                     y = c(0.1, 0.3, 0.9, 0.8),
-                     color = "blue", size = 2)
+ggdraw() +
+  draw_line(
+    x = c(0.2, 0.7, 0.7, 0.3),
+    y = c(0.1, 0.3, 0.9, 0.8),
+    color = "blue", size = 2
+  )
 }
 \seealso{
 \code{\link{geom_path}}, \code{\link{ggdraw}}

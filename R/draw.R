@@ -15,9 +15,12 @@
 #' @param ... geom_path parameters such as \code{colour}, \code{alpha}, \code{size}, etc.
 #' @seealso \code{\link{geom_path}}, \code{\link{ggdraw}}
 #' @examples
-#' ggdraw() + draw_line(x = c(0.2, 0.7, 0.7, 0.3),
-#'                      y = c(0.1, 0.3, 0.9, 0.8),
-#'                      color = "blue", size = 2)
+#' ggdraw() +
+#'   draw_line(
+#'     x = c(0.2, 0.7, 0.7, 0.3),
+#'     y = c(0.1, 0.3, 0.9, 0.8),
+#'     color = "blue", size = 2
+#'   )
 #' @export
 draw_line <- function(x, y, ...){
   geom_path(data = data.frame(x, y),
@@ -54,10 +57,10 @@ draw_line <- function(x, y, ...){
 #' #
 #' # Adorn a plot from the Anscombe data set of "identical" data.
 #' library(ggplot2)
-#' theme_set(theme_half_open())
-#' p <- qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
-#' threeStrings <- c("Hello World!", "to be or not to be", "over and out")
-#' p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
+#'
+#' p <- ggplot(anscombe, aes(x1, y1)) + geom_point() + geom_smooth()
+#' three_strings <- c("Hello World!", "to be or not to be", "over and out")
+#' p + draw_text(three_strings, x = 8:10, y = 5:7, hjust = 0)
 #' @export
 draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.5, ...){
   geom_text(data = data.frame(text, x, y),
@@ -94,30 +97,32 @@ draw_text <- function(text, x = 0.5, y = 0.5, size = 14, hjust = 0.5, vjust = 0.
 #' @seealso \code{\link{ggdraw}}
 #' @examples
 #' library(ggplot2)
-#' theme_set(theme_half_open())
+#'
 #' # setup plot and a label (regression description)
-#' p <- ggplot(mtcars, aes(mpg, disp)) + geom_line(color = "blue") + background_grid(minor = 'none')
-#' c <- cor.test(mtcars$mpg, mtcars$disp, method = 'sp')
-#' label <- substitute(paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
-#'                     list(estimate = signif(c$estimate, 2), pvalue = signif(c$p.value, 2)))
+#' p <- ggplot(mtcars, aes(disp, mpg)) +
+#'   geom_line(color = "blue") +
+#'   theme_half_open() +
+#'   background_grid(minor = 'none')
+#' out <- cor.test(mtcars$disp, mtcars$mpg, method = 'sp', exact = FALSE)
+#' label <- substitute(
+#'   paste("Spearman ", rho, " = ", estimate, ", P = ", pvalue),
+#'   list(estimate = signif(out$estimate, 2), pvalue = signif(out$p.value, 2))
+#' )
 #'
 #' # Add label to plot, centered on {x,y} (in data coordinates)
-#' p + draw_label(label, x = 20, y = 400)
+#' p + draw_label(label, x = 300, y = 32)
 #' # Add label to plot in data coordinates, flush-left at x, baseline at y.
-#' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 0)
-#'
-#' # Add label to plot. Data coordinates, drawing rightward
-#' # from x, with ascenders of text touching y.
-#' p + draw_label(label, x = 20, y = 400, hjust = 0, vjust = 1)
+#' p + draw_label(label, x = 100, y = 30, hjust = 0, vjust = 0)
 #'
 #' # Add labels via ggdraw. Uses ggdraw coordinates.
 #' # ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).
-#' ggdraw(p) + draw_label("centered on 70% of x, 90% of y height", x = 0.7, y = 0.9)
-#' labstr = "bottom left at {0%, 0%} of the SHEET, not the plot!"
-#' p = ggdraw(p) + draw_label(labstr, x = 0, y = 0, hjust = 0, vjust = 0)
-#' p = p + draw_label("top right at {1,1}", x = 1, y = 1, hjust = 1, vjust = 1)
-#' p = p + draw_label("bottom left at {.4,.4}", x = 0.4, y = 0.4, hjust = 0, vjust = 0)
-#' p + draw_label("centered on at {.5,.5}", x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5)
+#' ggdraw(p) +
+#'   draw_label("centered on 70% of x range,\n90% of y range", x = 0.7, y = 0.9)
+#'
+#' ggdraw(p) +
+#'   draw_label("bottom left at (0, 0)", x = 0, y = 0, hjust = 0, vjust = 0) +
+#'   draw_label("top right at (1, 1)", x = 1, y = 1, hjust = 1, vjust = 1) +
+#'   draw_label("centered on (0.5, 0.5)", x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5)
 #' @export
 draw_label <- function(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
                     fontfamily = "", fontface = "plain", color = "black", size = 14,
@@ -189,12 +194,14 @@ draw_plot_label <- function(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5, size
 #' @seealso \code{\link{draw_plot_label}}
 #' @examples
 #' library(ggplot2)
-#' theme_set(theme_half_open())
+#' df <- data.frame(
+#'   x = 1:10, y1 = 1:10, y2 = (1:10)^2, y3 = (1:10)^3, y4 = (1:10)^4
+#' )
 #'
-#' p1 <- qplot(1:10, 1:10)
-#' p2 <- qplot(1:10, (1:10)^2)
-#' p3 <- qplot(1:10, (1:10)^3)
-#' p4 <- qplot(1:10, (1:10)^4)
+#' p1 <- ggplot(df, aes(x, y1)) + geom_point()
+#' p2 <- ggplot(df, aes(x, y2)) + geom_point()
+#' p3 <- ggplot(df, aes(x, y3)) + geom_point()
+#' p4 <- ggplot(df, aes(x, y4)) + geom_point()
 #'
 #' # Create a simple grid
 #' p <- plot_grid(p1, p2, p3, p4, align = 'hv')
@@ -261,24 +268,34 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'  (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).
 #' @examples
 #' library(ggplot2)
-#' theme_set(theme_half_open())
 #'
 #' # Use image as plot background
-#' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
+#' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+#'   geom_density(alpha = 0.7) +
+#'   scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+#'   theme_half_open(12)
+#'
+#' logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 #' ggdraw() +
-#'   draw_image("http://jeroen.github.io/images/tiger.svg") +
-#'   draw_plot(p + theme(legend.box.background = element_rect(color = "white")))
+#'   draw_image(logo_file, scale = .7) +
+#'   draw_plot(p)
 #'
 #' # Make grid with plot and image
-#' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
-#'   geom_density(alpha = 0.7)
-#' p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
-#' plot_grid(p, p2, labels = "AUTO")
+#'
+#' cow_file <- system.file("extdata", "cow.jpg", package = "cowplot")
+#' p2 <- ggdraw() + draw_image(cow_file, scale = 0.9)
+#' plot_grid(
+#'   p + theme(legend.position = c(1, 1), legend.justification = c(1, 1)),
+#'   p2,
+#'   labels = "AUTO"
+#' )
 #'
 #' # Manipulate images and draw in plot coordinates
 #' if (requireNamespace("magick", quietly = TRUE)){
-#'   img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
-#'   img <- magick::image_transparent(img, color = "white")
+#'   img <- magick::image_transparent(
+#'     magick::image_read(logo_file),
+#'     color = "white"
+#'   )
 #'   img2 <- magick::image_negate(img)
 #'   ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
 #'     geom_point(size = 3) +
@@ -327,10 +344,10 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #'   of `scale = 1` indicates no scaling.
 #' @examples
 #' library(ggplot2)
-#' theme_set(theme_half_open())
 #'
 #' # make a plot
-#' p <- qplot(1:10, 1:10)
+#' p <- ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
+#'     geom_point()
 #' # draw into the top-right corner of a larger plot area
 #' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
@@ -360,8 +377,7 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
 #'   expected, due to limitations of the grid graphics system.
 #' @examples
 #' # A grid grob (here a blue circle)
-#' library(grid)
-#' g <- circleGrob(gp = gpar(fill = "blue"))
+#' g <- grid::circleGrob(gp = grid::gpar(fill = "blue"))
 #' # place into the middle of the plotting area, at a scale of 50%
 #' ggdraw() + draw_grob(g, scale = 0.5)
 #' @export
@@ -439,8 +455,10 @@ annotation_id <- local({
 #' @examples
 #' library(ggplot2)
 #'
-#' p <- ggplot(mpg, aes(displ, cty)) + geom_point()
-#' ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
+#' p <- ggplot(mpg, aes(displ, cty)) +
+#'   geom_point() +
+#'   theme_minimal_grid()
+#' ggdraw(p) + draw_label("Draft", colour = "#80404080", size = 120, angle = 45)
 #' @export
 ggdraw <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), clip = "off") {
   p <- ggplot() + # empty plot

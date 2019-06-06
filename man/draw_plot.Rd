@@ -32,10 +32,10 @@ Places a plot somewhere onto the drawing canvas. By default, coordinates run fro
 }
 \examples{
 library(ggplot2)
-theme_set(theme_half_open())
 
 # make a plot
-p <- qplot(1:10, 1:10)
+p <- ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
+    geom_point()
 # draw into the top-right corner of a larger plot area
 ggdraw() + draw_plot(p, .6, .6, .4, .4)
 }

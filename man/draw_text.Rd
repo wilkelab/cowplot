@@ -42,10 +42,10 @@ ggdraw() + draw_text("Hello World!", x = 0.5, y = 0.5)
 #
 # Adorn a plot from the Anscombe data set of "identical" data.
 library(ggplot2)
-theme_set(theme_half_open())
-p <- qplot(x = x1, y = y1, geom = c("smooth", "point"), data = anscombe)
-threeStrings <- c("Hello World!", "to be or not to be", "over and out")
-p + draw_text(threeStrings, x = 8:10, y = 5:7, hjust = 0)
+
+p <- ggplot(anscombe, aes(x1, y1)) + geom_point() + geom_smooth()
+three_strings <- c("Hello World!", "to be or not to be", "over and out")
+p + draw_text(three_strings, x = 8:10, y = 5:7, hjust = 0)
 }
 \seealso{
 \code{\link{draw_label}}

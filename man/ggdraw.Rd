@@ -22,6 +22,8 @@ Set up a drawing layer on top of a ggplot.
 \examples{
 library(ggplot2)
 
-p <- ggplot(mpg, aes(displ, cty)) + geom_point()
-ggdraw(p) + draw_label("Draft", colour = "grey", size = 120, angle = 45)
+p <- ggplot(mpg, aes(displ, cty)) +
+  geom_point() +
+  theme_minimal_grid()
+ggdraw(p) + draw_label("Draft", colour = "#80404080", size = 120, angle = 45)
 }

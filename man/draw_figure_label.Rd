@@ -25,12 +25,14 @@ one pane. The function is similar to \code{draw_plot_label}.
 }
 \examples{
 library(ggplot2)
-theme_set(theme_half_open())
+df <- data.frame(
+  x = 1:10, y1 = 1:10, y2 = (1:10)^2, y3 = (1:10)^3, y4 = (1:10)^4
+)
 
-p1 <- qplot(1:10, 1:10)
-p2 <- qplot(1:10, (1:10)^2)
-p3 <- qplot(1:10, (1:10)^3)
-p4 <- qplot(1:10, (1:10)^4)
+p1 <- ggplot(df, aes(x, y1)) + geom_point()
+p2 <- ggplot(df, aes(x, y2)) + geom_point()
+p3 <- ggplot(df, aes(x, y3)) + geom_point()
+p4 <- ggplot(df, aes(x, y4)) + geom_point()
 
 # Create a simple grid
 p <- plot_grid(p1, p2, p3, p4, align = 'hv')

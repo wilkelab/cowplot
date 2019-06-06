@@ -40,24 +40,34 @@ package to work, and fails gracefully if that package is not installed.
 }
 \examples{
 library(ggplot2)
-theme_set(theme_half_open())
 
 # Use image as plot background
-p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) + geom_density(alpha = 0.7)
+p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
+  geom_density(alpha = 0.7) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_half_open(12)
+
+logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 ggdraw() +
-  draw_image("http://jeroen.github.io/images/tiger.svg") +
-  draw_plot(p + theme(legend.box.background = element_rect(color = "white")))
+  draw_image(logo_file, scale = .7) +
+  draw_plot(p)
 
 # Make grid with plot and image
-p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
-  geom_density(alpha = 0.7)
-p2 <- ggdraw() + draw_image("http://jeroen.github.io/images/tiger.svg", scale = 0.9)
-plot_grid(p, p2, labels = "AUTO")
+
+cow_file <- system.file("extdata", "cow.jpg", package = "cowplot")
+p2 <- ggdraw() + draw_image(cow_file, scale = 0.9)
+plot_grid(
+  p + theme(legend.position = c(1, 1), legend.justification = c(1, 1)),
+  p2,
+  labels = "AUTO"
+)
 
 # Manipulate images and draw in plot coordinates
 if (requireNamespace("magick", quietly = TRUE)){
-  img <- magick::image_read("http://jeroen.github.io/images/tiger.svg")
-  img <- magick::image_transparent(img, color = "white")
+  img <- magick::image_transparent(
+    magick::image_read(logo_file),
+    color = "white"
+  )
   img2 <- magick::image_negate(img)
   ggplot(data.frame(x = 1:3, y = 1:3), aes(x, y)) +
     geom_point(size = 3) +

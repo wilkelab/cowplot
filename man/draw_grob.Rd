@@ -36,8 +36,7 @@ Places an arbitrary grob somewhere onto the drawing canvas. By default, coordina
 }
 \examples{
 # A grid grob (here a blue circle)
-library(grid)
-g <- circleGrob(gp = gpar(fill = "blue"))
+g <- grid::circleGrob(gp = grid::gpar(fill = "blue"))
 # place into the middle of the plotting area, at a scale of 50\%
 ggdraw() + draw_grob(g, scale = 0.5)
 }
