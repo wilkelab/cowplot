@@ -37,11 +37,11 @@ multiple y-axes are desired (see example).
 library(ggplot2)
 
 p1 <- ggplot(mpg, aes(manufacturer, hwy)) + stat_summary(fun.y="median", geom = "bar") +
- theme_half_open() +
- theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
+  theme_half_open() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, vjust= 1))
 p2 <- ggplot(mpg, aes(manufacturer, displ)) + geom_point(color="red") +
- scale_y_continuous(position = "right") +
- theme_half_open() + theme(axis.text.x = element_blank())
+  scale_y_continuous(position = "right") +
+  theme_half_open() + theme(axis.text.x = element_blank())
 
 # manually align and plot on top of each other
 aligned_plots <- align_plots(p1, p2, align="hv", axis="tblr")

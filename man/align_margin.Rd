@@ -30,22 +30,27 @@ white space to plot margins so that all margins have the same dimensions.
 }
 \examples{
 library(ggplot2)
-theme_set(theme_half_open())
 
 # Example for how to utilize, though align_plots() does this internally and automatically
-p1 <- qplot(1:10, 1:10)
-p2 <- qplot(1:10, (1:10)^2)
-p3 <- qplot(1:10, (1:10)^3)
+df <- data.frame(
+  x = 1:10, y1 = 1:10, y2 = (1:10)^2, y3 = (1:10)^3
+)
+
+p1 <- ggplot(df, aes(x, y1)) + geom_point()
+p2 <- ggplot(df, aes(x, y2)) + geom_point()
+p3 <- ggplot(df, aes(x, y3)) + geom_point()
 plots <- list(p1, p2, p3)
-grobs <- lapply(plots, ggplot2::ggplotGrob)
+grobs <- lapply(plots, as_grob)
 plot_widths <- lapply(grobs, function(x) {x$widths})
 # Aligning the left margins of all plots
 aligned_widths <- align_margin(plot_widths, "first")
 # Aligning the right margins of all plots as well
-aligned_widths <- align_margin(plot_widths, "last")
+aligned_widths <- align_margin(aligned_widths, "last")
 # Setting the dimensions of plots to the aligned dimensions
-for (i in 1:3) {
-  plots[[i]]$widths <- aligned_widths[[i]]
+for (i in seq_along(plots)) {
+  grobs[[i]]$widths <- aligned_widths[[i]]
 }
+# Draw aligned plots
+plot_grid(plotlist = grobs, ncol = 1)
 }
 \keyword{internal}
