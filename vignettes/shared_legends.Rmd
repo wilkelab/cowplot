@@ -13,28 +13,31 @@ vignette: >
 
 This vignette demonstrates how to make compound plots with a shared legend.
 
-First we load the required packages:
-```{r message=FALSE}
+We begin with a row of three plots, without legend.
+
+```{r message = FALSE, fig.width=9, fig.height=3}
 library(ggplot2)
 library(cowplot)
-library(grid) # for "unit"
-theme_set(theme_cowplot(font_size=12)) # default fontsize doesn't work well for online viewing
-```
+library(rlang)
 
-Now we make a row of three plots, without legend:
-```{r fig.width=9, fig.height=3}
 # down-sampled diamonds data set
 dsamp <- diamonds[sample(nrow(diamonds), 1000), ]
 
-# Make three plots.
-# We set left and right margins to 0 to remove unnecessary spacing in the
-# final plot arrangement.
-p1 <- qplot(carat, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6, 0, 6, 0), "pt"))
-p2 <- qplot(depth, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
-p3 <- qplot(color, price, data=dsamp, colour=clarity) +
-  theme(plot.margin = unit(c(6, 0, 6, 0), "pt")) + ylab("")
+# function to create plots
+plot_diamonds <- function(xaes) {
+  xaes <- enquo(xaes)
+  ggplot(dsamp, aes(!!xaes, price, color = clarity)) +
+    geom_point() +
+    theme_half_open(12) +
+    # we set the left and right margins to 0 to remove 
+    # unnecessary spacing in the final plot arrangement.
+    theme(plot.margin = margin(6, 0, 6, 0))
+}
+
+# make three plots
+p1 <- plot_diamonds(carat)
+p2 <- plot_diamonds(depth) + ylab(NULL)
+p3 <- plot_diamonds(color) + ylab(NULL)
 
 # arrange the three plots in a single row
 prow <- plot_grid(
@@ -49,69 +52,71 @@ prow <- plot_grid(
 prow
 ```
 
-Now we add the legend back in manually. Legend to the side:
+Now we add the legend back in manually. We can place the legend to the side of the plots.
+
 ```{r fig.width=10, fig.height=3}
 # extract the legend from one of the plots
-# (clearly the whole thing only makes sense if all plots
-# have the same legend, so we can arbitrarily pick one.)
 legend <- get_legend(p1)
 
-# add the legend to the row we made earlier. Give it one-third of the width
-# of one plot (via rel_widths).
-p <- plot_grid( prow, legend, rel_widths = c(3, .3))
-p
+# add the legend to the row we made earlier. Give it one-third of 
+# the width of one plot (via rel_widths).
+plot_grid(prow, legend, rel_widths = c(3, .3))
 ```
 
-
-Legend at the bottom:
+Or we can place the legend at the bottom.
 ```{r fig.width=9, fig.height=3.3}
-# extract the legend from one of the plots
-# (clearly the whole thing only makes sense if all plots
-# have the same legend, so we can arbitrarily pick one.)
-legend_b <- get_legend(p1 + theme(legend.position="bottom"))
+# extract a legend that is laid out horizontally
+legend_b <- get_legend(p1 + theme(legend.position = "bottom"))
 
-# add the legend underneath the row we made earlier. Give it 10% of the height
-# of one plot (via rel_heights).
-p <- plot_grid( prow, legend_b, ncol = 1, rel_heights = c(1, .2))
-p
+# add the legend underneath the row we made earlier. Give it 10%
+# of the height of one plot (via rel_heights).
+plot_grid(prow, legend_b, ncol = 1, rel_heights = c(1, .2))
 ```
 
-Legend between plots:
+Or we can place the legend between plots.
 ```{r fig.width=10, fig.height=3}
 # arrange the three plots in a single row, leaving space between plot B and C
-prow <- plot_grid( p1 + theme(legend.position="none"),
-           p2 + theme(legend.position="none"),
-           NULL,
-           p3 + theme(legend.position="none"),
-           align = 'vh',
-           labels = c("A", "B", "", "C"),
-           hjust = -1,
-           nrow = 1,
-           rel_widths = c(1, 1, .3, 1)
-           )
+prow <- plot_grid(
+  p1 + theme(legend.position="none"),
+  p2 + theme(legend.position="none"),
+  NULL,
+  p3 + theme(legend.position="none"),
+  align = 'vh',
+  labels = c("A", "B", "", "C"),
+  hjust = -1,
+  nrow = 1,
+  rel_widths = c(1, 1, .3, 1)
+)
 
+# now add in the legend
 prow + draw_grob(legend, 2/3.3, 0, .3/3.3, 1)
 ```
 
-One more example, now with a more complex plot arrangement:
+One more example, now with a more complex plot arrangement.
 ```{r fig.width=7.5, fig.height=5}
-# plot A
+# plot 1
 p1 <- ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
-  geom_point() + facet_grid(. ~ Species) + stat_smooth(method = "lm") +
+  geom_point() + 
+  stat_smooth(method = "lm") +
+  facet_grid(. ~ Species) +
+  theme_half_open(12) +
   background_grid(major = 'y', minor = "none") + 
-  panel_border() + theme(legend.position = "none")
+  panel_border() + 
+  theme(legend.position = "none")
 
-# plot B
+# plot 2
 p2 <- ggplot(iris, aes(Sepal.Length, fill = Species)) +
   geom_density(alpha = .7) + 
-  scale_y_continuous(expand = c(0, 0)) +
+  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  theme_half_open(12) +
   theme(legend.justification = "top")
 p2a <- p2 + theme(legend.position = "none")
 
-# plot C
+# plot 3
 p3 <- ggplot(iris, aes(Sepal.Width, fill = Species)) +
   geom_density(alpha = .7) + 
   scale_y_continuous(expand = c(0, 0)) +
+  theme_half_open(12) +
   theme(legend.position = "none")
 
 # legend
@@ -120,8 +125,12 @@ legend <- get_legend(p2)
 # align all plots vertically
 plots <- align_plots(p1, p2a, p3, align = 'v', axis = 'l')
 
-# put together bottom row and then everything
-bottom_row <- plot_grid(plots[[2]], plots[[3]], legend, labels = c("B", "C"), rel_widths = c(1, 1, .3), nrow = 1)
+# put together the bottom row and then everything
+bottom_row <- plot_grid(
+  plots[[2]], plots[[3]], legend,
+  labels = c("B", "C"),
+  rel_widths = c(1, 1, .3),
+  nrow = 1
+)
 plot_grid(plots[[1]], bottom_row, labels = c("A"), ncol = 1)
-
 ```
