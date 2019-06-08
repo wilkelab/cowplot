@@ -2,21 +2,21 @@
 % Please edit documentation in R/save.R
 \name{ggsave2}
 \alias{ggsave2}
-\title{Cowplot reimplementation of ggsave.}
+\title{Cowplot reimplementation of \code{ggsave()}.}
 \usage{
 ggsave2(filename, plot = ggplot2::last_plot(), device = NULL,
   path = NULL, scale = 1, width = NA, height = NA,
   units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...)
 }
 \arguments{
-\item{filename}{Filename of plot}
+\item{filename}{Filename of the plot.}
 
 \item{plot}{Plot to save, defaults to last plot displayed.}
 
 \item{device}{Device to use, automatically extract from file name extension.}
 
-\item{path}{Path to save plot to (if you just want to set path and not
-filename).}
+\item{path}{Path to save plot to (if you just want to set \code{path} and not
+\code{filename}).}
 
 \item{scale}{Scaling factor.}
 
@@ -28,14 +28,14 @@ filename).}
 
 \item{dpi}{DPI to use for raster graphics.}
 
-\item{limitsize}{When \code{TRUE} (the default), \code{ggsave} will not
+\item{limitsize}{When \code{TRUE} (the default), \code{ggsave2()} will not
 save images larger than 50x50 inches, to prevent the common error of
 specifying dimensions in pixels.}
 
 \item{...}{Other arguments to be handed to the plot device.}
 }
 \description{
-This function should behave just like \code{ggsave} from ggplot2,
-with the main difference being that by default it doesn't use the Dingbats
-font for pdf output.
+This function behaves just like \code{\link[=ggsave]{ggsave()}} from ggplot2. The main difference is
+that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
+causes problems with some pdf readers.
 }

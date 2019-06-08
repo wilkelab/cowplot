@@ -2,7 +2,7 @@
 % Please edit documentation in R/save.R
 \name{save_plot}
 \alias{save_plot}
-\title{Alternative to ggsave, with better support for multi-figure plots.}
+\title{Alternative to \code{ggsave()}, with better support for multi-figure plots.}
 \usage{
 save_plot(filename, plot, ncol = 1, nrow = 1, base_height = 3.71,
   base_asp = 1.618, base_width = NULL, ..., cols, rows,
@@ -29,11 +29,11 @@ The default is 1.618 (the golden ratio), which works well for figures with a leg
 or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calculated from
 \code{base_height} and \code{base_aspect_ratio}.}
 
-\item{...}{Other arguments to be handed to \code{\link{ggsave2}}.}
+\item{...}{Other arguments to be handed to \code{\link[=ggsave2]{ggsave2()}}.}
 
-\item{cols}{Deprecated. Like \code{ncol}.}
+\item{cols}{Deprecated. Use \code{ncol}.}
 
-\item{rows}{Deprecated. Like \code{nrow}.}
+\item{rows}{Deprecated. Use \code{nrow}.}
 
 \item{base_aspect_ratio}{Deprecated. Like \code{base_asp}.}
 
@@ -42,11 +42,11 @@ or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calcul
 \item{height}{Deprecated. Don't use.}
 }
 \description{
-This function replaces the standard \code{ggsave} function for saving a plot into a file. It
-has several advantages over \code{ggsave}. First, it uses default sizes that work well with
+This function replaces the standard \code{\link[=ggsave]{ggsave()}} function for saving a plot into a file. It
+has several advantages over \code{ggsave()}. First, it uses default sizes that work well with
 the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 acknowledges that one often first develops individual plots and then combines them into
-multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
+multi-plot figures, and it makes it easy---in combination with \code{\link[=plot_grid]{plot_grid()}}---to carry out
 this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
 frequently necessary to accommodate plots with or without figure legend.
 }
@@ -60,7 +60,7 @@ of multiple comparable figures. See examples for details.
 \examples{
 library(ggplot2)
 
-# save a single plot with legend
+# save a single plot with a legend
 p1 <- ggplot(mpg, aes(x = cty, y = hwy, color = factor(cyl))) +
   geom_point(size = 2) +
   theme_half_open()

@@ -1,19 +1,19 @@
-#' Cowplot reimplementation of ggsave.
+#' Cowplot reimplementation of `ggsave()`.
 #'
-#' This function should behave just like \code{ggsave} from ggplot2,
-#' with the main difference being that by default it doesn't use the Dingbats
-#' font for pdf output.
-#' @param filename Filename of plot
+#' This function behaves just like [`ggsave()`] from ggplot2. The main difference is
+#' that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
+#' causes problems with some pdf readers.
+#' @param filename Filename of the plot.
 #' @param plot Plot to save, defaults to last plot displayed.
 #' @param device Device to use, automatically extract from file name extension.
-#' @param path Path to save plot to (if you just want to set path and not
-#'    filename).
+#' @param path Path to save plot to (if you just want to set `path` and not
+#'    `filename`).
 #' @param scale Scaling factor.
 #' @param width Width (defaults to the width of current plotting window).
 #' @param height Height (defaults to the height of current plotting window).
 #' @param units Units for width and height when either one is explicitly specified (in, cm, or mm).
 #' @param dpi DPI to use for raster graphics.
-#' @param limitsize When \code{TRUE} (the default), \code{ggsave} will not
+#' @param limitsize When `TRUE` (the default), `ggsave2()` will not
 #'   save images larger than 50x50 inches, to prevent the common error of
 #'   specifying dimensions in pixels.
 #' @param ... Other arguments to be handed to the plot device.
@@ -56,13 +56,13 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 }
 
 
-#' Alternative to ggsave, with better support for multi-figure plots.
+#' Alternative to `ggsave()`, with better support for multi-figure plots.
 #'
-#' This function replaces the standard \code{ggsave} function for saving a plot into a file. It
-#' has several advantages over \code{ggsave}. First, it uses default sizes that work well with
+#' This function replaces the standard [`ggsave()`] function for saving a plot into a file. It
+#' has several advantages over `ggsave()`. First, it uses default sizes that work well with
 #' the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 #' acknowledges that one often first develops individual plots and then combines them into
-#' multi-plot figures, and it makes it easy---in combination with \code{plot_grid}---to carry out
+#' multi-plot figures, and it makes it easy---in combination with [`plot_grid()`]---to carry out
 #' this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
 #' frequently necessary to accommodate plots with or without figure legend.
 #'
@@ -84,16 +84,16 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' or `ncol` > 1. This argument is used if `base_width = NULL` or if `base_height = NULL`;
 #' if both width and height are provided then the aspect ratio is ignored.
 #' The default is 1.618 (the golden ratio), which works well for figures with a legend.
-#' @param base_aspect_ratio Deprecated. Like `base_asp`.
-#' @param rows Deprecated. Like `nrow`.
-#' @param cols Deprecated. Like `ncol`.
+#' @param base_aspect_ratio Deprecated. Use `base_asp`.
+#' @param rows Deprecated. Use `nrow`.
+#' @param cols Deprecated. Use `ncol`.
 #' @param width Deprecated. Don't use.
 #' @param height Deprecated. Don't use.
-#' @param ... Other arguments to be handed to [`ggsave2`].
+#' @param ... Other arguments to be handed to [`ggsave2()`].
 #' @examples
 #' library(ggplot2)
 #'
-#' # save a single plot with legend
+#' # save a single plot with a legend
 #' p1 <- ggplot(mpg, aes(x = cty, y = hwy, color = factor(cyl))) +
 #'   geom_point(size = 2) +
 #'   theme_half_open()
