@@ -15,7 +15,7 @@ This vignette demonstrates how to make compound plots with a shared legend.
 
 We begin with a row of three plots, without legend.
 
-```{r message = FALSE, fig.width=9, fig.height=3}
+```{r message = FALSE, fig.width=7.5, fig.height=2.5}
 library(ggplot2)
 library(cowplot)
 library(rlang)
@@ -54,19 +54,26 @@ prow
 
 Now we add the legend back in manually. We can place the legend to the side of the plots.
 
-```{r fig.width=10, fig.height=3}
+```{r fig.width=2.5*3.4, fig.height=2.5}
 # extract the legend from one of the plots
-legend <- get_legend(p1)
+legend <- get_legend(
+  # create some space to the left of the legend
+  p1 + theme(legend.box.margin = margin(0, 0, 0, 12))
+)
 
 # add the legend to the row we made earlier. Give it one-third of 
 # the width of one plot (via rel_widths).
-plot_grid(prow, legend, rel_widths = c(3, .3))
+plot_grid(prow, legend, rel_widths = c(3, .4))
 ```
 
 Or we can place the legend at the bottom.
-```{r fig.width=9, fig.height=3.3}
+```{r fig.width=7.5, fig.height=3}
 # extract a legend that is laid out horizontally
-legend_b <- get_legend(p1 + theme(legend.position = "bottom"))
+legend_b <- get_legend(
+  p1 + 
+    guides(color = guide_legend(nrow = 1)) +
+    theme(legend.position = "bottom")
+)
 
 # add the legend underneath the row we made earlier. Give it 10%
 # of the height of one plot (via rel_heights).
@@ -74,7 +81,7 @@ plot_grid(prow, legend_b, ncol = 1, rel_heights = c(1, .2))
 ```
 
 Or we can place the legend between plots.
-```{r fig.width=10, fig.height=3}
+```{r fig.width=2.5*3.3, fig.height=2.5}
 # arrange the three plots in a single row, leaving space between plot B and C
 prow <- plot_grid(
   p1 + theme(legend.position="none"),
