@@ -22,8 +22,12 @@ Other breaking changes:
   an error.
 
 ## New features
-- The new functions `stamp()`, `stamp_good()`, `stamp_bad()`, `stamp_ugly()`,
-  `stamp_wrong()` allow labeling of plots as good, bad, ugly, wrong, etc.
+- Improved alignment of plots. Plots can now be aligned in a greedy
+  manner, which improves the appearance of aligned plots with axis
+  labels of very different sizes.
+- The new functions `stamp()`, `stamp_good()`, `stamp_bad()`,
+  `stamp_ugly()`, `stamp_wrong()` allow labeling of plots as good,
+  bad, ugly, wrong, etc.
 - Added a function `as_grob()` that can convert base plots, lattice plots,
   and ggplot2 plots into grobs that can then be drawn using standard
   grid approaches.
