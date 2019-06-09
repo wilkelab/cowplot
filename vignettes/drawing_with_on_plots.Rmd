@@ -125,8 +125,7 @@ inset <- ~{
   par(
     cex = 0.8,
     mar = c(3, 3, 1, 1),
-    mgp = c(2, 1, 0),
-    oma = c(0, 0, 0, 0)
+    mgp = c(2, 1, 0)
   )
   barplot(counts, xlab = "drv", ylab = "count")
 }
@@ -198,10 +197,9 @@ ggdraw() +
 We can also add an image as a logo onto a plot.
 
 ```{r fig.width = 5.7, fig.height = 3.8}
-img <- system.file("extdata", "logo.png", package = "cowplot") %>%
-  image_read()
+logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 
 ggdraw() + 
   draw_plot(p) +
-  draw_image(img, x = 1, hjust = 1, width = 0.13, height = 0.2)
+  draw_image(logo_file, x = 1, hjust = 1, width = 0.13, height = 0.2)
 ```

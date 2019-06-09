@@ -35,7 +35,7 @@ or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calcul
 
 \item{rows}{Deprecated. Use \code{nrow}.}
 
-\item{base_aspect_ratio}{Deprecated. Like \code{base_asp}.}
+\item{base_aspect_ratio}{Deprecated. Use \code{base_asp}.}
 
 \item{width}{Deprecated. Don't use.}
 

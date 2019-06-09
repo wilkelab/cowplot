@@ -154,26 +154,34 @@ When we combine plots with `plot_grid()`, we may want to add a title that spans 
 # make a plot grid consisting of two panels
 p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) + 
   geom_point(colour = "blue") + 
-  theme_half_open() + 
+  theme_half_open(12) + 
   background_grid(minor = 'none')
 
 p2 <- ggplot(mtcars, aes(x = hp, y = mpg)) + 
   geom_point(colour = "green") + 
-  theme_half_open() + 
+  theme_half_open(12) + 
   background_grid(minor = 'none')
 
-p <- plot_grid(p1, p2, labels=c('A', 'B'))
+plot_row <- plot_grid(p1, p2)
 
 # now add the title
 title <- ggdraw() + 
   draw_label(
-    "MPG declines with displacement and horsepower",
-    fontface = 'bold'
+    "Miles per gallon decline with displacement and horsepower",
+    fontface = 'bold',
+    x = 0,
+    hjust = 0
+  ) +
+  theme(
+    # add margin on the left of the drawing canvas,
+    # so title is aligned with left edge of first plot
+    plot.margin = margin(0, 0, 0, 7)
   )
 plot_grid(
-  title, p,
+  title, plot_row,
   ncol = 1,
-  rel_heights = c(0.1, 1) # rel_heights values control title margins
+  # rel_heights values control vertical title margins
+  rel_heights = c(0.1, 1)
 )
 ```
 In the final `plot_grid` line, the values of `rel_heights` need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.

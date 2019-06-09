@@ -143,8 +143,7 @@ plot_grid(
 p6 <- ~{
   par(
     mar = c(3, 3, 1, 1),
-    mgp = c(2, 1, 0),
-    oma = c(0, 0, 0, 0)
+    mgp = c(2, 1, 0)
   )
   plot(sqrt)
 }
@@ -152,8 +151,7 @@ p6 <- ~{
 p7 <- function() {
   par(
     mar = c(2, 2, 1, 1),
-    mgp = c(2, 1, 0),
-    oma = c(0, 0, 0, 0)
+    mgp = c(2, 1, 0)
   )
   image(volcano)
 }
