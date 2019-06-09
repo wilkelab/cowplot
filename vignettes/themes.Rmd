@@ -2,14 +2,17 @@
 title: "Themes"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{Themes}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
 
 The cowplot package provides a consistent set of plot themes that cover a wide range of use cases. To see these themes in action, check out the book [*Fundamentals of Data Visualization,*](https://serialmentor.com/dataviz) which uses them throughout. However, note that the figures in the book use the font Myriad Pro. Since this font is not freely available, the cowplot themes use the default R font, which for most graphic devices is Helvetica. All themes have a `font_family` argument that you can use to customize the font for your own use.
 

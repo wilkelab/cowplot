@@ -2,14 +2,17 @@
 title: "Mixing different plotting frameworks"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{ixing different plotting frameworks}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
 
 All cowplot functions that take plot objects as input (`ggdraw()`, `draw_plot()`, `plot_grid()`) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package gridGraphics installed.
 
@@ -109,7 +112,7 @@ plot_grid(p1, p2, p3, p4, rel_heights = c(.6, 1), labels = "auto")
 
 Other packages are supported as long as they return grid grobs.
 
-```{r message = FALSE}
+```{r message = FALSE, fig.width = 4.5, fig.height = 4.5}
 library(VennDiagram)
 
 p_venn <- draw.pairwise.venn(
@@ -120,5 +123,10 @@ p_venn <- draw.pairwise.venn(
   ind = FALSE
 )
 
-ggdraw(p_venn)
+# plot venn diagram and add some margin and enclosing box
+ggdraw(p_venn) +
+  theme(
+    plot.background = element_rect(fill = NA),
+    plot.margin = margin(12, 12, 12, 12)
+  )
 ```

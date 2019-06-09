@@ -2,14 +2,17 @@
 title: "Shared legends"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{Shared legends}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
 
 This vignette demonstrates how to make compound plots with a shared legend.
 
@@ -67,7 +70,7 @@ plot_grid(prow, legend, rel_widths = c(3, .4))
 ```
 
 Or we can place the legend at the bottom.
-```{r fig.width=7.5, fig.height=3}
+```{r fig.width=7.5, fig.height=1.1*2.5}
 # extract a legend that is laid out horizontally
 legend_b <- get_legend(
   p1 + 
@@ -77,7 +80,7 @@ legend_b <- get_legend(
 
 # add the legend underneath the row we made earlier. Give it 10%
 # of the height of one plot (via rel_heights).
-plot_grid(prow, legend_b, ncol = 1, rel_heights = c(1, .2))
+plot_grid(prow, legend_b, ncol = 1, rel_heights = c(1, .1))
 ```
 
 Or we can place the legend between plots.

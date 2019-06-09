@@ -1,35 +1,41 @@
 destination: docs
 
 reference:
+- title: Plot composition
+  desc: Arranging and aligning plots
+  contents:
+  - align_margin
+  - align_plots
+  - plot_grid
+
 - title: Drawing
   desc: Place elements on the canvas
   contents:
   - starts_with("draw_")
+  - starts_with("stamp_")
   - ggdraw
   - add_sub
-  - align_margin
-  - align_plots
-  - background_grid
-  - plot_grid
-  - insert_xaxis_grob
   - axis_canvas
-  - panel_border
 
 - title: Themes
-  desc: Set default themes
+  desc: Modify plot themes
   contents:
   - starts_with("theme_")
+  - background_grid
+  - panel_border
 
 - title: Get methods
   desc: Retrieve elements of a plot
   contents:
   - starts_with("get_")
 
-- title: Gtable
-  desc: Manipulate gtable elements
+- title: Grobs
+  desc: Manipulate and convert grobs
   contents:
   - starts_with("gtable_")
   - starts_with("as_")
+  - insert_xaxis_grob
+  - insert_yaxis_grob
 
 - title: Output
   desc: Render figures to an output
@@ -38,4 +44,3 @@ reference:
   - save_plot
   - png_null_device
   - set_null_device
-  - cowplot

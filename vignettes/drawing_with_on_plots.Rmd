@@ -2,15 +2,18 @@
 title: "Drawing with and on plots"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
-    fig_height: 3
 vignette: >
   %\VignetteIndexEntry{Drawing with and on plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
+
 The cowplot package provides functions to draw with and on plots. These functions enable us to take plots and add arbitrary annotations or backgrounds, to place plots inside of other plots, to arrange plots in more complicated layouts, or to combine plots from different graphic systems (ggplot2, grid, lattice, base). This functionality is build on top of ggplot2, i.e., the resulting plots are ggplot2 objects and they can be modified, extended, and outputted just like regular ggplot2 plots.
 
 ## Basic annotations

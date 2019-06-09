@@ -2,14 +2,17 @@
 title: "Arranging plots in a grid"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{Arranging plots in a grid}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
 
 This vignette covers the function `plot_grid()`, which can be used to create table-like layouts of plots. This functionality is built on top of the cowplot drawing layer implemented in `ggdraw()` and `draw_*()`, and it aligns plots via the `align_plots()` function. It is strongly recommended to read the vignettes on these two sets of features (the vignettes called "Drawing with and on plots" and "Aligning plots") to fully understand how `plot_grid()` works.
 

@@ -2,15 +2,17 @@
 title: "Aligning plots"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
-    fig_height: 3
 vignette: >
   %\VignetteIndexEntry{Aligning plots}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
 
 There are several packages that can be used to align plots. The most widely used ones beside cowplot are egg and patchwork. All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
 

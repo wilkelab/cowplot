@@ -2,14 +2,18 @@
 title: "Introduction to cowplot"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
-output:
-  rmarkdown::html_vignette:
-    fig_width: 4
 vignette: >
   %\VignetteIndexEntry{Introduction to cowplot}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---
+```{r message = FALSE, echo = FALSE}
+knitr::opts_chunk$set(
+  fig.width = 4,
+  fig.height = 3
+)
+```
+
 The cowplot package is a simple add-on to ggplot. It provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in my lab, to provide my students and postdocs with the tools to make high-quality figures for their publications. I have also used the package extensively in my book [Fundamentals of Data Visualization.](https://www.amazon.com/gp/product/1492031089) This introductory vignette provides a brief glance at the key features of the package.
 
 
@@ -19,7 +23,7 @@ When I first wrote the cowplot package, its primary purpose was to provide a sim
 
 Importantly, the cowplot package now provides a set of complementary themes with different features. I now believe that there isn't one single theme that works for all figures, and therefore I recommend that you always explicitly set a theme for every plot you make.
 
-```{r message = FALSE}
+```{r fig.width = 5.2, message = FALSE}
 library(ggplot2)
 library(cowplot)
 

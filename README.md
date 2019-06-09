@@ -1,4 +1,4 @@
-<img width="120px" alt="cowplot logo" align="right" src="inst/extdata/logo.png">
+<img width="120px" alt="cowplot logo" align="right" src="man/figures/logo.png">
 
 # cowplot – Streamlined plot theme and plot annotations for ggplot2
 
@@ -12,16 +12,17 @@ The cowplot package provides various features that help with creating publicatio
 
 # Installation
 
-The package is available on CRAN [here](https://cran.r-project.org/package=cowplot) and can be installed via
-
-    install.packages("cowplot")
-
-You can install the latest development version of the package using the devtools package. In your R console, simply enter:
+Until version 1.0 of cowplot is available on CRAN, it is recommended to install the latest development version of the package using the devtools package. In your R console, simply enter:
 
     devtools::install_github("wilkelab/cowplot")
 
+The cowplot package is also on [CRAN](https://cran.r-project.org/package=cowplot) and can be installed via
+
+    install.packages("cowplot")
+
+However, the version on CRAN (0.9.4) is outdated and many of the examples on this site will not work with cowplot 0.9.4.
 
 # Usage
 
-To get a quick introduction to the main features of this package, read the vignettes provided with the [package on CRAN.](https://cran.r-project.org/package=cowplot)
+To get a quick introduction to the main features of this package, read the [introductory vignette.](https://wilkelab.org/cowplot/articles/introduction.html) For a more in-depth discussion, read [all vignettes](https://wilkelab.org/cowplot/articles/index.html) and/or the [reference documentation.](https://wilkelab.org/cowplot/reference/index.html)
 
