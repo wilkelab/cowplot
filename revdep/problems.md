@@ -1,187 +1,200 @@
-# Setup
+# AneuFinder
 
-## Platform
+<details>
 
-|setting  |value                        |
-|:--------|:----------------------------|
-|version  |R version 3.4.2 (2017-09-28) |
-|system   |x86_64, darwin15.6.0         |
-|ui       |RStudio (1.0.153)            |
-|language |(EN)                         |
-|collate  |en_US.UTF-8                  |
-|tz       |America/Chicago              |
-|date     |2017-12-16                   |
+* Version: 1.10.2
+* Source code: https://github.com/cran/AneuFinder
+* URL: https://github.com/ataudt/aneufinder.git
+* Date/Publication: 2019-01-04
+* Number of recursive dependencies: 101
 
-## Packages
+Run `revdep_details(,"AneuFinder")` for more info
 
-|package  |*  |version |date       |source                      |
-|:--------|:--|:-------|:----------|:---------------------------|
-|covr     |   |3.0.1   |2017-11-07 |cran (@3.0.1)               |
-|cowplot  |   |0.9.2   |2017-12-16 |local (wilkelab/cowplot@NA) |
-|dplyr    |   |0.7.4   |2017-09-28 |cran (@0.7.4)               |
-|ggplot2  |   |2.2.1   |2016-12-30 |cran (@2.2.1)               |
-|gtable   |   |0.2.0   |2016-02-26 |cran (@0.2.0)               |
-|knitr    |   |1.17    |2017-08-10 |cran (@1.17)                |
-|magick   |   |1.6     |2017-12-01 |cran (@1.6)                 |
-|maps     |   |3.2.0   |2017-06-08 |cran (@3.2.0)               |
-|plyr     |   |1.8.4   |2016-06-08 |cran (@1.8.4)               |
-|scales   |   |0.5.0   |2017-08-24 |cran (@0.5.0)               |
-|testthat |   |2.0.0   |2017-12-13 |cran (@2.0.0)               |
-|tidyr    |   |0.7.2   |2017-10-16 |cran (@0.7.2)               |
-|vdiffr   |   |0.2.1   |2017-10-09 |cran (@0.2.1)               |
-|viridis  |   |0.4.0   |2017-03-27 |cran (@0.4.0)               |
+</details>
 
-# Check results
+## Newly broken
 
-8 packages with problems
+*   checking examples ... ERROR
+    ```
+    ...
+    Subsetting specified chromosomes ... 0.02s
+    Calculating coverage ... 0.5s
+    Splitting into strands ... 0.07s
+    Counting overlaps for binsize_1e+06 ... 0.22s
+    Warning in bam2GRanges(file, bamindex, chromosomes = chromosomes, pairedEndReads = pairedEndReads,  :
+      Not using chromosomes MMCHR1_RANDOM_CTG1, MMCHR1_RANDOM_CTG2, MMCHR1_RANDOM_CTG3, MMCHR1_RANDOM_CTG4, MMCHR1_RANDOM_CTG5, MMCHR4UN_CTG1, MMCHR4UN_CTG3, MMCHR4UN_CTG2, MMCHR4UN_CTG4, MMCHR4UN_CTG5, MMCHR4UN_CTG6, MMCHR5_RANDOM_CTG4, MMCHR5_RANDOM_CTG1, MMCHR5_RANDOM_CTG2, MMCHR5_RANDOM_CTG3, MMCHR5_RANDOM_CTG5, MMCHR7_RANDOM_CTG1, MMCHRX_RANDOM_CTG2, MMCHRY_CTGU1, MMCHRY_CTGU2, MMCHRY_CTGU3, MMCHRY_CTGU4, MSCHRUN_CTG1, MSCHRUN_CTG13, MSCHRUN_CTG14, MSCHRUN_CTG21, MSCHRUN_CTG2, MSCHRUN_CTG22, MSCHRUN_CTG19, MSCHRUN_CTG16, MSCHRUN_CTG3, MSCHRUN_CTG20, MSCHRUN_CTG4, MSCHRUN_CTG5, MSCHRUN_CTG6, MSCHRUN_CTG7, MSCHRUN_CTG17, MSCHRUN_CTG18, MSCHRUN_CTG9, MSCHRUN_CTG10, MSCHRUN_CTG11, MSCHRUN_CTG12, MSCHRUN_CTG15, MSCHRUN_CTG23 because they are not in the data.
+    Reading file BB150803_IV_074.bam ... 0.53s
+    Converting to GRanges ... 0.01s
+    Filtering reads ... 0.01s
+    Warning in binReads(file, assembly = assembly, min.mapq = min.mapq, pairedEndReads = pairedEndReads,  :
+      Could not find chromosomes MMCHR1_RANDOM_CTG1, MMCHR1_RANDOM_CTG2, MMCHR1_RANDOM_CTG3, MMCHR1_RANDOM_CTG4, MMCHR1_RANDOM_CTG5, MMCHR4UN_CTG1, MMCHR4UN_CTG3, MMCHR4UN_CTG2, MMCHR4UN_CTG4, MMCHR4UN_CTG5, MMCHR4UN_CTG6, MMCHR5_RANDOM_CTG4, MMCHR5_RANDOM_CTG1, MMCHR5_RANDOM_CTG2, MMCHR5_RANDOM_CTG3, MMCHR5_RANDOM_CTG5, MMCHR7_RANDOM_CTG1, MMCHRX_RANDOM_CTG2, MMCHRY_CTGU1, MMCHRY_CTGU2, MMCHRY_CTGU3, MMCHRY_CTGU4, MSCHRUN_CTG1, MSCHRUN_CTG13, MSCHRUN_CTG14, MSCHRUN_CTG21, MSCHRUN_CTG2, MSCHRUN_CTG22, MSCHRUN_CTG19, MSCHRUN_CTG16, MSCHRUN_CTG3, MSCHRUN_CTG20, MSCHRUN_CTG4, MSCHRUN_CTG5, MSCHRUN_CTG6, MSCHRUN_CTG7, MSCHRUN_CTG17, MSCHRUN_CTG18, MSCHRUN_CTG9, MSCHRUN_CTG10, MSCHRUN_CTG11, MSCHRUN_CTG12, MSCHRUN_CTG15, MSCHRUN_CTG23.
+    Subsetting specified chromosomes ... 0.01s
+    Removing duplicate reads ... 0.14s
+    Calculating coverage ... 0.4s
+    Splitting into strands ... 0.01s
+    Counting overlaps for binsize_1e+06 ... 0.21s
+    > ## Plot a histogram to decide on a sensible cutoff
+    > qplot(pre.blacklist$ratio, binwidth=0.1)
+    Error in qplot(pre.blacklist$ratio, binwidth = 0.1) : 
+      could not find function "qplot"
+    Execution halted
+    ```
 
-|package    |version | errors| warnings| notes|
-|:----------|:-------|------:|--------:|-----:|
-|bigstatsr  |0.2.3   |      1|        0|     0|
-|DGCA       |1.0.1   |      1|        0|     0|
-|JWileymisc |0.2.1   |      0|        1|     0|
-|meme       |0.1.1   |      0|        1|     1|
-|pcr        |1.1.0   |      0|        1|     0|
-|poppr      |2.5.0   |      1|        0|     0|
-|Seurat     |2.1.0   |      1|        0|     1|
-|survivALL  |0.9.1   |      1|        0|     0|
+## Newly fixed
 
-## bigstatsr (0.2.3)
-Maintainer: Florian Privé <florian.prive.21@gmail.com>  
-Bug reports: https://github.com/privefl/bigstatsr/issues
+*   R CMD check timed out
+    
 
-1 error  | 0 warnings | 0 notes
+## In both
 
-```
-checking whether package ‘bigstatsr’ can be installed ... ERROR
-Installation failed.
-See ‘/Users/wilke/github/cowplot/revdep/checks/bigstatsr.Rcheck/00install.out’ for details.
-```
+*   checking package dependencies ... NOTE
+    ```
+    Packages suggested but not available for checking:
+      'BSgenome.Hsapiens.UCSC.hg19', 'BSgenome.Mmusculus.UCSC.mm10'
+    ```
 
-## DGCA (1.0.1)
-Maintainer: Andrew McKenzie <amckenz@gmail.com>
+*   checking R code for possible problems ... NOTE
+    ```
+    Aneufinder: multiple local function definitions for ‘parallel.helper’
+      with different formal arguments
+    ```
 
-1 error  | 0 warnings | 0 notes
+# foreSIGHT
 
-```
-checking package dependencies ... ERROR
-Package required but not available: ‘WGCNA’
+<details>
 
-Packages suggested but not available for checking:
-  ‘impute’ ‘fdrtool’ ‘GOstats’ ‘HGNChelper’ ‘org.Hs.eg.db’
-  ‘AnnotationDbi’ ‘MEGENA’ ‘doMC’
+* Version: 0.9.6
+* Source code: https://github.com/cran/foreSIGHT
+* Date/Publication: 2018-07-10 08:00:26 UTC
+* Number of recursive dependencies: 54
 
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+Run `revdep_details(,"foreSIGHT")` for more info
 
-## JWileymisc (0.2.1)
-Maintainer: Joshua F. Wiley <jwiley.psych@gmail.com>  
-Bug reports: https://github.com/JWiley/JWileymisc/issues
+</details>
 
-0 errors | 1 warning  | 0 notes
+## Newly broken
 
-```
-checking whether package ‘JWileymisc’ can be installed ... WARNING
-Found the following significant warnings:
-  Warning: package ‘foreach’ was built under R version 3.4.3
-See ‘/Users/wilke/github/cowplot/revdep/checks/JWileymisc.Rcheck/00install.out’ for details.
-```
+*   checking whether package ‘foreSIGHT’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/Users/wilke/github/cowplot/revdep/checks.noindex/foreSIGHT/new/foreSIGHT.Rcheck/00install.out’ for details.
+    ```
 
-## meme (0.1.1)
-Maintainer: Guangchuang Yu <guangchuangyu@gmail.com>  
-Bug reports: https://github.com/GuangchuangYu/meme/issues
+## Installation
 
-0 errors | 1 warning  | 1 note 
+### Devel
 
 ```
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Quitting from lines 167-177 (meme.Rmd) 
-Error: processing vignette 'meme.Rmd' failed with diagnostics:
-unused argument (data = d)
+* installing *source* package ‘foreSIGHT’ ...
+** package ‘foreSIGHT’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+Error: object ‘ggsave’ is not exported by 'namespace:cowplot'
 Execution halted
-
-
-checking installed package size ... NOTE
-  installed size is  5.4Mb
-  sub-directories of 1Mb or more:
-    doc   4.9Mb
-```
-
-## pcr (1.1.0)
-Maintainer: Mahmoud Ahmed <mahmoud.s.fahmy@students.kasralainy.edu.eg>  
-Bug reports: https://github.com/MahShaaban/pcr/issues
-
-0 errors | 1 warning  | 0 notes
+ERROR: lazy loading failed for package ‘foreSIGHT’
+* removing ‘/Users/wilke/github/cowplot/revdep/checks.noindex/foreSIGHT/new/foreSIGHT.Rcheck/foreSIGHT’
 
 ```
-checking re-building of vignette outputs ... WARNING
-Error in re-building vignettes:
-  ...
-Joining, by = c("group", "gene")
-Joining, by = c("group", "gene")
-Joining, by = "gene"
-Joining, by = c("group", "gene")
-Joining, by = c("group", "gene")
-Parsed with column specification:
-cols(
-... 8 lines ...
-! LaTeX Error: \caption outside float.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.528 \caption
-
-Error: processing vignette 'qpcr_analysis.Rmd' failed with diagnostics:
-pandoc document conversion failed with error 43
-Execution halted
-```
-
-## poppr (2.5.0)
-Maintainer: Zhian N. Kamvar <zkamvar@gmail.com>  
-Bug reports: https://github.com/grunwaldlab/poppr/issues
-
-1 error  | 0 warnings | 0 notes
+### CRAN
 
 ```
-checking whether package ‘poppr’ can be installed ... ERROR
-Installation failed.
-See ‘/Users/wilke/github/cowplot/revdep/checks/poppr.Rcheck/00install.out’ for details.
-```
-
-## Seurat (2.1.0)
-Maintainer: Paul Hoffman <seuratpackage@gmail.com>  
-Bug reports: https://github.com/satijalab/seurat/issues
-
-1 error  | 0 warnings | 1 note 
-
-```
-checking whether package ‘Seurat’ can be installed ... ERROR
-Installation failed.
-See ‘/Users/wilke/github/cowplot/revdep/checks/Seurat.Rcheck/00install.out’ for details.
-
-checking package dependencies ... NOTE
-Packages suggested but not available for checking:
-  ‘SummarizedExperiment’ ‘MAST’ ‘DESeq2’
-```
-
-## survivALL (0.9.1)
-Maintainer: Dominic Pearce <dominic.pearce@ed.ac.uk>
-
-1 error  | 0 warnings | 0 notes
+* installing *source* package ‘foreSIGHT’ ...
+** package ‘foreSIGHT’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+** inst
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (foreSIGHT)
 
 ```
-checking package dependencies ... ERROR
-Packages required but not available:
-  ‘survcomp’ ‘survsim’ ‘Biobase’ ‘desiR’ ‘pander’
+# scater
 
-Package suggested but not available for checking: ‘GGally’
+<details>
 
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-```
+* Version: 1.10.1
+* Source code: https://github.com/cran/scater
+* URL: http://bioconductor.org/packages/scater/
+* BugReports: https://support.bioconductor.org/
+* Date/Publication: 2019-01-04
+* Number of recursive dependencies: 223
+
+Run `revdep_details(,"scater")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking tests ...
+    ```
+     ERROR
+    Running the tests in ‘tests/testthat.R’ failed.
+    Last 13 lines of output:
+      22: namespaceImportFrom(ns, loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]), 
+             i[[2L]], from = package)
+      23: asNamespace(ns)
+      24: loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]])
+      25: runHook(".onLoad", env, package.lib, package)
+      26: stop(gettextf("%s failed in %s() for '%s', details:\n  call: %s\n  error: %s", hookname, "loadNamespace", 
+             pkgname, deparse(conditionCall(res))[1L], conditionMessage(res)), call. = FALSE, domain = NA)
+      
+      ══ testthat results  ══════════════════════════════════════════════════════════════════════════
+      OK: 1140 SKIPPED: 0 WARNINGS: 45 FAILED: 2
+      1. Error: nexprs responds to other options (@test-calc-nexprs.R#28) 
+      2. Error: runPCA works as expected for QC metrics (@test-red-dim.R#114) 
+      
+      Error: testthat unit tests failed
+      Execution halted
+    ```
+
+## Newly fixed
+
+*   R CMD check timed out
+    
+
+## In both
+
+*   checking examples ... WARNING
+    ```
+    ...
+    Found the following significant warnings:
+    
+      Warning: 'calcIsExprs' is deprecated.
+      Warning: 'plotQC' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'add_ticks' is deprecated.
+      Warning: 'readTxResults' is deprecated.
+      Warning: 'summariseExprsAcrossFeatures' is deprecated.
+      Warning: 'summariseExprsAcrossFeatures' is deprecated.
+    Deprecated functions may be defunct as soon as of the next release of
+    R.
+    See ?Deprecated.
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 10.6Mb
+      sub-directories of 1Mb or more:
+        doc    5.0Mb
+        libs   4.9Mb
+    ```
 
