@@ -20,8 +20,6 @@ breaking changes were introduced:
 Other breaking changes:
 - The defaults for `save_plot()` were changed somewhat. This may require
   adjustment if you have code depending on it.
-- `get_legend()` now returns NULL if there is no legend, instead of raising
-  an error.
 
 ## New features
 - Improved alignment of plots. Plots can now be aligned in a greedy
@@ -56,6 +54,9 @@ Other breaking changes:
   new grid themes.
 - Renamed `plot_to_gtable()` to `as_gtable()`.
 - All functions now understand both spellings of color/colour.
+- `get_legend()` now returns NULL if there is no legend, instead of raising
+  an error.
+
 
 cowplot 0.9.2
 ----------------------------------------------------------------
