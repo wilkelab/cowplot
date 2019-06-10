@@ -7,18 +7,20 @@ In many ways, cowplot now behaves more appropriately and plays nicer with
 the R environment and other R packages. However, this means that several
 breaking changes were introduced:
 
-- The default ggplot2 theme is no longer changed upon loading.
+- The default ggplot2 theme is no longer changed upon loading. You can add
+  `theme_set(theme_cowplot())` to your code to restore the old behavior.
 - The package ggplot2 needs to be loaded separately from cowplot, it is not
   automatically attached.
 - All themes now use parameters `font_size` and `font_family`. Previously,
   `theme_nothing()` and `theme_map`() used `base_size` and `base_family`.
-- Renamed `cowplot::ggsave()` to `cowplot::ggsave2()`, so that the ggplot2
-  version of ggsave() is no longer masked by the cowplot version.
+- The function `cowplot::ggsave()` was renamed to `cowplot::ggsave2()`,
+  so that the ggplot2 version of ggsave() is no longer masked by the
+  cowplot version.
 
 Other breaking changes:
 - The defaults for `save_plot()` were changed somewhat. This may require
   adjustment if you have code depending on it.
-- `get_legend()` now returns NULL if there is no legend instead of raising
+- `get_legend()` now returns NULL if there is no legend, instead of raising
   an error.
 
 ## New features
