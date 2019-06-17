@@ -12,6 +12,6 @@
   ]]></style>
 </defs>
 <rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
-<text x='323.14' y='303.74' style='font-size: 16.00px; font-weight: bold; fill: #0000FF; font-family: Liberation Sans;' textLength='73.72px' lengthAdjust='spacingAndGlyphs'>blue label</text>
+<text x='323.14' y='304.16' style='font-size: 16.00px; font-weight: bold; fill: #0000FF; font-family: Liberation Sans;' textLength='73.72px' lengthAdjust='spacingAndGlyphs'>blue label</text>
 <text x='6.97' y='17.99' style='font-size: 16.00px; font-weight: bold; font-family: Liberation Sans;' textLength='273.22px' lengthAdjust='spacingAndGlyphs'>Label color specified w/ UK spelling</text>
 </svg>
