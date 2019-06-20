@@ -11,7 +11,8 @@ test_that("key glyphs", {
   )
 
   p1 <- ggplot(df, aes(x, y, color = x)) +
-    geom_boxplot(
+    # use geom_point() for missing linetype, size
+    geom_point(
       key_glyph = rectangle_key_glyph(fill = color, padding = margin(3, 3, 3, 3))
     )
 
