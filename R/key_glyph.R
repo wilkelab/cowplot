@@ -57,9 +57,21 @@ rectangle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = 
       data$size <- 0.5
     }
 
-    # enable users to specify color with US spelling, "color"
-    if (is.null(data$color)) {
+    # set defaults if missing
+    if (is.null(data$colour)) {
+      data$colour <- rep(NA, nrow(data))
+    }
+    if (is.null(data$color)) { # enable US spelling
       data$color <- data$colour
+    }
+    if (is.null(data$fill)) {
+      data$fill <- rep("grey20", nrow(data))
+    }
+    if (is.null(data$alpha)) {
+      data$alpha <- rep(NA, nrow(data))
+    }
+    if (is.null(data$linetype)) {
+      data$linetype <- rep(1, nrow(data))
     }
 
     lwd <- min(eval_tidy(size_aes, data), min(size) / 4)
@@ -70,9 +82,9 @@ rectangle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = 
       width = unit(1, "npc") - unit(lwd, "mm") - padding[2] - padding[4],
       height = unit(1, "npc") - unit(lwd, "mm") - padding[1] - padding[3],
       gp = gpar(
-        col = eval_tidy(colour_aes %||% NA, data),
-        fill = scales::alpha(eval_tidy(fill_aes %||% "grey20", data), eval_tidy(alpha_aes, data)),
-        lty = eval_tidy(linetype_aes %||% 1, data),
+        col = eval_tidy(colour_aes, data),
+        fill = scales::alpha(eval_tidy(fill_aes, data), eval_tidy(alpha_aes, data)),
+        lty = eval_tidy(linetype_aes, data),
         lwd = lwd * .pt,
         linejoin = params$linejoin %||% "mitre",
         # `lineend` is a workaround for Windows and intentionally kept unexposed
@@ -105,9 +117,21 @@ circle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = siz
       data$size <- 0.5
     }
 
-    # enable users to specify color with US spelling, "color"
-    if (is.null(data$color)) {
+    # set defaults if missing
+    if (is.null(data$colour)) {
+      data$colour <- rep(NA, nrow(data))
+    }
+    if (is.null(data$color)) { # enable US spelling
       data$color <- data$colour
+    }
+    if (is.null(data$fill)) {
+      data$fill <- rep("grey20", nrow(data))
+    }
+    if (is.null(data$alpha)) {
+      data$alpha <- rep(NA, nrow(data))
+    }
+    if (is.null(data$linetype)) {
+      data$linetype <- rep(1, nrow(data))
     }
 
     lwd <- min(eval_tidy(size_aes, data), min(size) / 4)
@@ -122,9 +146,9 @@ circle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = siz
       y = unit(0.5, "npc") + 0.5*(padding[3] - padding[1]),
       r = 0.5*radius,
       gp = gpar(
-        col = eval_tidy(colour_aes %||% NA, data),
-        fill = scales::alpha(eval_tidy(fill_aes %||% "grey20", data), eval_tidy(alpha_aes, data)),
-        lty = eval_tidy(linetype_aes %||% 1, data),
+        col = eval_tidy(colour_aes, data),
+        fill = scales::alpha(eval_tidy(fill_aes, data), eval_tidy(alpha_aes, data)),
+        lty = eval_tidy(linetype_aes, data),
         lwd = lwd * .pt
       )
     )
