@@ -64,18 +64,20 @@ rectangle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = 
 
     lwd <- min(eval_tidy(size_aes, data), min(size) / 4)
 
+    col <- eval_default(colour_aes, data, NA)
+    fill <- eval_default(fill_aes, data, "grey20")
+    alpha <- eval_default(alpha_aes, data, NA)
+    lty <- eval_default(linetype_aes, data, 1)
+
     rectGrob(
       x = unit(0.5, "npc") + 0.5*(padding[4] - padding[2]),
       y = unit(0.5, "npc") + 0.5*(padding[3] - padding[1]),
       width = unit(1, "npc") - unit(lwd, "mm") - padding[2] - padding[4],
       height = unit(1, "npc") - unit(lwd, "mm") - padding[1] - padding[3],
       gp = gpar(
-        col = eval_default(colour_aes, data, NA),
-        fill = scales::alpha(
-          eval_default(fill_aes, data, "grey20"),
-          eval_default(alpha_aes, data, NA)
-        ),
-        lty = eval_default(linetype_aes, data, 1),
+        col = col,
+        fill = scales::alpha(fill, alpha),
+        lty = lty,
         lwd = lwd * .pt,
         linejoin = params$linejoin %||% "mitre",
         # `lineend` is a workaround for Windows and intentionally kept unexposed
@@ -120,30 +122,32 @@ circle_key_glyph <- function(colour = NA, fill = fill, alpha = alpha, size = siz
       unit(1, "npc") - unit(lwd, "mm") - padding[1] - padding[3]
     )
 
+    col <- eval_default(colour_aes, data, NA)
+    fill <- eval_default(fill_aes, data, "grey20")
+    alpha <- eval_default(alpha_aes, data, NA)
+    lty <- eval_default(linetype_aes, data, 1)
+
     circleGrob(
       x = unit(0.5, "npc") + 0.5*(padding[4] - padding[2]),
       y = unit(0.5, "npc") + 0.5*(padding[3] - padding[1]),
       r = 0.5*radius,
       gp = gpar(
-        col = eval_default(colour_aes, data, NA),
-        fill = scales::alpha(
-          eval_default(fill_aes, data, "grey20"),
-          eval_default(alpha_aes, data, NA)
-        ),
-        lty = eval_default(linetype_aes, data, 1),
+        col = col,
+        fill = scales::alpha(fill, alpha),
+        lty = lty,
         lwd = lwd * .pt
       )
     )
   }
 }
 
+
 eval_default <- function(x, data, default) {
   force(default)
-  force(data)
 
   suppressWarnings(
     tryCatch(
-      error = function(e) rep_len(default, nrow(data)),
+      error = function(e) default,
       eval_tidy(x, data)
     )
   )
