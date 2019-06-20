@@ -18,6 +18,7 @@ Imports:
     gtable,
     grDevices,
     methods,
+    rlang,
     scales,
     utils
 License: GPL-2
@@ -54,6 +55,7 @@ Collate:
     'get_legend.R'
     'get_panel.R'
     'gtable.R'
+    'key_glyph.R'
     'plot_grid.R'
     'save.R'
     'set_null_device.R'
