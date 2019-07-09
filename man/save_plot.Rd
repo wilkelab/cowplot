@@ -58,6 +58,7 @@ if we have code that can save a single figure, it is trivial to adapt this code 
 of multiple comparable figures. See examples for details.
 }
 \examples{
+\donttest{
 library(ggplot2)
 
 # save a single plot with a legend
@@ -81,4 +82,5 @@ p3b <- ggplot(data.frame(x = x, y = cos(x)+x), aes(x, y)) +
  theme_minimal_hgrid()
 p4 <- plot_grid(p3, p3b, labels = "AUTO")
 save_plot("p4.pdf", p4, ncol = 2, base_asp = 1.1)
+}
 }

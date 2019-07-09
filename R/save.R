@@ -91,6 +91,7 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' @param height Deprecated. Don't use.
 #' @param ... Other arguments to be handed to [`ggsave2()`].
 #' @examples
+#' \donttest{
 #' library(ggplot2)
 #'
 #' # save a single plot with a legend
@@ -114,6 +115,7 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #'  theme_minimal_hgrid()
 #' p4 <- plot_grid(p3, p3b, labels = "AUTO")
 #' save_plot("p4.pdf", p4, ncol = 2, base_asp = 1.1)
+#' }
 #' @export
 save_plot <- function(filename, plot, ncol = 1, nrow = 1,
                       base_height = 3.71, base_asp = 1.618, base_width = NULL, ...,
