@@ -18,11 +18,13 @@ reference:
   - axis_canvas
 
 - title: Themes
-  desc: Modify plot themes
+  desc: Modify plot appearance
   contents:
   - starts_with("theme_")
   - background_grid
   - panel_border
+  - rectangle_key_glyph
+  - circle_key_glyph
 
 - title: Get methods
   desc: Retrieve elements of a plot
