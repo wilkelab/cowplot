@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 This vignette covers the function `plot_grid()`, which can be used to create table-like layouts of plots. This functionality is built on top of the cowplot drawing layer implemented in `ggdraw()` and `draw_*()`, and it aligns plots via the `align_plots()` function. It is strongly recommended to read the vignettes on these two sets of features (the vignettes called "Drawing with and on plots" and "Aligning plots") to fully understand how `plot_grid()` works.
 
-## Basic use of `plot_grid()`
+## Basic usage
 
 The `plot_grid()` function provides a simple interface for arranging plots into a grid and adding labels to them.
 ```{r, message=FALSE, fig.width=6}
@@ -176,4 +176,5 @@ plot_grid(
   rel_heights = c(0.1, 1)
 )
 ```
+
 In the final `plot_grid` line, the values of `rel_heights` need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.

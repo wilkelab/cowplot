@@ -66,7 +66,7 @@ handle mathematical expressions, though. For those, use draw_label." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -111,15 +111,13 @@ handle mathematical expressions, though. For those, use draw_label." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -133,7 +131,7 @@ handle mathematical expressions, though. For those, use draw_label." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draw multiple text-strings in one go.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/draw.R'><code>R/draw.R</code></a></small>
+    
     <div class="hidden name"><code>draw_text.Rd</code></div>
     </div>
 
@@ -187,7 +185,7 @@ the theme. This is different from <code>geom_text</code> in ggplot2.</p>
 <p>By default, the x and y coordinates specify the center of the text box. Set <code>hjust = 0, vjust = 0</code> to specify
 the lower left corner, and other values of <code>hjust</code> and <code>vjust</code> for any other relative location you want to
 specify.</p>
-<p>For a full list of ... options, see  <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_text'>geom_label</a></code>.</p>
+<p>For a full list of ... options, see  <code><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_label</a></code>.</p>
     
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
@@ -200,7 +198,7 @@ specify.</p>
 <span class='co'># Adorn a plot from the Anscombe data set of "identical" data.</span>
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>anscombe</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>y1</span>)) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>geom_smooth</a></span>()
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>anscombe</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>y1</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>()
 <span class='no'>three_strings</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"Hello World!"</span>, <span class='st'>"to be or not to be"</span>, <span class='st'>"over and out"</span>)
 <span class='no'>p</span> + <span class='fu'>draw_text</span>(<span class='no'>three_strings</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>8</span>:<span class='fl'>10</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>7</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='draw_text-2.png' alt='' width='700' height='433' /></div></pre>
   </div>

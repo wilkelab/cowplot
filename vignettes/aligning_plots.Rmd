@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-There are several packages that can be used to align plots. The most widely used ones beside cowplot are egg and patchwork. All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
+There are several packages that can be used to align plots. The most widely used ones beside cowplot are [egg](https://cran.r-project.org/package=egg) and [patchwork.](https://github.com/thomasp85/patchwork) All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.
 
 Most importantly, while egg and patchwork align and arrange plots at the same time, cowplot aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.
 

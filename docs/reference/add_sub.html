@@ -68,7 +68,7 @@ add_sub() whenever possible." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -113,15 +113,13 @@ add_sub() whenever possible." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -135,7 +133,7 @@ add_sub() whenever possible." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add annotation underneath a plot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/add_sub.R'><code>R/add_sub.R</code></a></small>
+    
     <div class="hidden name"><code>add_sub.Rd</code></div>
     </div>
 
@@ -143,7 +141,7 @@ add_sub() whenever possible." />
     
     <p>This function can add an arbitrary label or mathematical expression underneath
 the plot, similar to the <code>sub</code> parameter in base R. It is mostly superseded now by the
-<code>caption</code> argument to <code><a href='https://www.rdocumentation.org/packages/ggplot2/topics/labs'>ggplot2::labs()</a></code>, and it is recommended to use <code>caption</code> instead of
+<code>caption</code> argument to <code><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggplot2::labs()</a></code>, and it is recommended to use <code>caption</code> instead of
 <code>add_sub()</code> whenever possible.</p>
     
     </div>
@@ -243,16 +241,16 @@ the plot panel.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/theme_get'>theme_set</a></span>(<span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>())
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>disp</span>)) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) + <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>minor</span><span class='kw'>=</span><span class='st'>'none'</span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span>(<span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>())
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>disp</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) + <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>minor</span><span class='kw'>=</span><span class='st'>'none'</span>)
 <span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"This is an annotation.\nAnnotations can span multiple lines."</span>))</div><div class='img'><img src='add_sub-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># You can also do this repeatedly.</span>
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"This formula has no relevance here:"</span>, <span class='kw'>y</span>  <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)
 <span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>p2</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='no'>a</span>^<span class='fl'>2</span>+<span class='no'>b</span>^<span class='fl'>2</span>, <span class='st'>" = "</span>, <span class='no'>c</span>^<span class='fl'>2</span>)))
 <span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p3</span>)</div><div class='img'><img src='add_sub-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#This code also works with faceted plots:</span>
-<span class='no'>plot.iris</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/facet_grid'>facet_grid</a></span>(<span class='no'>.</span> ~ <span class='no'>Species</span>) + <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth'>stat_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"lm"</span>) +
+<span class='no'>plot.iris</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='no'>.</span> ~ <span class='no'>Species</span>) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>stat_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"lm"</span>) +
   <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>major</span> <span class='kw'>=</span> <span class='st'>'y'</span>, <span class='kw'>minor</span> <span class='kw'>=</span> <span class='st'>"none"</span>) + <span class='co'># add thin horizontal lines</span>
   <span class='fu'><a href='panel_border.html'>panel_border</a></span>() <span class='co'># and a border around each panel</span>
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>plot.iris</span>, <span class='st'>"Annotation underneath a faceted plot, left justified."</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)

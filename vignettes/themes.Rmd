@@ -55,7 +55,7 @@ p +
 
 ## Choosing themes in the context of the plot
 
-When choosing a plot theme, you should always pay attention to how it works for your specific plot. For example, if you are making a bar plot, `theme_half_open()` generates awkward floating bars because of ggplot2's automatic axis expansion (i.e., the x axis line does not lie at *y* = 0).
+When choosing a plot theme, you should always pay attention to how it works for your specific plot. For example, if you are making a bar plot, `theme_half_open()` generates awkward floating bars because of ggplot2's automatic axis expansion (i.e., the x axis line does not lie at *y* = 0). I consider such plots to be ugly.
 
 ```{r}
 p <- ggplot(mtcars, aes(factor(cyl))) +

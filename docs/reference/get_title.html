@@ -66,7 +66,7 @@ the title, while get_subtitle() pulls the subtitle." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -111,15 +111,13 @@ the title, while get_subtitle() pulls the subtitle." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -133,7 +131,7 @@ the title, while get_subtitle() pulls the subtitle." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get plot titles</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/get_titles.R'><code>R/get_titles.R</code></a></small>
+    
     <div class="hidden name"><code>get_title.Rd</code></div>
     </div>
 
@@ -161,9 +159,9 @@ the title, while <code>get_subtitle()</code> pulls the subtitle.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>displ</span>, <span class='no'>cty</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/labs'>labs</a></span>(
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>displ</span>, <span class='no'>cty</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span>(
     <span class='kw'>title</span> <span class='kw'>=</span> <span class='st'>"Plot title"</span>,
     <span class='kw'>subtitle</span> <span class='kw'>=</span> <span class='st'>"Plot subtitle"</span>
   )

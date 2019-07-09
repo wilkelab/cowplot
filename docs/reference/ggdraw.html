@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -110,15 +110,13 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -132,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Set up a drawing layer on top of a ggplot</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/draw.R'><code>R/draw.R</code></a></small>
+    
     <div class="hidden name"><code>ggdraw.Rd</code></div>
     </div>
 
@@ -170,8 +168,8 @@ grob or gtable, or a recorded base-R plot, as in <code><a href='as_grob.html'>as
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>displ</span>, <span class='no'>cty</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>() +
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>displ</span>, <span class='no'>cty</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
   <span class='fu'><a href='theme_minimal_grid.html'>theme_minimal_grid</a></span>()
 <span class='fu'>ggdraw</span>(<span class='no'>p</span>) + <span class='fu'><a href='draw_label.html'>draw_label</a></span>(<span class='st'>"Draft"</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"#80404080"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>120</span>, <span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>45</span>)</div><div class='img'><img src='ggdraw-1.png' alt='' width='700' height='433' /></div></pre>
   </div>

@@ -71,7 +71,7 @@ frequently necessary to accommodate plots with or without figure legend." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -116,15 +116,13 @@ frequently necessary to accommodate plots with or without figure legend." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -138,7 +136,7 @@ frequently necessary to accommodate plots with or without figure legend." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Alternative to <code>ggsave()</code>, with better support for multi-figure plots.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/save.R'><code>R/save.R</code></a></small>
+    
     <div class="hidden name"><code>save_plot.Rd</code></div>
     </div>
 
@@ -234,8 +232,8 @@ of multiple comparable figures. See examples for details.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='co'># save a single plot with a legend</span>
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>cty</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>hwy</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>cyl</span>))) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_point'>geom_point</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>cty</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>hwy</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>factor</a></span>(<span class='no'>cyl</span>))) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>2</span>) +
   <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>()
 <span class='fu'>save_plot</span>(<span class='st'>"p1.png"</span>, <span class='no'>p1</span>)
 <span class='co'># same as p1 but determine base_width given base_height</span>
@@ -243,14 +241,14 @@ of multiple comparable figures. See examples for details.</p>
 
 <span class='co'># save a single plot without legend, adjust aspect ratio</span>
 <span class='no'>x</span> <span class='kw'>&lt;-</span> (<span class='fl'>1</span>:<span class='fl'>100</span>)/<span class='fl'>10</span>
-<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>*<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Trig'>sin</a></span>(<span class='no'>x</span>)), <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)) +
- <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
+<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>x</span>*<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Trig'>sin</a></span>(<span class='no'>x</span>)), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)) +
+ <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
  <span class='fu'><a href='theme_minimal_grid.html'>theme_minimal_hgrid</a></span>()
 <span class='fu'>save_plot</span>(<span class='st'>"p3.pdf"</span>, <span class='no'>p3</span>, <span class='kw'>base_asp</span> <span class='kw'>=</span> <span class='fl'>1.1</span>)
 
 <span class='co'># now combine with a second plot and save</span>
-<span class='no'>p3b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Trig'>cos</a></span>(<span class='no'>x</span>)+<span class='no'>x</span>), <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)) +
- <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>() +
+<span class='no'>p3b</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Trig'>cos</a></span>(<span class='no'>x</span>)+<span class='no'>x</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)) +
+ <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>() +
  <span class='fu'><a href='theme_minimal_grid.html'>theme_minimal_hgrid</a></span>()
 <span class='no'>p4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plot_grid.html'>plot_grid</a></span>(<span class='no'>p3</span>, <span class='no'>p3b</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='st'>"AUTO"</span>)
 <span class='fu'>save_plot</span>(<span class='st'>"p4.pdf"</span>, <span class='no'>p4</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>, <span class='kw'>base_asp</span> <span class='kw'>=</span> <span class='fl'>1.1</span>)</div></pre>

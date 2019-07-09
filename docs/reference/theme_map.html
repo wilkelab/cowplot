@@ -65,7 +65,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -110,15 +110,13 @@
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -132,7 +130,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Create a theme for map plotting</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/themes.R'><code>R/themes.R</code></a></small>
+    
     <div class="hidden name"><code>theme_map.Rd</code></div>
     </div>
 
@@ -183,11 +181,11 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>maps</span>)
 
-<span class='no'>usa_data</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/map_data'>map_data</a></span>(<span class='st'>"usa"</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>usa_data</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>region</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_polygon'>geom_polygon</a></span>() + <span class='fu'>theme_map</span>()</div><div class='img'><img src='theme_map-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>usa_data</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>region</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap'>facet_wrap</a></span>(~<span class='no'>region</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"free"</span>) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_polygon'>geom_polygon</a></span>() + <span class='fu'>theme_map</span>()</div><div class='img'><img src='theme_map-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='no'>usa_data</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/map_data.html'>map_data</a></span>(<span class='st'>"usa"</span>)
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>usa_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>region</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>() + <span class='fu'>theme_map</span>()</div><div class='img'><img src='theme_map-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>usa_data</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>long</span>, <span class='no'>lat</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>region</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~<span class='no'>region</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"free"</span>) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_polygon.html'>geom_polygon</a></span>() + <span class='fu'>theme_map</span>()</div><div class='img'><img src='theme_map-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>

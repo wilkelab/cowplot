@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,15 +76,11 @@
     </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,9 +95,9 @@
       <h1>Themes</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-07-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/themes.Rmd"><code>vignettes/themes.Rmd</code></a></small>
+      
       <div class="hidden name"><code>themes.Rmd</code></div>
 
     </div>
@@ -116,7 +112,7 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6">p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>() <span class="co"># identical to theme_cowplot()</span></a></code></pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
@@ -139,19 +135,19 @@
 <div id="choosing-themes-in-the-context-of-the-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#choosing-themes-in-the-context-of-the-plot" class="anchor"></a>Choosing themes in the context of the plot</h2>
-<p>When choosing a plot theme, you should always pay attention to how it works for your specific plot. For example, if you are making a bar plot, <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code> generates awkward floating bars because of ggplot2’s automatic axis expansion (i.e., the x axis line does not lie at <em>y</em> = 0).</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"#56B4E9"</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
+<p>When choosing a plot theme, you should always pay attention to how it works for your specific plot. For example, if you are making a bar plot, <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code> generates awkward floating bars because of ggplot2’s automatic axis expansion (i.e., the x axis line does not lie at <em>y</em> = 0). I consider such plots to be ugly.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"#56B4E9"</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>()</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb5-5" data-line-number="5"><span class="kw"><a href="../reference/stamp.html">stamp_ugly</a></span>(p)</a></code></pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
 <p>We can fix this problem by suppressing the axis expansion at the lower end.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"#56B4E9"</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(</a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"#56B4E9"</span>, <span class="dt">alpha =</span> <span class="fl">0.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(</a>
 <a class="sourceLine" id="cb6-4" data-line-number="4">    <span class="co"># don't expand y scale at the lower end</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">    <span class="dt">expand =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_scale.html">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>))</a>
 <a class="sourceLine" id="cb6-6" data-line-number="6">  )</a>
 <a class="sourceLine" id="cb6-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb6-8" data-line-number="8">p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>()</a></code></pre></div>
@@ -166,7 +162,7 @@
 <p><img src="themes_files/figure-html/unnamed-chunk-9-1.png" width="384"></p>
 <p>If you make a flipped bar plot with horizontal bars, you may instead want vertical grid lines, which you obtain with <code><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">p <span class="op">+</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid</a></span>()</a></code></pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-10-1.png" width="384"></p>
 </div>
@@ -174,9 +170,9 @@
 <h2 class="hasAnchor">
 <a href="#faceting" class="anchor"></a>Faceting</h2>
 <p>You need to pay special attention when faceting. A theme may look just fine for a single plot but work poorly in a faceted plot. As an example, consider what happens when we facet with <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code>.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="dv">12</span>)</a>
 <a class="sourceLine" id="cb10-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb10-6" data-line-number="6"><span class="kw"><a href="../reference/stamp.html">stamp_ugly</a></span>(p)</a></code></pre></div>
@@ -193,11 +189,11 @@
 <div id="empty-themes" class="section level2">
 <h2 class="hasAnchor">
 <a href="#empty-themes" class="anchor"></a>Empty themes</h2>
-<p>The two themes <code><a href="../reference/theme_map.html">theme_map()</a></code> and <code><a href="../reference/theme_nothing.html">theme_nothing()</a></code> provide stripped-down themes without axes. <code><a href="../reference/theme_map.html">theme_map()</a></code> is similar to <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_void()</a></code> from ggplot2 in that it retains the plot title, subtitle, caption, and legends, and simply removes axis ticks, lines, labels, and gridlines. All settings are matched to the other cowplot themes, so that you can mix plots using <code><a href="../reference/theme_map.html">theme_map()</a></code> and the other cowplot themes and they will look consistent.</p>
+<p>The two themes <code><a href="../reference/theme_map.html">theme_map()</a></code> and <code><a href="../reference/theme_nothing.html">theme_nothing()</a></code> provide stripped-down themes without axes. <code><a href="../reference/theme_map.html">theme_map()</a></code> is similar to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void()</a></code> from ggplot2 in that it retains the plot title, subtitle, caption, and legends, and simply removes axis ticks, lines, labels, and gridlines. All settings are matched to the other cowplot themes, so that you can mix plots using <code><a href="../reference/theme_map.html">theme_map()</a></code> and the other cowplot themes and they will look consistent.</p>
 <p>To demonstrate how these themes work and how they interact with the other themes provided, let’s first make a standard scatter plot with title, subtitle, caption, and legend.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg, <span class="dt">color =</span> wt)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(</a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg, <span class="dt">color =</span> wt)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(</a>
 <a class="sourceLine" id="cb13-4" data-line-number="4">    <span class="dt">title =</span> <span class="st">"Fuel efficiency in cars"</span>,</a>
 <a class="sourceLine" id="cb13-5" data-line-number="5">    <span class="dt">subtitle =</span> <span class="st">"Bigger and more powerful cars are less efficient"</span>,</a>
 <a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">caption =</span> <span class="st">"Motor Trend, 1974"</span></a>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,15 +76,11 @@
     </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,25 +95,25 @@
       <h1>Aligning plots</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-07-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/aligning_plots.Rmd"><code>vignettes/aligning_plots.Rmd</code></a></small>
+      
       <div class="hidden name"><code>aligning_plots.Rmd</code></div>
 
     </div>
 
     
     
-<p>There are several packages that can be used to align plots. The most widely used ones beside cowplot are egg and patchwork. All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.</p>
+<p>There are several packages that can be used to align plots. The most widely used ones beside cowplot are <a href="https://cran.r-project.org/package=egg">egg</a> and <a href="https://github.com/thomasp85/patchwork">patchwork.</a> All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.</p>
 <p>Most importantly, while egg and patchwork align and arrange plots at the same time, cowplot aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.</p>
 <p>We’ll start with a very simple example. Let’s consider these two plots.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, hp)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, hp)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">p1</a></code></pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">p2</a></code></pre></div>
@@ -136,18 +132,18 @@
 <h2 class="hasAnchor">
 <a href="#aligning-by-axis" class="anchor"></a>Aligning by axis</h2>
 <p>The vertical and horizontal alignment as described above tries to align every vertical or horizontal element in all plots. In other words, the axis titles are aligned to each other, the axis ticks are aligned to each other, the plot panels are aligned to each other, and so on. This method of alignment only works if all plots have exactly the same elements. Therefore, it fails, for example, if we try to align a plot that is faceted with one that is not.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>(<span class="dv">14</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/panel_border.html">panel_border</a></span>(<span class="dt">color =</span> <span class="st">"black"</span>)</a>
 <a class="sourceLine" id="cb6-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(vs))) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_bar</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>am) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(vs))) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>am) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_scale.html">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="dv">12</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="../reference/panel_border.html">panel_border</a></span>(<span class="dt">color =</span> <span class="st">"black"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">strip.background =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"gray80"</span>))</a>
+<a class="sourceLine" id="cb6-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">strip.background =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"gray80"</span>))</a>
 <a class="sourceLine" id="cb6-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb6-14" data-line-number="14"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p1, p2, <span class="dt">align =</span> <span class="st">"h"</span>, <span class="dt">rel_widths =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">1</span>, <span class="fl">1.3</span>))</a></code></pre></div>
 <pre><code>## Warning: Graphs cannot be horizontally aligned unless the axis parameter is
@@ -175,13 +171,13 @@
 <a class="sourceLine" id="cb10-12" data-line-number="12">  )</a>
 <a class="sourceLine" id="cb10-13" data-line-number="13"></a>
 <a class="sourceLine" id="cb10-14" data-line-number="14"></a>
-<a class="sourceLine" id="cb10-15" data-line-number="15">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(class, count)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/lims">ylim</a></span>(<span class="dv">0</span>, <span class="dv">65</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>()</a>
+<a class="sourceLine" id="cb10-15" data-line-number="15">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(class, count)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span>(<span class="dv">0</span>, <span class="dv">65</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>()</a>
 <a class="sourceLine" id="cb10-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb10-20" data-line-number="20">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(mean_mpg, count)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb10-20" data-line-number="20">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(mean_mpg, count)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb10-21" data-line-number="21"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
 <a class="sourceLine" id="cb10-22" data-line-number="22"></a>
 <a class="sourceLine" id="cb10-23" data-line-number="23"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p1, p2, <span class="dt">ncol =</span> <span class="dv">1</span>, <span class="dt">align =</span> <span class="st">'v'</span>)</a></code></pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
@@ -192,35 +188,35 @@
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">city_mpg &lt;-<span class="st"> </span>city_mpg <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb12-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">class =</span> <span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span>(class, <span class="op">-</span>mean_mpg))</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(class, count)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="dt">fill =</span> <span class="st">"#6297E770"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>)),</a>
+<a class="sourceLine" id="cb12-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(class, count)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(<span class="dt">fill =</span> <span class="st">"#6297E770"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(</a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">    <span class="dt">expand =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_scale.html">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>)),</a>
 <a class="sourceLine" id="cb12-8" data-line-number="8">    <span class="dt">position =</span> <span class="st">"right"</span></a>
 <a class="sourceLine" id="cb12-9" data-line-number="9">  ) <span class="op">+</span></a>
 <a class="sourceLine" id="cb12-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="dv">11</span>, <span class="dt">rel_small =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(</a>
-<a class="sourceLine" id="cb12-12" data-line-number="12">    <span class="dt">panel.grid.major =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#6297E770"</span>),</a>
-<a class="sourceLine" id="cb12-13" data-line-number="13">    <span class="dt">axis.line.x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(),</a>
-<a class="sourceLine" id="cb12-14" data-line-number="14">    <span class="dt">axis.text.x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(),</a>
-<a class="sourceLine" id="cb12-15" data-line-number="15">    <span class="dt">axis.title.x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(),</a>
-<a class="sourceLine" id="cb12-16" data-line-number="16">    <span class="dt">axis.ticks =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_blank</a></span>(),</a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(</a>
+<a class="sourceLine" id="cb12-12" data-line-number="12">    <span class="dt">panel.grid.major =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#6297E770"</span>),</a>
+<a class="sourceLine" id="cb12-13" data-line-number="13">    <span class="dt">axis.line.x =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),</a>
+<a class="sourceLine" id="cb12-14" data-line-number="14">    <span class="dt">axis.text.x =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),</a>
+<a class="sourceLine" id="cb12-15" data-line-number="15">    <span class="dt">axis.title.x =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),</a>
+<a class="sourceLine" id="cb12-16" data-line-number="16">    <span class="dt">axis.ticks =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),</a>
 <a class="sourceLine" id="cb12-17" data-line-number="17">    <span class="dt">axis.ticks.length =</span> grid<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/grid/topics/unit">unit</a></span>(<span class="dv">0</span>, <span class="st">"pt"</span>),</a>
-<a class="sourceLine" id="cb12-18" data-line-number="18">    <span class="dt">axis.text.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#6297E7"</span>),</a>
-<a class="sourceLine" id="cb12-19" data-line-number="19">    <span class="dt">axis.title.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#6297E7"</span>)</a>
+<a class="sourceLine" id="cb12-18" data-line-number="18">    <span class="dt">axis.text.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#6297E7"</span>),</a>
+<a class="sourceLine" id="cb12-19" data-line-number="19">    <span class="dt">axis.title.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#6297E7"</span>)</a>
 <a class="sourceLine" id="cb12-20" data-line-number="20">  )</a>
 <a class="sourceLine" id="cb12-21" data-line-number="21">p1</a></code></pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-10-1.png" width="528"></p>
 <p>Now let’s plot mean city mpg versus car class, as a scatter plot.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(class, mean_mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">"#D5442D"</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">21</span>)) <span class="op">+</span></a>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(city_mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(class, mean_mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="st">"#D5442D"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="dt">limits =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">10</span>, <span class="dv">21</span>)) <span class="op">+</span></a>
 <a class="sourceLine" id="cb13-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="dv">11</span>, <span class="dt">rel_small =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">axis.ticks.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7">    <span class="dt">axis.text.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
-<a class="sourceLine" id="cb13-8" data-line-number="8">    <span class="dt">axis.title.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
-<a class="sourceLine" id="cb13-9" data-line-number="9">    <span class="dt">axis.line.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>)</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">    <span class="dt">axis.ticks.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
+<a class="sourceLine" id="cb13-7" data-line-number="7">    <span class="dt">axis.text.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
+<a class="sourceLine" id="cb13-8" data-line-number="8">    <span class="dt">axis.title.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>),</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">    <span class="dt">axis.line.y =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="dt">color =</span> <span class="st">"#BB2D05"</span>)</a>
 <a class="sourceLine" id="cb13-10" data-line-number="10">  )</a>
 <a class="sourceLine" id="cb13-11" data-line-number="11">p2</a></code></pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-11-1.png" width="528"></p>

@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,15 +76,11 @@
     </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,9 +95,9 @@
       <h1>Drawing with and on plots</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-07-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/drawing_with_on_plots.Rmd"><code>vignettes/drawing_with_on_plots.Rmd</code></a></small>
+      
       <div class="hidden name"><code>drawing_with_on_plots.Rmd</code></div>
 
     </div>
@@ -116,8 +112,8 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(displ, cty)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">p &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(displ, cty)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>(<span class="dv">12</span>)</a>
 <a class="sourceLine" id="cb1-7" data-line-number="7"></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8">p</a></code></pre></div>
@@ -126,40 +122,40 @@
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/draw_label.html">draw_label</a></span>(<span class="st">"Draft"</span>, <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">angle =</span> <span class="dv">45</span>)</a></code></pre></div>
 <p><img src="drawing_with_on_plots_files/figure-html/unnamed-chunk-3-1.png" width="384"></p>
-<p>What <code><a href="../reference/ggdraw.html">ggdraw(p)</a></code> does is it captures a snapshot of the plot, so that the plot effectively turns into an image, and then it draws that image into a new ggplot2 canvas without visible axes or background grid. The <code>draw_*</code> functions are simply wrappers around regular geoms. So, in the above example we could have used <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_text">geom_text()</a></code> instead of <code><a href="../reference/draw_label.html">draw_label()</a></code>.</p>
+<p>What <code><a href="../reference/ggdraw.html">ggdraw(p)</a></code> does is it captures a snapshot of the plot, so that the plot effectively turns into an image, and then it draws that image into a new ggplot2 canvas without visible axes or background grid. The <code>draw_*</code> functions are simply wrappers around regular geoms. So, in the above example we could have used <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code> instead of <code><a href="../reference/draw_label.html">draw_label()</a></code>.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_text">geom_text</a></span>(</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">    <span class="dt">data =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">x =</span> <span class="fl">0.5</span>, <span class="dt">y =</span> <span class="fl">0.5</span>, <span class="dt">label =</span> <span class="st">"Draft"</span>),</a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(x, y, <span class="dt">label =</span> label),</a>
+<a class="sourceLine" id="cb3-4" data-line-number="4">    <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x, y, <span class="dt">label =</span> label),</a>
 <a class="sourceLine" id="cb3-5" data-line-number="5">    <span class="dt">hjust =</span> <span class="fl">0.5</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>, <span class="dt">angle =</span> <span class="dv">45</span>, <span class="dt">size =</span> <span class="dv">100</span><span class="op">/</span>.pt,</a>
 <a class="sourceLine" id="cb3-6" data-line-number="6">    <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>,</a>
 <a class="sourceLine" id="cb3-7" data-line-number="7">    <span class="dt">inherit.aes =</span> <span class="ot">FALSE</span></a>
 <a class="sourceLine" id="cb3-8" data-line-number="8">  )</a></code></pre></div>
 <p><img src="drawing_with_on_plots_files/figure-html/unnamed-chunk-4-1.png" width="384"></p>
-<p>However, notice how much more verbose the call to <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_text">geom_text()</a></code> is. Also, <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_text">geom_text()</a></code> interprets font sizes in mm, so we need to divide by <code>.pt</code> if we want to specify font sizes in the more conventional point metric. By contrast, <code><a href="../reference/draw_label.html">draw_label()</a></code> performs this conversion for us, so we can specify font sizes directly in points.</p>
-<p>Because <code><a href="../reference/ggdraw.html">ggdraw()</a></code> is built on top of ggplot2, we can <strong>complete..</strong></p>
+<p>However, notice how much more verbose the call to <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code> is. Also, <code><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text()</a></code> interprets font sizes in mm, so we need to divide by <code>.pt</code> if we want to specify font sizes in the more conventional point metric. By contrast, <code><a href="../reference/draw_label.html">draw_label()</a></code> performs this conversion for us, so we can specify font sizes directly in points.</p>
+<p>Because <code><a href="../reference/ggdraw.html">ggdraw()</a></code> is built on top of ggplot2, we can treat its output like a ggplot2 plot. For example, we can use the <code><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme()</a></code> function to change the background color.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/draw_label.html">draw_label</a></span>(<span class="st">"Draft"</span>, <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">angle =</span> <span class="dv">45</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(</a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="dt">plot.background =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"cornsilk"</span>, <span class="dt">color =</span> <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(</a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">    <span class="dt">plot.background =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"cornsilk"</span>, <span class="dt">color =</span> <span class="ot">NA</span>)</a>
 <a class="sourceLine" id="cb4-5" data-line-number="5">  )</a></code></pre></div>
 <p><img src="drawing_with_on_plots_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
-<p>We can also save the annotated plots in the standard way via <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave()</a></code>.</p>
+<p>We can also save the annotated plots in the standard way via <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">draft &lt;-<span class="st"> </span><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/draw_label.html">draw_label</a></span>(<span class="st">"Draft"</span>, <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">angle =</span> <span class="dv">45</span>)</a>
 <a class="sourceLine" id="cb5-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave</a></span>(<span class="st">"draft.pdf"</span>, draft)</a></code></pre></div>
-<p>(However, the cowplot package provides an alternative to <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggsave">ggsave()</a></code>, the function <code><a href="../reference/save_plot.html">save_plot()</a></code>, which makes it easier to save plots with appropriate sizing, in particular when making compound plots. See the documentation of <code><a href="../reference/save_plot.html">save_plot()</a></code> for details.)</p>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave</a></span>(<span class="st">"draft.pdf"</span>, draft)</a></code></pre></div>
+<p>(However, the cowplot package provides an alternative to <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">ggsave()</a></code>, the function <code><a href="../reference/save_plot.html">save_plot()</a></code>, which makes it easier to save plots with appropriate sizing, in particular when making compound plots. See the documentation of <code><a href="../reference/save_plot.html">save_plot()</a></code> for details.)</p>
 <p>Frequently, we may want to have the annotations underneath the plot rather than on top of it. We can achieve this effect by first setting up an empty drawing layer with <code><a href="../reference/ggdraw.html">ggdraw()</a></code>, then adding the label, and then adding the plot with <code><a href="../reference/draw_plot.html">draw_plot()</a></code>.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb6-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/draw_label.html">draw_label</a></span>(<span class="st">"Draft"</span>, <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">angle =</span> <span class="dv">45</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/draw_plot.html">draw_plot</a></span>(p)</a></code></pre></div>
 <p><img src="drawing_with_on_plots_files/figure-html/unnamed-chunk-7-1.png" width="384"></p>
-<p>This requires that the plot has a transparent background, and all cowplot themes meet this requirement. By contrast, this is not necessarily the case for ggplot2 themes. For example, if we change the theme of the plot to <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic()</a></code> the underlying label is hidden by the theme’s white background.</p>
+<p>This requires that the plot has a transparent background, and all cowplot themes meet this requirement. By contrast, this is not necessarily the case for ggplot2 themes. For example, if we change the theme of the plot to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic()</a></code> the underlying label is hidden by the theme’s white background.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>() <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="../reference/draw_label.html">draw_label</a></span>(<span class="st">"Draft"</span>, <span class="dt">color =</span> <span class="st">"#C0A0A0"</span>, <span class="dt">size =</span> <span class="dv">100</span>, <span class="dt">angle =</span> <span class="dv">45</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="../reference/draw_plot.html">draw_plot</a></span>(</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4">    p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic</a></span>()</a>
+<a class="sourceLine" id="cb7-4" data-line-number="4">    p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a>
 <a class="sourceLine" id="cb7-5" data-line-number="5">  )</a></code></pre></div>
 <p><img src="drawing_with_on_plots_files/figure-html/unnamed-chunk-8-1.png" width="384"></p>
 <p>The cowplot theme <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code> does not have this limitation.</p>
@@ -174,9 +170,9 @@
 <h2 class="hasAnchor">
 <a href="#making-inset-plots" class="anchor"></a>Making inset plots</h2>
 <p>The <code><a href="../reference/draw_plot.html">draw_plot()</a></code> function also allows us to place plots at arbitrary locations and at arbitrary sizes onto the canvas. This is useful for combining subplots into a layout that is not a simple grid, e.g. with an inset plotted inside a larger graph.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">inset &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mpg, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(drv)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"skyblue2"</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="op">+</span></a>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">inset &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mpg, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(drv)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="dt">fill =</span> <span class="st">"skyblue2"</span>, <span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_scale.html">expand_scale</a></span>(<span class="dt">mult =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="fl">0.05</span>))) <span class="op">+</span></a>
 <a class="sourceLine" id="cb9-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="dv">11</span>)</a>
 <a class="sourceLine" id="cb9-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb9-6" data-line-number="6"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p <span class="op">+</span><span class="st"> </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="dv">12</span>)) <span class="op">+</span></a>
@@ -234,7 +230,7 @@
 <div id="combining-plots-and-images" class="section level2">
 <h2 class="hasAnchor">
 <a href="#combining-plots-and-images" class="anchor"></a>Combining plots and images</h2>
-<p>The drawing layer also supports images, through the function <code><a href="../reference/draw_image.html">draw_image()</a></code>. This function, which requires the <strong>magick</strong> package to be installed, can take images in many different formats and combine them with plots. For example, we can use an image as a plot background:</p>
+<p>The drawing layer also supports images, through the function <code><a href="../reference/draw_image.html">draw_image()</a></code>. This function, which requires the <a href="https://CRAN.R-project.org/package=magick">magick</a> package to be installed, can take images in many different formats and combine them with plots. For example, we can use an image as a plot background:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(magick)</a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb13-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(forcats)</a>
@@ -247,10 +243,10 @@
 <a class="sourceLine" id="cb13-10" data-line-number="10">p &lt;-<span class="st"> </span>PASWR<span class="op">::</span>Cows <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-11" data-line-number="11"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(breed <span class="op">!=</span><span class="st"> "Canadian"</span>) <span class="op">%&gt;%</span></a>
 <a class="sourceLine" id="cb13-12" data-line-number="12"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="dt">breed =</span> <span class="kw"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span>(breed, butterfat)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(butterfat, <span class="dt">fill =</span> breed)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_density">geom_density</a></span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_grey">scale_fill_grey</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_cartesian">coord_cartesian</a></span>(<span class="dt">expand =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(butterfat, <span class="dt">fill =</span> breed)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span>(<span class="dt">alpha =</span> <span class="fl">0.7</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-15" data-line-number="15"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_grey.html">scale_fill_grey</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_cartesian.html">coord_cartesian</a></span>(<span class="dt">expand =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb13-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="dv">11</span>, <span class="dt">color =</span> <span class="st">"grey30"</span>)</a>
 <a class="sourceLine" id="cb13-18" data-line-number="18"></a>
 <a class="sourceLine" id="cb13-19" data-line-number="19"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>() <span class="op">+</span><span class="st"> </span></a>

@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-All cowplot functions that take plot objects as input (`ggdraw()`, `draw_plot()`, `plot_grid()`) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package gridGraphics installed.
+All cowplot functions that take plot objects as input (`ggdraw()`, `draw_plot()`, `plot_grid()`) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package [gridGraphics](https://CRAN.R-project.org/package=gridGraphics) installed.
 
 As the first example, we draw a base graphics plot with `ggdraw()` and style the background with the ggplot2 themeing mechanism.
 

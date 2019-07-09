@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,15 +76,11 @@
     </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,9 +95,9 @@
       <h1>Arranging plots in a grid</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-07-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/plot_grid.Rmd"><code>vignettes/plot_grid.Rmd</code></a></small>
+      
       <div class="hidden name"><code>plot_grid.Rmd</code></div>
 
     </div>
@@ -109,18 +105,17 @@
     
     
 <p>This vignette covers the function <code><a href="../reference/plot_grid.html">plot_grid()</a></code>, which can be used to create table-like layouts of plots. This functionality is built on top of the cowplot drawing layer implemented in <code><a href="../reference/ggdraw.html">ggdraw()</a></code> and <code>draw_*()</code>, and it aligns plots via the <code><a href="../reference/align_plots.html">align_plots()</a></code> function. It is strongly recommended to read the vignettes on these two sets of features (the vignettes called “Drawing with and on plots” and “Aligning plots”) to fully understand how <code><a href="../reference/plot_grid.html">plot_grid()</a></code> works.</p>
-<div id="basic-use-of-plot_grid" class="section level2">
+<div id="basic-usage" class="section level2">
 <h2 class="hasAnchor">
-<a href="#basic-use-of-plot_grid" class="anchor"></a>Basic use of <code><a href="../reference/plot_grid.html">plot_grid()</a></code>
-</h2>
+<a href="#basic-usage" class="anchor"></a>Basic usage</h2>
 <p>The <code><a href="../reference/plot_grid.html">plot_grid()</a></code> function provides a simple interface for arranging plots into a grid and adding labels to them.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
-<a class="sourceLine" id="cb1-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(qsec, mpg)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(disp, mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
+<a class="sourceLine" id="cb1-6" data-line-number="6">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(qsec, mpg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()</a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p1, p2, <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'A'</span>, <span class="st">'B'</span>))</a></code></pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
@@ -132,7 +127,7 @@
 <p>By default, the plots are not aligned, but in many cases they can be aligned via the <code>align</code> option.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">p3 &lt;-<span class="st"> </span>p1 <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb4-2" data-line-number="2"><span class="st">  </span><span class="co"># use large, rotated axis tick labels to highlight alignment issues</span></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">size =</span> <span class="dv">14</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">axis.text.x =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="dt">size =</span> <span class="dv">14</span>, <span class="dt">angle =</span> <span class="dv">90</span>, <span class="dt">vjust =</span> <span class="fl">0.5</span>))</a>
 <a class="sourceLine" id="cb4-4" data-line-number="4"></a>
 <a class="sourceLine" id="cb4-5" data-line-number="5"><span class="co"># plots are drawn without alignment</span></a>
 <a class="sourceLine" id="cb4-6" data-line-number="6"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p3, p2, <span class="dt">labels =</span> <span class="st">"AUTO"</span>)</a></code></pre></div>
@@ -192,7 +187,7 @@
 <a href="#nested-plot-grids" class="anchor"></a>Nested plot grids</h2>
 <p>If you want to generate a plot arrangement that is not a simple grid, you may insert one <code><a href="../reference/plot_grid.html">plot_grid()</a></code> plot into another.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">bottom_row &lt;-<span class="st"> </span><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p1, p2, <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'B'</span>, <span class="st">'C'</span>), <span class="dt">label_size =</span> <span class="dv">12</span>)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">p3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> qsec, <span class="dt">y =</span> disp)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>gear)</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">p3 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> qsec, <span class="dt">y =</span> disp)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>gear)</a>
 <a class="sourceLine" id="cb12-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb12-4" data-line-number="4"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p3, bottom_row, <span class="dt">labels =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">'A'</span>, <span class="st">''</span>), <span class="dt">label_size =</span> <span class="dv">12</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
@@ -212,13 +207,13 @@
 <a href="#joint-plot-titles" class="anchor"></a>Joint plot titles</h2>
 <p>When we combine plots with <code><a href="../reference/plot_grid.html">plot_grid()</a></code>, we may want to add a title that spans the entire combined figure. While there is no specific function in cowplot to achieve this effect, it can be simulated easily with a few lines of code:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co"># make a plot grid consisting of two panels</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">colour =</span> <span class="st">"blue"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">p1 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> disp, <span class="dt">y =</span> mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">colour =</span> <span class="st">"blue"</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="../reference/background_grid.html">background_grid</a></span>(<span class="dt">minor =</span> <span class="st">'none'</span>)</a>
 <a class="sourceLine" id="cb14-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb14-7" data-line-number="7">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> hp, <span class="dt">y =</span> mpg)) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">colour =</span> <span class="st">"green"</span>) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> hp, <span class="dt">y =</span> mpg)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">colour =</span> <span class="st">"green"</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="dv">12</span>) <span class="op">+</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb14-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/background_grid.html">background_grid</a></span>(<span class="dt">minor =</span> <span class="st">'none'</span>)</a>
 <a class="sourceLine" id="cb14-11" data-line-number="11"></a>
@@ -232,10 +227,10 @@
 <a class="sourceLine" id="cb14-19" data-line-number="19">    <span class="dt">x =</span> <span class="dv">0</span>,</a>
 <a class="sourceLine" id="cb14-20" data-line-number="20">    <span class="dt">hjust =</span> <span class="dv">0</span></a>
 <a class="sourceLine" id="cb14-21" data-line-number="21">  ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(</a>
+<a class="sourceLine" id="cb14-22" data-line-number="22"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(</a>
 <a class="sourceLine" id="cb14-23" data-line-number="23">    <span class="co"># add margin on the left of the drawing canvas,</span></a>
 <a class="sourceLine" id="cb14-24" data-line-number="24">    <span class="co"># so title is aligned with left edge of first plot</span></a>
-<a class="sourceLine" id="cb14-25" data-line-number="25">    <span class="dt">plot.margin =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">margin</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">    <span class="dt">plot.margin =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">7</span>)</a>
 <a class="sourceLine" id="cb14-26" data-line-number="26">  )</a>
 <a class="sourceLine" id="cb14-27" data-line-number="27"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(</a>
 <a class="sourceLine" id="cb14-28" data-line-number="28">  title, plot_row,</a>
@@ -243,7 +238,8 @@
 <a class="sourceLine" id="cb14-30" data-line-number="30">  <span class="co"># rel_heights values control vertical title margins</span></a>
 <a class="sourceLine" id="cb14-31" data-line-number="31">  <span class="dt">rel_heights =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.1</span>, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb14-32" data-line-number="32">)</a></code></pre></div>
-<p><img src="plot_grid_files/figure-html/unnamed-chunk-14-1.png" width="768"> In the final <code>plot_grid</code> line, the values of <code>rel_heights</code> need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.</p>
+<p><img src="plot_grid_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
+<p>In the final <code>plot_grid</code> line, the values of <code>rel_heights</code> need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.</p>
 </div>
   </div>
 
@@ -252,7 +248,7 @@
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-<li><a href="#basic-use-of-plot_grid">Basic use of <code><a href="--/reference/plot_grid-html">plot_grid()</a></code></a></li>
+<li><a href="#basic-usage">Basic usage</a></li>
       <li><a href="#fine-tuning-the-plot-grid">Fine-tuning the plot grid</a></li>
       <li><a href="#nested-plot-grids">Nested plot grids</a></li>
       <li><a href="#joint-plot-titles">Joint plot titles</a></li>

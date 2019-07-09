@@ -67,7 +67,7 @@ on which coordinate system is desired (see examples)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -112,15 +112,13 @@ on which coordinate system is desired (see examples)." />
     </li>
   </ul>
 </li>
+<li>
+  <a href="../news/index.html">Changelog</a>
+</li>
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -134,7 +132,7 @@ on which coordinate system is desired (see examples)." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Draw a text label or mathematical expression.</h1>
-    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/draw.R'><code>R/draw.R</code></a></small>
+    
     <div class="hidden name"><code>draw_label.Rd</code></div>
     </div>
 
@@ -218,8 +216,8 @@ specify.</p>
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 
 <span class='co'># setup plot and a label (regression description)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/ggplot'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/aes'>aes</a></span>(<span class='no'>disp</span>, <span class='no'>mpg</span>)) +
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/ggplot2/topics/geom_path'>geom_line</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) +
+<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>disp</span>, <span class='no'>mpg</span>)) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) +
   <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() +
   <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>minor</span> <span class='kw'>=</span> <span class='st'>'none'</span>)
 <span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/stats/topics/cor.test'>cor.test</a></span>(<span class='no'>mtcars</span>$<span class='no'>disp</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>'sp'</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)

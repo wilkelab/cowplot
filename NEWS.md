@@ -1,5 +1,4 @@
-cowplot 1.0.0
-----------------------------------------------------------------
+# cowplot 1.0.0
 
 ## Breaking changes
 
@@ -12,7 +11,7 @@ breaking changes were introduced:
 - The package ggplot2 needs to be loaded separately from cowplot, it is not
   automatically attached.
 - All themes now use parameters `font_size` and `font_family`. Previously,
-  `theme_nothing()` and `theme_map`() used `base_size` and `base_family`.
+  `theme_nothing()` and `theme_map()` used `base_size` and `base_family`.
 - The function `cowplot::ggsave()` was renamed to `cowplot::ggsave2()`,
   so that the ggplot2 version of ggsave() is no longer masked by the
   cowplot version.
@@ -22,6 +21,7 @@ Other breaking changes:
   adjustment if you have code depending on it.
 
 ## New features
+
 - New functions `rectangle_key_glyph()` and `circle_key_glyph()`
   make it possible to generate customized legend glyphs.
 - Improved alignment of plots. Plots can now be aligned in a greedy
@@ -49,6 +49,7 @@ Other breaking changes:
   plot panel (@malcolmbarrett, #111).
 
 ## Minor changes
+
 - Minor tweaks to various legend layout parameters so that legends look
   better as the underlying theme font size is changed.
 - Various minor fixes to `theme_cowplot()` and derived themes.
@@ -60,17 +61,25 @@ Other breaking changes:
   an error.
 
 
-cowplot 0.9.2
-----------------------------------------------------------------
+# cowplot 0.9.4
+
+- Fix CRAN check errors
+
+# cowplot 0.9.3
+
+- Fix regression tests to work with ggplot2 3.0.0
+
+# cowplot 0.9.2
+
 - Rewritten cowplot::ggsave function that calls ggplot2::ggsave
 - More robust handling of R graphics device weirdness/plots popping up in the wrong places
 
-cowplot 0.9.1
-----------------------------------------------------------------
+# cowplot 0.9.1
+
 - Make examples and vignettes fail gracefully when magick package is not installed
 
-cowplot 0.9.0
-----------------------------------------------------------------
+# cowplot 0.9.0
+
 - Added a theme for maps, `theme_map()`. Code provided by Spencer Fox, https://github.com/sjfox.
 - Added `axis_canvas()` function and related functions to make
   marginal plots and plot annotations simpler
@@ -80,8 +89,8 @@ cowplot 0.9.0
 - Added examples to various draw functions
 - Added draw_image() function to draw images onto plots
 
-cowplot 0.8.0
-----------------------------------------------------------------
+# cowplot 0.8.0
+
 - The function plot_grid can now also handle base-R (graphics) plots. Code provided by https://github.com/flying-sheep.
 - More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, https://github.com/sjfox.
 - Plot labels can now be styled. In particular, they follow the theme settings, e.g. if the theme uses a different font than default. This closes issue #37.
@@ -89,39 +98,39 @@ cowplot 0.8.0
 - Problems with elements from globally set themes leaking into the plot-grid background have been fixed. This closes issues #60, #63, #66.
 
 
-cowplot 0.7.0
-----------------------------------------------------------------
+# cowplot 0.7.0
+
 - This version of cowplot has been prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been removed. Alternative axes will be natively supported by ggplot2 2.2.0.
 - As of this version, cowplot requires R >= 3.3.0. This dependency was added because R 3.3 fixes a critical problem with lists of units.
 
-cowplot 0.6.3
-----------------------------------------------------------------
+# cowplot 0.6.3
+
 - Adds a get_legend() function that extracts the legend from a plot. Code provided by https://github.com/marcus1487
 - Fixes bug that creates an empty page on some plot devices. Fix provided by https://github.com/marcus1487
 - Fixes bug that hardcoded panel border line-type and size. Fix provided by Spencer Fox, https://github.com/sjfox
 - Adds the option of custom axes on the drawing layer. Code provided by https://github.com/zaczap
 - Separates out the alignment function from plot_grid(). Will likely be more useful further down the line. Code provided by Spencer Fox, https://github.com/sjfox
 
-cowplot 0.6.2
-----------------------------------------------------------------
+# cowplot 0.6.2
+
 - Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.
 
-cowplot 0.6.1
-----------------------------------------------------------------
+# cowplot 0.6.1
+
 - Added new convenience function draw_figure_label() to label figures with labels such as "Figure 1".
 - Fixes in switch_axis_position() so that rotated axis labels work.
 - Fix missing axis lines in ggplot2 2.1
 
-cowplot 0.6.0
-----------------------------------------------------------------
+# cowplot 0.6.0
+
 Major changes:
 - Now requires ggplot2 version 2.0.0 or higher. Use cowplot 0.5.0 with older versions of ggplot2.
 - Because of the dependency on ggplot2 2.0.0, the default design is changed. No more bold face for axis labels
 - Add auto-generation of labels in plot_grid()
 - Add vignettes describing plot annotations and shared legends among plots
 
-cowplot 0.5.0
-----------------------------------------------------------------
+# cowplot 0.5.0
+
 Major changes:
 - Fix label positioning in plot_grid() so it is not affected by the scale parameter
 - Add draw_label() function which can draw both text and plotmath expressions
@@ -131,8 +140,8 @@ Major changes:
 Other changes:
 - Improve vignettes
 
-cowplot 0.4.0
-----------------------------------------------------------------
+# cowplot 0.4.0
+
 Major changes:
 - Added a function switch_axis_position() which can move/copy the x and/or y axis of a
   plot to the other side
@@ -143,10 +152,10 @@ Other changes:
 - Various improvements in the documentation
 - Code has been separated into multiple files for easier maintenance
 
-cowplot 0.3.1
-----------------------------------------------------------------
+# cowplot 0.3.1
+
 Fix Vignette title
 
-cowplot 0.3.0
-----------------------------------------------------------------
+# cowplot 0.3.0
+
 First complete implementation ready for initial release

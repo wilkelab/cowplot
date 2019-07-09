@@ -53,7 +53,7 @@ ggdraw(p) +
 
 However, notice how much more verbose the call to `geom_text()` is. Also, `geom_text()` interprets font sizes in mm, so we need to divide by `.pt` if we want to specify font sizes in the more conventional point metric. By contrast, `draw_label()` performs this conversion for us, so we can specify font sizes directly in points.
 
-Because `ggdraw()` is built on top of ggplot2, we can **complete..**
+Because `ggdraw()` is built on top of ggplot2, we can treat its output like a ggplot2 plot. For example, we can use the `theme()` function to change the background color.
 ```{r}
 ggdraw(p) + 
   draw_label("Draft", color = "#C0A0A0", size = 100, angle = 45) +
@@ -171,7 +171,7 @@ ggdraw(p) +
 
 ## Combining plots and images
 
-The drawing layer also supports images, through the function `draw_image()`. This function, which requires the **magick** package to be installed, can take images in many different formats and combine them with plots. For example, we can use an image as a plot background:
+The drawing layer also supports images, through the function `draw_image()`. This function, which requires the [magick](https://CRAN.R-project.org/package=magick) package to be installed, can take images in many different formats and combine them with plots. For example, we can use an image as a plot background:
 
 ```{r message = FALSE, fig.width = 5.7, fig.height = 3.8}
 library(magick)

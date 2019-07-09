@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.99</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -76,15 +76,11 @@
     </li>
   </ul>
 </li>
-      </ul>
-<ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
+  <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
+<ul class="nav navbar-nav navbar-right"></ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -99,16 +95,16 @@
       <h1>Mixing different plotting frameworks</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2019-06-09</h4>
+            <h4 class="date">2019-07-09</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/mixing_plot_frameworks.Rmd"><code>vignettes/mixing_plot_frameworks.Rmd</code></a></small>
+      
       <div class="hidden name"><code>mixing_plot_frameworks.Rmd</code></div>
 
     </div>
 
     
     
-<p>All cowplot functions that take plot objects as input (<code><a href="../reference/ggdraw.html">ggdraw()</a></code>, <code><a href="../reference/draw_plot.html">draw_plot()</a></code>, <code><a href="../reference/plot_grid.html">plot_grid()</a></code>) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package gridGraphics installed.</p>
+<p>All cowplot functions that take plot objects as input (<code><a href="../reference/ggdraw.html">ggdraw()</a></code>, <code><a href="../reference/draw_plot.html">draw_plot()</a></code>, <code><a href="../reference/plot_grid.html">plot_grid()</a></code>) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package <a href="https://CRAN.R-project.org/package=gridGraphics">gridGraphics</a> installed.</p>
 <p>As the first example, we draw a base graphics plot with <code><a href="../reference/ggdraw.html">ggdraw()</a></code> and style the background with the ggplot2 themeing mechanism.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
@@ -123,7 +119,7 @@
 <a class="sourceLine" id="cb1-11" data-line-number="11">}</a>
 <a class="sourceLine" id="cb1-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb1-13" data-line-number="13"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p1) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">plot.background =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"cornsilk"</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb1-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="dt">plot.background =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="dt">fill =</span> <span class="st">"cornsilk"</span>))</a></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
 <p>We can also add a logo to the plot.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">logo_file &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"logo.png"</span>, <span class="dt">package =</span> <span class="st">"cowplot"</span>)</a>
@@ -138,7 +134,7 @@
 <a class="sourceLine" id="cb2-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="../reference/draw_plot.html">draw_plot</a></span>(p1)</a></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-3-1.png" width="384"></p>
 <p>And we can draw base graphics and ggplot2 graphics side-by-side in a plot grid.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="dt">data =</span> mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>()</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>()</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="kw"><a href="../reference/plot_grid.html">plot_grid</a></span>(p1, p2)</a></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>Base R plots can be stored in the form of functions that emit the desired plots (demonstrated above), as recorded plots, or using a convenient formula interface.</p>
@@ -173,7 +169,7 @@
 <a class="sourceLine" id="cb7-8" data-line-number="8">}</a>
 <a class="sourceLine" id="cb7-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co"># ggplot2</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="dt">data =</span> mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>()</a>
+<a class="sourceLine" id="cb7-11" data-line-number="11">p2 &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">factor</a></span>(cyl), mpg)) <span class="op">+</span><span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>()</a>
 <a class="sourceLine" id="cb7-12" data-line-number="12"></a>
 <a class="sourceLine" id="cb7-13" data-line-number="13"><span class="co"># lattice</span></a>
 <a class="sourceLine" id="cb7-14" data-line-number="14"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(lattice)</a>
@@ -199,9 +195,9 @@
 <a class="sourceLine" id="cb8-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb8-11" data-line-number="11"><span class="co"># plot venn diagram and add some margin and enclosing box</span></a>
 <a class="sourceLine" id="cb8-12" data-line-number="12"><span class="kw"><a href="../reference/ggdraw.html">ggdraw</a></span>(p_venn) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(</a>
-<a class="sourceLine" id="cb8-14" data-line-number="14">    <span class="dt">plot.background =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_rect</a></span>(<span class="dt">fill =</span> <span class="ot">NA</span>),</a>
-<a class="sourceLine" id="cb8-15" data-line-number="15">    <span class="dt">plot.margin =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">margin</a></span>(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>)</a>
+<a class="sourceLine" id="cb8-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(</a>
+<a class="sourceLine" id="cb8-14" data-line-number="14">    <span class="dt">plot.background =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="dt">fill =</span> <span class="ot">NA</span>),</a>
+<a class="sourceLine" id="cb8-15" data-line-number="15">    <span class="dt">plot.margin =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>, <span class="dv">12</span>)</a>
 <a class="sourceLine" id="cb8-16" data-line-number="16">  )</a></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-8-1.png" width="432"></p>
   </div>
