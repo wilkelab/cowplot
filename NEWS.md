@@ -1,4 +1,4 @@
-cowplot 0.9.99
+cowplot 1.0.0
 ----------------------------------------------------------------
 
 ## Breaking changes
@@ -22,7 +22,7 @@ Other breaking changes:
   adjustment if you have code depending on it.
 
 ## New features
-- New functions `rectangle_key_glyph()` and `circle_key_glyph()` that
+- New functions `rectangle_key_glyph()` and `circle_key_glyph()`
   make it possible to generate customized legend glyphs.
 - Improved alignment of plots. Plots can now be aligned in a greedy
   manner, which improves the appearance of aligned plots with axis

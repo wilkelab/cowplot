@@ -1,42 +1,27 @@
-This is a minor bugfix release that closes bugs related to plots showing up in the wrong places
-in shiny apps and extra blank plots popping up in knitted documents.
+This is a major new release that provides numerous new features. It also fixes
+a number of poor design choices that were made in earlier releases, such as 
+attaching ggplot2 or reexporting ggplot2 functions with slightly altered behavior.
+These fixes result in breaking changes for some downstream packages. However, all
+problems in downstream packages should be easily fixable. Maintainers of downstream
+packages were informed on June 9 of the impending submission of this version to
+CRAN. They had a month to fix any issues they may have had.
 
 ## Test environments
-* R devel on win-builder [ via devtools::build_win() ]
-* local OS X install x86_64-apple-darwin15.6.0 (64-bit), R 3.4.2
+* R devel on win-builder [ via devtools::check_win_devel() ]
+* R devel and R release on Linux (via Travis CI)
 
 ## R CMD check results
-There were no ERRORs, WARNINGs, or NOTEs.
+There were no ERRORs or WARNINGs.
+
+There was one NOTE:
+The overall package size is 12.6Mb, of which 12.0Mb are in 
+subdirectory doc. The package has extensive documentation with
+many figures, and it is not possible to keep the vignettes smaller
+while completely documenting all package features.
 
 ## Downstream dependencies
-Seem fine, according to devtools::revdep_check().
-The packages with errors failed at the installation stage,
-not because of cowplot.
+As stated above, a few packages break with this submission. All cases
+where packages break are cases where the packages depend on bad previous
+behavior of cowplot that has now been rectified.
 
-Full results available at https://github.com/wilkelab/cowplot/blob/master/revdep/README.md
-
-|package      |version | errors| warnings| notes|
-|:------------|:-------|------:|--------:|-----:|
-|bigstatsr    |0.2.3   |      1|        0|     0|
-|deconvolveR  |1.0-3   |      0|        0|     0|
-|DGCA         |1.0.1   |      1|        0|     0|
-|ESTER        |0.2.0   |      0|        0|     0|
-|ggpubr       |0.1.6   |      0|        0|     1|
-|IncucyteDRC  |0.5.4   |      0|        0|     0|
-|jtools       |0.9.0   |      0|        0|     1|
-|JWileymisc   |0.2.1   |      0|        1|     0|
-|meme         |0.1.1   |      0|        1|     1|
-|memery       |0.3.1   |      0|        0|     0|
-|modcmfitr    |0.1.0   |      0|        0|     0|
-|oddsratio    |1.0.2   |      0|        0|     0|
-|pcr          |1.1.0   |      0|        1|     0|
-|poppr        |2.5.0   |      1|        0|     0|
-|preText      |0.6.1   |      0|        0|     0|
-|RNOmni       |0.1.4   |      0|        0|     0|
-|scatr        |1.0.1   |      0|        0|     0|
-|Seurat       |2.1.0   |      1|        0|     1|
-|sicegar      |0.2.2   |      0|        0|     0|
-|survivALL    |0.9.1   |      1|        0|     0|
-|tadaatoolbox |0.15.0  |      0|        0|     0|
-|valr         |0.3.1   |      0|        0|     1|
-|vanddraabe   |1.0.0   |      0|        0|     0|
+Full results are available at https://github.com/wilkelab/cowplot/blob/master/revdep/README.md
