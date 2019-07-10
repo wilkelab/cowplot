@@ -1,3 +1,5 @@
+Update: Package size has been reduced to meet the 5Mb limit.
+
 This is a major new release that provides numerous new features. It also fixes
 several poor design choices that were made in earlier releases, such as 
 attaching ggplot2 or reexporting ggplot2 functions with slightly altered behavior.
