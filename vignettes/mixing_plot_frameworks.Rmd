@@ -3,7 +3,7 @@ title: "Mixing different plotting frameworks"
 author: "Claus O. Wilke"
 date: "`r Sys.Date()`"
 vignette: >
-  %\VignetteIndexEntry{ixing different plotting frameworks}
+  %\VignetteIndexEntry{Mixing different plotting frameworks}
   %\VignetteEngine{knitr::rmarkdown}
   %\usepackage[utf8]{inputenc}
 ---

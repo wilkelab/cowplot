@@ -7,6 +7,12 @@
 ^cran-comments\.md$
 ^TODO$
 ^ISSUE_TEMPLATE\.md$
-^vignettes/*\.png$
+^vignettes/mixing_plot_frameworks.Rmd$
+^vignettes/themes.Rmd$
+^vignettes/plot_grid.Rmd$
+^vignettes/drawing_with_on_plots.Rmd$
+^vignettes/aligning_plots.Rmd$
+^vignettes/shared_legends.Rmd$
 ^revdep$
 ^Meta$
+^CRAN-RELEASE$
