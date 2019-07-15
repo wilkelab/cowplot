@@ -1,5 +1,8 @@
 # cowplot 1.0.0.9000
 
+- In the functions `insert_xaxis_grob()` and `insert_yaxis_grob()`,
+  clipping is now configurable.
+
 # cowplot 1.0.0
 
 ## Breaking changes

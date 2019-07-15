@@ -12,8 +12,10 @@
 #' @param height The height of the grob, in grid units. Used by `insert_xaxis_grob()`.
 #' @param position The position of the grob. Can be `"right"` or `"left"` for `insert_yaxis_grob()`
 #'   and `"top"` or `"botton"` for `insert_xaxis_grob()`.
+#' @param clip Set to "off" to turn off clipping of the inserted grob.
 #' @export
-insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), position = c("top", "bottom"))
+insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"),
+                              position = c("top", "bottom"), clip = "on")
 {
   # if a plot is provided instead of a grob we extract the panel from that plot
   if (methods::is(grob, "ggplot")){
@@ -30,11 +32,11 @@ insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), posi
 
   if (position[1] == "top") {
     g <- gtable::gtable_add_rows(gt, height, pp$t-1)
-    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$l, pp$t, pp$r, clip = "inherit", name="xaxis-grob-t")
+    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$l, pp$t, pp$r, clip = clip, name="xaxis-grob-t")
   }
   else {
     g <- gtable::gtable_add_rows(gt, height, pp$b)
-    g <- gtable::gtable_add_grob(g, grob, pp$b+1, pp$l, pp$b+1, pp$r, clip = "inherit", name="xaxis-grob-b")
+    g <- gtable::gtable_add_grob(g, grob, pp$b+1, pp$l, pp$b+1, pp$r, clip = clip, name="xaxis-grob-b")
   }
 }
 
@@ -42,7 +44,8 @@ insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"), posi
 #'
 #' @rdname insert_xaxis_grob
 #' @export
-insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), position = c("right", "left"))
+insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"),
+                              position = c("right", "left"), clip = "on")
 {
   # if a plot is provided instead of a grob we extract the panel from that plot
   if (methods::is(grob, "ggplot")){
@@ -59,11 +62,11 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"), posit
 
   if (position[1] == "right") {
     g <- gtable::gtable_add_cols(gt, width, pp$r)
-    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$r+1, pp$b, pp$r+1, clip = "inherit", name="yaxis-grob-r")
+    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$r+1, pp$b, pp$r+1, clip = clip, name="yaxis-grob-r")
   }
   else {
     g <- gtable::gtable_add_cols(gt, width, pp$l-1)
-    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$l, pp$b, pp$l, clip = "inherit", name="yaxis-grob-l")
+    g <- gtable::gtable_add_grob(g, grob, pp$t, pp$l, pp$b, pp$l, clip = clip, name="yaxis-grob-l")
   }
 }
 
