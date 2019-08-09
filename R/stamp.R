@@ -14,7 +14,8 @@
 #' library(ggplot2)
 #'
 #' p <- ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width)) +
-#'   geom_point(aes(color = factor(Petal.Width)))
+#'   geom_point(aes(color = factor(Petal.Width))) + 
+#'   theme_cowplot()
 #'
 #' stamp_bad(p + guides(color = "none"))
 #' stamp_ugly(p)
