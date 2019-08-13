@@ -135,6 +135,10 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
+  # For pipe-friendlyness, also handle passing a list of plots as only positional argument
+  if (is.null(plotlist) && length(plots) == 1L && identical(class(plots[[1L]]), "list")) {
+    plots <- plots[[1L]]
+  }
   num_plots <- length(plots)
 
   if (!is.null(cols)){
