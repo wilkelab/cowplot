@@ -43,6 +43,7 @@ Suggests:
     magick,
     maps,
     PASWR,
+    patchwork,
     rmarkdown,
     testthat (>= 1.0.0),
     tidyr,
