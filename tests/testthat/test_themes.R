@@ -53,7 +53,11 @@ test_that("background grids match across themes", {
 
 test_that("themes look right", {
   p <- ggplot(mtcars, aes(hp, disp, color = mpg, shape = factor(cyl))) +
-    geom_point(size = 2)
+    geom_point(size = 2) +
+    guides(
+      shape = guide_legend(order = 1),
+      color = guide_colorbar(order = 2)
+    )
 
   expect_doppelganger("theme half open",
     p + theme_half_open()
