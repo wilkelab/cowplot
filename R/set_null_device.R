@@ -82,7 +82,7 @@ cairo_null_device <- function(width, height) {
     Cairo::Cairo(
       type = "raster",
       width = width, height = height,
-      units = "in"
+      units = "in", dpi = 300
     )
     grDevices::dev.control("enable")
   } else {
