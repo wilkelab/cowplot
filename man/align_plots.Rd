@@ -4,9 +4,13 @@
 \alias{align_plots}
 \title{Align multiple plots vertically and/or horizontally}
 \usage{
-align_plots(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
+align_plots(
+  ...,
+  plotlist = NULL,
+  align = c("none", "h", "v", "hv"),
   axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
-  greedy = TRUE)
+  greedy = TRUE
+)
 }
 \arguments{
 \item{...}{List of plots to be aligned.}

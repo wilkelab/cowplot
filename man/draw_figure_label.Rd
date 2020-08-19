@@ -4,8 +4,13 @@
 \alias{draw_figure_label}
 \title{Add a label to a figure}
 \usage{
-draw_figure_label(label, position = c("top.left", "top", "top.right",
-  "bottom.left", "bottom", "bottom.right"), size, fontface, ...)
+draw_figure_label(
+  label,
+  position = c("top.left", "top", "top.right", "bottom.left", "bottom", "bottom.right"),
+  size,
+  fontface,
+  ...
+)
 }
 \arguments{
 \item{label}{Label to be drawn}

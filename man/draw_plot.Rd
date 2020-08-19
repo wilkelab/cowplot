@@ -4,8 +4,16 @@
 \alias{draw_plot}
 \title{Draw a (sub)plot.}
 \usage{
-draw_plot(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
-  hjust = 0, vjust = 0)
+draw_plot(
+  plot,
+  x = 0,
+  y = 0,
+  width = 1,
+  height = 1,
+  scale = 1,
+  hjust = 0,
+  vjust = 0
+)
 }
 \arguments{
 \item{plot}{The plot to place. Can be a ggplot2 plot, an arbitrary grob or gtable,

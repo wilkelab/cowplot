@@ -4,9 +4,19 @@
 \alias{draw_plot_label}
 \title{Add a label to a plot}
 \usage{
-draw_plot_label(label, x = 0, y = 1, hjust = -0.5, vjust = 1.5,
-  size = 16, fontface = "bold", family = NULL, color = NULL,
-  colour, ...)
+draw_plot_label(
+  label,
+  x = 0,
+  y = 1,
+  hjust = -0.5,
+  vjust = 1.5,
+  size = 16,
+  fontface = "bold",
+  family = NULL,
+  color = NULL,
+  colour,
+  ...
+)
 }
 \arguments{
 \item{label}{String (or vector of strings) to be drawn as the label.}

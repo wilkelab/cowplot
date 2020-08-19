@@ -4,10 +4,16 @@
 \alias{background_grid}
 \title{Add/modify/remove the background grid in a ggplot2 plot}
 \usage{
-background_grid(major = c("xy", "x", "y", "only_minor", "none"),
-  minor = c("none", "xy", "x", "y"), size.major = 0.5,
-  size.minor = 0.2, color.major = "grey85", color.minor = "grey85",
-  colour.major, colour.minor)
+background_grid(
+  major = c("xy", "x", "y", "only_minor", "none"),
+  minor = c("none", "xy", "x", "y"),
+  size.major = 0.5,
+  size.minor = 0.2,
+  color.major = "grey85",
+  color.minor = "grey85",
+  colour.major,
+  colour.minor
+)
 }
 \arguments{
 \item{major}{Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",

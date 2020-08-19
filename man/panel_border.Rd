@@ -4,8 +4,7 @@
 \alias{panel_border}
 \title{Add/remove the panel border in a ggplot2 plot}
 \usage{
-panel_border(color = "grey85", size = 1, linetype = 1,
-  remove = FALSE, colour)
+panel_border(color = "grey85", size = 1, linetype = 1, remove = FALSE, colour)
 }
 \arguments{
 \item{color, colour}{The color of the border.}

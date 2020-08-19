@@ -5,11 +5,21 @@
 \alias{insert_yaxis_grob}
 \title{Insert an axis-like grob on either side of a plot panel in a \link{ggplot2} plot.}
 \usage{
-insert_xaxis_grob(plot, grob, height = grid::unit(0.2, "null"),
-  position = c("top", "bottom"), clip = "on")
+insert_xaxis_grob(
+  plot,
+  grob,
+  height = grid::unit(0.2, "null"),
+  position = c("top", "bottom"),
+  clip = "on"
+)
 
-insert_yaxis_grob(plot, grob, width = grid::unit(0.2, "null"),
-  position = c("right", "left"), clip = "on")
+insert_yaxis_grob(
+  plot,
+  grob,
+  width = grid::unit(0.2, "null"),
+  position = c("right", "left"),
+  clip = "on"
+)
 }
 \arguments{
 \item{plot}{The plot into which the grob will be inserted.}

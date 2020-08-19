@@ -3,8 +3,13 @@
 \docType{package}
 \name{cowplot}
 \alias{cowplot}
-\alias{cowplot-package}
-\title{cowplot.}
+\title{Streamlined Plot Theme and Plot Annotations for 'ggplot2'}
 \description{
-cowplot.
+Provides various features that help with creating publication-quality
+figures with 'ggplot2', such as a set of themes, functions to align
+plots and arrange them into complex compound figures, and functions
+that make it easy to annotate plots and or mix plots with images. The
+package was originally written for internal use in the Wilke lab,
+hence the name (Claus O. Wilke's plot package). It has also been used
+extensively in the book Fundamentals of Data Visualization.
 }

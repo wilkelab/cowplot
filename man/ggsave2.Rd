@@ -4,9 +4,19 @@
 \alias{ggsave2}
 \title{Cowplot reimplementation of \code{ggsave()}.}
 \usage{
-ggsave2(filename, plot = ggplot2::last_plot(), device = NULL,
-  path = NULL, scale = 1, width = NA, height = NA,
-  units = c("in", "cm", "mm"), dpi = 300, limitsize = TRUE, ...)
+ggsave2(
+  filename,
+  plot = ggplot2::last_plot(),
+  device = NULL,
+  path = NULL,
+  scale = 1,
+  width = NA,
+  height = NA,
+  units = c("in", "cm", "mm"),
+  dpi = 300,
+  limitsize = TRUE,
+  ...
+)
 }
 \arguments{
 \item{filename}{Filename of the plot.}

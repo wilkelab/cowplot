@@ -4,8 +4,18 @@
 \alias{draw_image}
 \title{Draw an image}
 \usage{
-draw_image(image, x = 0, y = 0, width = 1, height = 1, scale = 1,
-  clip = "inherit", interpolate = TRUE, hjust = 0, vjust = 0)
+draw_image(
+  image,
+  x = 0,
+  y = 0,
+  width = 1,
+  height = 1,
+  scale = 1,
+  clip = "inherit",
+  interpolate = TRUE,
+  hjust = 0,
+  vjust = 0
+)
 }
 \arguments{
 \item{image}{The image to place. Can be a file path, a URL, or a raw vector with image data,
