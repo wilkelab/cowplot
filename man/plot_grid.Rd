@@ -23,6 +23,7 @@ plot_grid(
   hjust = -0.5,
   vjust = 1.5,
   scale = 1,
+  byrow = TRUE,
   greedy = TRUE,
   cols = NULL,
   rows = NULL
@@ -83,6 +84,8 @@ select plots. Usually it's preferable to set margins instead of using \code{scal
 sometimes be more powerful.}
 
 \item{greedy}{(optional) How should margins be adjusted during alignment. See \code{\link[=align_plots]{align_plots()}} for details.}
+
+\item{byrow}{Logical value indicating if the plots should be arrange by row (default) or by column.}
 
 \item{cols}{Deprecated. Use \code{ncol}.}
 
@@ -146,6 +149,13 @@ plot_grid(
  labels = "auto",
  label_size = 12,
  align = "v"
+)
+
+# can arrange plots on the grid by column as well as by row.
+plot_grid(
+ p1, NULL, p2, NULL, p3, NULL,
+ ncol = 2,
+ byrow = TRUE
 )
 
 # can align top of plotting area as well as bottom
