@@ -4,9 +4,21 @@
 \alias{draw_label}
 \title{Draw a text label or mathematical expression.}
 \usage{
-draw_label(label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
-  fontfamily = "", fontface = "plain", color = "black", size = 14,
-  angle = 0, lineheight = 0.9, alpha = 1, colour)
+draw_label(
+  label,
+  x = 0.5,
+  y = 0.5,
+  hjust = 0.5,
+  vjust = 0.5,
+  fontfamily = "",
+  fontface = "plain",
+  color = "black",
+  size = 14,
+  angle = 0,
+  lineheight = 0.9,
+  alpha = 1,
+  colour
+)
 }
 \arguments{
 \item{label}{String or plotmath expression to be drawn.}
@@ -65,7 +77,7 @@ p + draw_label(label, x = 100, y = 30, hjust = 0, vjust = 0)
 # Add labels via ggdraw. Uses ggdraw coordinates.
 # ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).
 ggdraw(p) +
-  draw_label("centered on 70\% of x range,\\n90\% of y range", x = 0.7, y = 0.9)
+  draw_label("centered on 70\% of x range,\n90\% of y range", x = 0.7, y = 0.9)
 
 ggdraw(p) +
   draw_label("bottom left at (0, 0)", x = 0, y = 0, hjust = 0, vjust = 0) +

@@ -6,8 +6,17 @@
 \alias{GeomDrawGrob}
 \title{Draw a grob.}
 \usage{
-draw_grob(grob, x = 0, y = 0, width = 1, height = 1, scale = 1,
-  clip = "inherit", hjust = 0, vjust = 0)
+draw_grob(
+  grob,
+  x = 0,
+  y = 0,
+  width = 1,
+  height = 1,
+  scale = 1,
+  clip = "inherit",
+  hjust = 0,
+  vjust = 0
+)
 }
 \arguments{
 \item{grob}{The grob to place.}

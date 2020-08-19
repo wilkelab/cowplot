@@ -98,23 +98,28 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' p1 <- ggplot(mpg, aes(x = cty, y = hwy, color = factor(cyl))) +
 #'   geom_point(size = 2) +
 #'   theme_half_open()
-#' save_plot("p1.png", p1)
-#' # same as p1 but determine base_width given base_height
-#' save_plot("p2.png", p1, base_height = NULL, base_width = 6)
+#'
+#' file1 <- tempfile("file1", fileext = ".png")
+#' file2 <- tempfile("file2", fileext = ".png")
+#' save_plot(file1, p1)
+#' # same as file1 but determine base_width given base_height
+#' save_plot(file2, p1, base_height = NULL, base_width = 6)
 #'
 #' # save a single plot without legend, adjust aspect ratio
 #' x <- (1:100)/10
 #' p3 <- ggplot(data.frame(x = x, y = x*sin(x)), aes(x, y)) +
 #'  geom_line() +
 #'  theme_minimal_hgrid()
-#' save_plot("p3.pdf", p3, base_asp = 1.1)
+#' file3 <- tempfile("file3", fileext = ".pdf")
+#' save_plot(file3, p3, base_asp = 1.1)
 #'
 #' # now combine with a second plot and save
 #' p3b <- ggplot(data.frame(x = x, y = cos(x)+x), aes(x, y)) +
 #'  geom_line() +
 #'  theme_minimal_hgrid()
 #' p4 <- plot_grid(p3, p3b, labels = "AUTO")
-#' save_plot("p4.pdf", p4, ncol = 2, base_asp = 1.1)
+#' file4 <- tempfile("file4", fileext = ".pdf")
+#' save_plot(file4, p4, ncol = 2, base_asp = 1.1)
 #' }
 #' @export
 save_plot <- function(filename, plot, ncol = 1, nrow = 1,

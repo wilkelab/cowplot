@@ -4,10 +4,22 @@
 \alias{add_sub}
 \title{Add annotation underneath a plot}
 \usage{
-add_sub(plot, label, x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5,
-  vpadding = grid::unit(1, "lines"), fontfamily = "",
-  fontface = "plain", color = "black", size = 14, angle = 0,
-  lineheight = 0.9, colour)
+add_sub(
+  plot,
+  label,
+  x = 0.5,
+  y = 0.5,
+  hjust = 0.5,
+  vjust = 0.5,
+  vpadding = grid::unit(1, "lines"),
+  fontfamily = "",
+  fontface = "plain",
+  color = "black",
+  size = 14,
+  angle = 0,
+  lineheight = 0.9,
+  colour
+)
 }
 \arguments{
 \item{plot}{A ggplot object or gtable object derived from a ggplot object.}
@@ -75,7 +87,7 @@ the plot panel.
 library(ggplot2)
 theme_set(theme_half_open())
 p1 <- ggplot(mtcars, aes(mpg, disp)) + geom_line(colour = "blue") + background_grid(minor='none')
-ggdraw(add_sub(p1, "This is an annotation.\\nAnnotations can span multiple lines."))
+ggdraw(add_sub(p1, "This is an annotation.\nAnnotations can span multiple lines."))
 
 # You can also do this repeatedly.
 p2 <- add_sub(p1, "This formula has no relevance here:", y  = 0, vjust = 0)

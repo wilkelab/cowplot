@@ -5,13 +5,25 @@
 \alias{circle_key_glyph}
 \title{Create customizable legend key glyphs}
 \usage{
-rectangle_key_glyph(colour = NA, fill = fill, alpha = alpha,
-  size = size, linetype = linetype, padding = unit(c(0, 0, 0, 0),
-  "pt"), color)
+rectangle_key_glyph(
+  colour = NA,
+  fill = fill,
+  alpha = alpha,
+  size = size,
+  linetype = linetype,
+  padding = unit(c(0, 0, 0, 0), "pt"),
+  color
+)
 
-circle_key_glyph(colour = NA, fill = fill, alpha = alpha,
-  size = size, linetype = linetype, padding = unit(c(0, 0, 0, 0),
-  "pt"), color)
+circle_key_glyph(
+  colour = NA,
+  fill = fill,
+  alpha = alpha,
+  size = size,
+  linetype = linetype,
+  padding = unit(c(0, 0, 0, 0), "pt"),
+  color
+)
 }
 \arguments{
 \item{colour, color}{Unquoted name of the aesthetic to use for the outline color,

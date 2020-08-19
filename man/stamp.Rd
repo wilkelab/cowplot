@@ -8,8 +8,19 @@
 \alias{stamp_ugly}
 \title{Stamp plots with a label, such as good, bad, or ugly.}
 \usage{
-stamp(p, label, color = "black", alpha = 1, vjust = 1.1, hjust = 1,
-  size = 14, family = "", fontface = "bold", clip = "on", colour)
+stamp(
+  p,
+  label,
+  color = "black",
+  alpha = 1,
+  vjust = 1.1,
+  hjust = 1,
+  size = 14,
+  family = "",
+  fontface = "bold",
+  clip = "on",
+  colour
+)
 
 stamp_good(p, ...)
 

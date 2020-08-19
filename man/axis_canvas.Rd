@@ -4,8 +4,15 @@
 \alias{axis_canvas}
 \title{Generates a canvas onto which one can draw axis-like objects.}
 \usage{
-axis_canvas(plot, axis = "y", data = NULL, mapping = aes(),
-  xlim = NULL, ylim = NULL, coord_flip = FALSE)
+axis_canvas(
+  plot,
+  axis = "y",
+  data = NULL,
+  mapping = aes(),
+  xlim = NULL,
+  ylim = NULL,
+  coord_flip = FALSE
+)
 }
 \arguments{
 \item{plot}{The plot defining the x and/or y axis range for the axis canvas.}
