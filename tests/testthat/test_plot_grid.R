@@ -29,8 +29,8 @@ test_that("basic plot arranging works", {
   )
 
   expect_doppelganger("colwise arranging",
-    plot_grid(p1, NULL, p2, NULL, p3, NULL, byrow = FALSE) + theme_map()
-  ) # add theme_map() for plot title
+    plot_grid(p1, NULL, p2, p3, NULL, byrow = FALSE) + theme_map() # add theme_map() for plot title
+  )
 })
 
 
