@@ -90,18 +90,18 @@
 #' \donttest{
 #' #' # missing plots in some grid locations, auto-generate lower-case labels
 #' plot_grid(
-#'  p1, NULL, NULL, p2, p3, NULL,
-#'  ncol = 2,
-#'  labels = "auto",
-#'  label_size = 12,
-#'  align = "v"
+#'   p1, NULL, NULL, p2, p3, NULL,
+#'   ncol = 2,
+#'   labels = "auto",
+#'   label_size = 12,
+#'   align = "v"
 #' )
 #'
 #' # can arrange plots on the grid by column as well as by row.
 #' plot_grid(
-#'  p1, NULL, p2, NULL, p3, NULL,
-#'  ncol = 2,
-#'  byrow = TRUE
+#'   p1, NULL, p2, NULL, p3,
+#'   ncol = 2,
+#'   byrow = TRUE
 #' )
 #'
 #' # can align top of plotting area as well as bottom
@@ -178,7 +178,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   if (is.null(rows)) rows <- ceiling(num_plots/cols)
 
   # if the user wants to layout the plots by column, we use the calculated rows to reorder plots
-  if (!byrow) plots <- plots[c(t(matrix(c(1:num_plots, rep(NA, (rows * cols) - num_plots)), nrow = rows, byrow = byrow)))]
+  if (!isTRUE(byrow)) plots <- plots[c(t(matrix(c(1:num_plots, rep(NA, (rows * cols) - num_plots)), nrow = rows, byrow = FALSE)))]
 
   # Align the plots (if specified)
   grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
