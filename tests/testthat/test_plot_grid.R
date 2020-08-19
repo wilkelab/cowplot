@@ -27,6 +27,10 @@ test_that("basic plot arranging works", {
   expect_doppelganger("scaling plots",
     plot_grid(p1, p2, p3, labels = "AUTO", scale = c(.9, .7, .5), nrow = 1) + theme_map() # add theme_map() for plot title
   )
+
+  expect_doppelganger("colwise arranging",
+    plot_grid(p1, NULL, p2, NULL, p3, NULL, byrow = FALSE) + theme_map()
+  ) # add theme_map() for plot title
 })
 
 
