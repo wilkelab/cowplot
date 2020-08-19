@@ -136,9 +136,9 @@ plot_grid(
 
 # can arrange plots on the grid by column as well as by row.
 plot_grid(
-p1, NULL, p2, NULL, p3, NULL,
-ncol = 2,
-byrow = TRUE
+ p1, NULL, p2, NULL, p3, NULL,
+ ncol = 2,
+ byrow = TRUE
 )
 
 # can align top of plotting area as well as bottom
