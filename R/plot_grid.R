@@ -131,7 +131,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
                       label_x = 0, label_y = 1,
                       hjust = -0.5, vjust = 1.5, scale = 1., greedy = TRUE,
-                      cols = NULL, rows = NULL ) {
+                      cols = NULL, rows = NULL, bycol = FALSE) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
@@ -158,8 +158,6 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
     rows <- nrow
   }
 
-  # Align the plots (if specified)
-  grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
 
   # calculate grid dimensions
   if (is.null(cols) && is.null(rows)){
@@ -170,6 +168,12 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # alternatively, we know at least how many rows or how many columns we need
   if (is.null(cols)) cols <- ceiling(num_plots/rows)
   if (is.null(rows)) rows <- ceiling(num_plots/cols)
+
+  # if the user wants to layout the plots by column, we use the calculated rows to reorder plots
+  if (bycol) plots <- plots[c(t(matrix(1:num_plots, nrow = rows, byrow = F)))]
+
+  # Align the plots (if specified)
+  grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
 
   if ("AUTO" %in% labels)
     labels <- LETTERS[1:num_plots]
