@@ -256,8 +256,9 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'  related functions.
 #' @param x The x location of the image. (Left side if `hjust = 0`.)
 #' @param y The y location of the image. (Bottom side if `vjust = 0`.)
-#' @param hjust Horizontal justification relative to x.
-#' @param vjust Vertical justification relative to y.
+#' @param hjust,vjust Horizontal and vertical justification relative to x.
+#' @param halign,valign Horizontal and vertical justification of the image inside
+#'   the box.
 #' @param width Width of the image.
 #' @param height Height of the image.
 #' @param scale Scales the image relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -272,16 +273,25 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' # Use image as plot background
 #' p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
 #'   geom_density(alpha = 0.7) +
-#'   scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+#'   scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
 #'   theme_half_open(12)
 #'
 #' logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 #' ggdraw() +
-#'   draw_image(logo_file, scale = .7) +
+#'   draw_image(
+#'     logo_file, scale = .7
+#'   ) +
+#'   draw_plot(p)
+#'
+#' # Place in lower right corner
+#' ggdraw() +
+#'   draw_image(
+#'     logo_file, scale = .3, x = 1,
+#'     hjust = 1, halign = 1, valign = 0
+#'   ) +
 #'   draw_plot(p)
 #'
 #' # Make grid with plot and image
-#'
 #' cow_file <- system.file("extdata", "cow.jpg", package = "cowplot")
 #' p2 <- ggdraw() + draw_image(cow_file, scale = 0.9)
 #' plot_grid(
@@ -305,7 +315,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #' }
 #' @export
 draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit",
-                       interpolate = TRUE, hjust = 0, vjust = 0) {
+                       interpolate = TRUE, hjust = 0, vjust = 0, halign = 0.5, valign = 0.5) {
   if (!requireNamespace("magick", quietly = TRUE)){
     warning("Package `magick` is required to draw images. Image not drawn.", call. = FALSE)
     draw_grob(grid::nullGrob(), x, y, width, height)
@@ -319,11 +329,15 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
     else {
       image_data <- magick::image_read(image)
     }
-    g <- grid::rasterGrob(image_data, interpolate = interpolate)
+    g <- grid::rasterGrob(
+      image_data,
+      x = halign, y = valign, hjust = halign, vjust = valign,
+      interpolate = interpolate
+    )
     draw_grob(
       g, x = x, y = y, width = width, height = height,
       hjust = hjust, vjust = vjust, scale = scale,
-      clip = clip
+      clip = clip, halign = halign, valign = valign
     )
   }
 }
@@ -336,8 +350,9 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #'   or a recorded base-R plot, as in [as_grob()].
 #' @param x The x location of the plot. (Left side if `hjust = 0`.)
 #' @param y The y location of the plot. (Bottom side if `vjust = 0`.)
-#' @param hjust Horizontal justification relative to x.
-#' @param vjust Vertical justification relative to y.
+#' @param hjust,vjust Horizontal and vertical justification relative to x.
+#' @param halign,valign Horizontal and vertical justification of the plot inside
+#'   the box.
 #' @param width Width of the plot.
 #' @param height Height of the plot.
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -352,11 +367,12 @@ draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, cl
 #' ggdraw() + draw_plot(p, .6, .6, .4, .4)
 #' @export
 draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
-                      hjust = 0, vjust = 0) {
+                      hjust = 0, vjust = 0, halign = 0.5, valign = 0.5) {
   plot <- as_grob(plot) # convert to grob if necessary
   draw_grob(
     plot, x = x, y = y, width = width, height = height,
-    scale = scale, hjust = hjust, vjust = vjust
+    scale = scale, hjust = hjust, vjust = vjust,
+    halign = halign, valign = valign
   )
 }
 
@@ -367,8 +383,9 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
 #' @param grob The grob to place.
 #' @param x The x location of the grob. (Left side if `hjust = 0`.)
 #' @param y The y location of the grob. (Bottom side if `vjust = 0`.)
-#' @param hjust Horizontal justification relative to x.
-#' @param vjust Vertical justification relative to y.
+#' @param hjust,vjust Horizontal and vertical justification relative to x.
+#' @param halign,valign Horizontal and vertical justification of the grob inside
+#'   the box.
 #' @param width Width of the grob.
 #' @param height Height of the grob.
 #' @param scale Scales the grob relative to the rectangle defined by `x`, `y`, `width`, `height`. A setting
@@ -382,7 +399,7 @@ draw_plot <- function(plot, x = 0, y = 0, width = 1, height = 1, scale = 1,
 #' ggdraw() + draw_grob(g, scale = 0.5)
 #' @export
 draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit",
-                      hjust = 0, vjust = 0) {
+                      hjust = 0, vjust = 0, halign = 0.5, valign = 0.5) {
   layer(
     data = data.frame(x = NA),
     stat = StatIdentity,
@@ -396,7 +413,9 @@ draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip
       ymin = y - vjust*height,
       ymax = y + (1-vjust)*height,
       scale = scale,
-      clip = clip
+      clip = clip,
+      halign = halign,
+      valign = valign
     )
   )
 }
@@ -407,7 +426,8 @@ draw_grob <- function(grob, x = 0, y = 0, width = 1, height = 1, scale = 1, clip
 #' @importFrom ggplot2 ggproto GeomCustomAnn
 #' @export
 GeomDrawGrob <- ggproto("GeomDrawGrob", GeomCustomAnn,
-  draw_panel = function(self, data, panel_params, coord, grob, xmin, xmax, ymin, ymax, scale = 1, clip = "inherit") {
+  draw_panel = function(self, data, panel_params, coord, grob, xmin, xmax, ymin, ymax, scale = 1, clip = "inherit",
+                        halign = 0.5, valign = 0.5) {
     if (!inherits(coord, "CoordCartesian")) {
       stop("draw_grob only works with Cartesian coordinates",
            call. = FALSE)
@@ -421,13 +441,15 @@ GeomDrawGrob <- ggproto("GeomDrawGrob", GeomCustomAnn,
     # set up inner and outer viewport for clipping. Unfortunately,
     # clipping doesn't work properly most of the time, due to
     # grid limitations
-    vp_outer <- grid::viewport(x = mean(x_rng), y = mean(y_rng),
+    vp_outer <- grid::viewport(x = min(x_rng) + halign*diff(x_rng),
+                               y = min(y_rng) + valign*diff(y_rng),
                                width = diff(x_rng), height = diff(y_rng),
-                               just = c("center", "center"),
+                               just = c(halign, valign),
                                clip = clip)
 
-    vp_inner <- grid::viewport(width = scale, height = scale,
-                               just = c("center", "center"))
+    vp_inner <- grid::viewport(x = halign, y = valign,
+                               width = scale, height = scale,
+                               just = c(halign, valign))
 
     id <- annotation_id()
     inner_grob <- grid::grobTree(grob, vp = vp_inner, name = paste(grob$name, id))

@@ -14,7 +14,9 @@ draw_image(
   clip = "inherit",
   interpolate = TRUE,
   hjust = 0,
-  vjust = 0
+  vjust = 0,
+  halign = 0.5,
+  valign = 0.5
 )
 }
 \arguments{
@@ -39,9 +41,10 @@ Note that clipping doesn't always work as expected, due to limitations of the gr
 \item{interpolate}{A logical value indicating whether to linearly interpolate the image
 (the alternative is to use nearest-neighbour interpolation, which gives a more blocky result).}
 
-\item{hjust}{Horizontal justification relative to x.}
+\item{hjust, vjust}{Horizontal and vertical justification relative to x.}
 
-\item{vjust}{Vertical justification relative to y.}
+\item{halign, valign}{Horizontal and vertical justification of the image inside
+the box.}
 }
 \description{
 Places an image somewhere onto the drawing canvas. By default, coordinates run from
@@ -54,16 +57,25 @@ library(ggplot2)
 # Use image as plot background
 p <- ggplot(iris, aes(x = Sepal.Length, fill = Species)) +
   geom_density(alpha = 0.7) +
-  scale_y_continuous(expand = expand_scale(mult = c(0, 0.05))) +
+  scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
   theme_half_open(12)
 
 logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 ggdraw() +
-  draw_image(logo_file, scale = .7) +
+  draw_image(
+    logo_file, scale = .7
+  ) +
+  draw_plot(p)
+
+# Place in lower right corner
+ggdraw() +
+  draw_image(
+    logo_file, scale = .3, x = 1,
+    hjust = 1, halign = 1, valign = 0
+  ) +
   draw_plot(p)
 
 # Make grid with plot and image
-
 cow_file <- system.file("extdata", "cow.jpg", package = "cowplot")
 p2 <- ggdraw() + draw_image(cow_file, scale = 0.9)
 plot_grid(

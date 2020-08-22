@@ -197,12 +197,15 @@ ggdraw() +
   draw_plot(p)
 ```
 
-We can also add an image as a logo onto a plot.
+We can also add an image as a logo onto a plot. We use `halign` and `valign` in addition to `hjust` and `vjust` to align the image flush in the top right corner.
 
 ```{r fig.width = 5.7, fig.height = 3.8}
 logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 
 ggdraw() + 
   draw_plot(p) +
-  draw_image(logo_file, x = 1, hjust = 1, width = 0.13, height = 0.2)
+  draw_image(
+    logo_file, x = 1, y = 1, hjust = 1, vjust = 1, halign = 1, valign = 1,
+    width = 0.15
+  )
 ```

@@ -22,6 +22,60 @@ test_that("draw_grob() can align grobs", {
   )
 })
 
+test_that("image placement and scaling", {
+  img_src <- system.file("extdata", "logo.png", package = "cowplot")
+
+  p <- ggplot() + xlim(0, 1) + ylim(0, 1)
+
+  expect_doppelganger(
+    "four corners, centered, scaled",
+    p +
+      draw_image(
+        img_src, scale = 0.5,
+        x = 0, y = 0, width = .4, height = .4, hjust = 0, vjust = 0
+      ) +
+      draw_image(
+        img_src, scale = 0.75,
+        x = 1, y = 0, width = .4, height = .4, hjust = 1, vjust = 0
+      ) +
+      draw_image(
+        img_src, scale = 1.0,
+        x = 1, y = 1, width = .4, height = .4, hjust = 1, vjust = 1
+      ) +
+      draw_image(
+        img_src, scale = 1.25,
+        x = 0, y = 1, width = .4, height = .4, hjust = 0, vjust = 1
+      )
+  )
+
+  expect_doppelganger(
+    "four corners, aligned, scaled",
+    p +
+      draw_image(
+        img_src, scale = 0.5,
+        x = 0, y = 0, width = .4, height = .4, hjust = 0, vjust = 0,
+        halign = 0, valign = 0
+      ) +
+      draw_image(
+        img_src, scale = 0.75,
+        x = 1, y = 0, width = .4, height = .4, hjust = 1, vjust = 0,
+        halign = 1, valign = 0
+      ) +
+      draw_image(
+        img_src, scale = 1.0,
+        x = 1, y = 1, width = .4, height = .4, hjust = 1, vjust = 1,
+        halign = 1, valign = 1
+      ) +
+      draw_image(
+        img_src, scale = 1.25,
+        x = 0, y = 1, width = .4, height = .4, hjust = 0, vjust = 1,
+        halign = 0, valign = 1
+      )
+  )
+})
+
+
+
 test_that("draw_plot_label() works", {
   theme_old <- theme_set(
     theme_cowplot() +
