@@ -72,7 +72,7 @@ p <- ggplot(mtcars, aes(factor(cyl))) +
   geom_bar(fill = "#56B4E9", alpha = 0.8) +
   scale_y_continuous(
     # don't expand y scale at the lower end
-    expand = expand_scale(mult = c(0, 0.05))
+    expand = expansion(mult = c(0, 0.05))
   )
 
 p + theme_half_open()
