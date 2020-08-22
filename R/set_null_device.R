@@ -9,10 +9,10 @@
 #' if you use a graphics device that writes a file, then you may find temporary files associated
 #' with the device. The default null device, `pdf(NULL)`, does not cause these side effects. However, it has
 #' has other limitations. For example, on OS X, it cannot use all the fonts that are available on the
-#' system. The png device can use all fonts, but it will create temporary files.
+#' system. The ragg device can use all fonts, but it will create temporary files.
 #'
-#' @param null_device Either a string that defines the null device ("pdf", "png", "cairo") or a function
-#'   that returns a new graphics device.
+#' @param null_device Either a string that defines the null device ("pdf", "png", "cairo", "agg")
+#'  or a function that returns a new graphics device.
 #'
 #' @examples
 #' set_null_device("png") # set the png null device
@@ -27,7 +27,8 @@
 #'}
 #' set_null_device(jpeg_null_device)
 #' @seealso
-#' Available null devices are: [`pdf_null_device()`], [`png_null_device()`], [`cairo_null_device()`]
+#' Available null devices are: [`pdf_null_device()`], [`png_null_device()`],
+#'   [`cairo_null_device()`], [`agg_null_device()`]
 #' @export
 set_null_device <- function(null_device) {
   old <- null_dev_env$current
@@ -40,6 +41,7 @@ set_null_device <- function(null_device) {
       png = png_null_device,
       cairo = cairo_null_device,
       Cairo = cairo_null_device,
+      agg = agg_null_device,
       {
         warning("Null device ", null_device, " not recognized. Substituting grDevices::pdf().", call. = FALSE);
         pdf_null_device
@@ -87,6 +89,22 @@ cairo_null_device <- function(width, height) {
     grDevices::dev.control("enable")
   } else {
     warning("Package `Cairo` is required to use the Cairo null device. Substituting grDevices::pdf(NULL).", call. = FALSE)
+    pdf_null_device(width, height)
+  }
+}
+
+#' @rdname png_null_device
+#' @export
+agg_null_device <- function(width, height) {
+  if (requireNamespace("ragg", quietly = TRUE)) {
+    ragg::agg_png(
+      filename = tempfile(pattern = "cowplot_null_plot", fileext = ".png"),
+      width = width, height = height,
+      units = "in", res = 300
+    )
+    grDevices::dev.control("enable")
+  } else {
+    warning("Package `ragg` is required to use the agg null device. Substituting grDevices::pdf(NULL).", call. = FALSE)
     pdf_null_device(width, height)
   }
 }

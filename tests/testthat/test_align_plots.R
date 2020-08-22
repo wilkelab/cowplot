@@ -23,6 +23,10 @@ test_that("basic alignments, h, v, hv", {
 
 
 test_that("complex alignments, h, v, hv", {
+  # we need a graphics device open to perform unit conversion,
+  # otherwise we get an empty plot file
+  pdf(NULL)
+
   df <- data.frame(
     short = c("a", "b", "c"),
     long = c("aaaaaaaa", "bbbbbbbb", "ccccccccc"),
@@ -64,4 +68,5 @@ test_that("complex alignments, h, v, hv", {
     grid::convertUnit(sum(plots[[1]]$heights[1:6]), "cm"),
     grid::convertUnit(sum(plots[[2]]$heights[1:7]), "cm")
   )
+  dev.off()
 })

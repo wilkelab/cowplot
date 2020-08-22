@@ -45,6 +45,7 @@ Suggests:
     PASWR,
     patchwork,
     rmarkdown,
+    ragg,
     testthat (>= 1.0.0),
     tidyr,
     vdiffr (>= 0.3.0),

@@ -7,8 +7,8 @@
 set_null_device(null_device)
 }
 \arguments{
-\item{null_device}{Either a string that defines the null device ("pdf", "png", "cairo") or a function
-that returns a new graphics device.}
+\item{null_device}{Either a string that defines the null device ("pdf", "png", "cairo", "agg")
+or a function that returns a new graphics device.}
 }
 \description{
 The function \code{\link[=as_grob]{as_grob()}} needs to open a graphics device to render ggplot objects into
@@ -37,5 +37,6 @@ jpeg_null_device <- function(width, height) {
 set_null_device(jpeg_null_device)
 }
 \seealso{
-Available null devices are: \code{\link[=pdf_null_device]{pdf_null_device()}}, \code{\link[=png_null_device]{png_null_device()}}, \code{\link[=cairo_null_device]{cairo_null_device()}}
+Available null devices are: \code{\link[=pdf_null_device]{pdf_null_device()}}, \code{\link[=png_null_device]{png_null_device()}},
+\code{\link[=cairo_null_device]{cairo_null_device()}}, \code{\link[=agg_null_device]{agg_null_device()}}
 }

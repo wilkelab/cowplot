@@ -4,6 +4,7 @@
 \alias{png_null_device}
 \alias{pdf_null_device}
 \alias{cairo_null_device}
+\alias{agg_null_device}
 \title{Null devices}
 \usage{
 png_null_device(width, height)
@@ -11,6 +12,8 @@ png_null_device(width, height)
 pdf_null_device(width, height)
 
 cairo_null_device(width, height)
+
+agg_null_device(width, height)
 }
 \arguments{
 \item{width}{Device width in inch}
