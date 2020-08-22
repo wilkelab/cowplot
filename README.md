@@ -18,7 +18,7 @@ The cowplot package is available on [CRAN](https://cran.r-project.org/package=co
     
 To install the latest development version of the package using the devtools package, enter the following in your R console:
 
-    devtools::install_github("wilkelab/cowplot")
+    remotes::install_github("wilkelab/cowplot")
 
 # Usage
 
