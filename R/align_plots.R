@@ -49,8 +49,40 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
   # "first" aligns all lengths up to but excluding the first "null"; "last" aligns all lengths past the first "null"
   list_indices <- switch(
     margin_to_align,
-    first = lapply(sizes, function(x) 1:(grep("null", x)[1] - 1)),
-    last = lapply(sizes, function(x) (grep("null", x)[length(grep("null", x))] + 1):length(x)),
+    first = lapply(
+      sizes,
+      function(x) {
+        # find all positions of unit NULL
+        null_idx <- grep("null", x)
+        # if there are none, abort
+        if (length(null_idx) < 1) {
+          return(NULL)
+        }
+        # if the first is already a NULL, abort
+        first_null_idx <- null_idx[1]
+        if (first_null_idx < 2) {
+          return(NULL)
+        }
+        1:(first_null_idx - 1)
+      }
+    ),
+    last = lapply(
+      sizes,
+      function(x) {
+        # find all positions of unit NULL
+        null_idx <- grep("null", x)
+        # if there are none, abort
+        if (length(null_idx) < 1) {
+          return(NULL)
+        }
+        # if the last is already a NULL, abort
+        last_null_idx <- null_idx[length(null_idx)]
+        if (last_null_idx == length(x)) {
+          return(NULL)
+        }
+        (last_null_idx + 1):length(x)
+      }
+    ),
     stop("Invalid margin input, should be either 'first' or 'last'")
   )
 
@@ -61,28 +93,46 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
     last = lapply(sizes, function(x) length(x))
   )
 
+  # create a sequence of indices along the list of plots
   grob_seq <- seq_along(list_indices)
-  num <- unique(unlist(lapply(list_indices, function(x) length(x))))
-  num[num == 0] <- NULL # remove entry for missing graphs
+  # create a list of plots to exclude from alignment
+  grob_exclude <- which(vapply(list_indices, is.null, logical(1)))
+  # find number of distinct lengths
+  num <- unique(vapply(list_indices, length, numeric(1)))
+  num <- num[num != 0] # remove entry for missing/unalignable graphs
 
   if (greedy || length(num) > 1) { # Align if different number of items in margin
-    margins <- lapply(grob_seq, function(x) {sum(sizes[[x]][list_indices[[x]] ])})
+    margins <- lapply(
+      grob_seq,
+      function(x) {
+        if (!x %in% grob_exclude) {
+          sum(sizes[[x]][list_indices[[x]] ])
+        } else {
+          grid::unit(0, "pt")
+        }
+      }
+    )
     largest_margin <- max(do.call(grid::unit.c, margins))
     # For each grob, make the size of the extreme margin equal to the largest margin minus the sum of the remaining margins
     lapply(
       grob_seq,
       function(x) {
-        sizes[[x]][extreme_margin[[x]] ] <-
-          largest_margin - sum(sizes[[x]][list_indices[[x]][which(list_indices[[x]] != extreme_margin[[x]])] ])
+        if (!x %in% grob_exclude) {
+          sizes[[x]][extreme_margin[[x]] ] <-
+            largest_margin - sum(sizes[[x]][list_indices[[x]][which(list_indices[[x]] != extreme_margin[[x]])] ])
+        }
         sizes[[x]]
       }
     )
   } else{ # If margins have same number of items, then make all the same length
-    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq, function(x) sizes[[x]][list_indices[[x]] ]))
+    grob_seq_nonex <- grob_seq[!grob_seq %in% grob_exclude]
+    max_margins <- do.call(grid::unit.pmax, lapply(grob_seq_nonex, function(x) sizes[[x]][list_indices[[x]] ]))
     lapply(
       grob_seq,
       function(x) {
-        sizes[[x]][list_indices[[x]] ] <- max_margins
+        if (!x %in% grob_exclude) {
+          sizes[[x]][list_indices[[x]] ] <- max_margins
+        }
         sizes[[x]]
       }
     )

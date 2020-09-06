@@ -41,15 +41,25 @@ test_that("complex alignments, h, v, hv", {
   expect_warning(align_plots(p1, p2, align = "v"))
 
   # with greedy = FALSE, all widths are equal
-  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = FALSE)
+  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = FALSE)  # align left
   expect_equal(plots[[1]]$widths[1:4], plots[[2]]$widths[1:4])
 
+  plots <- align_plots(p1, p2, align = "v", axis = "r", greedy = FALSE)  # align right
+  expect_equal(plots[[1]]$widths[6:9], plots[[2]]$widths[14:17])
+
   # with greedy = TRUE, only the sums of the widths are equal
-  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = TRUE)
+  plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = TRUE)   # align left
   expect_equal(
     grid::convertUnit(sum(plots[[1]]$widths[1:4]), "in"),
     grid::convertUnit(sum(plots[[2]]$widths[1:4]), "in")
   )
+
+  plots <- align_plots(p1, p2, align = "v", axis = "r", greedy = TRUE)   # align right
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[6:9]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[14:17]), "in")
+  )
+
 
   p3 <- ggplot(df, aes(short, x)) +
     geom_point() + facet_wrap(~long, ncol = 1)
@@ -68,5 +78,66 @@ test_that("complex alignments, h, v, hv", {
     grid::convertUnit(sum(plots[[1]]$heights[1:6]), "cm"),
     grid::convertUnit(sum(plots[[2]]$heights[1:7]), "cm")
   )
+  dev.off()
+})
+
+
+test_that("complex alignments with non-plots", {
+  # we need a graphics device open to perform unit conversion,
+  # otherwise we get an empty plot file
+  pdf(NULL)
+
+  df <- data.frame(
+    short = c("a", "b", "c"),
+    long = c("aaaaaaaa", "bbbbbbbb", "ccccccccc"),
+    x = 1:3
+  )
+
+  p1 <- ggplot(df, aes(short, x, color = short)) + geom_point()
+  p2 <- ggplot(df, aes(short, x)) +
+    geom_point() + facet_wrap(~long)
+  p3 <- get_legend(p1)
+
+  # with greedy = FALSE, all widths are equal
+  plots <- align_plots(p1, p2, p3, align = "v", axis = "l", greedy = FALSE)  # align left
+  expect_equal(plots[[1]]$widths[1:4], plots[[2]]$widths[1:4])
+  plots <- align_plots(p1, NULL, p2, p3, align = "v", axis = "l", greedy = FALSE)  # align left
+  expect_equal(plots[[1]]$widths[1:4], plots[[3]]$widths[1:4])
+
+  # because p1 has a legend and p2 doesn't, only the sums of the widths are equal for right align
+  plots <- align_plots(p1, p2, p3, align = "v", axis = "r", greedy = FALSE)  # align right
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[6:11]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[14:17]), "in")
+  )
+  plots <- align_plots(p1, NULL, p2, p3, align = "v", axis = "r", greedy = FALSE)  # align right
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[6:11]), "in"),
+    grid::convertUnit(sum(plots[[3]]$widths[14:17]), "in")
+  )
+
+  # with greedy = TRUE, only the sums of the widths are equal
+  plots <- align_plots(p1, p2, p3, align = "v", axis = "l", greedy = TRUE)   # align left
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[1:4]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[1:4]), "in")
+  )
+  plots <- align_plots(p1, NULL, p2, p3, align = "v", axis = "l", greedy = TRUE)   # align left
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[1:4]), "in"),
+    grid::convertUnit(sum(plots[[3]]$widths[1:4]), "in")
+  )
+
+  plots <- align_plots(p1, p2, p3, align = "v", axis = "r", greedy = TRUE)   # align right
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[6:11]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[14:17]), "in")
+  )
+  plots <- align_plots(p1, NULL, p2, align = "v", axis = "r", greedy = TRUE)   # align right
+  expect_equal(
+    grid::convertUnit(sum(plots[[1]]$widths[6:11]), "in"),
+    grid::convertUnit(sum(plots[[3]]$widths[14:17]), "in")
+  )
+
   dev.off()
 })
