@@ -17,7 +17,7 @@ Description:
     internal use in the Wilke lab, hence the name (Claus O. Wilke's plot package).
     It has also been used extensively in the book Fundamentals of Data
     Visualization.
-URL: https://wilkelab.org/cowplot
+URL: https://wilkelab.org/cowplot/
 BugReports: https://github.com/wilkelab/cowplot/issues
 Depends:
     R (>= 3.5.0)

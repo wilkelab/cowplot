@@ -1,4 +1,4 @@
-# cowplot 1.0.0.9000
+# cowplot 1.1.0
 
 - `plot_grid()` now accepts `byrow` as an argument to place plots by row or by column onto the plot area (@BrianLang, #162).  
 - A new null device was added, `agg_null_device()`.
