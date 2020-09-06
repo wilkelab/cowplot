@@ -8,21 +8,36 @@
 
 <title>Generates a canvas onto which one can draw axis-like objects. — axis_canvas • cowplot</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,8 +45,8 @@
 
 
 
-<meta property="og:title" content="Generates a canvas onto which one can draw axis-like objects. — axis_canvas" />
 
+<meta property="og:title" content="Generates a canvas onto which one can draw axis-like objects. — axis_canvas" />
 <meta property="og:description" content="This function takes an existing ggplot2 plot and copies one or both of the axis into a new plot.
 The main idea is to use this in conjunction with insert_xaxis_grob() or insert_yaxis_grob() to
 draw custom axis-like objects or margin annotations. Importantly, while this function works for
@@ -39,9 +54,8 @@ both continuous and discrete scales, notice that discrete scales are converted i
 in the returned axis canvas. The levels of the discrete scale are placed at continuous values of
 1, 2, 3, etc. See Examples for an example of how to convert a discrete scale into a continuous
 scale." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -55,9 +69,10 @@ scale." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -71,7 +86,7 @@ scale." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -79,7 +94,7 @@ scale." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -120,9 +135,13 @@ scale." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/wilkelab/cowplot/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -130,18 +149,18 @@ scale." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generates a canvas onto which one can draw axis-like objects.</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/axis_canvas.R'><code>R/axis_canvas.R</code></a></small>
     <div class="hidden name"><code>axis_canvas.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>This function takes an existing ggplot2 plot and copies one or both of the axis into a new plot.
 The main idea is to use this in conjunction with <code><a href='insert_xaxis_grob.html'>insert_xaxis_grob()</a></code> or <code><a href='insert_xaxis_grob.html'>insert_yaxis_grob()</a></code> to
 draw custom axis-like objects or margin annotations. Importantly, while this function works for
@@ -149,12 +168,18 @@ both continuous and discrete scales, notice that discrete scales are converted i
 in the returned axis canvas. The levels of the discrete scale are placed at continuous values of
 1, 2, 3, etc. See Examples for an example of how to convert a discrete scale into a continuous
 scale.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>axis_canvas</span>(<span class='no'>plot</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"y"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(),
-  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>coord_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>axis_canvas</span>(
+  <span class='no'>plot</span>,
+  <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"y"</span>,
+  <span class='kw'>data</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'>aes</span>(),
+  <span class='kw'>xlim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ylim</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>coord_flip</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -190,46 +215,44 @@ if the y axis is copied over from <code>plot</code>.</p></td>
 the y axis and vice versa. Useful in combination with ggplot2's <code>coord_flip()</code> function.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># annotate line graphs with labels on the right</span>
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
-#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following object is masked from ‘package:testthat’:</span>
-#&gt; <span class='message'></span>
-#&gt; <span class='message'>    matches</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>dplyr</span>)</div><div class='output co'>#&gt; <span class='message'></span>
+#&gt; <span class='message'>Attaching package: ‘dplyr’</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:stats’:</span>
 #&gt; <span class='message'></span>
 #&gt; <span class='message'>    filter, lag</span></div><div class='output co'>#&gt; <span class='message'>The following objects are masked from ‘package:base’:</span>
 #&gt; <span class='message'></span>
-#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>tidyr</span>)
-<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
+#&gt; <span class='message'>    intersect, setdiff, setequal, union</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyr</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span>(<span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>())
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/seq'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>.1</span>)
-<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='no'>x</span>,
+<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span>(<span class='fl'>0</span>, <span class='fl'>10</span>, <span class='fl'>.1</span>)
+<span class='no'>d</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='no'>x</span>,
                 <span class='kw'>linear</span> <span class='kw'>=</span> <span class='no'>x</span>,
                 <span class='kw'>squared</span> <span class='kw'>=</span> <span class='no'>x</span>*<span class='no'>x</span>/<span class='fl'>5</span>,
                 <span class='kw'>cubed</span> <span class='kw'>=</span> <span class='no'>x</span>*<span class='no'>x</span>*<span class='no'>x</span>/<span class='fl'>25</span>) <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://tidyr.tidyverse.org/reference/gather.html'>gather</a></span>(<span class='no'>fun</span>, <span class='no'>y</span>, -<span class='no'>x</span>)
 
 <span class='no'>pmain</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>d</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>group</span> <span class='kw'>=</span> <span class='no'>fun</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>()  +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span>(<span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>))
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_x_continuous</a></span>(<span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>))
 
 <span class='no'>paxis</span> <span class='kw'>&lt;-</span> <span class='fu'>axis_canvas</span>(<span class='no'>pmain</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"y"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>d</span>, <span class='no'>x</span> <span class='kw'>==</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/Extremes'>max</a></span>(<span class='no'>x</span>)), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste0</a></span>(<span class='st'>" "</span>, <span class='no'>fun</span>)),
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='kw'>data</span> <span class='kw'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span>(<span class='no'>d</span>, <span class='no'>x</span> <span class='kw'>==</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='no'>x</span>)), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>y</span>, <span class='kw'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>" "</span>, <span class='no'>fun</span>)),
             <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'><a href='insert_xaxis_grob.html'>insert_yaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>paxis</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>.25</span>, <span class='st'>"null"</span>)))</div><div class='img'><img src='axis_canvas-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'><a href='insert_xaxis_grob.html'>insert_yaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>paxis</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>.25</span>, <span class='st'>"null"</span>)))</div><div class='img'><img src='axis_canvas-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># discrete scale with integrated color legend</span>
 <span class='no'>pmain</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Species</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_violin.html'>geom_violin</a></span>(<span class='kw'>trim</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"none"</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_discrete.html'>scale_x_discrete</a></span>(<span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal</a></span>()
 
-<span class='no'>label_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nlevels'>nlevels</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>),
-                         <span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/levels'>levels</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>))
+<span class='no'>label_data</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fu'><a href='https://rdrr.io/r/base/nlevels.html'>nlevels</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>),
+                         <span class='kw'>Species</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/levels.html'>levels</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>))
 <span class='no'>paxis</span> <span class='kw'>&lt;-</span> <span class='fu'>axis_canvas</span>(<span class='no'>pmain</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"x"</span>, <span class='kw'>data</span> <span class='kw'>=</span> <span class='no'>label_data</span>, <span class='kw'>mapping</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>x</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_tile.html'>geom_tile</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>), <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>0.3</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_text.html'>geom_text</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='no'>Species</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>), <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>11</span>/<span class='no'>.pt</span>)
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'><a href='insert_xaxis_grob.html'>insert_xaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>paxis</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>.07</span>, <span class='st'>"null"</span>),
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'><a href='insert_xaxis_grob.html'>insert_xaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>paxis</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>.07</span>, <span class='st'>"null"</span>),
                          <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"bottom"</span>))</div><div class='img'><img src='axis_canvas-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># add marginal density distributions to plot</span>
 <span class='no'>pmain</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>Sepal.Length</span>, <span class='kw'>y</span><span class='kw'>=</span><span class='no'>Sepal.Width</span>, <span class='kw'>color</span><span class='kw'>=</span><span class='no'>Species</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
@@ -242,20 +265,17 @@ the y axis and vice versa. Useful in combination with ggplot2's <code>coord_flip
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_density.html'>geom_density</a></span>(<span class='kw'>data</span><span class='kw'>=</span><span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span><span class='kw'>=</span><span class='no'>Sepal.Width</span>, <span class='kw'>fill</span><span class='kw'>=</span><span class='no'>Species</span>), <span class='kw'>alpha</span><span class='kw'>=</span><span class='fl'>0.7</span>, <span class='kw'>size</span><span class='kw'>=</span><span class='fl'>.2</span>) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span>()
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert_xaxis_grob.html'>insert_xaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>xdens</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>.2</span>, <span class='st'>"null"</span>), <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert_xaxis_grob.html'>insert_yaxis_grob</a></span>(<span class='no'>p1</span>, <span class='no'>ydens</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>.2</span>, <span class='st'>"null"</span>), <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"right"</span>)
+<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert_xaxis_grob.html'>insert_xaxis_grob</a></span>(<span class='no'>pmain</span>, <span class='no'>xdens</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>.2</span>, <span class='st'>"null"</span>), <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"top"</span>)
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='insert_xaxis_grob.html'>insert_yaxis_grob</a></span>(<span class='no'>p1</span>, <span class='no'>ydens</span>, <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>.2</span>, <span class='st'>"null"</span>), <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"right"</span>)
 <span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p2</span>)</div><div class='img'><img src='axis_canvas-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -263,13 +283,16 @@ the y axis and vice versa. Useful in combination with ggplot2's <code>coord_flip
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

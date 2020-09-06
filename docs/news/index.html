@@ -8,21 +8,36 @@
 
 <title>Changelog • cowplot</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,10 +45,10 @@
 
 
 
-<meta property="og:title" content="Changelog" />
 
+<meta property="og:title" content="Changelog" />
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -47,9 +62,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -63,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -71,7 +87,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -112,9 +128,13 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/wilkelab/cowplot/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -122,18 +142,34 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/wilkelab/cowplot/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="cowplot-1-0-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-1-0-0" class="anchor"></a>cowplot 1.0.0<small> 2019-07-11 </small>
+    <div id="cowplot-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#cowplot-110" class="anchor"></a>cowplot 1.1.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>
+<code><a href="../reference/plot_grid.html">plot_grid()</a></code> now accepts <code>byrow</code> as an argument to place plots by row or by column onto the plot area (<a href='https://github.com/BrianLang'>@BrianLang</a>, <a href='https://github.com/wilkelab/cowplot/issues/162'>#162</a>).<br>
+</li>
+<li>A new null device was added, <code><a href="../reference/png_null_device.html">agg_null_device()</a></code>.</li>
+<li>
+<code><a href="../reference/draw_image.html">draw_image()</a></code>, <code><a href="../reference/draw_plot.html">draw_plot()</a></code>, and <code><a href="../reference/draw_grob.html">draw_grob()</a></code> have gained additional alignment parameters <code>halign</code> and <code>valign</code> which allow internal alignment relative to the box into which content is drawn.</li>
+<li>In the functions <code><a href="../reference/insert_xaxis_grob.html">insert_xaxis_grob()</a></code> and <code><a href="../reference/insert_xaxis_grob.html">insert_yaxis_grob()</a></code>, clipping is now configurable.</li>
+<li>Plot assemblies generated by the patchwork package are now supported in <code><a href="../reference/as_grob.html">as_grob()</a></code>, <code><a href="../reference/ggdraw.html">ggdraw()</a></code>, and <code><a href="../reference/plot_grid.html">plot_grid()</a></code>.</li>
+</ul>
+</div>
+    <div id="cowplot-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#cowplot-100" class="anchor"></a>cowplot 1.0.0<small> 2019-07-11 </small>
 </h1>
 <div id="breaking-changes" class="section level2">
 <h2 class="hasAnchor">
@@ -161,7 +197,7 @@
 <li>Much improved handling of base R plots, thanks to improvements in grid and gridGraphics. Requires R &gt;= 3.6.0 and gridGraphics &gt;= 0.4.</li>
 <li>Added a function <code><a href="../reference/set_null_device.html">set_null_device()</a></code> to customize the null graphics device that is used in <code><a href="../reference/ggdraw.html">ggdraw()</a></code>, <code><a href="../reference/plot_grid.html">plot_grid()</a></code>, etc. There is no one null device that always works, so customization is needed.</li>
 <li>Added several new themes, including <code><a href="../reference/theme_minimal_grid.html">theme_minimal_grid()</a></code>, <code><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid()</a></code>, and <code><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid()</a></code>. Also, <code><a href="../reference/theme_cowplot.html">theme_cowplot()</a></code> is now also available as <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code>.</li>
-<li>Expanded functions for extracting plot components from ggplots via <code><a href="../reference/get_plot_component.html">get_plot_component()</a></code> and several wrapper functions for getting titles, axes, panels, and so on. This also lets <code><a href="../reference/get_panel.html">get_panel()</a></code> extract from plots with more than one panel. <code><a href="../reference/get_panel.html">get_panel_component()</a></code> allows you to further extract components like geoms from the plot panel (<a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>, #111).</li>
+<li>Expanded functions for extracting plot components from ggplots via <code><a href="../reference/get_plot_component.html">get_plot_component()</a></code> and several wrapper functions for getting titles, axes, panels, and so on. This also lets <code><a href="../reference/get_panel.html">get_panel()</a></code> extract from plots with more than one panel. <code><a href="../reference/get_panel.html">get_panel_component()</a></code> allows you to further extract components like geoms from the plot panel (<a href='https://github.com/malcolmbarrett'>@malcolmbarrett</a>, <a href='https://github.com/wilkelab/cowplot/issues/111'>#111</a>).</li>
 </ul>
 </div>
 <div id="minor-changes" class="section level2">
@@ -178,42 +214,42 @@
 </ul>
 </div>
 </div>
-    <div id="cowplot-0-9-4" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-9-4" class="anchor"></a>cowplot 0.9.4<small> 2019-01-08 </small>
+    <div id="cowplot-094" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.4">
+<a href="#cowplot-094" class="anchor"></a>cowplot 0.9.4<small> 2019-01-08 </small>
 </h1>
 <ul>
 <li>Fix CRAN check errors</li>
 </ul>
 </div>
-    <div id="cowplot-0-9-3" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-9-3" class="anchor"></a>cowplot 0.9.3<small> 2018-07-15 </small>
+    <div id="cowplot-093" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.3">
+<a href="#cowplot-093" class="anchor"></a>cowplot 0.9.3<small> 2018-07-15 </small>
 </h1>
 <ul>
 <li>Fix regression tests to work with ggplot2 3.0.0</li>
 </ul>
 </div>
-    <div id="cowplot-0-9-2" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-9-2" class="anchor"></a>cowplot 0.9.2<small> 2017-12-17 </small>
+    <div id="cowplot-092" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.2">
+<a href="#cowplot-092" class="anchor"></a>cowplot 0.9.2<small> 2017-12-17 </small>
 </h1>
 <ul>
 <li>Rewritten cowplot::ggsave function that calls ggplot2::ggsave</li>
 <li>More robust handling of R graphics device weirdness/plots popping up in the wrong places</li>
 </ul>
 </div>
-    <div id="cowplot-0-9-1" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-9-1" class="anchor"></a>cowplot 0.9.1<small> 2017-11-16 </small>
+    <div id="cowplot-091" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.1">
+<a href="#cowplot-091" class="anchor"></a>cowplot 0.9.1<small> 2017-11-16 </small>
 </h1>
 <ul>
 <li>Make examples and vignettes fail gracefully when magick package is not installed</li>
 </ul>
 </div>
-    <div id="cowplot-0-9-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-9-0" class="anchor"></a>cowplot 0.9.0<small> 2017-11-16 </small>
+    <div id="cowplot-090" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#cowplot-090" class="anchor"></a>cowplot 0.9.0<small> 2017-11-16 </small>
 </h1>
 <ul>
 <li>Added a theme for maps, <code><a href="../reference/theme_map.html">theme_map()</a></code>. Code provided by Spencer Fox, <a href="https://github.com/sjfox" class="uri">https://github.com/sjfox</a>.</li>
@@ -224,30 +260,30 @@
 <li>Added draw_image() function to draw images onto plots</li>
 </ul>
 </div>
-    <div id="cowplot-0-8-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-8-0" class="anchor"></a>cowplot 0.8.0<small> 2017-07-30 </small>
+    <div id="cowplot-080" class="section level1">
+<h1 class="page-header" data-toc-text="0.8.0">
+<a href="#cowplot-080" class="anchor"></a>cowplot 0.8.0<small> 2017-07-30 </small>
 </h1>
 <ul>
 <li>The function plot_grid can now also handle base-R (graphics) plots. Code provided by <a href="https://github.com/flying-sheep" class="uri">https://github.com/flying-sheep</a>.</li>
 <li>More sophisticated plot alignments of complex plots are now possible. Code provided by Spencer Fox, <a href="https://github.com/sjfox" class="uri">https://github.com/sjfox</a>.</li>
-<li>Plot labels can now be styled. In particular, they follow the theme settings, e.g. if the theme uses a different font than default. This closes issue #37.</li>
-<li>The positioning of plot labels in <code>plot_grid</code> can now be controlled with additional position parameters <code>label_x</code> and <code>label_y</code>. This closes issue #32.</li>
-<li>Problems with elements from globally set themes leaking into the plot-grid background have been fixed. This closes issues #60, #63, #66.</li>
+<li>Plot labels can now be styled. In particular, they follow the theme settings, e.g. if the theme uses a different font than default. This closes issue <a href='https://github.com/wilkelab/cowplot/issues/37'>#37</a>.</li>
+<li>The positioning of plot labels in <code>plot_grid</code> can now be controlled with additional position parameters <code>label_x</code> and <code>label_y</code>. This closes issue <a href='https://github.com/wilkelab/cowplot/issues/32'>#32</a>.</li>
+<li>Problems with elements from globally set themes leaking into the plot-grid background have been fixed. This closes issues <a href='https://github.com/wilkelab/cowplot/issues/60'>#60</a>, <a href='https://github.com/wilkelab/cowplot/issues/63'>#63</a>, <a href='https://github.com/wilkelab/cowplot/issues/66'>#66</a>.</li>
 </ul>
 </div>
-    <div id="cowplot-0-7-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-7-0" class="anchor"></a>cowplot 0.7.0<small> 2016-10-28 </small>
+    <div id="cowplot-070" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#cowplot-070" class="anchor"></a>cowplot 0.7.0<small> 2016-10-28 </small>
 </h1>
 <ul>
 <li>This version of cowplot has been prepared for the upcoming release of ggplot2 2.2.0. As a result of this upcoming switch, the function switch_axis_position() has been removed. Alternative axes will be natively supported by ggplot2 2.2.0.</li>
 <li>As of this version, cowplot requires R &gt;= 3.3.0. This dependency was added because R 3.3 fixes a critical problem with lists of units.</li>
 </ul>
 </div>
-    <div id="cowplot-0-6-3" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-6-3" class="anchor"></a>cowplot 0.6.3<small> 2016-09-30 </small>
+    <div id="cowplot-063" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.3">
+<a href="#cowplot-063" class="anchor"></a>cowplot 0.6.3<small> 2016-09-30 </small>
 </h1>
 <ul>
 <li>Adds a get_legend() function that extracts the legend from a plot. Code provided by <a href="https://github.com/marcus1487" class="uri">https://github.com/marcus1487</a>
@@ -262,17 +298,17 @@
 </li>
 </ul>
 </div>
-    <div id="cowplot-0-6-2" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-6-2" class="anchor"></a>cowplot 0.6.2<small> 2016-04-20 </small>
+    <div id="cowplot-062" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.2">
+<a href="#cowplot-062" class="anchor"></a>cowplot 0.6.2<small> 2016-04-20 </small>
 </h1>
 <ul>
 <li>Updated plot_grid vignette so the tutorial on aligning plots of different types works again. This stopped working at some point and was removed from 0.6.1.</li>
 </ul>
 </div>
-    <div id="cowplot-0-6-1" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-6-1" class="anchor"></a>cowplot 0.6.1<small> 2016-03-06 </small>
+    <div id="cowplot-061" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.1">
+<a href="#cowplot-061" class="anchor"></a>cowplot 0.6.1<small> 2016-03-06 </small>
 </h1>
 <ul>
 <li>Added new convenience function draw_figure_label() to label figures with labels such as “Figure 1”.</li>
@@ -280,9 +316,9 @@
 <li>Fix missing axis lines in ggplot2 2.1</li>
 </ul>
 </div>
-    <div id="cowplot-0-6-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-6-0" class="anchor"></a>cowplot 0.6.0<small> 2015-12-19 </small>
+    <div id="cowplot-060" class="section level1">
+<h1 class="page-header" data-toc-text="0.6.0">
+<a href="#cowplot-060" class="anchor"></a>cowplot 0.6.0<small> 2015-12-19 </small>
 </h1>
 <p>Major changes:</p>
 <ul>
@@ -292,9 +328,9 @@
 <li>Add vignettes describing plot annotations and shared legends among plots</li>
 </ul>
 </div>
-    <div id="cowplot-0-5-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-5-0" class="anchor"></a>cowplot 0.5.0<small> 2015-07-01 </small>
+    <div id="cowplot-050" class="section level1">
+<h1 class="page-header" data-toc-text="0.5.0">
+<a href="#cowplot-050" class="anchor"></a>cowplot 0.5.0<small> 2015-07-01 </small>
 </h1>
 <p>Major changes:</p>
 <ul>
@@ -308,9 +344,9 @@
 <li>Improve vignettes</li>
 </ul>
 </div>
-    <div id="cowplot-0-4-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-4-0" class="anchor"></a>cowplot 0.4.0<small> 2015-06-14 </small>
+    <div id="cowplot-040" class="section level1">
+<h1 class="page-header" data-toc-text="0.4.0">
+<a href="#cowplot-040" class="anchor"></a>cowplot 0.4.0<small> 2015-06-14 </small>
 </h1>
 <p>Major changes:</p>
 <ul>
@@ -324,45 +360,28 @@
 <li>Code has been separated into multiple files for easier maintenance</li>
 </ul>
 </div>
-    <div id="cowplot-0-3-1" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-3-1" class="anchor"></a>cowplot 0.3.1<small> 2015-06-04 </small>
+    <div id="cowplot-031" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.1">
+<a href="#cowplot-031" class="anchor"></a>cowplot 0.3.1<small> 2015-06-04 </small>
 </h1>
 <p>Fix Vignette title</p>
 </div>
-    <div id="cowplot-0-3-0" class="section level1">
-<h1 class="page-header">
-<a href="#cowplot-0-3-0" class="anchor"></a>cowplot 0.3.0<small> 2015-06-03 </small>
+    <div id="cowplot-030" class="section level1">
+<h1 class="page-header" data-toc-text="0.3.0">
+<a href="#cowplot-030" class="anchor"></a>cowplot 0.3.0<small> 2015-06-03 </small>
 </h1>
 <p>First complete implementation ready for initial release</p>
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#cowplot-1-0-0">1.0.0</a></li>
-        <li><a href="#cowplot-0-9-4">0.9.4</a></li>
-        <li><a href="#cowplot-0-9-3">0.9.3</a></li>
-        <li><a href="#cowplot-0-9-2">0.9.2</a></li>
-        <li><a href="#cowplot-0-9-1">0.9.1</a></li>
-        <li><a href="#cowplot-0-9-0">0.9.0</a></li>
-        <li><a href="#cowplot-0-8-0">0.8.0</a></li>
-        <li><a href="#cowplot-0-7-0">0.7.0</a></li>
-        <li><a href="#cowplot-0-6-3">0.6.3</a></li>
-        <li><a href="#cowplot-0-6-2">0.6.2</a></li>
-        <li><a href="#cowplot-0-6-1">0.6.1</a></li>
-        <li><a href="#cowplot-0-6-0">0.6.0</a></li>
-        <li><a href="#cowplot-0-5-0">0.5.0</a></li>
-        <li><a href="#cowplot-0-4-0">0.4.0</a></li>
-        <li><a href="#cowplot-0-3-1">0.3.1</a></li>
-        <li><a href="#cowplot-0-3-0">0.3.0</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -370,13 +389,16 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

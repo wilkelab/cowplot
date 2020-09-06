@@ -8,21 +8,36 @@
 
 <title>Add annotation underneath a plot — add_sub • cowplot</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,15 +45,14 @@
 
 
 
-<meta property="og:title" content="Add annotation underneath a plot — add_sub" />
 
+<meta property="og:title" content="Add annotation underneath a plot — add_sub" />
 <meta property="og:description" content="This function can add an arbitrary label or mathematical expression underneath
 the plot, similar to the sub parameter in base R. It is mostly superseded now by the
 caption argument to ggplot2::labs(), and it is recommended to use caption instead of
 add_sub() whenever possible." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -52,9 +66,10 @@ add_sub() whenever possible." />
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -68,7 +83,7 @@ add_sub() whenever possible." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -76,7 +91,7 @@ add_sub() whenever possible." />
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -117,9 +132,13 @@ add_sub() whenever possible." />
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/wilkelab/cowplot/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -127,30 +146,41 @@ add_sub() whenever possible." />
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add annotation underneath a plot</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/add_sub.R'><code>R/add_sub.R</code></a></small>
     <div class="hidden name"><code>add_sub.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>This function can add an arbitrary label or mathematical expression underneath
 the plot, similar to the <code>sub</code> parameter in base R. It is mostly superseded now by the
 <code>caption</code> argument to <code><a href='https://ggplot2.tidyverse.org/reference/labs.html'>ggplot2::labs()</a></code>, and it is recommended to use <code>caption</code> instead of
 <code>add_sub()</code> whenever possible.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>add_sub</span>(<span class='no'>plot</span>, <span class='no'>label</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>vpadding</span> <span class='kw'>=</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"lines"</span>), <span class='kw'>fontfamily</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"plain"</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lineheight</span> <span class='kw'>=</span> <span class='fl'>0.9</span>, <span class='no'>colour</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>add_sub</span>(
+  <span class='no'>plot</span>,
+  <span class='no'>label</span>,
+  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>vpadding</span> <span class='kw'>=</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>1</span>, <span class='st'>"lines"</span>),
+  <span class='kw'>fontfamily</span> <span class='kw'>=</span> <span class='st'>""</span>,
+  <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"plain"</span>,
+  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
+  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
+  <span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>lineheight</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
+  <span class='no'>colour</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -209,11 +239,10 @@ y and vjust parameters, this can be changed.</p></td>
       <td><p>Line height of text</p></td>
     </tr>
     </table>
-    
+
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
     <p>A gtable object holding the modified plot.</p>
-    
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>The exact location where the
@@ -237,42 +266,33 @@ default) then the extra padding is added equally above and below the label. As i
 case with <code>x</code>, <code>y</code>-values outside the range 0-1 are allowed. In particular,
 for sufficiently large values of <code>y</code>, the label will eventually be located inside
 the plot panel.</p>
-    
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme_get.html'>theme_set</a></span>(<span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>())
 <span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>mpg</span>, <span class='no'>disp</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) + <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>minor</span><span class='kw'>=</span><span class='st'>'none'</span>)
 <span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"This is an annotation.\nAnnotations can span multiple lines."</span>))</div><div class='img'><img src='add_sub-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># You can also do this repeatedly.</span>
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"This formula has no relevance here:"</span>, <span class='kw'>y</span>  <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>p2</span>, <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/expression'>expression</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/paste'>paste</a></span>(<span class='no'>a</span>^<span class='fl'>2</span>+<span class='no'>b</span>^<span class='fl'>2</span>, <span class='st'>" = "</span>, <span class='no'>c</span>^<span class='fl'>2</span>)))
+<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>p2</span>, <span class='fu'><a href='https://rdrr.io/r/base/expression.html'>expression</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='no'>a</span>^<span class='fl'>2</span>+<span class='no'>b</span>^<span class='fl'>2</span>, <span class='st'>" = "</span>, <span class='no'>c</span>^<span class='fl'>2</span>)))
 <span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p3</span>)</div><div class='img'><img src='add_sub-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'>#This code also works with faceted plots:</span>
 <span class='no'>plot.iris</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_grid.html'>facet_grid</a></span>(<span class='no'>.</span> ~ <span class='no'>Species</span>) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>stat_smooth</a></span>(<span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"lm"</span>) +
   <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>major</span> <span class='kw'>=</span> <span class='st'>'y'</span>, <span class='kw'>minor</span> <span class='kw'>=</span> <span class='st'>"none"</span>) + <span class='co'># add thin horizontal lines</span>
   <span class='fu'><a href='panel_border.html'>panel_border</a></span>() <span class='co'># and a border around each panel</span>
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>plot.iris</span>, <span class='st'>"Annotation underneath a faceted plot, left justified."</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p2</span>)</div><div class='img'><img src='add_sub-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'>add_sub</span>(<span class='no'>plot.iris</span>, <span class='st'>"Annotation underneath a faceted plot, left justified."</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using formula 'y ~ x'</span></div><div class='input'><span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p2</span>)</div><div class='img'><img src='add_sub-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Finally, it is possible to move the annotation inside of the plot if desired.</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"Annotation inside plot"</span>, <span class='kw'>vpadding</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/unit'>unit</a></span>(<span class='fl'>0</span>, <span class='st'>"lines"</span>),
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='fu'>add_sub</span>(<span class='no'>p1</span>, <span class='st'>"Annotation inside plot"</span>, <span class='kw'>vpadding</span><span class='kw'>=</span><span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fl'>0</span>, <span class='st'>"lines"</span>),
        <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>6</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.03</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>))</div><div class='img'><img src='add_sub-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      
-      <li><a href="#value">Value</a></li>
-
-      <li><a href="#details">Details</a></li>
-      
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -280,13 +300,16 @@ the plot panel.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 

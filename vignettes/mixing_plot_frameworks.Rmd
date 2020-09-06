@@ -42,9 +42,8 @@ logo_file <- system.file("extdata", "logo.png", package = "cowplot")
 ggdraw() + 
   draw_image(
     logo_file,
-    x = 1,
-    width = 0.13, height = 0.2,
-    hjust = 1
+    x = 1, width = 0.1,
+    hjust = 1, halign = 1, valign = 0
   ) +
   draw_plot(p1)
 ```

@@ -8,21 +8,36 @@
 
 <title>Arrange multiple plots into a grid — plot_grid • cowplot</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
+
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
-<!-- sticky kit -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script>
+<!-- headroom.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -30,12 +45,11 @@
 
 
 
+
 <meta property="og:title" content="Arrange multiple plots into a grid — plot_grid" />
-
 <meta property="og:description" content="Arrange multiple plots into a grid." />
-
 <meta property="og:image" content="/logo.png" />
-<meta name="twitter:card" content="summary" />
+
 
 
 
@@ -49,9 +63,10 @@
 <![endif]-->
 
 
+
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -65,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
       </span>
     </div>
 
@@ -73,7 +88,7 @@
       <ul class="nav navbar-nav">
         <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -114,9 +129,13 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-      
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/wilkelab/cowplot/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -124,30 +143,46 @@
 </div><!--/.navbar -->
 
       
+
       </header>
 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Arrange multiple plots into a grid</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/wilkelab/cowplot/blob/master/R/plot_grid.R'><code>R/plot_grid.R</code></a></small>
     <div class="hidden name"><code>plot_grid.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    
     <p>Arrange multiple plots into a grid.</p>
-    
     </div>
 
-    <pre class="usage"><span class='fu'>plot_grid</span>(<span class='no'>...</span>, <span class='kw'>plotlist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>, <span class='st'>"hv"</span>),
-  <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"l"</span>, <span class='st'>"r"</span>, <span class='st'>"t"</span>, <span class='st'>"b"</span>, <span class='st'>"lr"</span>, <span class='st'>"tb"</span>, <span class='st'>"tblr"</span>),
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rel_heights</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>label_fontfamily</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>label_fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>, <span class='kw'>label_colour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>label_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>label_y</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> -<span class='fl'>0.5</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1.5</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>greedy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
-    
+    <pre class="usage"><span class='fu'>plot_grid</span>(
+  <span class='no'>...</span>,
+  <span class='kw'>plotlist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>align</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>, <span class='st'>"hv"</span>),
+  <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"l"</span>, <span class='st'>"r"</span>, <span class='st'>"t"</span>, <span class='st'>"b"</span>, <span class='st'>"lr"</span>, <span class='st'>"tb"</span>, <span class='st'>"tblr"</span>),
+  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>rel_heights</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
+  <span class='kw'>label_fontfamily</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>label_fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
+  <span class='kw'>label_colour</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>label_x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
+  <span class='kw'>label_y</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>hjust</span> <span class='kw'>=</span> -<span class='fl'>0.5</span>,
+  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1.5</span>,
+  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
+  <span class='kw'>greedy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
+  <span class='kw'>cols</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>rows</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
+)</pre>
+
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
@@ -245,6 +280,10 @@ sometimes be more powerful.</p></td>
       <td><p>(optional) How should margins be adjusted during alignment. See <code><a href='align_plots.html'>align_plots()</a></code> for details.</p></td>
     </tr>
     <tr>
+      <th>byrow</th>
+      <td><p>Logical value indicating if the plots should be arrange by row (default) or by column.</p></td>
+    </tr>
+    <tr>
       <th>cols</th>
       <td><p>Deprecated. Use <code>ncol</code>.</p></td>
     </tr>
@@ -253,12 +292,12 @@ sometimes be more powerful.</p></td>
       <td><p>Deprecated. Use <code>nrow</code>.</p></td>
     </tr>
     </table>
-    
+
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
 
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/data.frame'>data.frame</a></span>(
+<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
   <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y2</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>2</span>, <span class='kw'>y3</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>3</span>, <span class='kw'>y4</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>4</span>
 )
 
@@ -266,7 +305,7 @@ sometimes be more powerful.</p></td>
 <span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y2</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
 <span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y3</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
 <span class='no'>p4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y4</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>as.factor</a></span>(<span class='no'>year</span>), <span class='no'>hwy</span>)) +
+<span class='no'>p5</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>year</span>), <span class='no'>hwy</span>)) +
         <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>() +
         <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span>(~<span class='no'>class</span>, <span class='kw'>scales</span> <span class='kw'>=</span> <span class='st'>"free_y"</span>)
 <span class='co'># simple grid</span>
@@ -274,7 +313,7 @@ sometimes be more powerful.</p></td>
 <span class='co'># simple grid with labels and aligned plots</span>
 <span class='fu'>plot_grid</span>(
   <span class='no'>p1</span>, <span class='no'>p2</span>, <span class='no'>p3</span>, <span class='no'>p4</span>,
-  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='st'>'A'</span>, <span class='st'>'B'</span>, <span class='st'>'C'</span>, <span class='st'>'D'</span>),
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>'A'</span>, <span class='st'>'B'</span>, <span class='st'>'C'</span>, <span class='st'>'D'</span>),
   <span class='kw'>align</span><span class='kw'>=</span><span class='st'>"hv"</span>
 )</div><div class='img'><img src='plot_grid-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># manually setting the number of rows, auto-generate upper-case labels</span>
@@ -288,59 +327,64 @@ sometimes be more powerful.</p></td>
 <span class='fu'>plot_grid</span>(
   <span class='no'>p1</span>, <span class='no'>p2</span>, <span class='no'>p3</span>, <span class='no'>p4</span>,
   <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>'hv'</span>,
-  <span class='kw'>rel_heights</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>1</span>),
-  <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
+  <span class='kw'>rel_heights</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>1</span>),
+  <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>)
 )</div><div class='img'><img src='plot_grid-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># aligning complex plots in a grid</span>
 <span class='fu'>plot_grid</span>(
   <span class='no'>p1</span>, <span class='no'>p5</span>,
-  <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"h"</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"b"</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
+  <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"h"</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"b"</span>, <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
 )</div><div class='img'><img src='plot_grid-5.png' alt='' width='700' height='433' /></div><div class='input'>
-# more examples
-</div><div class='input'><span class='co'>#' # missing plots in some grid locations, auto-generate lower-case labels</span>
+<span class='co'># more examples</span>
+<span class='co'># \donttest{</span>
+<span class='co'>#' # missing plots in some grid locations, auto-generate lower-case labels</span>
 <span class='fu'>plot_grid</span>(
- <span class='no'>p1</span>, <span class='kw'>NULL</span>, <span class='kw'>NULL</span>, <span class='no'>p2</span>, <span class='no'>p3</span>, <span class='kw'>NULL</span>,
- <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>,
- <span class='kw'>labels</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
- <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>12</span>,
- <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"v"</span>
+  <span class='no'>p1</span>, <span class='kw'>NULL</span>, <span class='kw'>NULL</span>, <span class='no'>p2</span>, <span class='no'>p3</span>, <span class='kw'>NULL</span>,
+  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>labels</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
+  <span class='kw'>label_size</span> <span class='kw'>=</span> <span class='fl'>12</span>,
+  <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"v"</span>
 )</div><div class='img'><img src='plot_grid-6.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='co'># can arrange plots on the grid by column as well as by row.</span>
+<span class='fu'>plot_grid</span>(
+  <span class='no'>p1</span>, <span class='kw'>NULL</span>, <span class='no'>p2</span>, <span class='kw'>NULL</span>, <span class='no'>p3</span>,
+  <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>byrow</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+)</div><div class='img'><img src='plot_grid-7.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># can align top of plotting area as well as bottom</span>
 <span class='fu'>plot_grid</span>(
   <span class='no'>p1</span>, <span class='no'>p5</span>,
   <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>"h"</span>, <span class='kw'>axis</span> <span class='kw'>=</span> <span class='st'>"tb"</span>,
-  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
-)</div><div class='img'><img src='plot_grid-7.png' alt='' width='700' height='433' /></div><div class='input'>
+  <span class='kw'>nrow</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>rel_widths</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>2</span>)
+)</div><div class='img'><img src='plot_grid-8.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># other types of plots not generated with ggplot</span>
 <span class='no'>p6</span> <span class='kw'>&lt;-</span> ~{
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(
-    <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
-    <span class='kw'>mgp</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)
+  <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(
+    <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
+    <span class='kw'>mgp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)
   )
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/plot'>plot</a></span>(<span class='no'>sqrt</span>)
+  <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>sqrt</span>)
 }
 
 <span class='no'>p7</span> <span class='kw'>&lt;-</span> <span class='kw'>function</span>() {
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/par'>par</a></span>(
-    <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
-    <span class='kw'>mgp</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)
+  <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(
+    <span class='kw'>mar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>1</span>),
+    <span class='kw'>mgp</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>, <span class='fl'>1</span>, <span class='fl'>0</span>)
   )
-  <span class='fu'><a href='https://www.rdocumentation.org/packages/graphics/topics/image'>image</a></span>(<span class='no'>volcano</span>)
+  <span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>volcano</span>)
 }
-<span class='no'>p8</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://www.rdocumentation.org/packages/grid/topics/grid.circle'>circleGrob</a></span>()
+<span class='no'>p8</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.circle.html'>circleGrob</a></span>()
 
-<span class='fu'>plot_grid</span>(<span class='no'>p1</span>, <span class='no'>p6</span>, <span class='no'>p7</span>, <span class='no'>p8</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='st'>"AUTO"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/c'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>.9</span>, <span class='fl'>.9</span>, <span class='fl'>.7</span>))</div><div class='img'><img src='plot_grid-8.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>plot_grid</span>(<span class='no'>p1</span>, <span class='no'>p6</span>, <span class='no'>p7</span>, <span class='no'>p8</span>, <span class='kw'>labels</span> <span class='kw'>=</span> <span class='st'>"AUTO"</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>, <span class='fl'>.9</span>, <span class='fl'>.9</span>, <span class='fl'>.7</span>))</div><div class='img'><img src='plot_grid-9.png' alt='' width='700' height='433' /></div><div class='input'># }
+</div></pre>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <h2>Contents</h2>
-    <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-            
-      <li><a href="#examples">Examples</a></li>
-    </ul>
-
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 </div>
+
 
       <footer>
       <div class="copyright">
@@ -348,13 +392,16 @@ sometimes be more powerful.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
+
       </footer>
    </div>
 
   
 
+
   </body>
 </html>
+
 
