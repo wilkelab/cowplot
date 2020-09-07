@@ -125,7 +125,7 @@ p3 <- ggplot(mtcars, aes(x = qsec, y = disp)) + geom_point() + facet_wrap(~gear)
 plot_grid(p3, bottom_row, labels = c('A', ''), label_size = 12, ncol = 1)
 ```
 
-Alignment can be a bit tricky in this case. However, it can usually be achieved through an explicit call to `align_plots()`. The trick is to first align the top-row plot (`p3`) and the first botton-row plot (`p1`) vertically along the left axis, using the `align_plots()` function. These aligned plots can then be passed to `plot_grid()`.
+Alignment can be a bit tricky in this case. However, it can usually be achieved through an explicit call to `align_plots()`. The trick is to first align the top-row plot (`p3`) and the first bottom-row plot (`p1`) vertically along the left axis, using the `align_plots()` function. These aligned plots can then be passed to `plot_grid()`.
 
 ```{r fig.width = 6, fig.height = 6}
 # first align the top-row plot (p3) with the left-most plot of the
