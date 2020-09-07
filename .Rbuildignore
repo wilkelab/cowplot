@@ -14,5 +14,6 @@
 ^vignettes/aligning_plots.Rmd$
 ^vignettes/shared_legends.Rmd$
 ^revdep$
+^pkgdown$
 ^Meta$
 ^CRAN-RELEASE$

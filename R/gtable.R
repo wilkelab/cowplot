@@ -22,7 +22,7 @@ gtable_squash_rows <- function(table, rows)
   table
 }
 
-#' Set the width of given colums to 0.
+#' Set the width of given columns to 0.
 #'
 #' @param table The gtable on which to operate
 #' @param cols Numerical vector indicating the columns whose width should be set to zero.

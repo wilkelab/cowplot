@@ -25,7 +25,7 @@ A gtable object holding the panel(s) or a grob of the component
 }
 \description{
 \code{get_panel()} extracts just the main panel from a ggplot or a specified panel
-in a facetted plot. \code{get_panel_component()} extracts components from the
+in a faceted plot. \code{get_panel_component()} extracts components from the
 panel, such as geoms.
 }
 \examples{

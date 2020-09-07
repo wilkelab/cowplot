@@ -2,7 +2,7 @@
 % Please edit documentation in R/gtable.R
 \name{gtable_squash_cols}
 \alias{gtable_squash_cols}
-\title{Set the width of given colums to 0.}
+\title{Set the width of given columns to 0.}
 \usage{
 gtable_squash_cols(table, cols)
 }
@@ -12,5 +12,5 @@ gtable_squash_cols(table, cols)
 \item{cols}{Numerical vector indicating the columns whose width should be set to zero.}
 }
 \description{
-Set the width of given colums to 0.
+Set the width of given columns to 0.
 }
