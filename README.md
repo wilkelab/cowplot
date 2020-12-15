@@ -3,8 +3,7 @@
 # cowplot – Streamlined plot theme and plot annotations for ggplot2
 
 <!-- badges: start -->
-
-[![Build Status](https://travis-ci.org/wilkelab/cowplot.svg?branch=master)](https://travis-ci.org/wilkelab/cowplot)
+[![R build status](https://github.com/wilkelab/cowplot/workflows/R-CMD-check/badge.svg)](https://github.com/wilkelab/cowplot/actions)
 [![Coverage Status](https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg)](https://codecov.io/github/wilkelab/cowplot?branch=master)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/cowplot)](https://CRAN.R-project.org/package=cowplot)
 [![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/cowplot)](https://cranlogs.r-pkg.org/downloads/total/last-month/cowplot)

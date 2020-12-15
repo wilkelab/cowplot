@@ -1,3 +1,7 @@
+# cowplot 1.1.1
+
+- Make sure tests don't fail if vdiffr is missing.
+
 # cowplot 1.1.0
 
 - `plot_grid()` now accepts `byrow` as an argument to place plots by row or by column onto the plot area (@BrianLang, #162).  

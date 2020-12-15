@@ -1,9 +1,11 @@
-This is a minor release fixing a few bugs and adding a few
-minor features. No downstream breakage is expected.
+Make sure tests don't fail just because vdiffr couldn't be installed, per request by Brian Ripley.
 
 ## Test environments
-* R devel on win-builder [ via devtools::check_win_devel() ]
-* R devel and R release on Linux (via Travis CI)
+
+* ubuntu 20.04, devel and release
+* windows, release
+* macOS, release
 
 ## R CMD check results
-There were no ERRORs, WARNINGs, or NOTEs.
+
+0 errors | 0 warnings | 0 notes
