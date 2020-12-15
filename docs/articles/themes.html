@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
       <h1 data-toc-skip>Themes</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2020-09-06</h4>
+            <h4 class="date">2020-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/themes.Rmd"><code>vignettes/themes.Rmd</code></a></small>
       <div class="hidden name"><code>themes.Rmd</code></div>
@@ -124,81 +124,105 @@
 <h2 class="hasAnchor">
 <a href="#basic-use-of-plot-themes" class="anchor"></a>Basic use of plot themes</h2>
 <p>The theme <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code> (or equivalently, <code><a href="../reference/theme_cowplot.html">theme_cowplot()</a></code>) provides a classical plot appearance with two axis lines and no background grid. This theme works for most types of graphs, but it is most appropriate for scatter plots and line graphs.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://wilkelab.org/cowplot">cowplot</a></span>)
 
-<span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>)) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>)) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
 
-<span class="no">p</span> + <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>() <span class="co"># identical to theme_cowplot()</span></pre></body></html></div>
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>() <span class="co"># identical to theme_cowplot()</span>
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
 <p>If you like a background grid, you can add it via the standard ggplot2 theme options. Alternatively, you can use the cowplot function <code><a href="../reference/background_grid.html">background_grid()</a></code>. This function needs to be placed after the theme call because the theme call overrides all previous theme settings.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">p</span> +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>() +
-  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>() <span class="co"># always place this after the theme</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>() <span class="co"># always place this after the theme</span>
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-3-1.png" width="384"></p>
 <p>If you prefer a minimal appearance with grid and without axis lines, use <code><a href="../reference/theme_minimal_grid.html">theme_minimal_grid()</a></code>.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">p</span> + <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-4-1.png" width="384"></p>
 <p>All themes can be further customized. For example, the default font size is 14 point, which works well for figures that are 5 to 8 inches wide. For smaller figures, you may want to use 12 point. Also, we can modify the color of the grid lines for <code><a href="../reference/theme_minimal_grid.html">theme_minimal_grid()</a></code>.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">p</span> +
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>(
-    <span class="kw">font_size</span> <span class="kw">=</span> <span class="fl">12</span>,
-    <span class="kw">color</span> <span class="kw">=</span> <span class="st">"grey70"</span>
-  )</pre></body></html></div>
+    font_size = <span class="fl">12</span>,
+    color = <span class="st">"grey70"</span>
+  )
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
 </div>
 <div id="choosing-themes-in-the-context-of-the-plot" class="section level2">
 <h2 class="hasAnchor">
 <a href="#choosing-themes-in-the-context-of-the-plot" class="anchor"></a>Choosing themes in the context of the plot</h2>
 <p>When choosing a plot theme, you should always pay attention to how it works for your specific plot. For example, if you are making a bar plot, <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code> generates awkward floating bars because of ggplot2’s automatic axis expansion (i.e., the x axis line does not lie at <em>y</em> = 0). I consider such plots to be ugly.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>))) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"#56B4E9"</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.8</span>) +
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">cyl</span>))) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(fill = <span class="st">"#56B4E9"</span>, alpha = <span class="fl">0.8</span>) <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>()
 
-<span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(<span class="no">p</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(<span class="kw">p</span>)
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
 <p>We can fix this problem by suppressing the axis expansion at the lower end.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>))) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"#56B4E9"</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.8</span>) +
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">cyl</span>))) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>(fill = <span class="st">"#56B4E9"</span>, alpha = <span class="fl">0.8</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(
     <span class="co"># don't expand y scale at the lower end</span>
-    <span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(<span class="kw">mult</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>))
+    expand = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(mult = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>))
   )
 
-<span class="no">p</span> + <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>()</pre></body></html></div>
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-7-1.png" width="384"></p>
 <p>Bar plots also tend to look awkward on background grids, and I would recommend against this use.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(
-  <span class="no">p</span> + <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>()
-)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(
+  <span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>()
+)
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-8-1.png" width="384"></p>
 <p>Instead, you can use <code><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid()</a></code>, which only draws horizontal grid lines.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">p</span> + <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-9-1.png" width="384"></p>
 <p>If you make a flipped bar plot with horizontal bars, you may instead want vertical grid lines, which you obtain with <code><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid()</a></code>.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="no">p</span> +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() +
-  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_vgrid</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-10-1.png" width="384"></p>
 </div>
 <div id="faceting" class="section level2">
 <h2 class="hasAnchor">
 <a href="#faceting" class="anchor"></a>Faceting</h2>
 <p>You need to pay special attention when faceting. A theme may look just fine for a single plot but work poorly in a faceted plot. As an example, consider what happens when we facet with <code><a href="../reference/theme_cowplot.html">theme_half_open()</a></code>.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">cyl</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">cyl</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
   <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>)
 
-<span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(<span class="no">p</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/stamp.html">stamp_ugly</a></span>(<span class="kw">p</span>)
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-11-1.png" width="624"></p>
 <p>The three facets don’t visually separate, because ggplot2 does not repeat the y axis line for each facet. We can improve the situation by drawing a border around each panel, either via standard ggplot2 theme calls or using the convenience function <code><a href="../reference/panel_border.html">panel_border()</a></code>. As with <code><a href="../reference/background_grid.html">background_grid()</a></code>, this function always has to be placed after the theme.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">p</span> + <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>()  <span class="co"># always place this after the theme</span></pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>()  <span class="co"># always place this after the theme</span>
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-12-1.png" width="624"></p>
 <p>In this particular case, maybe using both a panel border and a background grid is the best option.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">p</span> +
-  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>() +
-  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> 
+  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-13-1.png" width="624"></p>
 </div>
 <div id="empty-themes" class="section level2">
@@ -206,22 +230,28 @@
 <a href="#empty-themes" class="anchor"></a>Empty themes</h2>
 <p>The two themes <code><a href="../reference/theme_map.html">theme_map()</a></code> and <code><a href="../reference/theme_nothing.html">theme_nothing()</a></code> provide stripped-down themes without axes. <code><a href="../reference/theme_map.html">theme_map()</a></code> is similar to <code><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void()</a></code> from ggplot2 in that it retains the plot title, subtitle, caption, and legends, and simply removes axis ticks, lines, labels, and gridlines. All settings are matched to the other cowplot themes, so that you can mix plots using <code><a href="../reference/theme_map.html">theme_map()</a></code> and the other cowplot themes and they will look consistent.</p>
 <p>To demonstrate how these themes work and how they interact with the other themes provided, let’s first make a standard scatter plot with title, subtitle, caption, and legend.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">p</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">wt</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>, color = <span class="kw">wt</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(
-    <span class="kw">title</span> <span class="kw">=</span> <span class="st">"Fuel efficiency in cars"</span>,
-    <span class="kw">subtitle</span> <span class="kw">=</span> <span class="st">"Bigger and more powerful cars are less efficient"</span>,
-    <span class="kw">caption</span> <span class="kw">=</span> <span class="st">"Motor Trend, 1974"</span>
+    title = <span class="st">"Fuel efficiency in cars"</span>,
+    subtitle = <span class="st">"Bigger and more powerful cars are less efficient"</span>,
+    caption = <span class="st">"Motor Trend, 1974"</span>
   )
 
-<span class="no">p</span> + <span class="fu"><a href="../reference/theme_cowplot.html">theme_cowplot</a></span>(<span class="fl">12</span>)</pre></body></html></div>
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_cowplot.html">theme_cowplot</a></span>(<span class="fl">12</span>)
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-14-1.png" width="384"></p>
 <p>The same plot looks as follows with <code><a href="../reference/theme_map.html">theme_map()</a></code>.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">p</span> + <span class="fu"><a href="../reference/theme_map.html">theme_map</a></span>(<span class="fl">12</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_map.html">theme_map</a></span>(<span class="fl">12</span>)
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-15-1.png" width="384"></p>
 <p>Notice how all elements that have been retained look the same between this plot and the previous one.</p>
 <p>If we draw the same plot with <code><a href="../reference/theme_nothing.html">theme_nothing()</a></code>, then everything except the plot panel is removed, including titles and legends.</p>
-<div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="no">p</span> + <span class="fu"><a href="../reference/theme_nothing.html">theme_nothing</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb15"><pre class="downlit">
+<span class="kw">p</span> <span class="op">+</span> <span class="fu"><a href="../reference/theme_nothing.html">theme_nothing</a></span>()
+</pre></div>
 <p><img src="themes_files/figure-html/unnamed-chunk-16-1.png" width="384"></p>
 <p>This theme is used by <code><a href="../reference/ggdraw.html">ggdraw()</a></code> and <code><a href="../reference/plot_grid.html">plot_grid()</a></code> for the enclosing drawing canvas.</p>
 </div>
@@ -242,7 +272,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

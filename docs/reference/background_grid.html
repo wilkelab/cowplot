@@ -82,7 +82,7 @@ creation of the most commonly needed variations." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -158,19 +158,19 @@ creation of the most commonly needed variations." />
 
     <div class="ref-description">
     <p>This function provides a simple way to set the background grid in ggplot2. It
-doesn't do anything that can't be done just the same with <code>theme()</code>. However, it simplifies
+doesn't do anything that can't be done just the same with <code><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme()</a></code>. However, it simplifies
 creation of the most commonly needed variations.</p>
     </div>
 
     <pre class="usage"><span class='fu'>background_grid</span>(
-  <span class='kw'>major</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xy"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"only_minor"</span>, <span class='st'>"none"</span>),
-  <span class='kw'>minor</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"xy"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>),
-  <span class='kw'>size.major</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>size.minor</span> <span class='kw'>=</span> <span class='fl'>0.2</span>,
-  <span class='kw'>color.major</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>,
-  <span class='kw'>color.minor</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>,
-  <span class='no'>colour.major</span>,
-  <span class='no'>colour.minor</span>
+  major = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"xy"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>, <span class='st'>"only_minor"</span>, <span class='st'>"none"</span>),
+  minor = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"xy"</span>, <span class='st'>"x"</span>, <span class='st'>"y"</span>),
+  size.major = <span class='fl'>0.5</span>,
+  size.minor = <span class='fl'>0.2</span>,
+  color.major = <span class='st'>"grey85"</span>,
+  color.minor = <span class='st'>"grey85"</span>,
+  <span class='kw'>colour.major</span>,
+  <span class='kw'>colour.minor</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -210,12 +210,13 @@ creation of the most commonly needed variations.</p>
 is not what you want, you may be better off using <code><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme()</a></code> directly.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Length</span>, <span class='no'>Sepal.Width</span>)) +
- <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() +
- <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() +
- <span class='fu'>background_grid</span>()</div><div class='img'><img src='background_grid-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>Sepal.Length</span>, <span class='kw'>Sepal.Width</span>)) <span class='op'>+</span>
+ <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span>
+ <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() <span class='op'>+</span>
+ <span class='fu'>background_grid</span>()
+</div><div class='img'><img src='background_grid-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -231,7 +232,7 @@ is not what you want, you may be better off using <code><a href='https://ggplot2
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

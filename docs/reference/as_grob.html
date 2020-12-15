@@ -83,7 +83,7 @@ generates a base R plot, or a trellis object." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -164,7 +164,7 @@ object (grob), a recorded base R plot, a formula specifying a base R plot, a fun
 generates a base R plot, or a trellis object.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>as_grob</span>(<span class='no'>plot</span>, <span class='kw'>device</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</pre>
+    <pre class="usage"><span class='fu'>as_grob</span>(<span class='kw'>plot</span>, device = <span class='kw'>NULL</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,13 +182,14 @@ for details. If set to <code>NULL</code>, will use the cowplot-wide default.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>grid</span>)
-<span class='no'>x</span> <span class='kw'>&lt;-</span> <span class='fl'>1</span>:<span class='fl'>10</span>
-<span class='no'>y</span> <span class='kw'>&lt;-</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>2</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'>grid</span>)
+<span class='kw'>x</span> <span class='op'>&lt;-</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>
+<span class='kw'>y</span> <span class='op'>&lt;-</span> (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>2</span>
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> ~<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='op'>~</span><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)
 <span class='fu'><a href='https://rdrr.io/r/grid/grid.newpage.html'>grid.newpage</a></span>()
-<span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='fu'>as_grob</span>(<span class='no'>p</span>))</div><div class='img'><img src='as_grob-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/grid/grid.draw.html'>grid.draw</a></span>(<span class='fu'>as_grob</span>(<span class='kw'>p</span>))
+</div><div class='img'><img src='as_grob-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -204,7 +205,7 @@ for details. If set to <code>NULL</code>, will use the cowplot-wide default.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

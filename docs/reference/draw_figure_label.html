@@ -82,7 +82,7 @@ one pane. The function is similar to draw_plot_label." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -163,11 +163,11 @@ one pane. The function is similar to <code>draw_plot_label</code>.</p>
     </div>
 
     <pre class="usage"><span class='fu'>draw_figure_label</span>(
-  <span class='no'>label</span>,
-  <span class='kw'>position</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"top.left"</span>, <span class='st'>"top"</span>, <span class='st'>"top.right"</span>, <span class='st'>"bottom.left"</span>, <span class='st'>"bottom"</span>, <span class='st'>"bottom.right"</span>),
-  <span class='no'>size</span>,
-  <span class='no'>fontface</span>,
-  <span class='no'>...</span>
+  <span class='kw'>label</span>,
+  position = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"top.left"</span>, <span class='st'>"top"</span>, <span class='st'>"top.right"</span>, <span class='st'>"bottom.left"</span>, <span class='st'>"bottom"</span>, <span class='st'>"bottom.right"</span>),
+  <span class='kw'>size</span>,
+  <span class='kw'>fontface</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -198,31 +198,39 @@ one pane. The function is similar to <code>draw_plot_label</code>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
     <div class='dont-index'><p><code><a href='draw_plot_label.html'>draw_plot_label</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Ulrik Stervbo (ulrik.stervbo @ gmail.com)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y2</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>2</span>, <span class='kw'>y3</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>3</span>, <span class='kw'>y4</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>4</span>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y1 = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y2 = (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>2</span>, y3 = (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>3</span>, y4 = (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>4</span>
 )
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y1</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y2</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y3</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p4</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y4</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y1</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y2</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y3</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p4</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y4</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
 
 <span class='co'># Create a simple grid</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='plot_grid.html'>plot_grid</a></span>(<span class='no'>p1</span>, <span class='no'>p2</span>, <span class='no'>p3</span>, <span class='no'>p4</span>, <span class='kw'>align</span> <span class='kw'>=</span> <span class='st'>'hv'</span>)
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='plot_grid.html'>plot_grid</a></span>(<span class='kw'>p1</span>, <span class='kw'>p2</span>, <span class='kw'>p3</span>, <span class='kw'>p4</span>, align = <span class='st'>'hv'</span>)
 
 <span class='co'># Default font size and position</span>
-<span class='no'>p</span> + <span class='fu'>draw_figure_label</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Figure 1"</span>)</div><div class='img'><img src='draw_figure_label-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_figure_label</span>(label = <span class='st'>"Figure 1"</span>)
+</div><div class='img'><img src='draw_figure_label-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Different position and font size</span>
-<span class='no'>p</span> + <span class='fu'>draw_figure_label</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Figure 1"</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"bottom.right"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='draw_figure_label-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_figure_label</span>(label = <span class='st'>"Figure 1"</span>, position = <span class='st'>"bottom.right"</span>, size = <span class='fl'>10</span>)
+</div><div class='img'><img src='draw_figure_label-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Using bold font face</span>
-<span class='no'>p</span> + <span class='fu'>draw_figure_label</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Figure 1"</span>, <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>)</div><div class='img'><img src='draw_figure_label-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_figure_label</span>(label = <span class='st'>"Figure 1"</span>, fontface = <span class='st'>"bold"</span>)
+</div><div class='img'><img src='draw_figure_label-3.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Making the label red and slanted</span>
-<span class='no'>p</span> + <span class='fu'>draw_figure_label</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Figure 1"</span>, <span class='kw'>angle</span> <span class='kw'>=</span> -<span class='fl'>45</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='st'>"red"</span>)</div><div class='img'><img src='draw_figure_label-4.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_figure_label</span>(label = <span class='st'>"Figure 1"</span>, angle = <span class='op'>-</span><span class='fl'>45</span>, colour = <span class='st'>"red"</span>)
+</div><div class='img'><img src='draw_figure_label-4.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Labeling an individual plot</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p2</span>) + <span class='fu'>draw_figure_label</span>(<span class='kw'>label</span> <span class='kw'>=</span> <span class='st'>"Figure 1"</span>, <span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"bottom.right"</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>10</span>)</div><div class='img'><img src='draw_figure_label-5.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='kw'>p2</span>) <span class='op'>+</span> <span class='fu'>draw_figure_label</span>(label = <span class='st'>"Figure 1"</span>, position = <span class='st'>"bottom.right"</span>, size = <span class='fl'>10</span>)
+</div><div class='img'><img src='draw_figure_label-5.png' alt='' width='700' height='433' /></div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -239,7 +247,7 @@ one pane. The function is similar to <code>draw_plot_label</code>.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

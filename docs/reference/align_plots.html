@@ -85,7 +85,7 @@ multiple y-axes are desired (see example)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -169,11 +169,11 @@ multiple y-axes are desired (see example).</p>
     </div>
 
     <pre class="usage"><span class='fu'>align_plots</span>(
-  <span class='no'>...</span>,
-  <span class='kw'>plotlist</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>align</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>, <span class='st'>"hv"</span>),
-  <span class='kw'>axis</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"l"</span>, <span class='st'>"r"</span>, <span class='st'>"t"</span>, <span class='st'>"b"</span>, <span class='st'>"lr"</span>, <span class='st'>"tb"</span>, <span class='st'>"tblr"</span>),
-  <span class='kw'>greedy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>...</span>,
+  plotlist = <span class='kw'>NULL</span>,
+  align = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"h"</span>, <span class='st'>"v"</span>, <span class='st'>"hv"</span>),
+  axis = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"none"</span>, <span class='st'>"l"</span>, <span class='st'>"r"</span>, <span class='st'>"t"</span>, <span class='st'>"b"</span>, <span class='st'>"lr"</span>, <span class='st'>"tb"</span>, <span class='st'>"tblr"</span>),
+  greedy = <span class='fl'>TRUE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -209,20 +209,22 @@ aligns all columns/rows in the gtable if possible.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>manufacturer</span>, <span class='no'>hwy</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/stat_summary.html'>stat_summary</a></span>(<span class='kw'>fun.y</span><span class='kw'>=</span><span class='st'>"median"</span>, <span class='kw'>geom</span> <span class='kw'>=</span> <span class='st'>"bar"</span>) +
-  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(<span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>45</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vjust</span><span class='kw'>=</span> <span class='fl'>1</span>))</div><div class='output co'>#&gt; <span class='warning'>Warning: `fun.y` is deprecated. Use `fun` instead.</span></div><div class='input'><span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>manufacturer</span>, <span class='no'>displ</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='kw'>color</span><span class='kw'>=</span><span class='st'>"red"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(<span class='kw'>position</span> <span class='kw'>=</span> <span class='st'>"right"</span>) +
-  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(<span class='kw'>axis.text.x</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span>())
+<span class='kw'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>manufacturer</span>, <span class='kw'>hwy</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/stat_summary.html'>stat_summary</a></span>(fun.y=<span class='st'>"median"</span>, geom = <span class='st'>"bar"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(axis.text.x = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span>(angle = <span class='fl'>45</span>, hjust = <span class='fl'>1</span>, vjust= <span class='fl'>1</span>))
+</div><div class='output co'>#&gt; <span class='warning'>Warning: `fun.y` is deprecated. Use `fun` instead.</span></div><div class='input'><span class='kw'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mpg</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>manufacturer</span>, <span class='kw'>displ</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(color=<span class='st'>"red"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(position = <span class='st'>"right"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span>(axis.text.x = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_blank</a></span>())
 
 <span class='co'># manually align and plot on top of each other</span>
-<span class='no'>aligned_plots</span> <span class='kw'>&lt;-</span> <span class='fu'>align_plots</span>(<span class='no'>p1</span>, <span class='no'>p2</span>, <span class='kw'>align</span><span class='kw'>=</span><span class='st'>"hv"</span>, <span class='kw'>axis</span><span class='kw'>=</span><span class='st'>"tblr"</span>)
+<span class='kw'>aligned_plots</span> <span class='op'>&lt;-</span> <span class='fu'>align_plots</span>(<span class='kw'>p1</span>, <span class='kw'>p2</span>, align=<span class='st'>"hv"</span>, axis=<span class='st'>"tblr"</span>)
 
 <span class='co'># Note: In most cases two y-axes should not be used, but this example</span>
 <span class='co'># illustrates how one could accomplish it.</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>aligned_plots</span><span class='kw'>[[</span><span class='fl'>1</span>]]) + <span class='fu'><a href='draw_plot.html'>draw_plot</a></span>(<span class='no'>aligned_plots</span><span class='kw'>[[</span><span class='fl'>2</span>]])</div><div class='img'><img src='align_plots-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='kw'>aligned_plots</span>[[<span class='fl'>1</span>]]) <span class='op'>+</span> <span class='fu'><a href='draw_plot.html'>draw_plot</a></span>(<span class='kw'>aligned_plots</span>[[<span class='fl'>2</span>]])
+</div><div class='img'><img src='align_plots-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -238,7 +240,7 @@ aligns all columns/rows in the gtable if possible.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

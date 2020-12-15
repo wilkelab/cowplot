@@ -81,7 +81,7 @@ handle mathematical expressions, though. For those, use draw_label." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -160,7 +160,7 @@ handle mathematical expressions, though. For those, use draw_label." />
 handle mathematical expressions, though. For those, use <code>draw_label</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>draw_text</span>(<span class='no'>text</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>14</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>draw_text</span>(<span class='kw'>text</span>, x = <span class='fl'>0.5</span>, y = <span class='fl'>0.5</span>, size = <span class='fl'>14</span>, hjust = <span class='fl'>0.5</span>, vjust = <span class='fl'>0.5</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -209,13 +209,15 @@ specify.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># Draw onto a 1*1 drawing surface</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() + <span class='fu'>draw_text</span>(<span class='st'>"Hello World!"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='draw_text-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#</span>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() <span class='op'>+</span> <span class='fu'>draw_text</span>(<span class='st'>"Hello World!"</span>, x = <span class='fl'>0.5</span>, y = <span class='fl'>0.5</span>)
+</div><div class='img'><img src='draw_text-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'>#</span>
 <span class='co'># Adorn a plot from the Anscombe data set of "identical" data.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>anscombe</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x1</span>, <span class='no'>y1</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>()
-<span class='no'>three_strings</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Hello World!"</span>, <span class='st'>"to be or not to be"</span>, <span class='st'>"over and out"</span>)
-<span class='no'>p</span> + <span class='fu'>draw_text</span>(<span class='no'>three_strings</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>8</span>:<span class='fl'>10</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>5</span>:<span class='fl'>7</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='draw_text-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>anscombe</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x1</span>, <span class='kw'>y1</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_smooth.html'>geom_smooth</a></span>()
+<span class='kw'>three_strings</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Hello World!"</span>, <span class='st'>"to be or not to be"</span>, <span class='st'>"over and out"</span>)
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_text</span>(<span class='kw'>three_strings</span>, x = <span class='fl'>8</span><span class='op'>:</span><span class='fl'>10</span>, y = <span class='fl'>5</span><span class='op'>:</span><span class='fl'>7</span>, hjust = <span class='fl'>0</span>)
+</div><div class='output co'>#&gt; <span class='message'>`geom_smooth()` using method = 'loess' and formula 'y ~ x'</span></div><div class='img'><img src='draw_text-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -231,7 +233,7 @@ specify.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -80,7 +80,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -159,26 +159,26 @@
     </div>
 
     <pre class="usage"><span class='fu'>stamp</span>(
-  <span class='no'>p</span>,
-  <span class='no'>label</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1.1</span>,
-  <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>family</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"bold"</span>,
-  <span class='kw'>clip</span> <span class='kw'>=</span> <span class='st'>"on"</span>,
-  <span class='no'>colour</span>
+  <span class='kw'>p</span>,
+  <span class='kw'>label</span>,
+  color = <span class='st'>"black"</span>,
+  alpha = <span class='fl'>1</span>,
+  vjust = <span class='fl'>1.1</span>,
+  hjust = <span class='fl'>1</span>,
+  size = <span class='fl'>14</span>,
+  family = <span class='st'>""</span>,
+  fontface = <span class='st'>"bold"</span>,
+  clip = <span class='st'>"on"</span>,
+  <span class='kw'>colour</span>
 )
 
-<span class='fu'>stamp_good</span>(<span class='no'>p</span>, <span class='no'>...</span>)
+<span class='fu'>stamp_good</span>(<span class='kw'>p</span>, <span class='kw'>...</span>)
 
-<span class='fu'>stamp_bad</span>(<span class='no'>p</span>, <span class='no'>...</span>)
+<span class='fu'>stamp_bad</span>(<span class='kw'>p</span>, <span class='kw'>...</span>)
 
-<span class='fu'>stamp_wrong</span>(<span class='no'>p</span>, <span class='no'>...</span>)
+<span class='fu'>stamp_wrong</span>(<span class='kw'>p</span>, <span class='kw'>...</span>)
 
-<span class='fu'>stamp_ugly</span>(<span class='no'>p</span>, <span class='no'>...</span>)</pre>
+<span class='fu'>stamp_ugly</span>(<span class='kw'>p</span>, <span class='kw'>...</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -227,12 +227,14 @@
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Width</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='no'>Petal.Width</span>)))
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Sepal.Length</span>, y = <span class='kw'>Sepal.Width</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>(<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(color = <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>factor</a></span>(<span class='kw'>Petal.Width</span>)))
 
-<span class='fu'>stamp_bad</span>(<span class='no'>p</span> + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"none"</span>))</div><div class='img'><img src='stamp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>stamp_ugly</span>(<span class='no'>p</span>)</div><div class='img'><img src='stamp-2.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'>stamp_bad</span>(<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/guides.html'>guides</a></span>(color = <span class='st'>"none"</span>))
+</div><div class='img'><img src='stamp-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'>stamp_ugly</span>(<span class='kw'>p</span>)
+</div><div class='img'><img src='stamp-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -248,7 +250,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

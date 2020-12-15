@@ -82,7 +82,7 @@ on which coordinate system is desired (see examples)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -163,19 +163,19 @@ on which coordinate system is desired (see examples).</p>
     </div>
 
     <pre class="usage"><span class='fu'>draw_label</span>(
-  <span class='no'>label</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>fontfamily</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>fontface</span> <span class='kw'>=</span> <span class='st'>"plain"</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>angle</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>lineheight</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='no'>colour</span>
+  <span class='kw'>label</span>,
+  x = <span class='fl'>0.5</span>,
+  y = <span class='fl'>0.5</span>,
+  hjust = <span class='fl'>0.5</span>,
+  vjust = <span class='fl'>0.5</span>,
+  fontfamily = <span class='st'>""</span>,
+  fontface = <span class='st'>"plain"</span>,
+  color = <span class='st'>"black"</span>,
+  size = <span class='fl'>14</span>,
+  angle = <span class='fl'>0</span>,
+  lineheight = <span class='fl'>0.9</span>,
+  alpha = <span class='fl'>1</span>,
+  <span class='kw'>colour</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -241,30 +241,34 @@ specify.</p>
     <div class='dont-index'><p><code><a href='ggdraw.html'>ggdraw</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='co'># setup plot and a label (regression description)</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>disp</span>, <span class='no'>mpg</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(<span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"blue"</span>) +
-  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() +
-  <span class='fu'><a href='background_grid.html'>background_grid</a></span>(<span class='kw'>minor</span> <span class='kw'>=</span> <span class='st'>'none'</span>)
-<span class='no'>out</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span>(<span class='no'>mtcars</span>$<span class='no'>disp</span>, <span class='no'>mtcars</span>$<span class='no'>mpg</span>, <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>'sp'</span>, <span class='kw'>exact</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)
-<span class='no'>label</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(
-  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Spearman "</span>, <span class='no'>rho</span>, <span class='st'>" = "</span>, <span class='no'>estimate</span>, <span class='st'>", P = "</span>, <span class='no'>pvalue</span>),
-  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>estimate</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>signif</a></span>(<span class='no'>out</span>$<span class='no'>estimate</span>, <span class='fl'>2</span>), <span class='kw'>pvalue</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>signif</a></span>(<span class='no'>out</span>$<span class='no'>p.value</span>, <span class='fl'>2</span>))
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>disp</span>, <span class='kw'>mpg</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_path.html'>geom_line</a></span>(color = <span class='st'>"blue"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='theme_cowplot.html'>theme_half_open</a></span>() <span class='op'>+</span>
+  <span class='fu'><a href='background_grid.html'>background_grid</a></span>(minor = <span class='st'>'none'</span>)
+<span class='kw'>out</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/cor.test.html'>cor.test</a></span>(<span class='kw'>mtcars</span><span class='op'>$</span><span class='kw'>disp</span>, <span class='kw'>mtcars</span><span class='op'>$</span><span class='kw'>mpg</span>, method = <span class='st'>'sp'</span>, exact = <span class='fl'>FALSE</span>)
+<span class='kw'>label</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/substitute.html'>substitute</a></span>(
+  <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste</a></span>(<span class='st'>"Spearman "</span>, <span class='kw'>rho</span>, <span class='st'>" = "</span>, <span class='kw'>estimate</span>, <span class='st'>", P = "</span>, <span class='kw'>pvalue</span>),
+  <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(estimate = <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>signif</a></span>(<span class='kw'>out</span><span class='op'>$</span><span class='kw'>estimate</span>, <span class='fl'>2</span>), pvalue = <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>signif</a></span>(<span class='kw'>out</span><span class='op'>$</span><span class='kw'>p.value</span>, <span class='fl'>2</span>))
 )
 
 <span class='co'># Add label to plot, centered on {x,y} (in data coordinates)</span>
-<span class='no'>p</span> + <span class='fu'>draw_label</span>(<span class='no'>label</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>300</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>32</span>)</div><div class='img'><img src='draw_label-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Add label to plot in data coordinates, flush-left at x, baseline at y.</span>
-<span class='no'>p</span> + <span class='fu'>draw_label</span>(<span class='no'>label</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>100</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>30</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>)</div><div class='img'><img src='draw_label-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_label</span>(<span class='kw'>label</span>, x = <span class='fl'>300</span>, y = <span class='fl'>32</span>)
+</div><div class='img'><img src='draw_label-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Add label to plot in data coordinates, flush-left at x, baseline at y.</span>
+<span class='kw'>p</span> <span class='op'>+</span> <span class='fu'>draw_label</span>(<span class='kw'>label</span>, x = <span class='fl'>100</span>, y = <span class='fl'>30</span>, hjust = <span class='fl'>0</span>, vjust = <span class='fl'>0</span>)
+</div><div class='img'><img src='draw_label-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># Add labels via ggdraw. Uses ggdraw coordinates.</span>
 <span class='co'># ggdraw coordinates default to xlim = c(0, 1), ylim = c(0, 1).</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p</span>) +
-  <span class='fu'>draw_label</span>(<span class='st'>"centered on 70% of x range,\n90% of y range"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.7</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.9</span>)</div><div class='img'><img src='draw_label-3.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='no'>p</span>) +
-  <span class='fu'>draw_label</span>(<span class='st'>"bottom left at (0, 0)"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>) +
-  <span class='fu'>draw_label</span>(<span class='st'>"top right at (1, 1)"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>1</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>1</span>) +
-  <span class='fu'>draw_label</span>(<span class='st'>"centered on (0.5, 0.5)"</span>, <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>, <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='draw_label-4.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='kw'>p</span>) <span class='op'>+</span>
+  <span class='fu'>draw_label</span>(<span class='st'>"centered on 70% of x range,\n90% of y range"</span>, x = <span class='fl'>0.7</span>, y = <span class='fl'>0.9</span>)
+</div><div class='img'><img src='draw_label-3.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>(<span class='kw'>p</span>) <span class='op'>+</span>
+  <span class='fu'>draw_label</span>(<span class='st'>"bottom left at (0, 0)"</span>, x = <span class='fl'>0</span>, y = <span class='fl'>0</span>, hjust = <span class='fl'>0</span>, vjust = <span class='fl'>0</span>) <span class='op'>+</span>
+  <span class='fu'>draw_label</span>(<span class='st'>"top right at (1, 1)"</span>, x = <span class='fl'>1</span>, y = <span class='fl'>1</span>, hjust = <span class='fl'>1</span>, vjust = <span class='fl'>1</span>) <span class='op'>+</span>
+  <span class='fu'>draw_label</span>(<span class='st'>"centered on (0.5, 0.5)"</span>, x = <span class='fl'>0.5</span>, y = <span class='fl'>0.5</span>, hjust = <span class='fl'>0.5</span>, vjust = <span class='fl'>0.5</span>)
+</div><div class='img'><img src='draw_label-4.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -280,7 +284,7 @@ specify.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

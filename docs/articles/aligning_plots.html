@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
       <h1 data-toc-skip>Aligning plots</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2020-09-06</h4>
+            <h4 class="date">2020-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/aligning_plots.Rmd"><code>vignettes/aligning_plots.Rmd</code></a></small>
       <div class="hidden name"><code>aligning_plots.Rmd</code></div>
@@ -122,122 +122,148 @@
 <p>There are several packages that can be used to align plots. The most widely used ones beside cowplot are <a href="https://cran.r-project.org/package=egg">egg</a> and <a href="https://github.com/thomasp85/patchwork">patchwork.</a> All these packages use slightly different approaches to plot alignment, and the respective approaches have different strengths and weaknesses. If you cannot achieve your desired result with one of these packages try another one.</p>
 <p>Most importantly, while egg and patchwork align and arrange plots at the same time, cowplot aligns plots independently of how they are arranged. This makes it possible to align plots and then reproduce them separately, or even overlay them on top of each other.</p>
 <p>We’ll start with a very simple example. Let’s consider these two plots.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://wilkelab.org/cowplot">cowplot</a></span>)
 
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>)) +
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>)) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">hp</span>)) +
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">hp</span>)) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
-<span class="no">p1</span></pre></body></html></div>
+<span class="kw">p1</span>
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="no">p2</span></pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="kw">p2</span>
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-2-2.png" width="384"></p>
 <p>Both plots have the same x axis, but the width of the plot area is slightly larger in the first than in the second, because the y axis labels have different lengths. These differences in plot width could be distracting in a document where both plots are shown near each other. We can fix this problem by vertically aligning the two plots and then drawing them individually.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">aligned</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"v"</span>)
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="no">aligned</span><span class="kw">[[</span><span class="fl">1</span>]])</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="kw">aligned</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, align = <span class="st">"v"</span>)
+<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">aligned</span>[[<span class="fl">1</span>]])
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-3-1.png" width="384"></p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="no">aligned</span><span class="kw">[[</span><span class="fl">2</span>]])</pre></body></html></div>
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">aligned</span>[[<span class="fl">2</span>]])
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-3-2.png" width="384"></p>
 <p>Vertical alignment (<code>align = "v"</code>) means that any vertical reference lines, such as the right and left y axis lines, are aligned in the plots. By contrast, horizontal alignment (<code>align = "h"</code>) aligns horizontal reference lines. Both types of alignment can be used separately (<code>align = "v"</code> or <code>align = "h"</code>) or in combination (<code>align = "vh"</code> or <code>align = "hv"</code>).</p>
 <p>If we want to align and then arrange plots, we can call <code><a href="../reference/plot_grid.html">plot_grid()</a></code> and provide it with an <code>align</code> argument. The <code><a href="../reference/plot_grid.html">plot_grid()</a></code> function calls <code><a href="../reference/align_plots.html">align_plots()</a></code> to align the plots and then arranges them.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"v"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, ncol = <span class="fl">1</span>, align = <span class="st">"v"</span>)
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-4-1.png" width="384"></p>
 <div id="aligning-by-axis" class="section level2">
 <h2 class="hasAnchor">
 <a href="#aligning-by-axis" class="anchor"></a>Aligning by axis</h2>
 <p>The vertical and horizontal alignment as described above tries to align every vertical or horizontal element in all plots. In other words, the axis titles are aligned to each other, the axis ticks are aligned to each other, the plot panels are aligned to each other, and so on. This method of alignment only works if all plots have exactly the same elements. Therefore, it fails, for example, if we try to align a plot that is faceted with one that is not.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>(<span class="fl">14</span>) +
-  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"black"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_grid</a></span>(<span class="fl">14</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>(color = <span class="st">"black"</span>)
 
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">vs</span>))) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">am</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(<span class="kw">mult</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.1</span>))) +
-  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"black"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">strip.background</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"gray80"</span>))
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">vs</span>))) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_bar</a></span>() <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span><span class="kw">am</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(expand = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(mult = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.1</span>))) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="fl">12</span>) <span class="op">+</span>
+  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>(color = <span class="st">"black"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(strip.background = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(fill = <span class="st">"gray80"</span>))
 
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"h"</span>, <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, align = <span class="st">"h"</span>, rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))
+</pre></div>
 <pre><code>## Warning: Graphs cannot be horizontally aligned unless the axis parameter is set.
 ## Placing graphs unaligned.</code></pre>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-5-1.png" width="672"></p>
 <p>We receive a warning that the plots cannot be aligned, and the plots are drawn without alignment. To align these plots, we need to tell the <code><a href="../reference/align_plots.html">align_plots()</a></code> function which parts of the plots should be aligned. There are two alternatives, and both can be meaningful. First, we can align only the bottom axis (<code>axis = "b"</code>).</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"h"</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="st">"b"</span>, <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, align = <span class="st">"h"</span>, axis = <span class="st">"b"</span>, rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-6-1.png" width="672"></p>
 <p>Second, we can align both the bottom and the top axis (<code>axis = "bt"</code>).</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"h"</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="st">"bt"</span>, <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, align = <span class="st">"h"</span>, axis = <span class="st">"bt"</span>, rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1.3</span>))
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-7-1.png" width="672"></p>
 <p>In general, the <code>axis</code> argument tells the <code><a href="../reference/align_plots.html">align_plots()</a></code> function to only align specific axes. It understands the values <code>"t"</code> (top), <code>"r"</code> (right), <code>"b"</code> (bottom), and <code>"l"</code> (left), in any combination.</p>
 <p>As a second example, I will show how aligning by axis can be useful even if the plots contain the same number of elements. Consider this vertical arrangement of two plots, showing first the number of cars in different classes in the <code>mpg</code> dataset and second a scatter plot of the mean city mpg for each class versus the number of cars in the class.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">forcats</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://dplyr.tidyverse.org">dplyr</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://forcats.tidyverse.org">forcats</a></span>)
 
-<span class="no">city_mpg</span> <span class="kw">&lt;-</span> <span class="no">mpg</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/forcats/man/fct_lump.html">fct_lump</a></span>(<span class="no">class</span>, <span class="fl">4</span>, <span class="kw">other_level</span> <span class="kw">=</span> <span class="st">"other"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="no">class</span>) <span class="kw">%&gt;%</span>
+<span class="kw">city_mpg</span> <span class="op">&lt;-</span> <span class="kw">mpg</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(class = <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_lump.html">fct_lump</a></span>(<span class="kw">class</span>, <span class="fl">4</span>, other_level = <span class="st">"other"</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(<span class="kw">class</span>) <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarize</a></span>(
-    <span class="kw">mean_mpg</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="no">cty</span>),
-    <span class="kw">count</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()
-  ) <span class="kw">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
-    <span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/forcats/man/fct_reorder.html">fct_reorder</a></span>(<span class="no">class</span>, <span class="no">count</span>)
+    mean_mpg = <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span>(<span class="kw">cty</span>),
+    count = <span class="fu"><a href="https://dplyr.tidyverse.org/reference/context.html">n</a></span>()
+  ) <span class="op">%&gt;%</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(
+    class = <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span>(<span class="kw">class</span>, <span class="kw">count</span>)
   )
 
 
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">class</span>, <span class="no">count</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span>(<span class="fl">0</span>, <span class="fl">65</span>) +
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">class</span>, <span class="kw">count</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>() <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/lims.html">ylim</a></span>(<span class="fl">0</span>, <span class="fl">65</span>) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>()
 
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">mean_mpg</span>, <span class="no">count</span>)) +
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">mean_mpg</span>, <span class="kw">count</span>)) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
 
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">'v'</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, ncol = <span class="fl">1</span>, align = <span class="st">'v'</span>)
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
 <p>Because the y axis labels of the first plot are very long, the y axis title of the second plot is located far removed from the axis labels. This looks strange. It would be better to move the axis title closer to the labels. We can do this by aligning by axis. I’m aligning here only the left axis. Aligning the left and the right axis would have produced the same result.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">'v'</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="st">'l'</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, ncol = <span class="fl">1</span>, align = <span class="st">'v'</span>, axis = <span class="st">'l'</span>)
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-9-1.png" width="576"></p>
 <p>Finally, I’ll make two separate plots and then draw them on top of each other. First, let’s again draw a bar plot of the number of cars in different classes in the <code>mpg</code> dataset.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">city_mpg</span> <span class="kw">&lt;-</span> <span class="no">city_mpg</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw">class</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/forcats/man/fct_reorder.html">fct_reorder</a></span>(<span class="no">class</span>, -<span class="no">mean_mpg</span>))
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">city_mpg</span> <span class="op">&lt;-</span> <span class="kw">city_mpg</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(class = <span class="fu"><a href="https://forcats.tidyverse.org/reference/fct_reorder.html">fct_reorder</a></span>(<span class="kw">class</span>, <span class="op">-</span><span class="kw">mean_mpg</span>))
 
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">class</span>, <span class="no">count</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="st">"#6297E770"</span>) +
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">class</span>, <span class="kw">count</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(fill = <span class="st">"#6297E770"</span>) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(
-    <span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(<span class="kw">mult</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>)),
-    <span class="kw">position</span> <span class="kw">=</span> <span class="st">"right"</span>
-  ) +
-  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="fl">11</span>, <span class="kw">rel_small</span> <span class="kw">=</span> <span class="fl">1</span>) +
+    expand = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(mult = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>)),
+    position = <span class="st">"right"</span>
+  ) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_minimal_grid.html">theme_minimal_hgrid</a></span>(<span class="fl">11</span>, rel_small = <span class="fl">1</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-    <span class="kw">panel.grid.major</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#6297E770"</span>),
-    <span class="kw">axis.line.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-    <span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-    <span class="kw">axis.title.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-    <span class="kw">axis.ticks</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
-    <span class="kw">axis.ticks.length</span> <span class="kw">=</span> <span class="kw pkg">grid</span><span class="kw ns">::</span><span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span>(<span class="fl">0</span>, <span class="st">"pt"</span>),
-    <span class="kw">axis.text.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#6297E7"</span>),
-    <span class="kw">axis.title.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#6297E7"</span>)
+    panel.grid.major = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(color = <span class="st">"#6297E770"</span>),
+    axis.line.x = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
+    axis.text.x = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
+    axis.title.x = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
+    axis.ticks = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_blank</a></span>(),
+    axis.ticks.length = <span class="kw">grid</span>::<span class="fu"><a href="https://rdrr.io/r/grid/unit.html">unit</a></span>(<span class="fl">0</span>, <span class="st">"pt"</span>),
+    axis.text.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(color = <span class="st">"#6297E7"</span>),
+    axis.title.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(color = <span class="st">"#6297E7"</span>)
   )
-<span class="no">p1</span></pre></body></html></div>
+<span class="kw">p1</span>
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-10-1.png" width="528"></p>
 <p>Now let’s plot mean city mpg versus car class, as a scatter plot.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">class</span>, <span class="no">mean_mpg</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="st">"#D5442D"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="kw">limits</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">21</span>)) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">11</span>, <span class="kw">rel_small</span> <span class="kw">=</span> <span class="fl">1</span>) +
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">city_mpg</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">class</span>, <span class="kw">mean_mpg</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(size = <span class="fl">3</span>, color = <span class="st">"#D5442D"</span>) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(limits = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">10</span>, <span class="fl">21</span>)) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">11</span>, rel_small = <span class="fl">1</span>) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-    <span class="kw">axis.ticks.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#BB2D05"</span>),
-    <span class="kw">axis.text.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#BB2D05"</span>),
-    <span class="kw">axis.title.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#BB2D05"</span>),
-    <span class="kw">axis.line.y</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="st">"#BB2D05"</span>)
+    axis.ticks.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(color = <span class="st">"#BB2D05"</span>),
+    axis.text.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(color = <span class="st">"#BB2D05"</span>),
+    axis.title.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(color = <span class="st">"#BB2D05"</span>),
+    axis.line.y = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_line</a></span>(color = <span class="st">"#BB2D05"</span>)
   )
-<span class="no">p2</span></pre></body></html></div>
+<span class="kw">p2</span>
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-11-1.png" width="528"></p>
 <p>Now we align the two plots and then overlay them. The resulting plot has dual axes, and making such plots is usually discouraged. I present this example here only to show the types of effects we can achieve when plot alignment and plot placement are separated.</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">aligned_plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">align</span><span class="kw">=</span><span class="st">"hv"</span>, <span class="kw">axis</span><span class="kw">=</span><span class="st">"tblr"</span>)
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="no">aligned_plots</span><span class="kw">[[</span><span class="fl">1</span>]]) + <span class="fu"><a href="../reference/draw_plot.html">draw_plot</a></span>(<span class="no">aligned_plots</span><span class="kw">[[</span><span class="fl">2</span>]])</pre></body></html></div>
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="kw">aligned_plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, align=<span class="st">"hv"</span>, axis=<span class="st">"tblr"</span>)
+<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">aligned_plots</span>[[<span class="fl">1</span>]]) <span class="op">+</span> <span class="fu"><a href="../reference/draw_plot.html">draw_plot</a></span>(<span class="kw">aligned_plots</span>[[<span class="fl">2</span>]])
+</pre></div>
 <p><img src="aligning_plots_files/figure-html/unnamed-chunk-12-1.png" width="528"></p>
 </div>
   </div>
@@ -257,7 +283,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

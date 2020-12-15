@@ -87,7 +87,7 @@ white space to plot margins so that all margins have the same dimensions." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -172,7 +172,7 @@ margin, the function will align individual elements on the margin. Otherwise, it
 white space to plot margins so that all margins have the same dimensions.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>align_margin</span>(<span class='no'>sizes</span>, <span class='no'>margin_to_align</span>, <span class='kw'>greedy</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
+    <pre class="usage"><span class='fu'>align_margin</span>(<span class='kw'>sizes</span>, <span class='kw'>margin_to_align</span>, greedy = <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -198,29 +198,30 @@ all dimensions are jointly adjusted.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='co'># Example for how to utilize, though align_plots() does this internally and automatically</span>
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y1</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>10</span>, <span class='kw'>y2</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>2</span>, <span class='kw'>y3</span> <span class='kw'>=</span> (<span class='fl'>1</span>:<span class='fl'>10</span>)^<span class='fl'>3</span>
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y1 = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>, y2 = (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>2</span>, y3 = (<span class='fl'>1</span><span class='op'>:</span><span class='fl'>10</span>)<span class='op'>^</span><span class='fl'>3</span>
 )
 
-<span class='no'>p1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y1</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y2</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>p3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y3</span>)) + <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
-<span class='no'>plots</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='no'>p1</span>, <span class='no'>p2</span>, <span class='no'>p3</span>)
-<span class='no'>grobs</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>plots</span>, <span class='no'>as_grob</span>)
-<span class='no'>plot_widths</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='no'>grobs</span>, <span class='kw'>function</span>(<span class='no'>x</span>) {<span class='no'>x</span>$<span class='no'>widths</span>})
+<span class='kw'>p1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y1</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y2</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>p3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y3</span>)) <span class='op'>+</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
+<span class='kw'>plots</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span>(<span class='kw'>p1</span>, <span class='kw'>p2</span>, <span class='kw'>p3</span>)
+<span class='kw'>grobs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='kw'>plots</span>, <span class='kw'>as_grob</span>)
+<span class='kw'>plot_widths</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/lapply.html'>lapply</a></span>(<span class='kw'>grobs</span>, <span class='fu'>function</span>(<span class='kw'>x</span>) {<span class='kw'>x</span><span class='op'>$</span><span class='kw'>widths</span>})
 <span class='co'># Aligning the left margins of all plots</span>
-<span class='no'>aligned_widths</span> <span class='kw'>&lt;-</span> <span class='fu'>align_margin</span>(<span class='no'>plot_widths</span>, <span class='st'>"first"</span>)
+<span class='kw'>aligned_widths</span> <span class='op'>&lt;-</span> <span class='fu'>align_margin</span>(<span class='kw'>plot_widths</span>, <span class='st'>"first"</span>)
 <span class='co'># Aligning the right margins of all plots as well</span>
-<span class='no'>aligned_widths</span> <span class='kw'>&lt;-</span> <span class='fu'>align_margin</span>(<span class='no'>aligned_widths</span>, <span class='st'>"last"</span>)
+<span class='kw'>aligned_widths</span> <span class='op'>&lt;-</span> <span class='fu'>align_margin</span>(<span class='kw'>aligned_widths</span>, <span class='st'>"last"</span>)
 <span class='co'># Setting the dimensions of plots to the aligned dimensions</span>
-<span class='kw'>for</span> (<span class='no'>i</span> <span class='kw'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='no'>plots</span>)) {
-  <span class='no'>grobs</span><span class='kw'>[[</span><span class='no'>i</span>]]$<span class='no'>widths</span> <span class='kw'>&lt;-</span> <span class='no'>aligned_widths</span><span class='kw'>[[</span><span class='no'>i</span>]]
+<span class='co'>for</span> (<span class='kw'>i</span> <span class='co'>in</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq_along</a></span>(<span class='kw'>plots</span>)) {
+  <span class='kw'>grobs</span>[[<span class='kw'>i</span>]]<span class='op'>$</span><span class='kw'>widths</span> <span class='op'>&lt;-</span> <span class='kw'>aligned_widths</span>[[<span class='kw'>i</span>]]
 }
 <span class='co'># Draw aligned plots</span>
-<span class='fu'><a href='plot_grid.html'>plot_grid</a></span>(<span class='kw'>plotlist</span> <span class='kw'>=</span> <span class='no'>grobs</span>, <span class='kw'>ncol</span> <span class='kw'>=</span> <span class='fl'>1</span>)</div><div class='img'><img src='align_margin-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='plot_grid.html'>plot_grid</a></span>(plotlist = <span class='kw'>grobs</span>, ncol = <span class='fl'>1</span>)
+</div><div class='img'><img src='align_margin-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -236,7 +237,7 @@ all dimensions are jointly adjusted.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

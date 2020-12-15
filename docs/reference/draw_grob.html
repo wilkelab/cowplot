@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -161,17 +161,17 @@
     </div>
 
     <pre class="usage"><span class='fu'>draw_grob</span>(
-  <span class='no'>grob</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>clip</span> <span class='kw'>=</span> <span class='st'>"inherit"</span>,
-  <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>halign</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>valign</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
+  <span class='kw'>grob</span>,
+  x = <span class='fl'>0</span>,
+  y = <span class='fl'>0</span>,
+  width = <span class='fl'>1</span>,
+  height = <span class='fl'>1</span>,
+  scale = <span class='fl'>1</span>,
+  clip = <span class='st'>"inherit"</span>,
+  hjust = <span class='fl'>0</span>,
+  vjust = <span class='fl'>0</span>,
+  halign = <span class='fl'>0.5</span>,
+  valign = <span class='fl'>0.5</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -221,9 +221,10 @@ the box.</p></td>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># A grid grob (here a blue circle)</span>
-<span class='no'>g</span> <span class='kw'>&lt;-</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/grid.circle.html'>circleGrob</a></span>(<span class='kw'>gp</span> <span class='kw'>=</span> <span class='kw pkg'>grid</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"blue"</span>))
+<span class='kw'>g</span> <span class='op'>&lt;-</span> <span class='kw'>grid</span>::<span class='fu'><a href='https://rdrr.io/r/grid/grid.circle.html'>circleGrob</a></span>(gp = <span class='kw'>grid</span>::<span class='fu'><a href='https://rdrr.io/r/grid/gpar.html'>gpar</a></span>(fill = <span class='st'>"blue"</span>))
 <span class='co'># place into the middle of the plotting area, at a scale of 50%</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() + <span class='fu'>draw_grob</span>(<span class='no'>g</span>, <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>0.5</span>)</div><div class='img'><img src='draw_grob-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() <span class='op'>+</span> <span class='fu'>draw_grob</span>(<span class='kw'>g</span>, scale = <span class='fl'>0.5</span>)
+</div><div class='img'><img src='draw_grob-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -239,7 +240,7 @@ the box.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

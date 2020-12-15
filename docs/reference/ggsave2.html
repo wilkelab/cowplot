@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Cowplot reimplementation of <code>ggsave()</code>. — ggsave2 • cowplot</title>
+<title>Cowplot reimplementation of ggsave(). — ggsave2 • cowplot</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,7 +46,7 @@
 
 
 
-<meta property="og:title" content="Cowplot reimplementation of <code>ggsave()</code>. — ggsave2" />
+<meta property="og:title" content="Cowplot reimplementation of ggsave(). — ggsave2" />
 <meta property="og:description" content="This function behaves just like ggsave() from ggplot2. The main difference is
 that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
 causes problems with some pdf readers." />
@@ -82,7 +82,7 @@ causes problems with some pdf readers." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -157,23 +157,23 @@ causes problems with some pdf readers." />
     </div>
 
     <div class="ref-description">
-    <p>This function behaves just like <code>ggsave()</code> from ggplot2. The main difference is
+    <p>This function behaves just like <code><a href='https://ggplot2.tidyverse.org/reference/ggsave.html'>ggsave()</a></code> from ggplot2. The main difference is
 that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
 causes problems with some pdf readers.</p>
     </div>
 
     <pre class="usage"><span class='fu'>ggsave2</span>(
-  <span class='no'>filename</span>,
-  <span class='kw'>plot</span> <span class='kw'>=</span> <span class='kw pkg'>ggplot2</span><span class='kw ns'>::</span><span class='fu'><a href='https://ggplot2.tidyverse.org/reference/last_plot.html'>last_plot</a></span>(),
-  <span class='kw'>device</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>path</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>units</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"in"</span>, <span class='st'>"cm"</span>, <span class='st'>"mm"</span>),
-  <span class='kw'>dpi</span> <span class='kw'>=</span> <span class='fl'>300</span>,
-  <span class='kw'>limitsize</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='no'>...</span>
+  <span class='kw'>filename</span>,
+  plot = <span class='kw'>ggplot2</span>::<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/last_plot.html'>last_plot</a></span>(),
+  device = <span class='kw'>NULL</span>,
+  path = <span class='kw'>NULL</span>,
+  scale = <span class='fl'>1</span>,
+  width = <span class='fl'>NA</span>,
+  height = <span class='fl'>NA</span>,
+  units = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"in"</span>, <span class='st'>"cm"</span>, <span class='st'>"mm"</span>),
+  dpi = <span class='fl'>300</span>,
+  limitsize = <span class='fl'>TRUE</span>,
+  <span class='kw'>...</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -244,7 +244,7 @@ specifying dimensions in pixels.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -1,13 +1,6 @@
 pandoc: 2.10.1
-pkgdown: 1.5.1
+pkgdown: 1.6.0
 pkgdown_sha: ~
-articles:
-  aligning_plots: aligning_plots.html
-  drawing_with_on_plots: drawing_with_on_plots.html
-  introduction: introduction.html
-  mixing_plot_frameworks: mixing_plot_frameworks.html
-  plot_grid: plot_grid.html
-  shared_legends: shared_legends.html
-  themes: themes.html
-last_built: 2020-09-06T21:33Z
+articles: []
+last_built: 2020-12-15T17:50Z
 

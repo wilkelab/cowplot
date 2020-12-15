@@ -81,7 +81,7 @@ circles." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -161,23 +161,23 @@ circles.</p>
     </div>
 
     <pre class="usage"><span class='fu'>rectangle_key_glyph</span>(
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>fill</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>size</span>,
-  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='no'>linetype</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='st'>"pt"</span>),
-  <span class='no'>color</span>
+  colour = <span class='fl'>NA</span>,
+  fill = <span class='kw'>fill</span>,
+  alpha = <span class='kw'>alpha</span>,
+  size = <span class='kw'>size</span>,
+  linetype = <span class='kw'>linetype</span>,
+  padding = <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='st'>"pt"</span>),
+  <span class='kw'>color</span>
 )
 
 <span class='fu'>circle_key_glyph</span>(
-  <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fl'>NA</span>,
-  <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>fill</span>,
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='no'>alpha</span>,
-  <span class='kw'>size</span> <span class='kw'>=</span> <span class='no'>size</span>,
-  <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='no'>linetype</span>,
-  <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'>unit</span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='st'>"pt"</span>),
-  <span class='no'>color</span>
+  colour = <span class='fl'>NA</span>,
+  fill = <span class='kw'>fill</span>,
+  alpha = <span class='kw'>alpha</span>,
+  size = <span class='kw'>size</span>,
+  linetype = <span class='kw'>linetype</span>,
+  padding = <span class='fu'><a href='https://rdrr.io/r/grid/unit.html'>unit</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>, <span class='fl'>0</span>), <span class='st'>"pt"</span>),
+  <span class='kw'>color</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -217,26 +217,28 @@ and left padding from the edges of the legend key to the edges of the key glyph.
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1233</span>)
-<span class='no'>df</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='no'>letters</span>[<span class='fl'>1</span>:<span class='fl'>2</span>], <span class='fl'>10</span>, <span class='fl'>TRUE</span>),
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>)
+<span class='kw'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(
+  x = <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='kw'>letters</span>[<span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>], <span class='fl'>10</span>, <span class='fl'>TRUE</span>),
+  y = <span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>10</span>)
 )
 
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>x</span>)) +
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, color = <span class='kw'>x</span>)) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>(
-    <span class='kw'>key_glyph</span> <span class='kw'>=</span> <span class='fu'>rectangle_key_glyph</span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>color</span>, <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
-  )</div><div class='img'><img src='rectangle_key_glyph-1.png' alt='' width='700' height='433' /></div><div class='input'>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>x</span>)) +
+    key_glyph = <span class='fu'>rectangle_key_glyph</span>(fill = <span class='kw'>color</span>, padding = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span>(<span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>, <span class='fl'>3</span>))
+  )
+</div><div class='img'><img src='rectangle_key_glyph-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>df</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>, color = <span class='kw'>x</span>)) <span class='op'>+</span>
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_boxplot.html'>geom_boxplot</a></span>(
-    <span class='kw'>key_glyph</span> <span class='kw'>=</span> <span class='fu'>circle_key_glyph</span>(
-      <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>color</span>,
-      <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"black"</span>, <span class='kw'>linetype</span> <span class='kw'>=</span> <span class='fl'>3</span>, <span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-      <span class='kw'>padding</span> <span class='kw'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)
+    key_glyph = <span class='fu'>circle_key_glyph</span>(
+      fill = <span class='kw'>color</span>,
+      color = <span class='st'>"black"</span>, linetype = <span class='fl'>3</span>, size = <span class='fl'>0.3</span>,
+      padding = <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>margin</a></span>(<span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>, <span class='fl'>2</span>)
     )
-  )</div><div class='img'><img src='rectangle_key_glyph-2.png' alt='' width='700' height='433' /></div></pre>
+  )
+</div><div class='img'><img src='rectangle_key_glyph-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +254,7 @@ and left padding from the edges of the legend key to the edges of the key glyph.
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

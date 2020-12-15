@@ -79,7 +79,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -152,9 +152,17 @@
       <small>Source: <a href='https://github.com/wilkelab/cowplot/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="cowplot-111" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.1">
+<a href="#cowplot-111" class="anchor"></a>cowplot 1.1.1<small> Unreleased </small>
+</h1>
+<ul>
+<li>Make sure tests don’t fail if vdiffr is missing.</li>
+</ul>
+</div>
     <div id="cowplot-110" class="section level1">
 <h1 class="page-header" data-toc-text="1.1.0">
-<a href="#cowplot-110" class="anchor"></a>cowplot 1.1.0<small> Unreleased </small>
+<a href="#cowplot-110" class="anchor"></a>cowplot 1.1.0<small> 2020-09-08 </small>
 </h1>
 <ul>
 <li>
@@ -176,10 +184,10 @@
 <a href="#breaking-changes" class="anchor"></a>Breaking changes</h2>
 <p>In many ways, cowplot now behaves more appropriately and plays nicer with the R environment and other R packages. However, this means that several breaking changes were introduced:</p>
 <ul>
-<li>The default ggplot2 theme is no longer changed upon loading. You can add <code>theme_set(theme_cowplot())</code> to your code to restore the old behavior.</li>
+<li>The default ggplot2 theme is no longer changed upon loading. You can add <code><a href="https://ggplot2.tidyverse.org/reference/theme_get.html">theme_set(theme_cowplot())</a></code> to your code to restore the old behavior.</li>
 <li>The package ggplot2 needs to be loaded separately from cowplot, it is not automatically attached.</li>
 <li>All themes now use parameters <code>font_size</code> and <code>font_family</code>. Previously, <code><a href="../reference/theme_nothing.html">theme_nothing()</a></code> and <code><a href="../reference/theme_map.html">theme_map()</a></code> used <code>base_size</code> and <code>base_family</code>.</li>
-<li>The function <code>cowplot::ggsave()</code> was renamed to <code><a href="../reference/ggsave2.html">cowplot::ggsave2()</a></code>, so that the ggplot2 version of ggsave() is no longer masked by the cowplot version.</li>
+<li>The function <code><a href="https://ggplot2.tidyverse.org/reference/ggsave.html">cowplot::ggsave()</a></code> was renamed to <code><a href="../reference/ggsave2.html">cowplot::ggsave2()</a></code>, so that the ggplot2 version of ggsave() is no longer masked by the cowplot version.</li>
 </ul>
 <p>Other breaking changes:</p>
 <ul>
@@ -389,7 +397,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

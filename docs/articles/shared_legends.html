@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
       <h1 data-toc-skip>Shared legends</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2020-09-06</h4>
+            <h4 class="date">2020-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/shared_legends.Rmd"><code>vignettes/shared_legends.Rmd</code></a></small>
       <div class="hidden name"><code>shared_legends.Rmd</code></div>
@@ -121,121 +121,133 @@
     
 <p>This vignette demonstrates how to make compound plots with a shared legend.</p>
 <p>We begin with a row of three plots, without legend.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rlang</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://wilkelab.org/cowplot">cowplot</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://rlang.r-lib.org">rlang</a></span>)
 
 <span class="co"># down-sampled diamonds data set</span>
-<span class="no">dsamp</span> <span class="kw">&lt;-</span> <span class="no">diamonds</span>[<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">diamonds</span>), <span class="fl">1000</span>), ]
+<span class="kw">dsamp</span> <span class="op">&lt;-</span> <span class="kw">diamonds</span>[<span class="fu"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">diamonds</span>), <span class="fl">1000</span>), ]
 
 <span class="co"># function to create plots</span>
-<span class="no">plot_diamonds</span> <span class="kw">&lt;-</span> <span class="kw">function</span>(<span class="no">xaes</span>) {
-  <span class="no">xaes</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/tidyeval.html">enquo</a></span>(<span class="no">xaes</span>)
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">dsamp</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(!!<span class="no">xaes</span>, <span class="no">price</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">clarity</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-    <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
+<span class="kw">plot_diamonds</span> <span class="op">&lt;-</span> <span class="fu">function</span>(<span class="kw">xaes</span>) {
+  <span class="kw">xaes</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/tidyeval.html">enquo</a></span>(<span class="kw">xaes</span>)
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">dsamp</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="op">!</span><span class="op">!</span><span class="kw">xaes</span>, <span class="kw">price</span>, color = <span class="kw">clarity</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span>
+    <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span>
     <span class="co"># we set the left and right margins to 0 to remove </span>
     <span class="co"># unnecessary spacing in the final plot arrangement.</span>
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">plot.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">0</span>))
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(plot.margin = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">6</span>, <span class="fl">0</span>, <span class="fl">6</span>, <span class="fl">0</span>))
 }
 
 <span class="co"># make three plots</span>
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="no">carat</span>)
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="no">depth</span>) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="kw">NULL</span>)
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="no">color</span>) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="kw">NULL</span>)
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="kw">carat</span>)
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="kw">depth</span>) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="kw">NULL</span>)
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="fu">plot_diamonds</span>(<span class="kw">color</span>) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="kw">NULL</span>)
 
 <span class="co"># arrange the three plots in a single row</span>
-<span class="no">prow</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
-  <span class="no">p2</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
-  <span class="no">p3</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
-  <span class="kw">align</span> <span class="kw">=</span> <span class="st">'vh'</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">hjust</span> <span class="kw">=</span> -<span class="fl">1</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>
+<span class="kw">prow</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
+  <span class="kw">p1</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
+  <span class="kw">p2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
+  <span class="kw">p3</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
+  align = <span class="st">'vh'</span>,
+  labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"C"</span>),
+  hjust = <span class="op">-</span><span class="fl">1</span>,
+  nrow = <span class="fl">1</span>
 )
-<span class="no">prow</span></pre></body></html></div>
+<span class="kw">prow</span>
+</pre></div>
 <p><img src="shared_legends_files/figure-html/unnamed-chunk-2-1.png" width="720"></p>
 <p>Now we add the legend back in manually. We can place the legend to the side of the plots.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># extract the legend from one of the plots</span>
-<span class="no">legend</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="co"># extract the legend from one of the plots</span>
+<span class="kw">legend</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(
   <span class="co"># create some space to the left of the legend</span>
-  <span class="no">p1</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.box.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">12</span>))
+  <span class="kw">p1</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.box.margin = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">12</span>))
 )
 
 <span class="co"># add the legend to the row we made earlier. Give it one-third of </span>
 <span class="co"># the width of one plot (via rel_widths).</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">prow</span>, <span class="no">legend</span>, <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">.4</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">prow</span>, <span class="kw">legend</span>, rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">.4</span>))
+</pre></div>
 <p><img src="shared_legends_files/figure-html/unnamed-chunk-3-1.png" width="816"></p>
 <p>Or we can place the legend at the bottom.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># extract a legend that is laid out horizontally</span>
-<span class="no">legend_b</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(
-  <span class="no">p1</span> +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(<span class="kw">color</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span>(<span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"bottom"</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="co"># extract a legend that is laid out horizontally</span>
+<span class="kw">legend_b</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(
+  <span class="kw">p1</span> <span class="op">+</span> 
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(color = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span>(nrow = <span class="fl">1</span>)) <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"bottom"</span>)
 )
 
 <span class="co"># add the legend underneath the row we made earlier. Give it 10%</span>
 <span class="co"># of the height of one plot (via rel_heights).</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">prow</span>, <span class="no">legend_b</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">rel_heights</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">.1</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">prow</span>, <span class="kw">legend_b</span>, ncol = <span class="fl">1</span>, rel_heights = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">.1</span>))
+</pre></div>
 <p><img src="shared_legends_files/figure-html/unnamed-chunk-4-1.png" width="720"></p>
 <p>Or we can place the legend between plots.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># arrange the three plots in a single row, leaving space between plot B and C</span>
-<span class="no">prow</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
-  <span class="no">p2</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="co"># arrange the three plots in a single row, leaving space between plot B and C</span>
+<span class="kw">prow</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
+  <span class="kw">p1</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
+  <span class="kw">p2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
   <span class="kw">NULL</span>,
-  <span class="no">p3</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span><span class="kw">=</span><span class="st">"none"</span>),
-  <span class="kw">align</span> <span class="kw">=</span> <span class="st">'vh'</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">""</span>, <span class="st">"C"</span>),
-  <span class="kw">hjust</span> <span class="kw">=</span> -<span class="fl">1</span>,
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>,
-  <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">.3</span>, <span class="fl">1</span>)
+  <span class="kw">p3</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position=<span class="st">"none"</span>),
+  align = <span class="st">'vh'</span>,
+  labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">""</span>, <span class="st">"C"</span>),
+  hjust = <span class="op">-</span><span class="fl">1</span>,
+  nrow = <span class="fl">1</span>,
+  rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">.3</span>, <span class="fl">1</span>)
 )
 
 <span class="co"># now add in the legend</span>
-<span class="no">prow</span> + <span class="fu"><a href="../reference/draw_grob.html">draw_grob</a></span>(<span class="no">legend</span>, <span class="fl">2</span>/<span class="fl">3.3</span>, <span class="fl">0</span>, <span class="fl">.3</span>/<span class="fl">3.3</span>, <span class="fl">1</span>)</pre></body></html></div>
+<span class="kw">prow</span> <span class="op">+</span> <span class="fu"><a href="../reference/draw_grob.html">draw_grob</a></span>(<span class="kw">legend</span>, <span class="fl">2</span><span class="op">/</span><span class="fl">3.3</span>, <span class="fl">0</span>, <span class="fl">.3</span><span class="op">/</span><span class="fl">3.3</span>, <span class="fl">1</span>)
+</pre></div>
 <p><img src="shared_legends_files/figure-html/unnamed-chunk-5-1.png" width="792"></p>
 <p>One more example, now with a more complex plot arrangement.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># plot 1</span>
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Sepal.Length</span>, <span class="no">Sepal.Width</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">stat_smooth</a></span>(<span class="kw">method</span> <span class="kw">=</span> <span class="st">"lm"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="no">.</span> ~ <span class="no">Species</span>) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(<span class="kw">major</span> <span class="kw">=</span> <span class="st">'y'</span>, <span class="kw">minor</span> <span class="kw">=</span> <span class="st">"none"</span>) +
-  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"none"</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># plot 1</span>
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, <span class="kw">Sepal.Width</span>, color = <span class="kw">Species</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_smooth.html">stat_smooth</a></span>(method = <span class="st">"lm"</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="kw">.</span> <span class="op">~</span> <span class="kw">Species</span>) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span>
+  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(major = <span class="st">'y'</span>, minor = <span class="st">"none"</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/panel_border.html">panel_border</a></span>() <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"none"</span>)
 
 <span class="co"># plot 2</span>
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Sepal.Length</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.7</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(<span class="kw">mult</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>))) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.justification</span> <span class="kw">=</span> <span class="st">"top"</span>)
-<span class="no">p2a</span> <span class="kw">&lt;-</span> <span class="no">p2</span> + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"none"</span>)
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Length</span>, fill = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span>(alpha = <span class="fl">.7</span>) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(expand = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/expansion.html">expansion</a></span>(mult = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0.05</span>))) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.justification = <span class="st">"top"</span>)
+<span class="kw">p2a</span> <span class="op">&lt;-</span> <span class="kw">p2</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"none"</span>)
 
 <span class="co"># plot 3</span>
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Sepal.Width</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="no">Species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">.7</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="kw">expand</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>)) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">legend.position</span> <span class="kw">=</span> <span class="st">"none"</span>)
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">iris</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">Sepal.Width</span>, fill = <span class="kw">Species</span>)) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_density.html">geom_density</a></span>(alpha = <span class="fl">.7</span>) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(expand = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0</span>, <span class="fl">0</span>)) <span class="op">+</span>
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(legend.position = <span class="st">"none"</span>)
 
 <span class="co"># legend</span>
-<span class="no">legend</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(<span class="no">p2</span>)
+<span class="kw">legend</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_legend.html">get_legend</a></span>(<span class="kw">p2</span>)
 
 <span class="co"># align all plots vertically</span>
-<span class="no">plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="no">p1</span>, <span class="no">p2a</span>, <span class="no">p3</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">'v'</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="st">'l'</span>)</pre></body></html></div>
+<span class="kw">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="kw">p1</span>, <span class="kw">p2a</span>, <span class="kw">p3</span>, align = <span class="st">'v'</span>, axis = <span class="st">'l'</span>)
+</pre></div>
 <pre><code>## `geom_smooth()` using formula 'y ~ x'</code></pre>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># put together the bottom row and then everything</span>
-<span class="no">bottom_row</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">plots</span><span class="kw">[[</span><span class="fl">2</span>]], <span class="no">plots</span><span class="kw">[[</span><span class="fl">3</span>]], <span class="no">legend</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B"</span>, <span class="st">"C"</span>),
-  <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">.3</span>),
-  <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">1</span>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="co"># put together the bottom row and then everything</span>
+<span class="kw">bottom_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
+  <span class="kw">plots</span>[[<span class="fl">2</span>]], <span class="kw">plots</span>[[<span class="fl">3</span>]], <span class="kw">legend</span>,
+  labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"B"</span>, <span class="st">"C"</span>),
+  rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">.3</span>),
+  nrow = <span class="fl">1</span>
 )
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">plots</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">bottom_row</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>), <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">plots</span>[[<span class="fl">1</span>]], <span class="kw">bottom_row</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"A"</span>), ncol = <span class="fl">1</span>)
+</pre></div>
 <p><img src="shared_legends_files/figure-html/unnamed-chunk-6-1.png" width="720"></p>
   </div>
 
@@ -252,7 +264,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

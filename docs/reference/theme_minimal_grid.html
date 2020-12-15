@@ -84,7 +84,7 @@ in the save_plot() function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -160,43 +160,43 @@ in the save_plot() function." />
 
     <div class="ref-description">
     <p>Three minimalistic themes that provide either a full grid,
-a horizontal grid, or a vertical grid. Similar to <code>theme_minimal()</code>, but with some
+a horizontal grid, or a vertical grid. Similar to <code><a href='https://ggplot2.tidyverse.org/reference/ggtheme.html'>theme_minimal()</a></code>, but with some
 stylistic differences. Most importantly, these themes do not draw minor grid lines.
 Also, font sizes are coordinated with <code><a href='theme_cowplot.html'>theme_half_open()</a></code> and with the defaults
 in the <code><a href='save_plot.html'>save_plot()</a></code> function.</p>
     </div>
 
     <pre class="usage"><span class='fu'>theme_minimal_grid</span>(
-  <span class='kw'>font_size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>font_family</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>line_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>rel_small</span> <span class='kw'>=</span> <span class='fl'>12</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_tiny</span> <span class='kw'>=</span> <span class='fl'>11</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_large</span> <span class='kw'>=</span> <span class='fl'>16</span>/<span class='fl'>14</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>,
-  <span class='no'>colour</span>
+  font_size = <span class='fl'>14</span>,
+  font_family = <span class='st'>""</span>,
+  line_size = <span class='fl'>0.5</span>,
+  rel_small = <span class='fl'>12</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_tiny = <span class='fl'>11</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_large = <span class='fl'>16</span><span class='op'>/</span><span class='fl'>14</span>,
+  color = <span class='st'>"grey85"</span>,
+  <span class='kw'>colour</span>
 )
 
 <span class='fu'>theme_minimal_vgrid</span>(
-  <span class='kw'>font_size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>font_family</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>line_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>rel_small</span> <span class='kw'>=</span> <span class='fl'>12</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_tiny</span> <span class='kw'>=</span> <span class='fl'>11</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_large</span> <span class='kw'>=</span> <span class='fl'>16</span>/<span class='fl'>14</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>,
-  <span class='no'>colour</span>
+  font_size = <span class='fl'>14</span>,
+  font_family = <span class='st'>""</span>,
+  line_size = <span class='fl'>0.5</span>,
+  rel_small = <span class='fl'>12</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_tiny = <span class='fl'>11</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_large = <span class='fl'>16</span><span class='op'>/</span><span class='fl'>14</span>,
+  color = <span class='st'>"grey85"</span>,
+  <span class='kw'>colour</span>
 )
 
 <span class='fu'>theme_minimal_hgrid</span>(
-  <span class='kw'>font_size</span> <span class='kw'>=</span> <span class='fl'>14</span>,
-  <span class='kw'>font_family</span> <span class='kw'>=</span> <span class='st'>""</span>,
-  <span class='kw'>line_size</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>rel_small</span> <span class='kw'>=</span> <span class='fl'>12</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_tiny</span> <span class='kw'>=</span> <span class='fl'>11</span>/<span class='fl'>14</span>,
-  <span class='kw'>rel_large</span> <span class='kw'>=</span> <span class='fl'>16</span>/<span class='fl'>14</span>,
-  <span class='kw'>color</span> <span class='kw'>=</span> <span class='st'>"grey85"</span>,
-  <span class='no'>colour</span>
+  font_size = <span class='fl'>14</span>,
+  font_family = <span class='st'>""</span>,
+  line_size = <span class='fl'>0.5</span>,
+  rel_small = <span class='fl'>12</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_tiny = <span class='fl'>11</span><span class='op'>/</span><span class='fl'>14</span>,
+  rel_large = <span class='fl'>16</span><span class='op'>/</span><span class='fl'>14</span>,
+  color = <span class='st'>"grey85"</span>,
+  <span class='kw'>colour</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -239,22 +239,25 @@ this theme even further and draws only horizontal lines, and <code>theme_minimal
 does the same for vertical lines.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='co'># theme_minimal_grid()</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>Sepal.Length</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>Sepal.Width</span>, <span class='kw'>color</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() + <span class='fu'>theme_minimal_grid</span>()</div><div class='img'><img src='theme_minimal_grid-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>Sepal.Length</span>, y = <span class='kw'>Sepal.Width</span>, color = <span class='kw'>Species</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>() <span class='op'>+</span> <span class='fu'>theme_minimal_grid</span>()
+</div><div class='img'><img src='theme_minimal_grid-1.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># theme_minimal_hgrid()</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>carb</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"lightblue"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(<span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>11.5</span>), <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>)) +
-  <span class='fu'>theme_minimal_hgrid</span>()</div><div class='img'><img src='theme_minimal_grid-2.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>carb</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(fill = <span class='st'>"lightblue"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(limits = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>11.5</span>), expand = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>)) <span class='op'>+</span>
+  <span class='fu'>theme_minimal_hgrid</span>()
+</div><div class='img'><img src='theme_minimal_grid-2.png' alt='' width='700' height='433' /></div><div class='input'>
 <span class='co'># theme_minimal_vgrid()</span>
-<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>carb</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(<span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"lightblue"</span>) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(<span class='kw'>limits</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>11.5</span>), <span class='kw'>expand</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>)) +
-  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span>() +
-  <span class='fu'>theme_minimal_vgrid</span>()</div><div class='img'><img src='theme_minimal_grid-3.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='kw'>mtcars</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(x = <span class='kw'>carb</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_bar</a></span>(fill = <span class='st'>"lightblue"</span>) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/scale_continuous.html'>scale_y_continuous</a></span>(limits = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>11.5</span>), expand = <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>0</span>, <span class='fl'>0</span>)) <span class='op'>+</span>
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/coord_flip.html'>coord_flip</a></span>() <span class='op'>+</span>
+  <span class='fu'>theme_minimal_vgrid</span>()
+</div><div class='img'><img src='theme_minimal_grid-3.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -270,7 +273,7 @@ does the same for vertical lines.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

@@ -38,7 +38,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -110,7 +110,7 @@
       <h1 data-toc-skip>Arranging plots in a grid</h1>
                         <h4 class="author">Claus O. Wilke</h4>
             
-            <h4 class="date">2020-09-06</h4>
+            <h4 class="date">2020-12-15</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/plot_grid.Rmd"><code>vignettes/plot_grid.Rmd</code></a></small>
       <div class="hidden name"><code>plot_grid.Rmd</code></div>
@@ -124,31 +124,41 @@
 <h2 class="hasAnchor">
 <a href="#basic-usage" class="anchor"></a>Basic usage</h2>
 <p>The <code><a href="../reference/plot_grid.html">plot_grid()</a></code> function provides a simple interface for arranging plots into a grid and adding labels to them.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">cowplot</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://wilkelab.org/cowplot">cowplot</a></span>)
 
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">disp</span>, <span class="no">mpg</span>)) +
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">disp</span>, <span class="kw">mpg</span>)) <span class="op">+</span> 
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">qsec</span>, <span class="no">mpg</span>)) +
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">qsec</span>, <span class="kw">mpg</span>)) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>()
 
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">'B'</span>))</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">'B'</span>))
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-2-1.png" width="576"></p>
 <p>If you specify the labels as <code>labels = "AUTO"</code> or <code>labels = "auto"</code> then labels will be auto-generated in upper or lower case, respectively.</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="st">"AUTO"</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-3-1.png" width="576"></p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"auto"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="st">"auto"</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
 <p>By default, the plots are not aligned, but in many cases they can be aligned via the <code>align</code> option.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">p3</span> <span class="kw">&lt;-</span> <span class="no">p1</span> +
+<div class="sourceCode" id="cb4"><pre class="downlit">
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="kw">p1</span> <span class="op">+</span> 
   <span class="co"># use large, rotated axis tick labels to highlight alignment issues</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(<span class="kw">axis.text.x</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">14</span>, <span class="kw">angle</span> <span class="kw">=</span> <span class="fl">90</span>, <span class="kw">vjust</span> <span class="kw">=</span> <span class="fl">0.5</span>))
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(axis.text.x = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_text</a></span>(size = <span class="fl">14</span>, angle = <span class="fl">90</span>, vjust = <span class="fl">0.5</span>))
 
 <span class="co"># plots are drawn without alignment</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p3</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p3</span>, <span class="kw">p2</span>, labels = <span class="st">"AUTO"</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-5-1.png" width="576"></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># plots are drawn with horizontal alignment</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p3</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">"h"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb5"><pre class="downlit">
+<span class="co"># plots are drawn with horizontal alignment</span>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p3</span>, <span class="kw">p2</span>, labels = <span class="st">"AUTO"</span>, align = <span class="st">"h"</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-5-2.png" width="576"></p>
 <p>For more complex plot arrangements or other specific effects, you may have to specify the <code>axis</code> argument in addition to the <code>align</code> argument. See the vignette on aligning plots for details.</p>
 <p>The function <code><a href="../reference/plot_grid.html">plot_grid()</a></code> can handle a variety of different types of plots and graphic objects, not just ggplot2 plots. See the vignette on mixing different plotting frameworks for details. However, alignment of plots is only supported for ggplot2 plots.</p>
@@ -157,102 +167,120 @@
 <h2 class="hasAnchor">
 <a href="#fine-tuning-the-plot-grid" class="anchor"></a>Fine-tuning the plot grid</h2>
 <p>You can adjust the label size via the <code>label_size</code> option. Default is 14, so larger values will make the labels larger and smaller values will make them smaller.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>, <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb6"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="st">"AUTO"</span>, label_size = <span class="fl">12</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-6-1.png" width="576"></p>
 <p>You can also adjust the font family, font face, and color of the labels.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span>, <span class="no">p2</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>,
-  <span class="kw">label_fontfamily</span> <span class="kw">=</span> <span class="st">"serif"</span>,
-  <span class="kw">label_fontface</span> <span class="kw">=</span> <span class="st">"plain"</span>,
-  <span class="kw">label_colour</span> <span class="kw">=</span> <span class="st">"blue"</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb7"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
+  <span class="kw">p1</span>, <span class="kw">p2</span>,
+  labels = <span class="st">"AUTO"</span>, 
+  label_fontfamily = <span class="st">"serif"</span>,
+  label_fontface = <span class="st">"plain"</span>,
+  label_colour = <span class="st">"blue"</span>
+)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-7-1.png" width="576"></p>
 <p>Labels can be moved via the <code>label_x</code> and <code>label_y</code> arguments, and justified via the <code>hjust</code> and <code>vjust</code> arguments. For example, to place labels into the bottom left corner, you can write:</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span>, <span class="no">p2</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>,
-  <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>,
-  <span class="kw">label_x</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">label_y</span> <span class="kw">=</span> <span class="fl">0</span>,
-  <span class="kw">hjust</span> <span class="kw">=</span> -<span class="fl">0.5</span>, <span class="kw">vjust</span> <span class="kw">=</span> -<span class="fl">0.5</span>
-)</pre></body></html></div>
+<div class="sourceCode" id="cb8"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
+  <span class="kw">p1</span>, <span class="kw">p2</span>,
+  labels = <span class="st">"AUTO"</span>,
+  label_size = <span class="fl">12</span>,
+  label_x = <span class="fl">0</span>, label_y = <span class="fl">0</span>,
+  hjust = <span class="op">-</span><span class="fl">0.5</span>, vjust = <span class="op">-</span><span class="fl">0.5</span>
+)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-8-1.png" width="576"></p>
 <p>It is possible to adjust individual labels one by one by passing vectors of adjustment values to the options <code>label_x</code>, <code>label_y</code>, <code>hjust</code>, and <code>vjust</code> (example not shown).</p>
 <p>The numbers of rows and columns in the plot grid can be specified via <code>nrow</code> and <code>ncol</code>.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># arrange two plots into one column</span>
+<div class="sourceCode" id="cb9"><pre class="downlit">
+<span class="co"># arrange two plots into one column</span>
 <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span>, <span class="no">p2</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>
-)</pre></body></html></div>
+  <span class="kw">p1</span>, <span class="kw">p2</span>,
+  labels = <span class="st">"AUTO"</span>, ncol = <span class="fl">1</span>
+)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-9-1.png" width="288"></p>
 <p>The argument <code>NULL</code> can be used to indicate a missing plot in the grid. Note that missing plots will be labeled if automatic labeling is turned on.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="co"># the second plot in the first row and the</span>
+<div class="sourceCode" id="cb10"><pre class="downlit">
+<span class="co"># the second plot in the first row and the</span>
 <span class="co"># first plot in the second row are missing</span>
 <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">p1</span>, <span class="kw">NULL</span>, <span class="kw">NULL</span>, <span class="no">p2</span>,
-  <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">2</span>
-)</pre></body></html></div>
+  <span class="kw">p1</span>, <span class="kw">NULL</span>, <span class="kw">NULL</span>, <span class="kw">p2</span>,
+  labels = <span class="st">"AUTO"</span>, ncol = <span class="fl">2</span>
+)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-10-1.png" width="576"></p>
 <p>The relative widths and heights of rows and columns can be adjusted with the <code>rel_widths</code> and <code>rel_heights</code> arguments.</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="st">"AUTO"</span>, <span class="kw">rel_widths</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))</pre></body></html></div>
+<div class="sourceCode" id="cb11"><pre class="downlit">
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="st">"AUTO"</span>, rel_widths = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">1</span>, <span class="fl">2</span>))
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-11-1.png" width="576"></p>
 </div>
 <div id="nested-plot-grids" class="section level2">
 <h2 class="hasAnchor">
 <a href="#nested-plot-grids" class="anchor"></a>Nested plot grids</h2>
 <p>If you want to generate a plot arrangement that is not a simple grid, you may insert one <code><a href="../reference/plot_grid.html">plot_grid()</a></code> plot into another.</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">bottom_row</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'C'</span>), <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>)
-<span class="no">p3</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">qsec</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">disp</span>)) + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() + <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">gear</span>)
+<div class="sourceCode" id="cb12"><pre class="downlit">
+<span class="kw">bottom_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'C'</span>), label_size = <span class="fl">12</span>)
+<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">qsec</span>, y = <span class="kw">disp</span>)) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span><span class="kw">gear</span>)
 
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p3</span>, <span class="no">bottom_row</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">''</span>), <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p3</span>, <span class="kw">bottom_row</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">''</span>), label_size = <span class="fl">12</span>, ncol = <span class="fl">1</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-12-1.png" width="576"></p>
-<p>Alignment can be a bit tricky in this case. However, it can usually be achieved through an explicit call to <code><a href="../reference/align_plots.html">align_plots()</a></code>. The trick is to first align the top-row plot (<code>p3</code>) and the first botton-row plot (<code>p1</code>) vertically along the left axis, using the <code><a href="../reference/align_plots.html">align_plots()</a></code> function. These aligned plots can then be passed to <code><a href="../reference/plot_grid.html">plot_grid()</a></code>.</p>
-<div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># first align the top-row plot (p3) with the left-most plot of the</span>
+<p>Alignment can be a bit tricky in this case. However, it can usually be achieved through an explicit call to <code><a href="../reference/align_plots.html">align_plots()</a></code>. The trick is to first align the top-row plot (<code>p3</code>) and the first bottom-row plot (<code>p1</code>) vertically along the left axis, using the <code><a href="../reference/align_plots.html">align_plots()</a></code> function. These aligned plots can then be passed to <code><a href="../reference/plot_grid.html">plot_grid()</a></code>.</p>
+<div class="sourceCode" id="cb13"><pre class="downlit">
+<span class="co"># first align the top-row plot (p3) with the left-most plot of the</span>
 <span class="co"># bottom row (p1)</span>
-<span class="no">plots</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="no">p3</span>, <span class="no">p1</span>, <span class="kw">align</span> <span class="kw">=</span> <span class="st">'v'</span>, <span class="kw">axis</span> <span class="kw">=</span> <span class="st">'l'</span>)
+<span class="kw">plots</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/align_plots.html">align_plots</a></span>(<span class="kw">p3</span>, <span class="kw">p1</span>, align = <span class="st">'v'</span>, axis = <span class="st">'l'</span>)
 <span class="co"># then build the bottom row</span>
-<span class="no">bottom_row</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">plots</span><span class="kw">[[</span><span class="fl">2</span>]], <span class="no">p2</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'C'</span>), <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>)
+<span class="kw">bottom_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">plots</span>[[<span class="fl">2</span>]], <span class="kw">p2</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'B'</span>, <span class="st">'C'</span>), label_size = <span class="fl">12</span>)
 
 <span class="co"># then combine with the top row for final plot</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">plots</span><span class="kw">[[</span><span class="fl">1</span>]], <span class="no">bottom_row</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">''</span>), <span class="kw">label_size</span> <span class="kw">=</span> <span class="fl">12</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>)</pre></body></html></div>
+<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">plots</span>[[<span class="fl">1</span>]], <span class="kw">bottom_row</span>, labels = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">'A'</span>, <span class="st">''</span>), label_size = <span class="fl">12</span>, ncol = <span class="fl">1</span>)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-13-1.png" width="576"></p>
 </div>
 <div id="joint-plot-titles" class="section level2">
 <h2 class="hasAnchor">
 <a href="#joint-plot-titles" class="anchor"></a>Joint plot titles</h2>
 <p>When we combine plots with <code><a href="../reference/plot_grid.html">plot_grid()</a></code>, we may want to add a title that spans the entire combined figure. While there is no specific function in cowplot to achieve this effect, it can be simulated easily with a few lines of code:</p>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="co"># make a plot grid consisting of two panels</span>
-<span class="no">p1</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">disp</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">mpg</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="st">"blue"</span>) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(<span class="kw">minor</span> <span class="kw">=</span> <span class="st">'none'</span>)
+<div class="sourceCode" id="cb14"><pre class="downlit">
+<span class="co"># make a plot grid consisting of two panels</span>
+<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">disp</span>, y = <span class="kw">mpg</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(colour = <span class="st">"blue"</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(minor = <span class="st">'none'</span>)
 
-<span class="no">p2</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">hp</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">mpg</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="kw">colour</span> <span class="kw">=</span> <span class="st">"green"</span>) +
-  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) +
-  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(<span class="kw">minor</span> <span class="kw">=</span> <span class="st">'none'</span>)
+<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x = <span class="kw">hp</span>, y = <span class="kw">mpg</span>)) <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(colour = <span class="st">"green"</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/theme_cowplot.html">theme_half_open</a></span>(<span class="fl">12</span>) <span class="op">+</span> 
+  <span class="fu"><a href="../reference/background_grid.html">background_grid</a></span>(minor = <span class="st">'none'</span>)
 
-<span class="no">plot_row</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="no">p1</span>, <span class="no">p2</span>)
+<span class="kw">plot_row</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>)
 
 <span class="co"># now add the title</span>
-<span class="no">title</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>() +
+<span class="kw">title</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>() <span class="op">+</span> 
   <span class="fu"><a href="../reference/draw_label.html">draw_label</a></span>(
     <span class="st">"Miles per gallon decline with displacement and horsepower"</span>,
-    <span class="kw">fontface</span> <span class="kw">=</span> <span class="st">'bold'</span>,
-    <span class="kw">x</span> <span class="kw">=</span> <span class="fl">0</span>,
-    <span class="kw">hjust</span> <span class="kw">=</span> <span class="fl">0</span>
-  ) +
+    fontface = <span class="st">'bold'</span>,
+    x = <span class="fl">0</span>,
+    hjust = <span class="fl">0</span>
+  ) <span class="op">+</span>
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
     <span class="co"># add margin on the left of the drawing canvas,</span>
     <span class="co"># so title is aligned with left edge of first plot</span>
-    <span class="kw">plot.margin</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">7</span>)
+    plot.margin = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">7</span>)
   )
 <span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(
-  <span class="no">title</span>, <span class="no">plot_row</span>,
-  <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">1</span>,
+  <span class="kw">title</span>, <span class="kw">plot_row</span>,
+  ncol = <span class="fl">1</span>,
   <span class="co"># rel_heights values control vertical title margins</span>
-  <span class="kw">rel_heights</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.1</span>, <span class="fl">1</span>)
-)</pre></body></html></div>
+  rel_heights = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.1</span>, <span class="fl">1</span>)
+)
+</pre></div>
 <p><img src="plot_grid_files/figure-html/unnamed-chunk-14-1.png" width="768"></p>
 <p>In the final <code>plot_grid</code> line, the values of <code>rel_heights</code> need to be chosen appropriately so that the margins around the title look correct. With the values chosen here, the title takes up 9% (i.e., 0.1/1.1) of the total plot height.</p>
 </div>
@@ -273,7 +301,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>

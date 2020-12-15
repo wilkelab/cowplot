@@ -81,7 +81,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -161,16 +161,16 @@
     </div>
 
     <pre class="usage"><span class='fu'>draw_plot</span>(
-  <span class='no'>plot</span>,
-  <span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>width</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>height</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>scale</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>hjust</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>vjust</span> <span class='kw'>=</span> <span class='fl'>0</span>,
-  <span class='kw'>halign</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>valign</span> <span class='kw'>=</span> <span class='fl'>0.5</span>
+  <span class='kw'>plot</span>,
+  x = <span class='fl'>0</span>,
+  y = <span class='fl'>0</span>,
+  width = <span class='fl'>1</span>,
+  height = <span class='fl'>1</span>,
+  scale = <span class='fl'>1</span>,
+  hjust = <span class='fl'>0</span>,
+  vjust = <span class='fl'>0</span>,
+  halign = <span class='fl'>0.5</span>,
+  valign = <span class='fl'>0.5</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -215,13 +215,14 @@ the box.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>ggplot2</span>)
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='kw'><a href='http://ggplot2.tidyverse.org'>ggplot2</a></span>)
 
 <span class='co'># make a plot</span>
-<span class='no'>p</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='fl'>1</span>:<span class='fl'>3</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>x</span>, <span class='no'>y</span>)) +
+<span class='kw'>p</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span>(x = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, y = <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>), <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='kw'>x</span>, <span class='kw'>y</span>)) <span class='op'>+</span>
     <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_point.html'>geom_point</a></span>()
 <span class='co'># draw into the top-right corner of a larger plot area</span>
-<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() + <span class='fu'>draw_plot</span>(<span class='no'>p</span>, <span class='fl'>.6</span>, <span class='fl'>.6</span>, <span class='fl'>.4</span>, <span class='fl'>.4</span>)</div><div class='img'><img src='draw_plot-1.png' alt='' width='700' height='433' /></div></pre>
+<span class='fu'><a href='ggdraw.html'>ggdraw</a></span>() <span class='op'>+</span> <span class='fu'>draw_plot</span>(<span class='kw'>p</span>, <span class='fl'>.6</span>, <span class='fl'>.6</span>, <span class='fl'>.4</span>, <span class='fl'>.4</span>)
+</div><div class='img'><img src='draw_plot-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -237,7 +238,7 @@ the box.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
 </div>
 
       </footer>
