@@ -34,13 +34,13 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
   # work off of theme_grey just in case some new theme element comes along
   theme_grey(base_size = font_size, base_family = font_family) %+replace%
     theme(
-      line              = element_line(color = "black", size = line_size, linetype = 1, lineend = "butt"),
-      rect              = element_rect(fill = NA, color = NA, size = line_size, linetype = 1),
+      line              = element_line(color = "black", linewidth = line_size, linetype = 1, lineend = "butt"),
+      rect              = element_rect(fill = NA, color = NA, linewidth = line_size, linetype = 1),
       text              = element_text(family = font_family, face = "plain", color = "black",
                                        size = font_size, hjust = 0.5, vjust = 0.5, angle = 0, lineheight = .9,
                                        margin = margin(), debug = FALSE),
 
-      axis.line         = element_line(color = "black", size = line_size, lineend = "square"),
+      axis.line         = element_line(color = "black", linewidth = line_size, lineend = "square"),
       axis.line.x       = NULL,
       axis.line.y       = NULL,
       axis.text         = element_text(color = "black", size = small_size),
@@ -48,7 +48,7 @@ theme_cowplot <- function(font_size = 14, font_family = "", line_size = .5,
       axis.text.x.top   = element_text(margin = margin(b = small_size / 4), vjust = 0),
       axis.text.y       = element_text(margin = margin(r = small_size / 4), hjust = 1),
       axis.text.y.right = element_text(margin = margin(l = small_size / 4), hjust = 0),
-      axis.ticks        = element_line(color = "black", size = line_size),
+      axis.ticks        = element_line(color = "black", linewidth = line_size),
       axis.ticks.length = unit(half_line / 2, "pt"),
       axis.title.x      = element_text(
                             margin = margin(t = half_line / 2),
@@ -204,11 +204,11 @@ theme_minimal_grid <- function(font_size = 14, font_family = "", line_size = .5,
     theme(
       # make grid lines
       panel.grid        = element_line(color = color,
-                                       size = line_size),
+                                       linewidth = line_size),
       panel.grid.minor  = element_blank(),
 
       # adjust axis tickmarks
-      axis.ticks        = element_line(color = color, size = line_size),
+      axis.ticks        = element_line(color = color, linewidth = line_size),
 
       # no x or y axis lines
       axis.line.x       = element_blank(),
@@ -239,7 +239,7 @@ theme_minimal_vgrid <- function(font_size = 14, font_family = "", line_size = .5
       panel.grid.major.y = element_blank(),
 
       # add a y axis line
-      axis.line.y        = element_line(color = color, size = line_size),
+      axis.line.y        = element_line(color = color, linewidth = line_size),
 
       complete = TRUE
     )
@@ -263,7 +263,7 @@ theme_minimal_hgrid <- function(font_size = 14, font_family = "", line_size = .5
       panel.grid.major.x = element_blank(),
 
       # add a x axis line
-      axis.line.x       = element_line(color = color, size = line_size),
+      axis.line.x       = element_line(color = color, linewidth = line_size),
 
       complete = TRUE
     )
@@ -465,7 +465,7 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
   t <- theme(
     panel.grid = element_line(
       color = color.major,
-      size = size.major,
+      linewidth = size.major,
       linetype = 1,
       lineend = "butt"
     ),
@@ -474,7 +474,7 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
     panel.grid.major.y = NULL,
     panel.grid.minor = element_line(
       color = color.minor,
-      size = size.minor,
+      linewidth = size.minor,
       linetype = 1,
       lineend = "butt"
     ),
@@ -525,6 +525,6 @@ panel_border <- function(color = 'grey85', size = 1, linetype = 1, remove = FALS
   if (remove){
     return(theme(panel.border = element_blank()))
   }
-  theme(panel.border = element_rect(color = color, fill=NA, linetype = linetype, size = size))
+  theme(panel.border = element_rect(color = color, fill = NA, linetype = linetype, linewidth = size))
 }
 
