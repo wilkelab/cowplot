@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 1.1.1
+Version: 1.1.2
 Authors@R:
     person(
       given = "Claus O.",
@@ -22,7 +22,7 @@ BugReports: https://github.com/wilkelab/cowplot/issues
 Depends:
     R (>= 3.5.0)
 Imports:
-    ggplot2 (> 2.2.1),
+    ggplot2 (>= 3.4.0),
     grid,
     gtable,
     grDevices,

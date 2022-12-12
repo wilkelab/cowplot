@@ -1,3 +1,7 @@
+# cowplot 1.1.2
+
+- fix warning message: deprecated `size` argument in `element_rect()` and `element_line()` (@Yunuuuu, #190)
+
 # cowplot 1.1.1
 
 - Make sure tests don't fail if vdiffr is missing.
