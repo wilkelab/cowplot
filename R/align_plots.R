@@ -160,6 +160,8 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
 #' @param greedy (optional) Defines the alignment policy when alignment axes are specified via the
 #'  `axis` option. `greedy = TRUE` tries to always align by adjusting the outmost margin. `greedy = FALSE`
 #'  aligns all columns/rows in the gtable if possible.
+#' @param align_axis (optional) If set to TRUE, the axis are aligned and adjusted by their values.
+#' 
 #' @examples
 #' library(ggplot2)
 #'
@@ -179,15 +181,14 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
 #' @export
 align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                         axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
-                        greedy = TRUE){
-  # browser()
+                        greedy = TRUE, align_axis = FALSE) {
   plots <- c(list(...), plotlist)
   num_plots <- length(plots)
 
   # convert list of plots into list of grobs / gtables
   grobs <- lapply(plots, function(x) {if (!is.null(x)) as_gtable(x) else NULL})
 
-  #aligning graphs.
+  # aligning graphs.
   halign <- switch(
     align[1],
     h = TRUE,
@@ -207,13 +208,31 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # calculate the maximum widths and heights over all graphs, and find out whether
   # they can be aligned if necessary
   if (valign) {
+    
+    if (align_axis) {
+      # modification: get x-axis value range associated with each plot, create union of
+      # value ranges across all plots, & calculate the proportional width of each plot
+      # (with white space on either side) required in order for the plots to align
+      plot_x_range <- lapply(plots, function(x) {
+        ggplot_build(x)$layout$panel_params[[1]]$x.range
+      })
+      full_range <- range(plot_x_range)
+      plot_x_range <- lapply(plot_x_range, function(x) {
+        c(
+          diff(c(full_range[1], x[1])) / diff(full_range),
+          diff(x) / diff(full_range),
+          diff(c(x[2], full_range[2])) / diff(full_range)
+        )
+      })
+    }
+
     num_widths <- unique(lapply(grobs, function(x) {length(x$widths)})) # count number of unique lengths
     num_widths[num_widths == 0] <- NULL # remove entry for missing graphs
     if (length(num_widths) > 1 || length(grep("l|r", axis[1])) > 0) {
       # Complex aligns are ones that don't have the same number of elements that have sizes
       # or for which explicit axis alignment is requested
       vcomplex_align = TRUE
-      if(axis[1] == "none") {
+      if (axis[1] == "none") {
         warning(
           "Graphs cannot be vertically aligned unless the axis parameter is set. Placing graphs unaligned.",
           call. = FALSE
@@ -231,18 +250,36 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
         max_widths <- align_margin(max_widths, "last", greedy = greedy)
       }
     } else {
-      max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$widths})))
+      max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x) {x$widths})))
     }
   }
 
   if (halign) {
+
+    if (align_axis) {
+      # modification: get y-axis value range associated with each plot, create union of
+      # value ranges across all plots, & calculate the proportional width of each plot
+      # (with white space on either side) required in order for the plots to align
+      plot_y_range <- lapply(plots, function(x) {
+        ggplot_build(x)$layout$panel_params[[1]]$y.range
+      })
+      full_range <- range(plot_y_range)
+      plot_y_range <- lapply(plot_y_range, function(x) {
+        c(
+          diff(c(full_range[1], x[1])) / diff(full_range),
+               diff(x) / diff(full_range),
+               diff(c(x[2], full_range[2])) / diff(full_range)
+        )
+      })
+    }
+
     num_heights <- unique(lapply(grobs, function(x) {length(x$heights)})) # count number of unique lengths
     num_heights[num_heights == 0] <- NULL # remove entry for missing graphs
     if (length(num_heights) > 1 || length(grep("t|b", axis[1])) > 0) {
       # Complex aligns are ones that don't have the same number of elements that have sizes
       # or for which explicit axis alignment is requested
       hcomplex_align = TRUE
-      if (axis[1] == "none"){
+      if (axis[1] == "none") {
         warning(
           "Graphs cannot be horizontally aligned unless the axis parameter is set. Placing graphs unaligned.",
           call. = FALSE
@@ -260,7 +297,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       }
 
     } else {
-      max_heights <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$heights})))
+      max_heights <- list(do.call(grid::unit.pmax, lapply(grobs, function(x) {x$heights})))
     }
   }
 
@@ -268,17 +305,47 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   for (i in 1:num_plots) {
     if (!is.null(grobs[[i]])) {
       if (valign) {
-        if(vcomplex_align) {
+        if (vcomplex_align) {
           grobs[[i]]$widths <- max_widths[[i]]
         } else{
           grobs[[i]]$widths <- max_widths[[1]]
         }
+        if (align_axis) {
+          # modification: change panel cell's width to a proportion of unit(1, "null"),
+          # then add whitespace to the left / right of the plot's existing gtable
+          grobs[[i]]$widths[[5]] <- unit(plot_x_range[[i]][2], "null")
+          grobs[[i]] <- gtable::gtable_add_cols(
+            grobs[[i]], 
+            widths = unit(plot_x_range[[i]][1], "null"), 
+            pos = 0
+          )
+          grobs[[i]] <- gtable::gtable_add_cols(
+            grobs[[i]], 
+            widths = unit(plot_x_range[[i]][3], "null"), 
+            pos = -1
+          )
+        }
       }
       if (halign) {
-        if(hcomplex_align){
+        if (hcomplex_align) {
           grobs[[i]]$heights <- max_heights[[i]]
         } else{
           grobs[[i]]$heights <- max_heights[[1]]
+        }
+        if (align_axis) {
+          # modification: change panel cell's height to a proportion of unit(1, "null"),
+          # then add whitespace to the bottom / top of the plot's existing gtable
+          grobs[[i]]$heights[[7]] <- unit(plot_y_range[[i]][2], "null")
+          grobs[[i]] <- gtable::gtable_add_rows(
+            grobs[[i]], 
+            heights = unit(plot_y_range[[i]][1], "null"), 
+            pos = -1
+          )
+          grobs[[i]] <- gtable::gtable_add_rows(
+            grobs[[i]], 
+            heights = unit(plot_y_range[[i]][3], "null"), 
+            pos = 0
+          )
         }
       }
     }

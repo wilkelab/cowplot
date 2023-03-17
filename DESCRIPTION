@@ -1,6 +1,6 @@
 Package: cowplot
 Title: Streamlined Plot Theme and Plot Annotations for 'ggplot2'
-Version: 1.1.2
+Version: 1.1.2.9001
 Authors@R:
     person(
       given = "Claus O.",
@@ -72,6 +72,6 @@ Collate:
     'stamp.R'
     'themes.R'
     'utils_ggplot2.R'
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8

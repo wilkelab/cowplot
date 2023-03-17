@@ -141,3 +141,26 @@ test_that("complex alignments with non-plots", {
 
   dev.off()
 })
+
+
+test_that("align by axis", {
+  p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
+    geom_point()
+  p2 <- ggplot(mtcars[mtcars$disp > 300, ], aes(x = disp, y = mpg)) +
+    geom_point()
+  p3 <- ggplot(mtcars[mtcars$mpg > 20, ], aes(x = disp, y = mpg)) +
+    geom_point()
+
+  plots <- align_plots(p1, p2, align = "v", align_axis = TRUE)
+  # vertical alignment -> same height
+  expect_equal(capture.output(plots[[1]]$heights),
+               capture.output(plots[[2]]$heights))
+  # note there is a string difference in some subpart of plot$heights,
+  # not sure why or how to access it;
+  # comparing what is printed in units is probably better than nothing...
+
+  plots <- align_plots(p1, p3, align = "v", align_axis = TRUE)
+  # horizontal alignment -> same width
+  expect_equal(capture.output(plots[[1]]$widths),
+               capture.output(plots[[2]]$widths))
+})

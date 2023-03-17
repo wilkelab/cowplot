@@ -9,7 +9,8 @@ align_plots(
   plotlist = NULL,
   align = c("none", "h", "v", "hv"),
   axis = c("none", "l", "r", "t", "b", "lr", "tb", "tblr"),
-  greedy = TRUE
+  greedy = TRUE,
+  align_axis = FALSE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ margins. Options are \code{axis="none"} (default), or a string of any combinatio
 \item{greedy}{(optional) Defines the alignment policy when alignment axes are specified via the
 \code{axis} option. \code{greedy = TRUE} tries to always align by adjusting the outmost margin. \code{greedy = FALSE}
 aligns all columns/rows in the gtable if possible.}
+
+\item{align_axis}{(optional) If set to TRUE, the axis are aligned and adjusted by their values.}
 }
 \description{
 Align the plot area of multiple plots. Inputs are a list of plots plus alignment parameters.

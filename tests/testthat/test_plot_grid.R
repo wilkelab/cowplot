@@ -98,3 +98,22 @@ test_that("alignment", {
     plot_grid(p1, p2, ncol = 1, align = 'v', axis = "rl") + theme_map()
   )
 })
+
+
+test_that("align by axis", {
+  p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
+    geom_point()
+  p2 <- ggplot(mtcars[mtcars$disp > 300, ], aes(x = disp, y = mpg)) +
+    geom_point()
+
+  expect_doppelganger("aligning by x-axis values",
+    plot_grid(p1, p2, ncol = 1, align = "v",  align_axis = TRUE)
+  )
+
+  p3 <- ggplot(mtcars[mtcars$mpg > 20, ], aes(x = disp, y = mpg)) +
+    geom_point()
+
+  expect_doppelganger("aligning by y-axis values",
+    plot_grid(p1, p3, nrow = 1, align = "h",  align_axis = TRUE)
+  )
+})
