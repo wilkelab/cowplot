@@ -26,7 +26,8 @@ plot_grid(
   greedy = TRUE,
   byrow = TRUE,
   cols = NULL,
-  rows = NULL
+  rows = NULL,
+  align_axis = FALSE
 )
 }
 \arguments{
@@ -90,6 +91,8 @@ sometimes be more powerful.}
 \item{cols}{Deprecated. Use \code{ncol}.}
 
 \item{rows}{Deprecated. Use \code{nrow}.}
+
+\item{align_axis}{(optional) If set to TRUE, the axis are aligned and adjusted by their values.}
 }
 \description{
 Arrange multiple plots into a grid.
@@ -139,6 +142,20 @@ plot_grid(
   p1, p5,
   align = "h", axis = "b", nrow = 1, rel_widths = c(1, 2)
 )
+
+# aligning two plots by their x axis values
+p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
+  geom_point()
+p2 <- ggplot(mtcars[mtcars$disp > 300, ], aes(x = disp, y = mpg)) +
+  geom_point()
+
+plot_grid(p1, p2, ncol = 1, align = "v",  align_axis = TRUE)
+
+# align horizontally
+p3 <- ggplot(mtcars[mtcars$mpg > 20, ], aes(x = disp, y = mpg)) +
+  geom_point()
+
+plot_grid(p1, p3, nrow = 1, align = "h",  align_axis = TRUE)
 
 # more examples
 \donttest{

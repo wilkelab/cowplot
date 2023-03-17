@@ -40,6 +40,8 @@
 #' @param byrow Logical value indicating if the plots should be arrange by row (default) or by column.
 #' @param rows Deprecated. Use \code{nrow}.
 #' @param cols Deprecated. Use \code{ncol}.
+#' @param align_axis (optional) If set to TRUE, the axis are aligned and adjusted by their values.
+#'
 #' @examples
 #' library(ggplot2)
 #'
@@ -85,6 +87,20 @@
 #'   p1, p5,
 #'   align = "h", axis = "b", nrow = 1, rel_widths = c(1, 2)
 #' )
+#'
+#' # aligning two plots by their x axis values
+#' p1 <- ggplot(mtcars, aes(x = disp, y = mpg)) +
+#'   geom_point()
+#' p2 <- ggplot(mtcars[mtcars$disp > 300, ], aes(x = disp, y = mpg)) +
+#'   geom_point()
+#' 
+#' plot_grid(p1, p2, ncol = 1, align = "v",  align_axis = TRUE)
+#' 
+#' # align horizontally
+#' p3 <- ggplot(mtcars[mtcars$mpg > 20, ], aes(x = disp, y = mpg)) +
+#'   geom_point()
+#' 
+#' plot_grid(p1, p3, nrow = 1, align = "h",  align_axis = TRUE)
 #'
 #' # more examples
 #' \donttest{
@@ -139,7 +155,7 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
                       label_fontfamily = NULL, label_fontface = "bold", label_colour = NULL,
                       label_x = 0, label_y = 1,
                       hjust = -0.5, vjust = 1.5, scale = 1., greedy = TRUE,
-                      byrow = TRUE, cols = NULL, rows = NULL) {
+                      byrow = TRUE, cols = NULL, rows = NULL, align_axis = FALSE) {
 
   # Make a list from the ... arguments and plotlist
   plots <- c(list(...), plotlist)
@@ -181,7 +197,8 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   if (!isTRUE(byrow)) plots <- plots[c(t(matrix(c(1:num_plots, rep(NA, (rows * cols) - num_plots)), nrow = rows, byrow = FALSE)))]
 
   # Align the plots (if specified)
-  grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
+  grobs <- align_plots(plotlist = plots, align = align, axis = axis,
+                       greedy = greedy, align_axis = align_axis)
 
   if ("AUTO" %in% labels)
     labels <- LETTERS[1:num_plots]
