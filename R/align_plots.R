@@ -188,7 +188,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   # convert list of plots into list of grobs / gtables
   grobs <- lapply(plots, function(x) {if (!is.null(x)) as_gtable(x) else NULL})
 
-  #aligning graphs.
+  # aligning graphs.
   halign <- switch(
     align[1],
     h = TRUE,
@@ -232,7 +232,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       # Complex aligns are ones that don't have the same number of elements that have sizes
       # or for which explicit axis alignment is requested
       vcomplex_align = TRUE
-      if(axis[1] == "none") {
+      if (axis[1] == "none") {
         warning(
           "Graphs cannot be vertically aligned unless the axis parameter is set. Placing graphs unaligned.",
           call. = FALSE
@@ -250,7 +250,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
         max_widths <- align_margin(max_widths, "last", greedy = greedy)
       }
     } else {
-      max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$widths})))
+      max_widths <- list(do.call(grid::unit.pmax, lapply(grobs, function(x) {x$widths})))
     }
   }
 
@@ -279,7 +279,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       # Complex aligns are ones that don't have the same number of elements that have sizes
       # or for which explicit axis alignment is requested
       hcomplex_align = TRUE
-      if (axis[1] == "none"){
+      if (axis[1] == "none") {
         warning(
           "Graphs cannot be horizontally aligned unless the axis parameter is set. Placing graphs unaligned.",
           call. = FALSE
@@ -297,7 +297,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
       }
 
     } else {
-      max_heights <- list(do.call(grid::unit.pmax, lapply(grobs, function(x){x$heights})))
+      max_heights <- list(do.call(grid::unit.pmax, lapply(grobs, function(x) {x$heights})))
     }
   }
 
@@ -305,7 +305,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   for (i in 1:num_plots) {
     if (!is.null(grobs[[i]])) {
       if (valign) {
-        if(vcomplex_align) {
+        if (vcomplex_align) {
           grobs[[i]]$widths <- max_widths[[i]]
         } else{
           grobs[[i]]$widths <- max_widths[[1]]
@@ -327,7 +327,7 @@ align_plots <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
         }
       }
       if (halign) {
-        if(hcomplex_align){
+        if (hcomplex_align) {
           grobs[[i]]$heights <- max_heights[[i]]
         } else{
           grobs[[i]]$heights <- max_heights[[1]]
