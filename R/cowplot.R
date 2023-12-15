@@ -8,10 +8,9 @@
 #' hence the name (Claus O. Wilke's plot package). It has also been used
 #' extensively in the book Fundamentals of Data Visualization.
 #'
-#' @name cowplot
-#' @docType package
 #' @import ggplot2
 #' @import grid
 #' @import rlang
-NULL
+#' @keywords internal
+"_PACKAGE"
 

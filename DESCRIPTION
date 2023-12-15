@@ -30,7 +30,6 @@ Imports:
     rlang,
     scales
 License: GPL-2
-LazyData: true
 Suggests:
     Cairo,
     covr,
@@ -72,6 +71,6 @@ Collate:
     'stamp.R'
     'themes.R'
     'utils_ggplot2.R'
-RoxygenNote: 7.1.1
+RoxygenNote: 7.2.3
 Roxygen: list(markdown = TRUE)
 Encoding: UTF-8
