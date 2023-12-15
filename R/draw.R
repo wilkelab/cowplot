@@ -291,6 +291,8 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'   ) +
 #'   draw_plot(p)
 #'
+#' \dontrun{
+#'
 #' # Make grid with plot and image
 #' cow_file <- system.file("extdata", "cow.jpg", package = "cowplot")
 #' p2 <- ggdraw() + draw_image(cow_file, scale = 0.9)
@@ -312,6 +314,7 @@ draw_figure_label <- function(label, position = c("top.left", "top", "top.right"
 #'     geom_abline(slope = 1, intercept = 0, linetype = 2, color = "blue") +
 #'     draw_image(img , x = 1, y = 1, scale = .9) +
 #'     draw_image(img2, x = 2, y = 2, scale = .9)
+#' }
 #' }
 #' @export
 draw_image <- function(image, x = 0, y = 0, width = 1, height = 1, scale = 1, clip = "inherit",
