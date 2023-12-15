@@ -1,3 +1,6 @@
+# cowplot 1.1.2.9000
+
+
 # cowplot 1.1.2
 
 - fix warning message: deprecated `size` argument in `element_rect()` and `element_line()` (@Yunuuuu, #190)
