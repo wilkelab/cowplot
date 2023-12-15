@@ -33,6 +33,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -45,23 +47,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,8 +92,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/wilkelab/cowplot/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -115,75 +111,85 @@
   <div class="contents col-md-9">
 
 <p><img width="120px" alt="cowplot logo" align="right" src="reference/figures/logo.png"></p>
-<div id="cowplot--streamlined-plot-theme-and-plot-annotations-for-ggplot2" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#cowplot--streamlined-plot-theme-and-plot-annotations-for-ggplot2" class="anchor"></a>cowplot – Streamlined plot theme and plot annotations for ggplot2</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="cowplot--streamlined-plot-theme-and-plot-annotations-for-ggplot2">cowplot – Streamlined plot theme and plot annotations for ggplot2<a class="anchor" aria-label="anchor" href="#cowplot--streamlined-plot-theme-and-plot-annotations-for-ggplot2"></a>
+</h1></div>
 <!-- badges: start -->
 
 <!-- badges: end -->
-<p>The cowplot package provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in the Wilke lab, hence the name (Claus O. Wilke’s plot package). It has also been used extensively in the book <a href="https://www.amazon.com/gp/product/1492031089">Fundamentals of Data Visualization.</a></p>
+<p>The cowplot package provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in the Wilke lab, hence the name (Claus O. Wilke’s plot package). It has also been used extensively in the book <a href="https://www.amazon.com/gp/product/1492031089" class="external-link">Fundamentals of Data Visualization.</a></p>
 </div>
-<div id="installation" class="section level1">
-<h1 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h1>
-<p>The cowplot package is available on <a href="https://cran.r-project.org/package=cowplot">CRAN</a> and can be installed via</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">install.packages</span>(<span class="st">"cowplot"</span>)</span></code></pre></div>
+<div class="section level1">
+<h1 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h1>
+<p>The cowplot package is available on <a href="https://cran.r-project.org/package=cowplot" class="external-link">CRAN</a> and can be installed via</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"cowplot"</span>)</span></code></pre></div>
 <p>To install the latest development version of the package using the devtools package, enter the following in your R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a>remotes<span class="op">::</span><span class="kw">install_github</span>(<span class="st">"wilkelab/cowplot"</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"wilkelab/cowplot"</span>)</span></code></pre></div>
 </div>
-<div id="usage" class="section level1">
-<h1 class="hasAnchor">
-<a href="#usage" class="anchor"></a>Usage</h1>
-<p>To get a quick introduction to the main features of this package, read the <a href="https://wilkelab.org/cowplot/articles/introduction.html">introductory vignette.</a> For a more in-depth discussion, read <a href="https://wilkelab.org/cowplot/articles/index.html">all vignettes</a> and/or the <a href="https://wilkelab.org/cowplot/reference/index.html">reference documentation.</a></p>
+<div class="section level1">
+<h1 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
+</h1>
+<p>To get a quick introduction to the main features of this package, read the <a href="https://wilkelab.org/cowplot/articles/introduction.html" class="external-link">introductory vignette.</a> For a more in-depth discussion, read <a href="https://wilkelab.org/cowplot/articles/index.html" class="external-link">all vignettes</a> and/or the <a href="https://wilkelab.org/cowplot/reference/index.html" class="external-link">reference documentation.</a></p>
 </div>
 
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=cowplot">https://​cloud.r-project.org/​package=cowplot</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/wilkelab/cowplot/">https://​github.com/​wilkelab/​cowplot/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/wilkelab/cowplot/issues">https://​github.com/​wilkelab/​cowplot/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Claus O. Wilke <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7470-9261" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=cowplot" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/wilkelab/cowplot/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/wilkelab/cowplot/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/wilkelab/cowplot/actions"><img src="https://github.com/wilkelab/cowplot/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/github/wilkelab/cowplot?branch=master"><img src="https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg" alt="Coverage Status"></a></li>
-<li><a href="https://CRAN.R-project.org/package=cowplot"><img src="https://www.r-pkg.org/badges/version/cowplot" alt="CRAN_Status_Badge"></a></li>
-<li><a href="https://cranlogs.r-pkg.org/downloads/total/last-month/cowplot"><img src="https://cranlogs.r-pkg.org/badges/cowplot" alt="CRAN_Downloads_Badge"></a></li>
-<li><a href="https://doi.org/10.5281/zenodo.2533860"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.2533860.svg" alt="DOI"></a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing cowplot</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Claus O. Wilke <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-7470-9261" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/wilkelab/cowplot/actions" class="external-link"><img src="https://github.com/wilkelab/cowplot/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://app.codecov.io/github/wilkelab/cowplot?branch=master" class="external-link"><img src="https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg" alt="Coverage Status"></a></li>
+<li><a href="https://CRAN.R-project.org/package=cowplot" class="external-link"><img src="https://www.r-pkg.org/badges/version/cowplot" alt="CRAN_Status_Badge"></a></li>
+<li><a href="https://cranlogs.r-pkg.org/downloads/total/last-month/cowplot" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/cowplot" alt="CRAN_Downloads_Badge"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.2533860" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.2533860.svg" alt="DOI"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Claus O. Wilke.</p>
+  <p></p>
+<p>Developed by Claus O. Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -191,6 +197,8 @@
 
   
 
+
+  
 
   </body>
 </html>

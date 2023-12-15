@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,23 +40,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">cowplot</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -89,8 +85,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/wilkelab/cowplot/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/wilkelab/cowplot/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -104,131 +100,138 @@
 
       
 
-      </header><script src="mixing_plot_frameworks_files/header-attrs-2.3/header-attrs.js"></script><div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Mixing different plotting frameworks</h1>
-                        <h4 class="author">Claus O. Wilke</h4>
+                        <h4 data-toc-skip class="author">Claus O.
+Wilke</h4>
             
-            <h4 class="date">2020-12-15</h4>
+            <h4 data-toc-skip class="date">2023-12-14</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/master/vignettes/mixing_plot_frameworks.Rmd"><code>vignettes/mixing_plot_frameworks.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/wilkelab/cowplot/blob/HEAD/vignettes/mixing_plot_frameworks.Rmd" class="external-link"><code>vignettes/mixing_plot_frameworks.Rmd</code></a></small>
       <div class="hidden name"><code>mixing_plot_frameworks.Rmd</code></div>
 
     </div>
 
     
     
-<p>All cowplot functions that take plot objects as input (<code><a href="../reference/ggdraw.html">ggdraw()</a></code>, <code><a href="../reference/draw_plot.html">draw_plot()</a></code>, <code><a href="../reference/plot_grid.html">plot_grid()</a></code>) can handle several different types of objects in addition to ggplot2 objects. Most importantly, they can handle plots produced with base R graphics. However, this functionality is only available if you have the package <a href="https://CRAN.R-project.org/package=gridGraphics">gridGraphics</a> installed.</p>
-<p>As the first example, we draw a base graphics plot with <code><a href="../reference/ggdraw.html">ggdraw()</a></code> and style the background with the ggplot2 themeing mechanism.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://ggplot2.tidyverse.org">ggplot2</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://wilkelab.org/cowplot">cowplot</a></span>)
-
-<span class="co"># define a function that emits the desired plot</span>
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="fu">function</span>() {
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(
-    mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>),
-    mgp = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>)
-  )
-  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">cyl</span>, xlab = <span class="st">"cyl"</span>, ylab = <span class="st">"mpg"</span>, data = <span class="kw">mtcars</span>)
-}
-
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">p1</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(plot.background = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(fill = <span class="st">"cornsilk"</span>))
-</pre></div>
+<p>All cowplot functions that take plot objects as input
+(<code><a href="../reference/ggdraw.html">ggdraw()</a></code>, <code><a href="../reference/draw_plot.html">draw_plot()</a></code>,
+<code><a href="../reference/plot_grid.html">plot_grid()</a></code>) can handle several different types of objects
+in addition to ggplot2 objects. Most importantly, they can handle plots
+produced with base R graphics. However, this functionality is only
+available if you have the package <a href="https://CRAN.R-project.org/package=gridGraphics" class="external-link">gridGraphics</a>
+installed.</p>
+<p>As the first example, we draw a base graphics plot with
+<code><a href="../reference/ggdraw.html">ggdraw()</a></code> and style the background with the ggplot2 themeing
+mechanism.</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://wilkelab.org/cowplot/" class="external-link">cowplot</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># define a function that emits the desired plot</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span></span>
+<span>    mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>    mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, xlab <span class="op">=</span> <span class="st">"cyl"</span>, ylab <span class="op">=</span> <span class="st">"mpg"</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span>plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"cornsilk"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-2-1.png" width="384"></p>
 <p>We can also add a logo to the plot.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="kw">logo_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html">system.file</a></span>(<span class="st">"extdata"</span>, <span class="st">"logo.png"</span>, package = <span class="st">"cowplot"</span>)
-
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>() <span class="op">+</span> 
-  <span class="fu"><a href="../reference/draw_image.html">draw_image</a></span>(
-    <span class="kw">logo_file</span>,
-    x = <span class="fl">1</span>, width = <span class="fl">0.1</span>,
-    hjust = <span class="fl">1</span>, halign = <span class="fl">1</span>, valign = <span class="fl">0</span>
-  ) <span class="op">+</span>
-  <span class="fu"><a href="../reference/draw_plot.html">draw_plot</a></span>(<span class="kw">p1</span>)
-</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">logo_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span><span class="st">"extdata"</span>, <span class="st">"logo.png"</span>, package <span class="op">=</span> <span class="st">"cowplot"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> </span>
+<span>  <span class="fu"><a href="../reference/draw_image.html">draw_image</a></span><span class="op">(</span></span>
+<span>    <span class="va">logo_file</span>,</span>
+<span>    x <span class="op">=</span> <span class="fl">1</span>, width <span class="op">=</span> <span class="fl">0.1</span>,</span>
+<span>    hjust <span class="op">=</span> <span class="fl">1</span>, halign <span class="op">=</span> <span class="fl">1</span>, valign <span class="op">=</span> <span class="fl">0</span></span>
+<span>  <span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="../reference/draw_plot.html">draw_plot</a></span><span class="op">(</span><span class="va">p1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-3-1.png" width="384"></p>
-<p>And we can draw base graphics and ggplot2 graphics side-by-side in a plot grid.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(data = <span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">cyl</span>), <span class="kw">mpg</span>)) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>()
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>)
-</pre></div>
+<p>And we can draw base graphics and ggplot2 graphics side-by-side in a
+plot grid.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, <span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-4-1.png" width="576"></p>
-<p>Base R plots can be stored in the form of functions that emit the desired plots (demonstrated above), as recorded plots, or using a convenient formula interface.</p>
-<p>To create a recorded plot, we first draw the base plot, then we record it with <code><a href="https://rdrr.io/r/grDevices/recordplot.html">recordPlot()</a></code>, and then we can draw it with <code><a href="../reference/ggdraw.html">ggdraw()</a></code>.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># create base R plot</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>), mgp = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>))
-<span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">cyl</span>, xlab = <span class="st">"cyl"</span>, ylab = <span class="st">"mpg"</span>, data = <span class="kw">mtcars</span>)
-</pre></div>
+<p>Base R plots can be stored in the form of functions that emit the
+desired plots (demonstrated above), as recorded plots, or using a
+convenient formula interface.</p>
+<p>To create a recorded plot, we first draw the base plot, then we
+record it with <code><a href="https://rdrr.io/r/grDevices/recordplot.html" class="external-link">recordPlot()</a></code>, and then we can draw it with
+<code><a href="../reference/ggdraw.html">ggdraw()</a></code>.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># create base R plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, xlab <span class="op">=</span> <span class="st">"cyl"</span>, ylab <span class="op">=</span> <span class="st">"mpg"</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-5-1.png" width="384"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># record previous base R plot and then draw through ggdraw()</span>
-<span class="kw">p1_recorded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/recordplot.html">recordPlot</a></span>()
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">p1_recorded</span>)
-</pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># record previous base R plot and then draw through ggdraw()</span></span>
+<span><span class="va">p1_recorded</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/recordplot.html" class="external-link">recordPlot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="va">p1_recorded</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-5-2.png" width="384"></p>
-<p>We can store arbitrarily complex plotting code in formulas by enclosing it into curly braces.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="co"># store base R plot as formula</span>
-<span class="kw">p1_formula</span> <span class="op">&lt;-</span> <span class="op">~</span>{
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(
-    mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>), 
-    mgp = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>)
-  )
-  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">cyl</span>, xlab = <span class="st">"cyl"</span>, ylab = <span class="st">"mpg"</span>, data = <span class="kw">mtcars</span>)
-}
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">p1_formula</span>)
-</pre></div>
+<p>We can store arbitrarily complex plotting code in formulas by
+enclosing it into curly braces.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># store base R plot as formula</span></span>
+<span><span class="va">p1_formula</span> <span class="op">&lt;-</span> <span class="op">~</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span></span>
+<span>    mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>    mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, xlab <span class="op">=</span> <span class="st">"cyl"</span>, ylab <span class="op">=</span> <span class="st">"mpg"</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="va">p1_formula</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-6-1.png" width="384"></p>
 <p>There is also support for lattice graphics and grid grobs.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="co"># base R</span>
-<span class="kw">p1</span> <span class="op">&lt;-</span> <span class="op">~</span>{
-  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(
-    mar = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span>), 
-    mgp = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span>)
-  )
-  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html">boxplot</a></span>(<span class="kw">mpg</span> <span class="op">~</span> <span class="kw">cyl</span>, xlab = <span class="st">"cyl"</span>, ylab = <span class="st">"mpg"</span>, data = <span class="kw">mtcars</span>)
-}
-
-<span class="co"># ggplot2</span>
-<span class="kw">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(data = <span class="kw">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">cyl</span>), <span class="kw">mpg</span>)) <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html">geom_boxplot</a></span>()
-
-<span class="co"># lattice</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://lattice.r-forge.r-project.org">lattice</a></span>)
-<span class="kw">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html">bwplot</a></span>(<span class="op">~</span><span class="kw">mpg</span> <span class="op">|</span> <span class="kw">cyl</span>, data = <span class="kw">mtcars</span>)
-
-<span class="co"># elementary grid graphics objects</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">grid</span>)
-<span class="kw">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.circle.html">circleGrob</a></span>(r = <span class="fl">0.3</span>, gp = <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html">gpar</a></span>(fill = <span class="st">"skyblue"</span>))
-
-<span class="co"># combine all into one plot</span>
-<span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span>(<span class="kw">p1</span>, <span class="kw">p2</span>, <span class="kw">p3</span>, <span class="kw">p4</span>, rel_heights = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">.6</span>, <span class="fl">1</span>), labels = <span class="st">"auto"</span>)
-</pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># base R</span></span>
+<span><span class="va">p1</span> <span class="op">&lt;-</span> <span class="op">~</span><span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span></span>
+<span>    mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, </span>
+<span>    mgp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/boxplot.html" class="external-link">boxplot</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">cyl</span>, xlab <span class="op">=</span> <span class="st">"cyl"</span>, ylab <span class="op">=</span> <span class="st">"mpg"</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># ggplot2</span></span>
+<span><span class="va">p2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">mtcars</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="va">cyl</span><span class="op">)</span>, <span class="va">mpg</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_boxplot.html" class="external-link">geom_boxplot</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># lattice</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lattice.r-forge.r-project.org/" class="external-link">lattice</a></span><span class="op">)</span></span>
+<span><span class="va">p3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lattice/man/xyplot.html" class="external-link">bwplot</a></span><span class="op">(</span><span class="op">~</span><span class="va">mpg</span> <span class="op">|</span> <span class="va">cyl</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># elementary grid graphics objects</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">grid</span><span class="op">)</span></span>
+<span><span class="va">p4</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grid/grid.circle.html" class="external-link">circleGrob</a></span><span class="op">(</span>r <span class="op">=</span> <span class="fl">0.3</span>, gp <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grid/gpar.html" class="external-link">gpar</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="st">"skyblue"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># combine all into one plot</span></span>
+<span><span class="fu"><a href="../reference/plot_grid.html">plot_grid</a></span><span class="op">(</span><span class="va">p1</span>, <span class="va">p2</span>, <span class="va">p3</span>, <span class="va">p4</span>, rel_heights <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">.6</span>, <span class="fl">1</span><span class="op">)</span>, labels <span class="op">=</span> <span class="st">"auto"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-7-1.png" width="768"></p>
 <p>Other packages are supported as long as they return grid grobs.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">VennDiagram</span>)
-
-<span class="kw">p_venn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html">draw.pairwise.venn</a></span>(
-  <span class="fl">100</span>, <span class="fl">70</span>, <span class="fl">30</span>,
-  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"First"</span>, <span class="st">"Second"</span>),
-  fill = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"light blue"</span>, <span class="st">"pink"</span>),
-  alpha = <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fl">0.7</span>, <span class="fl">0.7</span>),
-  ind = <span class="fl">FALSE</span>
-)
-
-<span class="co"># plot venn diagram and add some margin and enclosing box</span>
-<span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span>(<span class="kw">p_venn</span>) <span class="op">+</span>
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html">theme</a></span>(
-    plot.background = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">element_rect</a></span>(fill = <span class="fl">NA</span>),
-    plot.margin = <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html">margin</a></span>(<span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">12</span>)
-  )
-</pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">VennDiagram</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">p_venn</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/VennDiagram/man/draw.pairwise.venn.html" class="external-link">draw.pairwise.venn</a></span><span class="op">(</span></span>
+<span>  <span class="fl">100</span>, <span class="fl">70</span>, <span class="fl">30</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"First"</span>, <span class="st">"Second"</span><span class="op">)</span>,</span>
+<span>  fill <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"light blue"</span>, <span class="st">"pink"</span><span class="op">)</span>,</span>
+<span>  alpha <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">0.7</span><span class="op">)</span>,</span>
+<span>  ind <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot venn diagram and add some margin and enclosing box</span></span>
+<span><span class="fu"><a href="../reference/ggdraw.html">ggdraw</a></span><span class="op">(</span><span class="va">p_venn</span><span class="op">)</span> <span class="op">+</span></span>
+<span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme.html" class="external-link">theme</a></span><span class="op">(</span></span>
+<span>    plot.background <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">element_rect</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span>,</span>
+<span>    plot.margin <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/element.html" class="external-link">margin</a></span><span class="op">(</span><span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">12</span>, <span class="fl">12</span><span class="op">)</span></span>
+<span>  <span class="op">)</span></span></code></pre></div>
 <p><img src="mixing_plot_frameworks_files/figure-html/unnamed-chunk-8-1.png" width="432"></p>
   </div>
 
@@ -241,11 +244,13 @@
 
 
       <footer><div class="copyright">
-  <p>Developed by Claus O. Wilke.</p>
+  <p></p>
+<p>Developed by Claus O. Wilke.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.0.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.7.</p>
 </div>
 
       </footer>
@@ -253,6 +258,8 @@
 
   
 
+
+  
 
   </body>
 </html>
