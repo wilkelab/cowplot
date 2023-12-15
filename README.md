@@ -4,7 +4,6 @@
 
 <!-- badges: start -->
 [![R build status](https://github.com/wilkelab/cowplot/workflows/R-CMD-check/badge.svg)](https://github.com/wilkelab/cowplot/actions)
-[![Coverage Status](https://img.shields.io/codecov/c/github/wilkelab/cowplot/master.svg)](https://app.codecov.io/github/wilkelab/cowplot?branch=master)
 [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/cowplot)](https://CRAN.R-project.org/package=cowplot)
 [![CRAN\_Downloads\_Badge](https://cranlogs.r-pkg.org/badges/cowplot)](https://cranlogs.r-pkg.org/downloads/total/last-month/cowplot)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.2533860.svg)](https://doi.org/10.5281/zenodo.2533860)
