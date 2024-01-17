@@ -10,6 +10,6 @@ test_that("get legend", {
   expect_equal(l$name, "guide-box")
 
   # return null legend if no legend
-  expect_null(get_legend(p + theme(legend.position = "none")))
+  expect_s3_class(get_legend(p + theme(legend.position = "none")), "zeroGrob")
 })
 

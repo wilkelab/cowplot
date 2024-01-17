@@ -9,6 +9,13 @@ test_that("plot components", {
     "axis-b", "spacer", "axis-r", "spacer", "xlab-t", "xlab-b", "ylab-l",
     "ylab-r", "guide-box", "subtitle", "title", "caption", "tag"
   )
+  if (inherits(guide_legend(), "Guide")) { # proxy testing for ggplot2 3.5.0+
+    component_names <- setdiff(component_names, c("guide-box", "tag"))
+    component_names <- union(
+      component_names,
+      paste0("guide-box-", c("left", "right", "top", "bottom", "inside"))
+    )
+  }
 
   expect_type(plot_component_names(p), "character")
   expect_true(all(component_names %in% plot_component_names(p)))
