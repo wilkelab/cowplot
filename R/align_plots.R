@@ -53,7 +53,7 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
       sizes,
       function(x) {
         # find all positions of unit NULL
-        null_idx <- grep("null", x)
+        null_idx <- grep("null$", x)
         # if there are none, abort
         if (length(null_idx) < 1) {
           return(NULL)
@@ -70,7 +70,7 @@ align_margin <- function(sizes, margin_to_align, greedy = TRUE) {
       sizes,
       function(x) {
         # find all positions of unit NULL
-        null_idx <- grep("null", x)
+        null_idx <- grep("null$", x)
         # if there are none, abort
         if (length(null_idx) < 1) {
           return(NULL)
