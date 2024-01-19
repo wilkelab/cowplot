@@ -45,8 +45,8 @@ test_that("complex alignments, h, v, hv", {
   expect_equal(plots[[1]]$widths[1:4], plots[[2]]$widths[1:4])
 
   plots <- align_plots(p1, p2, align = "v", axis = "r", greedy = FALSE)  # align right
-  ncol <- vapply(plots, ncol, integer(1))
-  expect_equal(plots[[1]]$widths[ncol[1] - 3:0], plots[[2]]$widths[ncol[2] - 3:0])
+  n <- vapply(plots, ncol, integer(1))
+  expect_equal(plots[[1]]$widths[n[1] - 3:0], plots[[2]]$widths[n[2] - 3:0])
 
   # with greedy = TRUE, only the sums of the widths are equal
   plots <- align_plots(p1, p2, align = "v", axis = "l", greedy = TRUE)   # align left
@@ -56,10 +56,10 @@ test_that("complex alignments, h, v, hv", {
   )
 
   plots <- align_plots(p1, p2, align = "v", axis = "r", greedy = TRUE)   # align right
-  ncol <- vapply(plots, ncol, integer(1))
+  n <- vapply(plots, ncol, integer(1))
   expect_equal(
-    grid::convertUnit(sum(plots[[1]]$widths[ncol[1] - 3:0]), "in"),
-    grid::convertUnit(sum(plots[[2]]$widths[ncol[2] - 3:0]), "in")
+    grid::convertUnit(sum(plots[[1]]$widths[n[1] - 3:0]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[n[2] - 3:0]), "in")
   )
 
 
@@ -70,9 +70,9 @@ test_that("complex alignments, h, v, hv", {
   expect_warning(align_plots(p1, p3, align = "h"))
 
   plots <- align_plots(p1, p3, align = "h", axis = "bt", greedy = FALSE)
-  nrow <- vapply(plots, nrow, integer(1))
+  n <- vapply(plots, nrow, integer(1))
   expect_equal(
-    grid::convertUnit(plots[[1]]$heights[nrow[1] - 3:0] - plots[[2]]$heights[nrow[2] - 3:0], "cm"),
+    grid::convertUnit(plots[[1]]$heights[n[1] - 3:0] - plots[[2]]$heights[n[2] - 3:0], "cm"),
     grid::unit(c(0, 0, 0, 0), "cm")
   )
 
@@ -110,16 +110,16 @@ test_that("complex alignments with non-plots", {
 
   # because p1 has a legend and p2 doesn't, only the sums of the widths are equal for right align
   plots <- align_plots(p1, p2, p3, align = "v", axis = "r", greedy = FALSE)  # align right
-  ncol <- vapply(plots, ncol, integer(1))
+  n <- vapply(plots, ncol, integer(1))
   expect_equal(
-    grid::convertUnit(sum(plots[[1]]$widths[ncol[1] - 5:0]), "in"),
-    grid::convertUnit(sum(plots[[2]]$widths[ncol[2] - 3:0]), "in")
+    grid::convertUnit(sum(plots[[1]]$widths[n[1] - 5:0]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[n[2] - 3:0]), "in")
   )
   plots <- align_plots(p1, NULL, p2, p3, align = "v", axis = "r", greedy = FALSE)  # align right
-  ncol <- vapply(plots, NCOL, integer(1))
+  n <- vapply(plots, NCOL, integer(1))
   expect_equal(
-    grid::convertUnit(sum(plots[[1]]$widths[ncol[1] - 5:0]), "in"),
-    grid::convertUnit(sum(plots[[3]]$widths[ncol[3] - 3:0]), "in")
+    grid::convertUnit(sum(plots[[1]]$widths[n[1] - 5:0]), "in"),
+    grid::convertUnit(sum(plots[[3]]$widths[n[3] - 3:0]), "in")
   )
 
   # with greedy = TRUE, only the sums of the widths are equal
@@ -135,16 +135,16 @@ test_that("complex alignments with non-plots", {
   )
 
   plots <- align_plots(p1, p2, p3, align = "v", axis = "r", greedy = TRUE)   # align right
-  ncol <- vapply(plots, ncol, integer(1))
+  n <- vapply(plots, ncol, integer(1))
   expect_equal(
-    grid::convertUnit(sum(plots[[1]]$widths[ncol[1] - 5:0]), "in"),
-    grid::convertUnit(sum(plots[[2]]$widths[ncol[2] - 3:0]), "in")
+    grid::convertUnit(sum(plots[[1]]$widths[n[1] - 5:0]), "in"),
+    grid::convertUnit(sum(plots[[2]]$widths[n[2] - 3:0]), "in")
   )
   plots <- align_plots(p1, NULL, p2, align = "v", axis = "r", greedy = TRUE)   # align right
-  ncol <- vapply(plots, NCOL, integer(1))
+  n <- vapply(plots, NCOL, integer(1))
   expect_equal(
-    grid::convertUnit(sum(plots[[1]]$widths[ncol[1] - 5:0]), "in"),
-    grid::convertUnit(sum(plots[[3]]$widths[ncol[3] - 3:0]), "in")
+    grid::convertUnit(sum(plots[[1]]$widths[n[1] - 5:0]), "in"),
+    grid::convertUnit(sum(plots[[3]]$widths[n[3] - 3:0]), "in")
   )
 
   dev.off()
