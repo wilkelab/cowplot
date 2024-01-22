@@ -1,4 +1,6 @@
-# cowplot 1.1.2.9000
+# cowplot 1.1.3
+
+- fix issues with upcoming ggplot 3.5.0.
 
 
 # cowplot 1.1.2

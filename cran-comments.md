@@ -1,4 +1,4 @@
-Minor bug fixes
+Minor bug fixes for upcoming ggplot2 release
 
 ## Test environments
 
