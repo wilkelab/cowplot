@@ -98,3 +98,18 @@ test_that("alignment", {
     plot_grid(p1, p2, ncol = 1, align = 'v', axis = "rl") + theme_map()
   )
 })
+
+
+
+test_that("labels reorder by byrow", {
+
+  p_list <- lapply(1:3, \(x) ggplot())
+
+  expect_doppelganger("byrow is TRUE",
+    plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = TRUE)
+  )
+
+  expect_doppelganger("byrow is FALSE",
+    plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = FALSE)
+  )
+})

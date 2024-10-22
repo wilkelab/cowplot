@@ -178,9 +178,10 @@ plot_grid <- function(..., plotlist = NULL, align = c("none", "h", "v", "hv"),
   if (is.null(rows)) rows <- ceiling(num_plots/cols)
 
   # if the user wants to layout the plots by column, we use the calculated rows to reorder plots and labels
-  if (!isTRUE(byrow)) 
+  if (!isTRUE(byrow)){
     plots <- plots[c(t(matrix(c(1:num_plots, rep(NA, (rows * cols) - num_plots)), nrow = rows, byrow = FALSE)))]
     labels <- labels[c(t(matrix(c(1:num_plots, rep(NA, (rows * cols) - num_plots)), nrow = rows, byrow = FALSE)))]
+  }
 
   # Align the plots (if specified)
   grobs <- align_plots(plotlist = plots, align = align, axis = axis, greedy = greedy)
