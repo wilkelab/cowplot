@@ -102,14 +102,13 @@ test_that("alignment", {
 
 
 test_that("labels reorder by byrow", {
-
+  # byrow=TRUE
   p_list <- lapply(1:3, \(x) ggplot())
+  g <- plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = TRUE)
+  expect_equal(layer_data(g, 4)$label, 2)
 
-  expect_doppelganger("byrow is TRUE",
-    plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = TRUE)
-  )
-
-  expect_doppelganger("byrow is FALSE",
-    plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = FALSE)
-  )
+  # byrow=FALSE
+  p_list <- lapply(1:3, \(x) ggplot())
+  g <- plot_grid(plotlist = p_list, ncol = 2, labels = 1:3, byrow = FALSE)
+  expect_equal(layer_data(g, 4)$label, 3)
 })
