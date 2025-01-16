@@ -36,4 +36,7 @@ library(ggplot2)
 p <- ggplot(mpg, aes(displ, cty)) + geom_point()
 ggdraw(get_plot_component(p, "ylab-l"))
 
+plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +  geom_point(size=2.5) + theme(legend.position='bottom')
+ggdraw(get_plot_component(plot.mpg, "guide-box"))
+
 }

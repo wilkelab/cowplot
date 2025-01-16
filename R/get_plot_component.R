@@ -1,3 +1,15 @@
+#' is zero grob
+#'
+#' Function to check if a grob is a zero grob
+#'
+#' @param x A grob
+#' @return A logical value
+#' @export
+is_zeroGrob <- function(x) {
+  "zeroGrob" %in% attr(x, "class")
+}
+
+
 #' Get plot components
 #'
 #' Extract plot components from a ggplot or gtable. `get_plot_component()`
@@ -18,6 +30,9 @@
 #' p <- ggplot(mpg, aes(displ, cty)) + geom_point()
 #' ggdraw(get_plot_component(p, "ylab-l"))
 #'
+#' plot.mpg <- ggplot(mpg, aes(x = cty, y = hwy, colour = factor(cyl))) +  geom_point(size=2.5) + theme(legend.position='bottom')
+#' ggdraw(get_plot_component(plot.mpg, "guide-box"))
+#'
 #' @export
 get_plot_component <- function(plot, pattern, return_all = FALSE) {
   plot <- as_gtable(plot)
@@ -30,8 +45,16 @@ get_plot_component <- function(plot, pattern, return_all = FALSE) {
     if (length(grobIndex) > 1 && !return_all) {
       # If there's more than one grob, return just the first one
       warning("Multiple components found; returning the first one. To return all, use `return_all = TRUE`.")
-      grobIndex <- grobIndex[1]
-      matched_grobs <- grobs[[grobIndex]]
+      #grobIndex <- grobIndex[1]
+      matched_grobs1 <- grobs[grobIndex]
+      # Remove zero grobs
+      matched_grobs_non_zero <- matched_grobs1[!sapply(matched_grobs1, is_zeroGrob)]
+      # now get the first grob
+      if(length(matched_grobs_non_zero) == 0) {
+        matched_grobs <- NULL
+      } else {
+        matched_grobs <- matched_grobs_non_zero[[1]]
+      }
     } else if (length(grobIndex) > 1 && return_all) {
       # If there's more than one grob, return all as a list
       matched_grobs <- grobs[grobIndex]

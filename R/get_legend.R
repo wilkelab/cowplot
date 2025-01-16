@@ -20,6 +20,6 @@
 #'                  plot_grid(NULL, legend, ncol=1),
 #'                  rel_widths=c(1, 0.2)))
 #' @export
-get_legend <- function(plot) {
-  get_plot_component(plot, "guide-box")
+get_legend <- function(plot, return_all = FALSE) {
+  get_plot_component(plot, "guide-box", return_all = return_all)
 }

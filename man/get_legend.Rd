@@ -4,7 +4,7 @@
 \alias{get_legend}
 \title{Retrieve the legend of a plot}
 \usage{
-get_legend(plot)
+get_legend(plot, return_all = FALSE)
 }
 \arguments{
 \item{plot}{A ggplot or gtable from which to retrieve the legend}
