@@ -1,8 +1,9 @@
 #' Get plot components
 #'
 #' Extract plot components from a ggplot or gtable. `get_plot_component()`
-#' extracts grobs or a list of grobs. `plot_component_names()` provides the
-#' names of the components in the plot. `plot_components()` returns all
+#' extracts specific grobs or a list of grobs. Note that it omits `zeroGrob`s and
+#' returns `NULL` if there is no non-zero grob to return. `plot_component_names()`
+#' provides the names of the components in the plot. `plot_components()` returns all
 #' components as a list.
 #'
 #' @param plot A ggplot or gtable to extract from.
