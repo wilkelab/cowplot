@@ -8,7 +8,8 @@
 #' @param plot A ggplot or gtable to extract from.
 #' @param pattern The name of the component.
 #' @param return_all If there is more than one component, should all be returned
-#'   as a list? Default is `FALSE`.
+#'   as a list? Default is `NA`, which returns the first component with a warning.
+#'   `TRUE` returns all components. `FALSE` returns the first without warning.
 #'
 #' @return A grob or list of grobs (`get_plot_component()`, `plot_components()`)
 #'   or a character vector (`plot_component_names()`)
@@ -19,20 +20,31 @@
 #' ggdraw(get_plot_component(p, "ylab-l"))
 #'
 #' @export
-get_plot_component <- function(plot, pattern, return_all = FALSE) {
+get_plot_component <- function(plot, pattern, return_all = NA) {
   plot <- as_gtable(plot)
   grob_names <- plot_component_names(plot)
   grobs <- plot_components(plot)
 
+  # remove zeroGrob's
+  not_empty <- !vapply(
+    grobs,
+    inherits, what = "zeroGrob",
+    FUN.VALUE = logical(1)
+  )
+  grobs <- grobs[not_empty]
+  grob_names <- grob_names[not_empty]
+
   grobIndex <- which(grepl(pattern, grob_names))
 
   if (length(grobIndex) != 0) {
-    if (length(grobIndex) > 1 && !return_all) {
+    if (length(grobIndex) > 1 && !isTRUE(return_all)) {
       # If there's more than one grob, return just the first one
-      warning("Multiple components found; returning the first one. To return all, use `return_all = TRUE`.")
+      if (is.na(return_all)) {
+        warning("Multiple components found; returning the first one. To return all, use `return_all = TRUE`.")
+      }
       grobIndex <- grobIndex[1]
       matched_grobs <- grobs[[grobIndex]]
-    } else if (length(grobIndex) > 1 && return_all) {
+    } else if (length(grobIndex) > 1 && isTRUE(return_all)) {
       # If there's more than one grob, return all as a list
       matched_grobs <- grobs[grobIndex]
     } else {

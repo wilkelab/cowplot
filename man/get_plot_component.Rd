@@ -6,7 +6,7 @@
 \alias{plot_components}
 \title{Get plot components}
 \usage{
-get_plot_component(plot, pattern, return_all = FALSE)
+get_plot_component(plot, pattern, return_all = NA)
 
 plot_component_names(plot)
 
@@ -18,7 +18,8 @@ plot_components(plot)
 \item{pattern}{The name of the component.}
 
 \item{return_all}{If there is more than one component, should all be returned
-as a list? Default is \code{FALSE}.}
+as a list? Default is \code{NA}, which returns the first component with a warning.
+\code{TRUE} returns all components. \code{FALSE} returns the first without warning.}
 }
 \value{
 A grob or list of grobs (\code{get_plot_component()}, \code{plot_components()})
