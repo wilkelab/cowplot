@@ -4,7 +4,7 @@ test_that("basic ggdraw usage", {
   # empty ggdraw object
   g <- ggdraw()
 
-  expect_equal(methods::is(g), "gg")
+  expect_true(is_ggplot(g))
 
   # test proper scale limits on empty object
   build <- ggplot2::ggplot_build(g)

@@ -1,5 +1,9 @@
-# cowplot 1.1.3.9000
+# cowplot 1.2.0
 
+- fix test for ggplot object class (#210)
+
+- fix label order when laying out plots by column rather than by row
+  (@Doubt-0KB, #203)
 
 # cowplot 1.1.3
 
