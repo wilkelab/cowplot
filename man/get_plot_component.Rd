@@ -27,8 +27,9 @@ or a character vector (\code{plot_component_names()})
 }
 \description{
 Extract plot components from a ggplot or gtable. \code{get_plot_component()}
-extracts grobs or a list of grobs. \code{plot_component_names()} provides the
-names of the components in the plot. \code{plot_components()} returns all
+extracts specific grobs or a list of grobs. Note that it omits \code{zeroGrob}s and
+returns \code{NULL} if there is no non-zero grob to return. \code{plot_component_names()}
+provides the names of the components in the plot. \code{plot_components()} returns all
 components as a list.
 }
 \examples{

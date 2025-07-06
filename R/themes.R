@@ -155,7 +155,7 @@ theme_half_open <- theme_cowplot
 #' Minimalistic themes with grids
 #'
 #' Three minimalistic themes that provide either a full grid,
-#' a horizontal grid, or a vertical grid. Similar to [`theme_minimal()`], but with some
+#' a horizontal grid, or a vertical grid. Similar to [ggplot2::theme_minimal()], but with some
 #' stylistic differences. Most importantly, these themes do not draw minor grid lines.
 #' Also, font sizes are coordinated with [`theme_half_open()`] and with the defaults
 #' in the [`save_plot()`] function.
@@ -426,11 +426,11 @@ theme_map <- function(font_size = 14, font_family = "", line_size = .5,
 #' Add/modify/remove the background grid in a ggplot2 plot
 #'
 #' This function provides a simple way to set the background grid in ggplot2. It
-#' doesn't do anything that can't be done just the same with [`theme()`]. However, it simplifies
+#' doesn't do anything that can't be done just the same with [ggplot2::theme()]. However, it simplifies
 #' creation of the most commonly needed variations.
 #'
 #' Note: This function completely overwrites all background grid settings of the current theme. If that
-#' is not what you want, you may be better off using [`theme()`] directly.
+#' is not what you want, you may be better off using [ggplot2::theme()] directly.
 #' @param major Specifies along which axes you would like to plot major grid lines. Options are "xy", "x",
 #'  "y", "none".
 #' @param minor Specifies along which axes you would like to plot minor grid lines. Options are "xy", "x",
@@ -509,7 +509,7 @@ background_grid <- function(major = c("xy", "x", "y", "only_minor", "none"),
 #' Add/remove the panel border in a ggplot2 plot
 #'
 #' This function provides a simple way to modify the panel border in ggplot2. It
-#' doesn't do anything that can't be done just the same with \code{theme()}. However, it
+#' doesn't do anything that can't be done just the same with [ggplot2::theme()]. However, it
 #' saves some typing.
 #' @param color,colour The color of the border.
 #' @param size Size. Needs to be twice as large as desired outcome when panel clipping

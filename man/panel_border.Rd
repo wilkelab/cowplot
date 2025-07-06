@@ -18,6 +18,6 @@ is on (the default).}
 }
 \description{
 This function provides a simple way to modify the panel border in ggplot2. It
-doesn't do anything that can't be done just the same with \code{theme()}. However, it
+doesn't do anything that can't be done just the same with \code{\link[ggplot2:theme]{ggplot2::theme()}}. However, it
 saves some typing.
 }

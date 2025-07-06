@@ -1,6 +1,6 @@
-#' Insert an axis-like grob on either side of a plot panel in a [ggplot2] plot.
+#' Insert an axis-like grob on either side of a plot panel in a ggplot2 plot.
 #'
-#' The function `insert_xaxis_grob()` inserts a grob at the top or bottom of the plot panel in a [ggplot2] plot.
+#' The function `insert_xaxis_grob()` inserts a grob at the top or bottom of the plot panel in a ggplot2 plot.
 #'
 #' For usage examples, see [axis_canvas()].
 #' @param plot The plot into which the grob will be inserted.
@@ -40,7 +40,7 @@ insert_xaxis_grob <- function(plot, grob, height = grid::unit(0.2, "null"),
   }
 }
 
-#' The function `insert_yaxis_grob()` inserts a grob to the right or left of the plot panel in a [ggplot2] plot.
+#' The function `insert_yaxis_grob()` inserts a grob to the right or left of the plot panel in a ggplot2 plot.
 #'
 #' @rdname insert_xaxis_grob
 #' @export
@@ -72,7 +72,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"),
 
 #' Generates a canvas onto which one can draw axis-like objects.
 #'
-#' This function takes an existing [ggplot2] plot and copies one or both of the axis into a new plot.
+#' This function takes an existing ggplot2 plot and copies one or both of the axis into a new plot.
 #' The main idea is to use this in conjunction with [insert_xaxis_grob()] or [insert_yaxis_grob()] to
 #' draw custom axis-like objects or margin annotations. Importantly, while this function works for
 #' both continuous and discrete scales, notice that discrete scales are converted into continuous scales
@@ -88,7 +88,7 @@ insert_yaxis_grob <- function(plot, grob, width = grid::unit(0.2, "null"),
 #' @param ylim (optional) Vector of two numbers specifying the limits of the y axis. Ignored
 #' if the y axis is copied over from `plot`.
 #' @param coord_flip (optional) If `true`, flips the coordinate system and applies x limits to
-#'   the y axis and vice versa. Useful in combination with [ggplot2]'s [coord_flip()] function.
+#'   the y axis and vice versa. Useful in combination with ggplot2's [ggplot2::coord_flip()] function.
 #' @examples
 #' # annotate line graphs with labels on the right
 #' library(dplyr)

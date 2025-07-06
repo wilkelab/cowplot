@@ -30,10 +30,10 @@ if the x axis is copied over from \code{plot}.}
 if the y axis is copied over from \code{plot}.}
 
 \item{coord_flip}{(optional) If \code{true}, flips the coordinate system and applies x limits to
-the y axis and vice versa. Useful in combination with \link{ggplot2}'s \code{\link[=coord_flip]{coord_flip()}} function.}
+the y axis and vice versa. Useful in combination with ggplot2's \code{\link[ggplot2:coord_flip]{ggplot2::coord_flip()}} function.}
 }
 \description{
-This function takes an existing \link{ggplot2} plot and copies one or both of the axis into a new plot.
+This function takes an existing ggplot2 plot and copies one or both of the axis into a new plot.
 The main idea is to use this in conjunction with \code{\link[=insert_xaxis_grob]{insert_xaxis_grob()}} or \code{\link[=insert_yaxis_grob]{insert_yaxis_grob()}} to
 draw custom axis-like objects or margin annotations. Importantly, while this function works for
 both continuous and discrete scales, notice that discrete scales are converted into continuous scales

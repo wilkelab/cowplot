@@ -33,7 +33,7 @@ By default, the x and y coordinates specify the center of the text box. Set \cod
 the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 specify.
 
-For a full list of ... options, see  \code{\link{geom_label}}.
+For a full list of ... options, see \code{\link[ggplot2:geom_text]{ggplot2::geom_label()}}.
 }
 \examples{
 # Draw onto a 1*1 drawing surface

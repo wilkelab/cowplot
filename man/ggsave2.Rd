@@ -45,7 +45,7 @@ specifying dimensions in pixels.}
 \item{...}{Other arguments to be handed to the plot device.}
 }
 \description{
-This function behaves just like \code{\link[=ggsave]{ggsave()}} from ggplot2. The main difference is
+This function behaves just like \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}}. The main difference is
 that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
 causes problems with some pdf readers.
 }

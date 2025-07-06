@@ -3,7 +3,7 @@
 \name{insert_xaxis_grob}
 \alias{insert_xaxis_grob}
 \alias{insert_yaxis_grob}
-\title{Insert an axis-like grob on either side of a plot panel in a \link{ggplot2} plot.}
+\title{Insert an axis-like grob on either side of a plot panel in a ggplot2 plot.}
 \usage{
 insert_xaxis_grob(
   plot,
@@ -39,7 +39,7 @@ and \code{"top"} or \code{"botton"} for \code{insert_xaxis_grob()}.}
 \item{width}{The width of the grob, in grid units. Used by \code{insert_yaxis_grob()}.}
 }
 \description{
-The function \code{insert_xaxis_grob()} inserts a grob at the top or bottom of the plot panel in a \link{ggplot2} plot.
+The function \code{insert_xaxis_grob()} inserts a grob at the top or bottom of the plot panel in a ggplot2 plot.
 }
 \details{
 For usage examples, see \code{\link[=axis_canvas]{axis_canvas()}}.

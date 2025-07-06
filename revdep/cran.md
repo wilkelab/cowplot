@@ -1,16 +1,27 @@
 ## revdepcheck results
 
-We checked 363 reverse dependencies (250 from CRAN + 113 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 460 reverse dependencies (332 from CRAN + 128 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 0 new problems
- * We failed to check 5 packages
+ * We saw 2 new problems
+ * We failed to check 7 packages
 
 Issues with CRAN packages are summarised below.
 
+### New problems
+(This reports the first line of each new failure)
+
+* BeeBDC
+  checking tests ...
+
+* SCIntRuler
+  checking running R code from vignettes ...
+
 ### Failed to check
 
-* CoSMoS    (NA)
-* mcmcabn   (NA)
-* stppSim   (NA)
-* TOmicsVis (NA)
-* valse     (NA)
+* bartMan         (NA)
+* clustTMB        (NA)
+* LipinskiFilters (NA)
+* TestAnaAPP      (NA)
+* text            (NA)
+* tidybayes       (NA)
+* valse           (NA)

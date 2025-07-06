@@ -56,7 +56,7 @@ theme_minimal_hgrid(
 }
 \description{
 Three minimalistic themes that provide either a full grid,
-a horizontal grid, or a vertical grid. Similar to \code{\link[=theme_minimal]{theme_minimal()}}, but with some
+a horizontal grid, or a vertical grid. Similar to \code{\link[ggplot2:ggtheme]{ggplot2::theme_minimal()}}, but with some
 stylistic differences. Most importantly, these themes do not draw minor grid lines.
 Also, font sizes are coordinated with \code{\link[=theme_half_open]{theme_half_open()}} and with the defaults
 in the \code{\link[=save_plot]{save_plot()}} function.

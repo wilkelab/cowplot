@@ -54,7 +54,7 @@ or \code{ncol} > 1. Default is \code{NULL}, which means that the width is calcul
 \item{height}{Deprecated. Don't use.}
 }
 \description{
-This function replaces the standard \code{\link[=ggsave]{ggsave()}} function for saving a plot into a file. It
+This function replaces the standard \code{\link[ggplot2:ggsave]{ggplot2::ggsave()}} function for saving a plot into a file. It
 has several advantages over \code{ggsave()}. First, it uses default sizes that work well with
 the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 acknowledges that one often first develops individual plots and then combines them into

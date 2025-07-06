@@ -17,7 +17,7 @@ draw_line(x, y, ...)
 Provide a sequence of x values and accompanying y values to draw a line on a plot.
 }
 \details{
-This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
+This is a convenience function, providing a wrapper around \code{\link[ggplot2:geom_path]{ggplot2::geom_path()}}.
 }
 \examples{
 ggdraw() +
@@ -26,7 +26,4 @@ ggdraw() +
     y = c(0.1, 0.3, 0.9, 0.8),
     color = "blue", size = 2
   )
-}
-\seealso{
-\code{\link{geom_path}}, \code{\link{ggdraw}}
 }

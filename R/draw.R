@@ -8,12 +8,11 @@
 #'
 #' Provide a sequence of x values and accompanying y values to draw a line on a plot.
 #'
-#' This is a convenience function, providing a wrapper around ggplot2's \code{geom_path}.
+#' This is a convenience function, providing a wrapper around [ggplot2::geom_path()].
 #'
 #' @param x Vector of x coordinates.
 #' @param y Vector of y coordinates.
 #' @param ... geom_path parameters such as \code{colour}, \code{alpha}, \code{size}, etc.
-#' @seealso \code{\link{geom_path}}, \code{\link{ggdraw}}
 #' @examples
 #' ggdraw() +
 #'   draw_line(
@@ -41,7 +40,7 @@ draw_line <- function(x, y, ...){
 #' the lower left corner, and other values of \code{hjust} and \code{vjust} for any other relative location you want to
 #' specify.
 #'
-#' For a full list of ... options, see  \code{\link{geom_label}}.
+#' For a full list of ... options, see [ggplot2::geom_label()].
 #'
 #' @param text A vector of Character (not expressions) specifying the string(s) to be written.
 #' @param x Vector of x coordinates.

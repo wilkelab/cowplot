@@ -1,6 +1,6 @@
 #' Cowplot reimplementation of `ggsave()`.
 #'
-#' This function behaves just like [`ggsave()`] from ggplot2. The main difference is
+#' This function behaves just like [ggplot2::ggsave()]. The main difference is
 #' that by default it doesn't use the Dingbats font for pdf output. The Dingbats font
 #' causes problems with some pdf readers.
 #' @param filename Filename of the plot.
@@ -58,11 +58,11 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 
 #' Alternative to `ggsave()`, with better support for multi-figure plots.
 #'
-#' This function replaces the standard [`ggsave()`] function for saving a plot into a file. It
+#' This function replaces the standard [ggplot2::ggsave()] function for saving a plot into a file. It
 #' has several advantages over `ggsave()`. First, it uses default sizes that work well with
 #' the cowplot theme, so that frequently a plot size does not have to be explicitly specified. Second, it
 #' acknowledges that one often first develops individual plots and then combines them into
-#' multi-plot figures, and it makes it easy---in combination with [`plot_grid()`]---to carry out
+#' multi-plot figures, and it makes it easy---in combination with [plot_grid()]---to carry out
 #' this workflow. Finally, it makes it easy to adjust the aspect ratio of the figure, which is
 #' frequently necessary to accommodate plots with or without figure legend.
 #'
@@ -89,7 +89,7 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
 #' @param cols Deprecated. Use `ncol`.
 #' @param width Deprecated. Don't use.
 #' @param height Deprecated. Don't use.
-#' @param ... Other arguments to be handed to [`ggsave2()`].
+#' @param ... Other arguments to be handed to [ggsave2()].
 #' @examples
 #' \donttest{
 #' library(ggplot2)

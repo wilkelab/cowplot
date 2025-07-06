@@ -32,12 +32,12 @@ background_grid(
 }
 \description{
 This function provides a simple way to set the background grid in ggplot2. It
-doesn't do anything that can't be done just the same with \code{\link[=theme]{theme()}}. However, it simplifies
+doesn't do anything that can't be done just the same with \code{\link[ggplot2:theme]{ggplot2::theme()}}. However, it simplifies
 creation of the most commonly needed variations.
 }
 \details{
 Note: This function completely overwrites all background grid settings of the current theme. If that
-is not what you want, you may be better off using \code{\link[=theme]{theme()}} directly.
+is not what you want, you may be better off using \code{\link[ggplot2:theme]{ggplot2::theme()}} directly.
 }
 \examples{
 library(ggplot2)
