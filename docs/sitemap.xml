@@ -1,162 +1,55 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/ISSUE_TEMPLATE.html</loc>
-  </url>
-  <url>
-    <loc>/articles/aligning_plots.html</loc>
-  </url>
-  <url>
-    <loc>/articles/drawing_with_on_plots.html</loc>
-  </url>
-  <url>
-    <loc>/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>/articles/introduction.html</loc>
-  </url>
-  <url>
-    <loc>/articles/mixing_plot_frameworks.html</loc>
-  </url>
-  <url>
-    <loc>/articles/plot_grid.html</loc>
-  </url>
-  <url>
-    <loc>/articles/shared_legends.html</loc>
-  </url>
-  <url>
-    <loc>/articles/themes.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/add_sub.html</loc>
-  </url>
-  <url>
-    <loc>/reference/align_margin.html</loc>
-  </url>
-  <url>
-    <loc>/reference/align_plots.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_grob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/as_gtable.html</loc>
-  </url>
-  <url>
-    <loc>/reference/axis_canvas.html</loc>
-  </url>
-  <url>
-    <loc>/reference/background_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cowplot-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/cowplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_figure_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_grob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_image.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_line.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_plot_label.html</loc>
-  </url>
-  <url>
-    <loc>/reference/draw_text.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_legend.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_panel.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_plot_component.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_title.html</loc>
-  </url>
-  <url>
-    <loc>/reference/get_y_axis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggdraw.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ggsave2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gtable_remove_grobs.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gtable_squash_cols.html</loc>
-  </url>
-  <url>
-    <loc>/reference/gtable_squash_rows.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/insert_xaxis_grob.html</loc>
-  </url>
-  <url>
-    <loc>/reference/panel_border.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/png_null_device.html</loc>
-  </url>
-  <url>
-    <loc>/reference/rectangle_key_glyph.html</loc>
-  </url>
-  <url>
-    <loc>/reference/save_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/set_null_device.html</loc>
-  </url>
-  <url>
-    <loc>/reference/stamp.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_cowplot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_map.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_minimal_grid.html</loc>
-  </url>
-  <url>
-    <loc>/reference/theme_nothing.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/ISSUE_TEMPLATE.html</loc></url>
+<url><loc>/articles/aligning_plots.html</loc></url>
+<url><loc>/articles/drawing_with_on_plots.html</loc></url>
+<url><loc>/articles/index.html</loc></url>
+<url><loc>/articles/introduction.html</loc></url>
+<url><loc>/articles/mixing_plot_frameworks.html</loc></url>
+<url><loc>/articles/plot_grid.html</loc></url>
+<url><loc>/articles/shared_legends.html</loc></url>
+<url><loc>/articles/themes.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/add_sub.html</loc></url>
+<url><loc>/reference/align_margin.html</loc></url>
+<url><loc>/reference/align_plots.html</loc></url>
+<url><loc>/reference/as_grob.html</loc></url>
+<url><loc>/reference/as_gtable.html</loc></url>
+<url><loc>/reference/axis_canvas.html</loc></url>
+<url><loc>/reference/background_grid.html</loc></url>
+<url><loc>/reference/cowplot-package.html</loc></url>
+<url><loc>/reference/draw_figure_label.html</loc></url>
+<url><loc>/reference/draw_grob.html</loc></url>
+<url><loc>/reference/draw_image.html</loc></url>
+<url><loc>/reference/draw_label.html</loc></url>
+<url><loc>/reference/draw_line.html</loc></url>
+<url><loc>/reference/draw_plot.html</loc></url>
+<url><loc>/reference/draw_plot_label.html</loc></url>
+<url><loc>/reference/draw_text.html</loc></url>
+<url><loc>/reference/get_legend.html</loc></url>
+<url><loc>/reference/get_panel.html</loc></url>
+<url><loc>/reference/get_plot_component.html</loc></url>
+<url><loc>/reference/get_title.html</loc></url>
+<url><loc>/reference/get_y_axis.html</loc></url>
+<url><loc>/reference/ggdraw.html</loc></url>
+<url><loc>/reference/ggsave2.html</loc></url>
+<url><loc>/reference/gtable_remove_grobs.html</loc></url>
+<url><loc>/reference/gtable_squash_cols.html</loc></url>
+<url><loc>/reference/gtable_squash_rows.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/insert_xaxis_grob.html</loc></url>
+<url><loc>/reference/panel_border.html</loc></url>
+<url><loc>/reference/plot_grid.html</loc></url>
+<url><loc>/reference/png_null_device.html</loc></url>
+<url><loc>/reference/rectangle_key_glyph.html</loc></url>
+<url><loc>/reference/save_plot.html</loc></url>
+<url><loc>/reference/set_null_device.html</loc></url>
+<url><loc>/reference/stamp.html</loc></url>
+<url><loc>/reference/theme_cowplot.html</loc></url>
+<url><loc>/reference/theme_map.html</loc></url>
+<url><loc>/reference/theme_minimal_grid.html</loc></url>
+<url><loc>/reference/theme_nothing.html</loc></url>
 </urlset>
+

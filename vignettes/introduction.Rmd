@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-The cowplot package is a simple add-on to ggplot. It provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in my lab, to provide my students and postdocs with the tools to make high-quality figures for their publications. I have also used the package extensively in my book [Fundamentals of Data Visualization.](https://www.amazon.com/gp/product/1492031089) This introductory vignette provides a brief glance at the key features of the package.
+The cowplot package is a simple add-on to ggplot. It provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images. The package was originally written for internal use in my lab, to provide my students and postdocs with the tools to make high-quality figures for their publications. I have also used the package extensively in my book [Fundamentals of Data Visualization.](https://clauswilke.com/dataviz/) This introductory vignette provides a brief glance at the key features of the package.
 
 For more complete documentation, read [all vignettes](https://wilkelab.org/cowplot/articles/index.html) and/or the [reference documentation.](https://wilkelab.org/cowplot/reference/index.html)
 

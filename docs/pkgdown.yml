@@ -1,5 +1,5 @@
-pandoc: 3.1.1
-pkgdown: 2.0.7
+pandoc: '3.2'
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   aligning_plots: aligning_plots.html
@@ -9,5 +9,4 @@ articles:
   plot_grid: plot_grid.html
   shared_legends: shared_legends.html
   themes: themes.html
-last_built: 2024-01-22T21:29Z
-
+last_built: 2025-07-06T18:07Z
