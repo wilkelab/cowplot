@@ -1,8 +1,11 @@
-Minor bug fixes for upcoming ggplot2 release
+Minor bug fixes for upcoming ggplot2 release.
+
+One package has a reverse dependency fail. They were informed three weeks ago
+and have not responded in any way: https://github.com/yuelyu21/SCIntRuler/issues/3
 
 ## Test environments
 
-* ubuntu 20.04, devel and release
+* ubuntu 24.04.2, devel and release
 * windows, devel and release
 * macOS, release
 
