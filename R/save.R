@@ -51,7 +51,10 @@ ggsave2 <- function(filename, plot = ggplot2::last_plot(), device = NULL, path =
   # call ggplot2::ggsave while saving and afterwards restoring the current graphics device
   cur_dev <- grDevices::dev.cur()
   x <- do.call(ggplot2::ggsave, args, envir = parent.frame())
-  grDevices::dev.set(cur_dev)
+  # Selecting the null device would open the default graphics device.
+  if (cur_dev > 1L) {
+    grDevices::dev.set(cur_dev)
+  }
   invisible(x)
 }
 

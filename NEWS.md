@@ -1,3 +1,8 @@
+# cowplot (development version)
+
+- `save_plot()` and `ggsave2()` avoid opening the default graphics device when
+  called with no active device, preventing an extra `Rplots.pdf` file (#204).
+
 # cowplot 1.2.0
 
 - fix `get_legend()` for redesigned ggplot legend system (#202)
